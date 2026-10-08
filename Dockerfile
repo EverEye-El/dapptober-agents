@@ -1,6 +1,7 @@
 FROM node:22-bookworm-slim AS build
 WORKDIR /app
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY patches ./patches
 RUN npm install --global pnpm@10.2.0
 COPY apps ./apps
 COPY packages ./packages

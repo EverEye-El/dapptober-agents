@@ -12,6 +12,8 @@ For Vercel, create eight separate projects as needed. Set the daily app director
 
 For a standalone container: `docker build --build-arg APP=day-04-mcp-mercenary -t dapptober-day04 .`, then `docker run --env-file <private-env-file> -p 3004:3000 dapptober-day04`. Set PUBLIC_ORIGIN to the externally reachable origin, not an internal container hostname. Docker builds are supplied but were not executed in this environment; standalone builds were tested.
 
+Run `pnpm readiness --init` to initialize missing private environments without replacing existing files. `pnpm readiness` checks all eight apps; `pnpm readiness 05 --online` also checks RPC chain ID and contract bytecode without spending. See [owner setup and live acceptance](LIVE-SETUP-CHECKLIST.md). A configured environment is not live-operation evidence.
+
 ## Real mode configuration
 
 Set AGENT_MODE=real, OWNER_ADDRESS to the owner wallet, OPERATOR_TOKEN to a unique random secret of at least 32 characters, DATABASE_URL to a PostgreSQL URL and PUBLIC_ORIGIN to this app's HTTPS origin. Set CHAIN_ID and RPC_URL consistently. The runtime creates a `dapptober_state` table; the database user must be permitted to create/use it. Each day and operator token has a separate state namespace. Back up PostgreSQL and use a pooler compatible with transactions. Rotating the operator token creates a new application state namespace; reconcile chain history before resuming workers.

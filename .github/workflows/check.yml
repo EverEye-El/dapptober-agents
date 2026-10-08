@@ -14,5 +14,25 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm run check
       - run: pnpm run test:senate-chain
-      - run: pnpm start > /tmp/agents.log 2>&1 &
-      - run: sleep 15 && pnpm run smoke
+      - run: pnpm run test:release-chain
+      - run: pnpm run test:production
+  containers:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        app: [day-01-wallet-genesis, day-02-pay-per-prompt, day-03-agent-passport, day-04-mcp-mercenary, day-05-stablecoin-autopilot, day-06-intent-calligrapher, day-07-glass-box-mind, day-08-swarm-senate]
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build --build-arg APP=${{ matrix.app }} -t dapptober-check .
+      - name: Verify standalone container starts and serves its independent app
+        run: |
+          docker run -d --name agent-check -p 3000:3000 -e AGENT_MODE=demo dapptober-check
+          trap 'docker logs agent-check; docker rm -f agent-check' EXIT
+          curl --retry 20 --retry-connrefused --retry-delay 2 --fail http://localhost:3000/ > /tmp/agent-page.html
+          test -s /tmp/agent-page.html
+  tee-container:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -f services/glass-box-tee/Dockerfile -t dapptober-tee-check .

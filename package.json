@@ -12,13 +12,31 @@
     "check": "pnpm run lint && pnpm run typecheck && pnpm test && pnpm run test:contracts && pnpm run build",
     "start": "node scripts/workspace.mjs start",
     "smoke": "node scripts/smoke.mjs",
-    "test:senate-chain": "node scripts/senate-chain-test.mjs"
+    "test:senate-chain": "node scripts/senate-chain-test.mjs",
+    "readiness": "node scripts/readiness.mjs",
+    "test:release-chain": "node scripts/senate-chain-test.mjs --release",
+    "test:production": "node scripts/production-smoke.mjs"
   },
   "dependencies": {
     "@ai-sdk/openai-compatible": "^2.0.0",
     "@cowprotocol/sdk-config": "^2.7.2",
     "@cowprotocol/sdk-order-book": "^4.3.0",
     "@cowprotocol/sdk-order-signing": "^1.1.16",
+    "@dapptober/agent-core": "workspace:*",
+    "@dapptober/chain": "workspace:*",
+    "@dapptober/config": "workspace:*",
+    "@dapptober/governance": "workspace:*",
+    "@dapptober/guardrails": "workspace:*",
+    "@dapptober/identity": "workspace:*",
+    "@dapptober/inference": "workspace:*",
+    "@dapptober/intents": "workspace:*",
+    "@dapptober/mcp": "workspace:*",
+    "@dapptober/payments": "workspace:*",
+    "@dapptober/receipts": "workspace:*",
+    "@dapptober/treasury": "workspace:*",
+    "@dapptober/types": "workspace:*",
+    "@dapptober/ui": "workspace:*",
+    "@dapptober/wallet": "workspace:*",
     "@modelcontextprotocol/sdk": "^1.0.0",
     "@openzeppelin/contracts": "^5.0.0",
     "@phala/dcap-qvl": "^0.6.5",
@@ -35,22 +53,7 @@
     "react-dom": "^19.2.0",
     "thirdweb": "^5.0.0",
     "viem": "^2.38.0",
-    "zod": "^4.0.0",
-    "@dapptober/receipts": "workspace:*",
-    "@dapptober/ui": "workspace:*",
-    "@dapptober/payments": "workspace:*",
-    "@dapptober/types": "workspace:*",
-    "@dapptober/guardrails": "workspace:*",
-    "@dapptober/identity": "workspace:*",
-    "@dapptober/config": "workspace:*",
-    "@dapptober/chain": "workspace:*",
-    "@dapptober/mcp": "workspace:*",
-    "@dapptober/wallet": "workspace:*",
-    "@dapptober/governance": "workspace:*",
-    "@dapptober/inference": "workspace:*",
-    "@dapptober/agent-core": "workspace:*",
-    "@dapptober/intents": "workspace:*",
-    "@dapptober/treasury": "workspace:*"
+    "zod": "^4.0.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.0.0",
@@ -73,7 +76,8 @@
       "ws": "^8.21.0",
       "tmp": "^0.2.7",
       "js-yaml": "^4.3.2",
-      "uuid": "^11.1.1"
+      "uuid": "^11.1.1",
+      "decode-uri-component": "0.5.0"
     },
     "onlyBuiltDependencies": [
       "@tailwindcss/oxide",
@@ -86,6 +90,9 @@
           "pino-pretty": "13.2.0"
         }
       }
+    },
+    "patchedDependencies": {
+      "decode-uri-component@0.5.0": "patches/decode-uri-component@0.5.0.patch"
     }
   }
 }
