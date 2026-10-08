@@ -1,0 +1,17 @@
+name: Verify agents
+on: [push, pull_request]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - uses: foundry-rs/foundry-toolchain@v1
+      - run: npm ci
+      - run: npm run check
+      - run: npm run test:senate-chain
+      - run: npm start > /tmp/agents.log 2>&1 &
+      - run: sleep 15 && npm run smoke

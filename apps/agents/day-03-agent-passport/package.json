@@ -1,0 +1,10 @@
+{
+  "name": "@dapptober/day-03",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --port 3003",
+    "start": "next start --port 3003",
+    "build": "next build --webpack",
+    "test": "vitest run --root ../../.. tests/day-03.test.ts"
+  }
+}

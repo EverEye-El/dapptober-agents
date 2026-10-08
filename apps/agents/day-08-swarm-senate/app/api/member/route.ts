@@ -1,0 +1,6 @@
+import {governanceAction} from '@dapptober/governance';
+import {withState} from '@dapptober/agent-core/src/store';
+import {config} from '@dapptober/config';
+import {json} from '@dapptober/agent-core/src/http';
+const busy=new Set<string>();
+export async function POST(request:Request){const ip=request.headers.get('x-forwarded-for')??'local';if(busy.has(ip)||busy.size>=8)return json({error:'Senate busy'},undefined,429);busy.add(ip);try{const c=config();if(c.AGENT_MODE!=='real')throw new Error('Use the local control room for simulated member actions');const origin=request.headers.get('origin');if(origin&&origin!==new URL(c.PUBLIC_ORIGIN).origin)throw new Error('Untrusted origin');if(Number(request.headers.get('content-length'))>10000)throw new Error('Request too large');const text=await request.text();if(text.length>10000)throw new Error('Request too large');const {action,input}=JSON.parse(text);if(!['senate.profile.prepare','senate.profile.save','senate.delegate','senate.override'].includes(action))throw new Error('Unsupported member action');const {result}=await withState(8,'public',c,s=>governanceAction(s,c,action,input??{}));return json({result});}catch(e){return json({error:e instanceof Error?e.message:'Member action rejected'},undefined,400);}finally{busy.delete(ip);}}

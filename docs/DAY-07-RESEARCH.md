@@ -1,0 +1,15 @@
+# Day 07 research and acceptance — 2026-10-07
+
+Canonical complete prompt: `prompts/dapp-prompts.ts`, Day 7, The Glass-Box Mind. Live https://www.dapptober.xyz/dapp/7 inspected via public HTML. Brief/features match; live Jev is optional, canonical Jev appraisal is required. Cyan transparent laboratory with verified-green and tampered-red states, retaining the shared terminal shell.
+
+Acceptance: actual inference inside an attested TEE; receipt cryptographically binds model identity, input and output; independent verification page; owner can post a receipt commitment onchain; intentional tampering fails; explicit opt-in shareable answer cards; Jev confidence appraisal cannot override cryptographic failure; independent run/test/build/deploy and shared inference capability.
+
+Official references reviewed before implementation:
+- https://github.com/Phala-Network/dcap-qvl — Intel-root DCAP verification; obtain collateral and verify signature, revocation, freshness and TCB. Published `@phala/dcap-qvl` 0.6.5 is used, above CRL fix 0.5.3. https://github.com/Phala-Network/dcap-qvl/security/advisories/GHSA-2cjj-h43h-m6xj
+- https://github.com/Dstack-TEE/dstack/tree/next/sdk/js — dstack key/quote APIs. Main describes unreleased guest v1; npm currently publishes 0.5.8, whose `DstackClient.getKey`/`getQuote` APIs are inspected from installed declarations and pinned. Do not mix unreleased v1 key derivation with published v0 calls.
+- https://docs.phala.com/phala-cloud/confidential-ai/verify/verify-signature and /confidential-model/api-reference/receipts — a signed response is insufficient without a verified attestation, model binding and request/response hashes. Hosted ACI canonicalization is not fully specified in the guide, so this build supplies a reviewed dstack worker with an explicit versioned signing protocol rather than guessing ACI bytes.
+- https://github.com/ollama/ollama/blob/main/docs/api.md — local, non-streaming model inference and immutable model digest; worker only talks to a loopback model process inside the same measured VM.
+
+Choice: CPU inference inside Intel TDX, using local Ollama in the confidential VM; no GPU attestation claim. The deployment verifier pins reviewed MRTD and all four RTMR measurements, accepts only UpToDate TCB, verifies Intel collateral, rejects debug mode, checks quote report data against signed payload hash, and checks a pinned model artifact digest. This avoids delegating the trust decision to the provider or to Jev. The receipt signer is TEE-derived; a nonce binds each fresh inference request. Local mode signs deterministic answers with an explicitly public demo key and never claims Intel verification.
+
+No deployment credentials or funded wallet are needed for local tests. Real TEE hardware, approved measurements, worker access token, Jev key and PostgreSQL are required for real operation. Onchain posting is a commitment anchor, explicitly distinguished from hardware verification; the independent verifier page validates the full receipt.

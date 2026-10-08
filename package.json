@@ -1,0 +1,62 @@
+{
+  "name": "dapptober-agents",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "apps/agents/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "node scripts/workspace.mjs dev",
+    "build": "node scripts/workspace.mjs build",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:contracts": "node scripts/contracts.mjs test --offline",
+    "check": "npm run lint && npm run typecheck && npm test && npm run test:contracts && npm run build",
+    "start": "node scripts/workspace.mjs start",
+    "smoke": "node scripts/smoke.mjs",
+    "test:senate-chain": "node scripts/senate-chain-test.mjs"
+  },
+  "dependencies": {
+    "@ai-sdk/openai-compatible": "^2.0.0",
+    "@cowprotocol/sdk-config": "^2.7.2",
+    "@cowprotocol/sdk-order-book": "^4.3.0",
+    "@cowprotocol/sdk-order-signing": "^1.1.16",
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "@openzeppelin/contracts": "^5.0.0",
+    "@phala/dcap-qvl": "^0.6.5",
+    "@phala/dstack-sdk": "^0.5.8",
+    "@x402/core": "^2.0.0",
+    "@x402/evm": "^2.0.0",
+    "@x402/fetch": "^2.0.0",
+    "@x402/next": "^2.0.0",
+    "@x402/svm": "^2.28.0",
+    "ai": "^6.0.0",
+    "next": "^16.0.0",
+    "postgres": "^3.4.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "thirdweb": "^5.0.0",
+    "viem": "^2.38.0",
+    "zod": "^4.0.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.0.0",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "eslint": "^9.0.0",
+    "solc": "^0.8.30",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5.9.0",
+    "typescript-eslint": "^8.0.0",
+    "vitest": "^5.0.3"
+  },
+  "overrides": {
+    "ws": "^8.21.0",
+    "tmp": "^0.2.7",
+    "js-yaml": "^4.3.2",
+    "uuid": "^11.1.1"
+  }
+}

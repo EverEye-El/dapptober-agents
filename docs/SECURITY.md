@@ -1,0 +1,23 @@
+# Authority and recovery
+
+The browser holds owner/client signing authority. Backend keys are scoped agent signers; never supply an unrestricted owner key. Real APIs require a constant-time checked bearer token, origin checks and bounded request bodies. A deployment is a single operator workspace. PostgreSQL row locks serialize durable state changes; local demo uses atomic files and per-session queues. Financial outcomes are refreshed from contracts. External settlement and database persistence are separate systems: a process crash after settlement requires chain/provider reconciliation before a retry. Session and treasury request IDs prevent duplicate onchain movements from replayed previews.
+
+Jev gates screening and model routing, while deterministic and contract policy checks constrain amounts, expiry, recipients, allowed assets, liquidity, risk and allocations. Low-confidence wallet sends require owner cosignatures. Contract approval thresholds cannot be bypassed by a model. Provider outages fail closed rather than switching to simulation. Wallet vault token allowances should remain limited to USDC because the daily limit is enforced per token. Revocation increments the signing epoch.
+
+Receipts form a canonical SHA256 hash chain and identify real versus simulated activity; real transaction hashes are added only after a mined success. This detects modified linked records, but is not an externally anchored append-only proof. PostgreSQL credentials and the operator token remain powerful deployment secrets. Public resource/passport/toll endpoints expose only intended public data. Configure platform-level rate limiting/WAF on public Jev-screened resources to control inference cost.
+
+Escrow holds funds until creator approval, trusted-validator dispute resolution or explicit timeout settlement. A validator is a nominated trust dependency. Passport registration demonstrates ownership, not honesty; job-linked distinct-client signatures and evidence are separate signals. ERC8004-inspired custom contracts are clearly distinguished from full standard registries. EAS attestation requires the correct deployed schema.
+
+ERC4626 loss or illiquidity can prevent a combined withdraw-all transaction. Owner individual withdrawals and recoverLiquid are available on the contract; the agent cannot override expiry, limits or pause. CoW orders bind receiver, minimum bought amount, maximum sell budget, deadline and chain; quote expiry and token allowance are checked. Signing an order does not guarantee a solver fill.
+
+Pinned dependencies are audited during the final verification. Transitive SDK advisories that cannot be safely fixed without upstream changes are recorded in FINAL-AUDIT.md. Contracts and production-funded workflows have not had an external audit; the delivered tests are functional and adversarial verification, not a formal proof.
+
+## Day 07 extension
+
+See [Day 7 research](DAY-07-RESEARCH.md), [application and worker deployment](../apps/agents/day-07-glass-box-mind/README.md) and [Day 7 audit](DAY-07-AUDIT.md). Shared `packages/inference` provides signed model/input/output receipts, strict Intel DCAP and workload/model appraisal, opt-in sharing and owner-wallet onchain commitments. The independent verifier page checks ECDSA locally; hardware appraisal requires current Intel collateral and independently approved measurements. Demo keys and historical fixtures never confer hardware trust. Jev receives verification facts and cannot override failed cryptography. No other daily app server is required.
+
+## Day 08 extension
+
+[Day 08](../apps/agents/day-08-swarm-senate/README.md) uses a dedicated server seed to derive one delegate signer per member, chain and Governor. Only member wallets authorize value profiles and delegate their fixed VOICE units. Revisioned EIP712 signatures prevent profile replay; signer rotation requires new delegation and proposals. Never use a member or treasury private key as the seed.
+
+OpenZeppelin override accounting preserves each human's snapshot authority and prevents duplicate voting weight. The contract blocks zero-membership delegate addresses during the final review window. The public browser encodes overrides locally, so human voting does not depend on operator/API availability once the page is loaded. Symbolic resolutions cannot transfer funds or call arbitrary contracts. Pause stops future agent votes, not existing ballots; humans must override before the deadline. Jev decisions and LLM text cannot grant transaction authority. Public profiles, proposal text and debate archives must contain no secrets. Use ingress rate/body limits, private PostgreSQL and long-running request support. See the [audit](DAY-08-AUDIT.md) for external validation limits.

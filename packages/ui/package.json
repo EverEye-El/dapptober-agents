@@ -1,0 +1,12 @@
+{
+  "name": "@dapptober/ui",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.tsx",
+    "./src/*": "./src/*.ts",
+    "./src/glass-room": "./src/glass-room.tsx",
+    "./src/senate-room": "./src/senate-room.tsx"
+  }
+}

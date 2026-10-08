@@ -1,0 +1,24 @@
+# Deploy this whole composition in one Intel TDX dstack CVM. No GPU is used.
+services:
+  ollama:
+    image: ${OLLAMA_IMAGE:?Set reviewed ollama/ollama image@sha256 digest}
+    network_mode: host
+    environment:
+      OLLAMA_HOST: 127.0.0.1:11434
+    volumes:
+      - models:/root/.ollama
+  inference:
+    image: ${GLASS_WORKER_IMAGE:?Set reviewed worker image@sha256 digest}
+    network_mode: host
+    restart: on-failure
+    environment:
+      TEE_WORKER_TOKEN: ${TEE_WORKER_TOKEN:?required}
+      TEE_MODEL: ${TEE_MODEL:?required}
+      TEE_MODEL_DIGEST: ${TEE_MODEL_DIGEST:?required}
+    volumes:
+      - /var/run/dstack.sock:/var/run/dstack.sock
+      - models:/models:ro
+    group_add:
+      - ${DSTACK_SOCKET_GID:?Set the socket group ID from your reviewed CVM image}
+volumes:
+  models:

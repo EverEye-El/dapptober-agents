@@ -1,0 +1,33 @@
+# Day 07 — The Glass-Box Mind
+
+Independent cyan laboratory for AI inference receipts. Canonical requirements: complete Day 7 prompt in `prompts/dapp-prompts.ts`. Shared capability: `packages/inference`. Research and trust decisions: [Day 7 research](../../../docs/DAY-07-RESEARCH.md).
+
+```sh
+npm ci
+npm run dev -- 07                 # http://localhost:3007
+npm run test --workspace @dapptober/day-07
+npm run build -- 07
+npm start -- 07
+node scripts/smoke.mjs 07
+```
+
+Local mode needs no secrets. Ask a question, inspect the signed model/input/output, tamper with the answer to crack the chamber red, restore the original, download receipt JSON, and explicitly publish a public answer card. Simulation uses a deterministic fixture answer and PUBLIC ECDSA key. Cyan “signature intact” is never green hardware verification. Share cards can be opened in another browser; unpublished cards return 404. `/verify` imports receipts and checks signatures locally before requesting Intel DCAP verification. Jev appraises verification facts with confidence; it cannot override a cryptographic failure and never receives the confidential prompt or answer.
+
+## Real deployment
+
+Copy `.env.example` to `.env.local`; use HTTPS PUBLIC_ORIGIN, a 32+ character OPERATOR_TOKEN, PostgreSQL DATABASE_URL and TYPESAFE_API_KEY. Configure the separately deployed worker's HTTPS URL/token and trusted model/measurements. The frontend and its operator API see the prompt before it reaches the confidential worker; this is not an end-to-end attested browser channel.
+
+1. Review `services/glass-box-tee/server.mjs`, the receipt protocol and container composition. Build the worker from the repository root: `docker build -f services/glass-box-tee/Dockerfile -t glass-worker .`. Publish to your registry and pin its immutable digest; independently pin the reviewed Ollama image digest. Run both in one **Intel TDX dstack CVM**. CPU-only model inference stays inside the VM; no GPU attestation claim.
+2. Use `services/glass-box-tee/compose.yaml` with environment from its `.env.example`. The guest must support published dstack SDK 0.5.8 `GetKey` / `GetQuote` APIs and grant the non-root worker access to `/var/run/dstack.sock` using the socket's actual group ID. Do not use a simulator. The worker fails startup without dstack, a strong access token, or the pinned model.
+3. Bootstrap the exact model inside the same confidential VM before worker startup: start Ollama alone, run `docker compose exec ollama ollama pull "$TEE_MODEL"`, inspect its `/api/tags` digest and validate it against your independently approved model artifact. Set TEE_MODEL_DIGEST to that SHA256 with `0x` prefix, then start the worker. The worker independently hashes the model manifest and every referenced weight/config blob from its read-only model-volume mount before and after every inference, and also checks Ollama’s reported digest and accepts no caller-supplied model or model server URL. Use an explicit `library` model name and tag, such as `qwen3:0.6b`. Stop model downloads/changes after bootstrap; protect the CVM model storage with the reviewed dstack encrypted-storage configuration. Ollama binds loopback only; secure ingress to worker port 8080 with TLS. Configure token via secret injection, never committed compose values.
+4. Independently establish MRTD and all RTMRs from the reviewed CVM image, container digest, compose configuration and dstack event log/measurement procedure. Pin the approved values as TEE_MEASUREMENTS JSON (`mrtd`, `rtmr0`…`rtmr3`, each 96 lowercase hex chars). Never enroll measurements merely because an untrusted provider returned them. Updating images, composition, model, guest or deployment measurements requires re-review and policy update. A strict mismatch fails closed.
+5. Deploy this Next app using the root Dockerfile (`--build-arg APP=day-07-glass-box-mind`) or a Node/serverless Next host with public HTTPS and durable PostgreSQL. Supply only the required Day 7 variables; no other daily server is required. The verifier obtains current Intel collateral from Phala PCCS, validates Intel-root signatures/revocation/freshness, requires UpToDate TCB and non-debug TDX, matches every trusted measurement, checks model digest, and requires quote REPORTDATA = 32-byte receipt payload digest followed by 32 zero bytes. Worker responses must match the fresh request nonce, prompt and timestamp.
+6. Optional: deploy `contracts/src/InferenceAnchor.sol` on Base Sepolia with Foundry, configure its address/RPC and publish a card. “Post commitment onchain” prepares a transaction for your browser wallet. The contract records the full proof commitment and public URI immutably; **it does not verify DCAP or certify factual correctness**. Its publisher can be any address. Verify the full receipt on `/verify`; trust green only under a reviewed verifier policy. `inference.anchor.status` reads publication status.
+
+The explicit receipt domain and ABI field order live in `packages/inference/src/protocol.ts`. Every model/prompt/output/version/mode/nonce/time/signer field is hashed and EIP191 signed. The quote binds that payload, which includes the signer; proof IDs additionally hash the signature and quote. TEE evidence attests execution of the measured worker, not truthfulness or safety of the model's answer. Long-lived receipts must be re-verified against current collateral and workload policy; cached card status is historical until the page rechecks it.
+
+Production verification is bounded to eight concurrent public checks per instance; configure ingress request limits, body limits and rate limiting for internet exposure. Application requests cap inference inputs at 12,000 characters and store at most 100 private answers; export/rotate the workspace at that limit. Publishing intentionally exposes full prompts and outputs and cannot retract copies already downloaded. Demo file persistence requires one process and a writable `.data` directory; real publication is stored in PostgreSQL with the private operator namespace and exposed only after explicit publication.
+
+## Validation limits
+
+Automated tests include real upstream Intel-signed TDX quote verification at its historical collateral validity time, modified-quote and expired-collateral rejection, exact workload/model/payload/debug/TCB policy checks, signed-field tampering, opt-in sharing, and contract immutability. Historical fixtures never issue app receipts. Real hardware provisioning, Jev access and funded chain publication require external credentials and were not performed locally. See the Day 7 final audit for measured results.
