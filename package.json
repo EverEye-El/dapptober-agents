@@ -2,10 +2,6 @@
   "name": "dapptober-agents",
   "private": true,
   "type": "module",
-  "workspaces": [
-    "apps/agents/*",
-    "packages/*"
-  ],
   "scripts": {
     "dev": "node scripts/workspace.mjs dev",
     "build": "node scripts/workspace.mjs build",
@@ -13,7 +9,7 @@
     "lint": "eslint .",
     "test": "vitest run",
     "test:contracts": "node scripts/contracts.mjs test --offline",
-    "check": "npm run lint && npm run typecheck && npm test && npm run test:contracts && npm run build",
+    "check": "pnpm run lint && pnpm run typecheck && pnpm test && pnpm run test:contracts && pnpm run build",
     "start": "node scripts/workspace.mjs start",
     "smoke": "node scripts/smoke.mjs",
     "test:senate-chain": "node scripts/senate-chain-test.mjs"
@@ -39,7 +35,22 @@
     "react-dom": "^19.2.0",
     "thirdweb": "^5.0.0",
     "viem": "^2.38.0",
-    "zod": "^4.0.0"
+    "zod": "^4.0.0",
+    "@dapptober/receipts": "workspace:*",
+    "@dapptober/ui": "workspace:*",
+    "@dapptober/payments": "workspace:*",
+    "@dapptober/types": "workspace:*",
+    "@dapptober/guardrails": "workspace:*",
+    "@dapptober/identity": "workspace:*",
+    "@dapptober/config": "workspace:*",
+    "@dapptober/chain": "workspace:*",
+    "@dapptober/mcp": "workspace:*",
+    "@dapptober/wallet": "workspace:*",
+    "@dapptober/governance": "workspace:*",
+    "@dapptober/inference": "workspace:*",
+    "@dapptober/agent-core": "workspace:*",
+    "@dapptober/intents": "workspace:*",
+    "@dapptober/treasury": "workspace:*"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.0.0",
@@ -53,10 +64,28 @@
     "typescript-eslint": "^8.0.0",
     "vitest": "^5.0.3"
   },
-  "overrides": {
-    "ws": "^8.21.0",
-    "tmp": "^0.2.7",
-    "js-yaml": "^4.3.2",
-    "uuid": "^11.1.1"
+  "packageManager": "pnpm@10.2.0",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "ws": "^8.21.0",
+      "tmp": "^0.2.7",
+      "js-yaml": "^4.3.2",
+      "uuid": "^11.1.1"
+    },
+    "onlyBuiltDependencies": [
+      "@tailwindcss/oxide",
+      "esbuild",
+      "sharp"
+    ],
+    "packageExtensions": {
+      "pino@7.11.0": {
+        "optionalDependencies": {
+          "pino-pretty": "13.2.0"
+        }
+      }
+    }
   }
 }

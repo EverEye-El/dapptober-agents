@@ -6,5 +6,12 @@
     "start": "next start --port 3001",
     "build": "next build --webpack",
     "test": "vitest run --root ../../.. tests/day-01.test.ts"
+  },
+  "dependencies": {
+    "@dapptober/agent-core": "workspace:*",
+    "@dapptober/ui": "workspace:*",
+    "next": "^16.0.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
   }
 }

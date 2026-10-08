@@ -6,7 +6,7 @@ const dirs=readdirSync('apps/agents').filter(x=>!day||x.startsWith(`day-${day.pa
 if(!dirs.length)throw new Error('Unknown day');
 const children=[];
 for(const dir of dirs){
- const child=spawn('npm',['run',command,'--workspace',`apps/agents/${dir}`],{stdio:'inherit'});children.push(child);
+ const child=spawn('pnpm',['--filter',`./apps/agents/${dir}`,'run',command],{stdio:'inherit'});children.push(child);
  child.on('error',err=>{console.error(err.message);process.exitCode=1;});
  if(command==='build')await new Promise(resolve=>child.on('exit',code=>{if(code)process.exit(code);resolve();}));
  else child.on('exit',code=>{if(code){process.exitCode=code;for(const sibling of children)if(sibling!==child)sibling.kill('SIGTERM');}});

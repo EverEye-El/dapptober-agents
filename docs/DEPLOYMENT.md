@@ -1,14 +1,16 @@
 # Independent deployment
 
-Use Node 22.12+, npm and Foundry. Run `npm ci` at the repository root. The six apps compile shared packages into their own deployment; they never call another daily server. Choose one app from the root README and copy its `.env.example` to `.env.local` inside that app. Blank optional variables are ignored.
+Use Node 22.12+, pnpm 10.2.0 and Foundry. Run `pnpm install --frozen-lockfile` at the repository root. The eight apps compile shared packages into their own deployment; they never call another daily server. Choose one app from the root README and copy its `.env.example` to `.env.local` inside that app. Blank optional variables are ignored.
+
+Use the version in the root `packageManager` field. Run `corepack enable` and `corepack prepare pnpm@10.2.0 --activate`, or install `pnpm@10.2.0` through npm. All workspace imports are declared explicitly with `workspace:*`. CI and Docker install with `--frozen-lockfile`. Only Tailwind oxide, esbuild and sharp dependency build scripts are permitted; optional bufferutil/keccak/utf-8-validate hooks remain disabled.
 
 ## Local and production
 
-`npm run dev -- 01` starts Day 01; replace the number for another day. `npm run build -- 01` builds that app, and `npm run start --workspace @dapptober/day-01` serves it on port 3001. Omit the day to build/start all six. Demo mode uses a local `.data` directory and is intended for one persistent process. It is explicitly simulated and requires no credentials.
+`pnpm run dev 01` starts Day 01; replace the number for another day. `pnpm run build 01` builds that app, and `pnpm --filter @dapptober/day-01 run start` serves it on port 3001. Omit the day to build/start all eight. Demo mode uses a local `.data` directory and is intended for one persistent process. It is explicitly simulated and requires no credentials.
 
-For Vercel, create six separate projects as needed. Set the daily app directory as Root Directory and enable access to files outside it. Each app contains a `vercel.json` with root install and workspace build commands. Select Node 22 and set that project's environment variables. Real mode requires PostgreSQL because serverless local files are ephemeral. Do not deploy demo file storage as a durable multi-instance service.
+For Vercel, create eight separate projects as needed. Set the daily app directory as Root Directory and enable access to files outside it. Each app contains a `vercel.json` with root install and workspace build commands. Select Node 22 and set that project's environment variables. Real mode requires PostgreSQL because serverless local files are ephemeral. Do not deploy demo file storage as a durable multi-instance service.
 
-For a standalone container: `docker build --build-arg APP=day-04-mcp-mercenary -t dapptober-day04 .`, then `docker run --env-file <private-env-file> -p 3004:3000 dapptober-day04`. Set PUBLIC_ORIGIN to the externally reachable origin, not an internal container hostname. Docker builds are supplied but were not executed in this environment; npm standalone builds were tested.
+For a standalone container: `docker build --build-arg APP=day-04-mcp-mercenary -t dapptober-day04 .`, then `docker run --env-file <private-env-file> -p 3004:3000 dapptober-day04`. Set PUBLIC_ORIGIN to the externally reachable origin, not an internal container hostname. Docker builds are supplied but were not executed in this environment; standalone builds were tested.
 
 ## Real mode configuration
 
@@ -30,7 +32,7 @@ Day 06 needs COW_CHAIN_ID (11155111 Sepolia or 8453 Base), COW_USDC, COW_WETH an
 
 ## Contracts
 
-Build/test with `npm run test:contracts`. `scripts/contracts.mjs` uses the pinned solc-js compiler offline, including OpenZeppelin imports; no forge-std download is needed. Start `anvil` for a local chain if desired.
+Build/test with `pnpm run test:contracts`. `scripts/contracts.mjs` uses the pinned solc-js compiler offline, including OpenZeppelin imports; no forge-std download is needed. Start `anvil` for a local chain if desired.
 
 Set RPC_URL and use an encrypted Foundry account (`cast wallet import dapptober-deployer --interactive`), then run from the repository root:
 
@@ -51,9 +53,9 @@ An MCP client can connect to `/api/mcp` with Streamable HTTP and its bearer toke
 
 ## Release verification
 
-Run `npm run check`, start the eight production apps using `npm start`, then `npm run smoke`. Inspect exported receipts, configure live credentials, and exercise a minimal funded test transaction before increasing owner caps. Public-chain and provider integration is implemented but cannot be certified by a local simulation.
+Run `pnpm run check`, start the eight production apps using `pnpm start`, then `pnpm run smoke`. Inspect exported receipts, configure live credentials, and exercise a minimal funded test transaction before increasing owner caps. Public-chain and provider integration is implemented but cannot be certified by a local simulation.
 
-The convenience `npm start` command uses Next's local production server and may warn about standalone output. The Docker recipe executes the generated standalone server directly. In a demo container, mount a writable persistent state directory at the server's `.data` path; real deployment uses PostgreSQL and avoids local persistence.
+The convenience `pnpm start` command uses Next's local production server and may warn about standalone output. The Docker recipe executes the generated standalone server directly. In a demo container, mount a writable persistent state directory at the server's `.data` path; real deployment uses PostgreSQL and avoids local persistence.
 
 ## Day 07 extension
 
@@ -61,6 +63,6 @@ See [Day 7 research](DAY-07-RESEARCH.md), [application and worker deployment](..
 
 ## Day 08 extension
 
-Build independently with `npm run build -- 08`, start with `npm start -- 08` (port 3008), or select `APP=day-08-swarm-senate` in the root Dockerfile. [The app README](../apps/agents/day-08-swarm-senate/README.md) documents contract deployment, timestamp voting windows, founding membership, signed profile registration and per-member delegation. Copy its `.env.example` and supply the Governor/token addresses, deployment block, RPC, private PostgreSQL, operator token, dedicated delegate seed and AI/Jev credentials.
+Build independently with `pnpm run build 08`, start with `pnpm start 08` (port 3008), or select `APP=day-08-swarm-senate` in the root Dockerfile. [The app README](../apps/agents/day-08-swarm-senate/README.md) documents contract deployment, timestamp voting windows, founding membership, signed profile registration and per-member delegation. Copy its `.env.example` and supply the Governor/token addresses, deployment block, RPC, private PostgreSQL, operator token, dedicated delegate seed and AI/Jev credentials.
 
 Fund delegate EOAs with native gas only after members approve delegation. Use a Node host with sufficient debate request duration; schedule `scripts/senate-worker.mjs` for bounded operator debate/vote cycles. The worker never overrides humans or executes policy adoption. Back up transcript/profile storage and repeatedly refresh the bounded chain scanner when backfilling. Membership is immutable per deployment. See [research](DAY-08-RESEARCH.md) and [audit](DAY-08-AUDIT.md).

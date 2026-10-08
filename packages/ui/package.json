@@ -8,5 +8,12 @@
     "./src/*": "./src/*.ts",
     "./src/glass-room": "./src/glass-room.tsx",
     "./src/senate-room": "./src/senate-room.tsx"
+  },
+  "dependencies": {
+    "@dapptober/governance": "workspace:*",
+    "@dapptober/inference": "workspace:*",
+    "@dapptober/types": "workspace:*",
+    "react": "^19.2.0",
+    "viem": "^2.38.0"
   }
 }

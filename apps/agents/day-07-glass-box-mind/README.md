@@ -3,11 +3,11 @@
 Independent cyan laboratory for AI inference receipts. Canonical requirements: complete Day 7 prompt in `prompts/dapp-prompts.ts`. Shared capability: `packages/inference`. Research and trust decisions: [Day 7 research](../../../docs/DAY-07-RESEARCH.md).
 
 ```sh
-npm ci
-npm run dev -- 07                 # http://localhost:3007
-npm run test --workspace @dapptober/day-07
-npm run build -- 07
-npm start -- 07
+pnpm install --frozen-lockfile
+pnpm run dev 07                 # http://localhost:3007
+pnpm --filter @dapptober/day-07 run test
+pnpm run build 07
+pnpm start 07
 node scripts/smoke.mjs 07
 ```
 

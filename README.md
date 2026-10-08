@@ -17,13 +17,17 @@ Eight independently runnable crypto-native agents for Dapptober 2026, built on a
 
 ## Start here
 
-Node 22.12+ and npm. Foundry is required for Solidity tests. Dependencies and compiler are pinned in `package-lock.json`.
+Node 22.12+ and pnpm 10.2.0. Foundry is required for Solidity tests. Dependencies and compiler are pinned in `pnpm-lock.yaml`.
+
+Enable the pinned package manager with `corepack enable` and `corepack prepare pnpm@10.2.0 --activate` (or install `pnpm@10.2.0` through npm).
+
+See [pnpm migration and validation](docs/PNPM-MIGRATION.md) for the workspace changes and remaining upstream warnings.
 
 ```sh
-npm ci
-npm run dev -- 01
+pnpm install --frozen-lockfile
+pnpm run dev 01
 # Or run all eight independent servers:
-npm run dev
+pnpm run dev
 ```
 
 Local simulation is the default and needs no secrets. Every simulated balance, signature, payment and attestation is labelled. State and receipts persist under each application's ignored `.data/` directory, isolated by HttpOnly session cookie. Local mode supports one process per app; use PostgreSQL for real/serverless mode. The agents never fabricate real transaction hashes.
@@ -33,19 +37,19 @@ Real mode uses configured RPCs, contracts, Jev, generative AI, thirdweb, x402 or
 ## Commands
 
 ```sh
-npm run dev -- 04                 # independent Day 04 server
-npm run build -- 03               # independent Day 03 production build
-npm run test --workspace @dapptober/day-06
-npm run typecheck
-npm run lint
-npm test
-npm run test:contracts            # Solidity unit and fuzz tests, offline
-npm run build                    # all eight independent builds
-npm run check                    # full verification
-npm run smoke                    # production HTTP workflow audit (servers must run)
+pnpm run dev 04                 # independent Day 04 server
+pnpm run build 03               # independent Day 03 production build
+pnpm --filter @dapptober/day-06 run test
+pnpm run typecheck
+pnpm run lint
+pnpm test
+pnpm run test:contracts            # Solidity unit and fuzz tests, offline
+pnpm run build                    # all eight independent builds
+pnpm run check                    # full verification
+pnpm run smoke                    # production HTTP workflow audit (servers must run)
 ```
 
-`npm run start --workspace @dapptober/day-01` runs a built app. `npm run start` starts all eight after a full build. No other daily server is needed by any real deployment.
+`pnpm --filter @dapptober/day-01 run start` runs a built app. `pnpm run start` starts all eight after a full build. No other daily server is needed by any real deployment.
 
 ## Shared capabilities
 

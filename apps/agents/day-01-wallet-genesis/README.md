@@ -27,9 +27,9 @@ Owner-signed previews control real administrative transactions. Server financial
 From the repository root:
 
 ```sh
-npm ci
+pnpm install --frozen-lockfile
 cp apps/agents/day-01-wallet-genesis/.env.example apps/agents/day-01-wallet-genesis/.env.local
-npm run dev -- 01
+pnpm run dev 01
 ```
 
 Open http://localhost:3001. Local mode works without credentials. For real mode, configure this application's `.env.local`, set `AGENT_MODE=real`, and follow [`docs/DEPLOYMENT.md`](../../../docs/DEPLOYMENT.md). Blank optional variables are ignored; required real-mode values produce explicit errors. `PUBLIC_ORIGIN` must exactly match the deployment origin. The operator token must be at least 32 random characters; enter it in the control room.
@@ -37,12 +37,12 @@ Open http://localhost:3001. Local mode works without credentials. For real mode,
 ## Test and build independently
 
 ```sh
-npm run test --workspace @dapptober/day-01
-npm run build -- 01
-npm run start --workspace @dapptober/day-01
+pnpm --filter @dapptober/day-01 run test
+pnpm run build 01
+pnpm --filter @dapptober/day-01 run start
 ```
 
-Contract and shared checks: `npm run test:contracts`, `npm test`, `npm run typecheck`, `npm run lint`.
+Contract and shared checks: `pnpm run test:contracts`, `pnpm test`, `pnpm run typecheck`, `pnpm run lint`.
 
 ## Deploy independently
 

@@ -33,9 +33,16 @@ Release work also remains: verify hosted CI after pushing, address the remaining
 
 Day 07 has the most infrastructure left; Day 08 has the strongest tested real-chain integration so far.
 
+## Shared tooling — pnpm migration
+
+The workspace now uses pinned pnpm 10.2.0 and `pnpm-lock.yaml`. Fresh frozen installation, an isolated production-only worker installation, lint/typecheck, 40 application tests, 28 contract tests, the real Anvil integration, all eight production builds and all eight production HTTP workflows pass. Direct external dependency versions are preserved; scripts, CI, Docker, existing Vercel configurations and active setup docs use pnpm. See [migration audit](PNPM-MIGRATION.md).
+
+Remaining: review and merge the migration pull request, verify hosted GitHub CI, build the container images, and resolve the documented upstream dependency advisories/peer warnings. Live deployment requirements for Days 01–08 above are unchanged. Package-manager migration does not establish live protocol validation.
+
 ## Supporting documentation
 
 - [Deployment instructions](DEPLOYMENT.md)
+- [pnpm migration audit](PNPM-MIGRATION.md)
 - [Days 01–06 audit](FINAL-AUDIT.md)
 - [Day 07 audit](DAY-07-AUDIT.md)
 - [Day 08 audit](DAY-08-AUDIT.md)

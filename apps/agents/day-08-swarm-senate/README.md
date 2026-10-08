@@ -3,12 +3,12 @@
 Canonical prompt: complete Day 08 in `prompts/dapp-prompts.ts`. Holographic Roman senate with distinct value-conditioned delegate agents, public opening statements and rebuttals, Jev review flags, provisional votes, human overrides, and outcome/alignment inspection. Profiles condition model reasoning; this is not weight fine-tuning.
 
 ```sh
-npm ci
-npm run dev -- 08                 # http://localhost:3008
-npm run test --workspace @dapptober/day-08
-npm run test:senate-chain         # disposable Anvil integration; external AI explicitly mocked
-npm run build -- 08
-npm start -- 08
+pnpm install --frozen-lockfile
+pnpm run dev 08                 # http://localhost:3008
+pnpm --filter @dapptober/day-08 run test
+pnpm run test:senate-chain         # disposable Anvil integration; external AI explicitly mocked
+pnpm run build 08
+pnpm start 08
 node scripts/smoke.mjs 08
 ```
 
@@ -54,4 +54,4 @@ Actual Governor tallies/status control real outcomes; database debate text never
 
 This is one immutable equal-membership cohort per deployed token; adding or removing founding members requires a new DAO deployment. It is not token-weighted treasury governance, Snapshot integration, a fully autonomous DAO scheduler service, or a model-training platform. Real providers, durable storage, funded delegate wallets and public-chain deployment need external credentials. The complete local workflow, Solidity voting logic and failure cases are tested; live provider and funded deployment results are recorded separately in the final audit.
 
-The real governance adapter uses the latest chain timestamp for lifecycle guards and reads quorum only after a historical snapshot exists. It also checks that the configured voice token matches the Governor. `npm run test:senate-chain` starts and stops its own disposable local Anvil node on port 18548, deploys both contracts, verifies member signature/replay handling, delegates, debates with mocked external cognition, casts actual transactions, overrides, reconciles logs and executes a successful resolution. Public-chain providers and live AI/Jev services are separate external validation.
+The real governance adapter uses the latest chain timestamp for lifecycle guards and reads quorum only after a historical snapshot exists. It also checks that the configured voice token matches the Governor. `pnpm run test:senate-chain` starts and stops its own disposable local Anvil node on port 18548, deploys both contracts, verifies member signature/replay handling, delegates, debates with mocked external cognition, casts actual transactions, overrides, reconciles logs and executes a successful resolution. Public-chain providers and live AI/Jev services are separate external validation.

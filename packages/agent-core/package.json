@@ -6,5 +6,25 @@
   "exports": {
     ".": "./src/index.ts",
     "./src/*": "./src/*.ts"
+  },
+  "dependencies": {
+    "@ai-sdk/openai-compatible": "^2.0.0",
+    "@dapptober/chain": "workspace:*",
+    "@dapptober/config": "workspace:*",
+    "@dapptober/governance": "workspace:*",
+    "@dapptober/guardrails": "workspace:*",
+    "@dapptober/identity": "workspace:*",
+    "@dapptober/inference": "workspace:*",
+    "@dapptober/intents": "workspace:*",
+    "@dapptober/mcp": "workspace:*",
+    "@dapptober/payments": "workspace:*",
+    "@dapptober/receipts": "workspace:*",
+    "@dapptober/treasury": "workspace:*",
+    "@dapptober/types": "workspace:*",
+    "@dapptober/wallet": "workspace:*",
+    "ai": "^6.0.0",
+    "postgres": "^3.4.0",
+    "viem": "^2.38.0",
+    "zod": "^4.0.0"
   }
 }

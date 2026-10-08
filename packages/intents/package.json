@@ -6,5 +6,18 @@
   "exports": {
     ".": "./src/index.ts",
     "./src/*": "./src/*.ts"
+  },
+  "dependencies": {
+    "@cowprotocol/sdk-config": "^2.7.2",
+    "@cowprotocol/sdk-order-book": "^4.3.0",
+    "@cowprotocol/sdk-order-signing": "^1.1.16",
+    "@dapptober/agent-core": "workspace:*",
+    "@dapptober/chain": "workspace:*",
+    "@dapptober/config": "workspace:*",
+    "@dapptober/guardrails": "workspace:*",
+    "@dapptober/receipts": "workspace:*",
+    "@dapptober/types": "workspace:*",
+    "viem": "^2.38.0",
+    "zod": "^4.0.0"
   }
 }
