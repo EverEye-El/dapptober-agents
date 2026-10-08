@@ -12,10 +12,9 @@ jobs:
           cache: pnpm
       - uses: foundry-rs/foundry-toolchain@v1
       - run: pnpm install --frozen-lockfile
-      - run: pnpm run check
+      - run: pnpm run lint && pnpm run typecheck && pnpm test && pnpm run test:contracts
       - run: pnpm run test:senate-chain
       - run: pnpm run test:release-chain
-      - run: pnpm run test:production
   containers:
     runs-on: ubuntu-latest
     strategy:
@@ -24,15 +23,22 @@ jobs:
         app: [day-01-wallet-genesis, day-02-pay-per-prompt, day-03-agent-passport, day-04-mcp-mercenary, day-05-stablecoin-autopilot, day-06-intent-calligrapher, day-07-glass-box-mind, day-08-swarm-senate]
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
       - run: docker build --build-arg APP=${{ matrix.app }} -t dapptober-check .
-      - name: Verify standalone container starts and serves its independent app
+      - name: Verify standalone container and complete independent agent workflow
+        env:
+          APP: ${{ matrix.app }}
         run: |
-          docker run -d --name agent-check -p 3000:3000 -e AGENT_MODE=demo dapptober-check
+          docker run -d --name agent-check -p 3000:3000 -e AGENT_MODE=demo -e PUBLIC_ORIGIN=http://localhost:3000 dapptober-check
           trap 'docker logs agent-check; docker rm -f agent-check' EXIT
           curl --retry 20 --retry-all-errors --retry-delay 2 --fail http://localhost:3000/ > /tmp/agent-page.html
           test -s /tmp/agent-page.html
           curl --fail http://localhost:3000/api/agent > /tmp/agent-state.json
           python3 -c 'import json; s=json.load(open("/tmp/agent-state.json")); assert s["state"]["mode"] == "demo"; assert s["receiptsValid"] is True'
+          day=$((10#${APP:4:2}))
+          SMOKE_PORT_BASE=$((3000-day)) node scripts/smoke.mjs "$day"
   tee-container:
     runs-on: ubuntu-latest
     steps:
