@@ -12,7 +12,7 @@ This living document tracks every built Dapptober agent from local implementatio
 
 ## Current status
 
-Status as of October 8, 2026: all eight apps work in local demo mode, but none is verified end to end as a live production service. Interfaces, workflows, shared logic and builds were tested. The localhost apps currently simulate financial actions and AI responses.
+Status as of October 9, 2026: all nine apps work in local demo mode, but none is verified end to end as a live production service. Interfaces, workflows, shared logic and builds were tested. The localhost apps currently simulate financial actions and AI responses.
 
 Real protocol integrations are implemented, but deployment, credentials, funding and live verification remain.
 
@@ -26,18 +26,19 @@ Real protocol integrations are implemented, but deployment, credentials, funding
 | **06 — Intent Calligrapher** | Intent parsing, constraints, signing payloads and simulated solver workflow | **No custom contract deployment.** Use existing CoW contracts; configure supported chain/tokens; fund wallet, approve relayer and verify a real order, fill and cancellation |
 | **07 — Glass-Box Mind** | Receipt signatures, tamper rejection, sharing and verification; historical Intel-signed quote tests | Deploy confidential worker/model inside an **Intel TDX CVM**; approve/pin workload measurements and model digest; verify fresh hardware-backed inference. **InferenceAnchor** deployment is needed only for onchain publication |
 | **08 — Swarm Senate** | Debate/override workflow; contract tests; **actual local Anvil deployment, delegation, votes, override and adoption** | Deploy **SenateVoice + SwarmGovernor** on the chosen public chain; enroll members, sign profiles, delegate and fund agent gas; configure live reasoning; verify public-chain lifecycle; schedule worker if desired |
+| **09 — Forecast Colosseum** | Funded binary pools, agent API and hard risk limits, Brier/calibration ranking, confidence review; eight contract tests with collateral fuzzing; **actual Anvil human/agent trades, direct cap rejection, oracle-double dispute/reset/settlement and USDC payout**; independent production HTTP workflow and browser QA | Deploy **ForecastColosseum** with verified UMA OOv3, whitelisted six-decimal USDC and approved **ASSERT_TRUTH2**; set ≥2 hour live dispute window; fund human/agent USDC/gas and separate oracle bonds; register caps; configure real Jev/AI, HTTPS/PostgreSQL; verify public-chain assertion/dispute/settlement and standings; operate oracle monitoring and obtain contract review. Local oracle/provider doubles are not production DVM/AI evidence |
 
 For every live app, remaining setup includes HTTPS hosting, PostgreSQL, private environment configuration, operator authentication and its required AI/Jev credentials. Each then needs a live acceptance run: passing demo tests does not establish that providers, wallets and public-chain transactions work together.
 
 Release work also remains: verify hosted CI for subsequent changes, address the remaining low elliptic dependency advisory and review the custom contracts before putting meaningful funds into them. Keep subsequent daily work committed and pushed. The contracts have automated tests, not an independent security audit.
 
-Day 07 has the most infrastructure left; Day 08 has the strongest tested real-chain integration so far.
+Day 07 has the most infrastructure left. Days 01, 03, 04, 05, 08 and 09 have actual local-chain acceptance evidence; production protocol acceptance remains separate.
 
 ## Shared tooling — pnpm migration
 
 The workspace now uses pinned pnpm 10.2.0 and `pnpm-lock.yaml`. Fresh frozen installation, an isolated production-only worker installation, lint/typecheck, 40 application tests, 28 contract tests, the real Anvil integration, all eight production builds and all eight production HTTP workflows pass. Direct external dependency versions are preserved; scripts, CI, Docker, existing Vercel configurations and active setup docs use pnpm. See [migration audit](PNPM-MIGRATION.md).
 
-Hosted migration GitHub CI was verified passing on October 8 (push and PR runs linked in [live setup checklist](LIVE-SETUP-CHECKLIST.md)). Remaining: review and merge the migration pull request, resolve the documented upstream dependency advisories/peer warnings. Live deployment requirements for Days 01–08 above are unchanged. Package-manager migration does not establish live protocol validation.
+Hosted migration GitHub CI was verified passing on October 8 (push and PR runs linked in [live setup checklist](LIVE-SETUP-CHECKLIST.md)). Migration PR #1 is merged. Remaining: resolve the documented upstream dependency advisories/peer warnings. Live deployment requirements for Days 01–08 above are unchanged. Package-manager migration does not establish live protocol validation.
 
 ## Supporting documentation
 
@@ -46,6 +47,7 @@ Hosted migration GitHub CI was verified passing on October 8 (push and PR runs l
 - [Days 01–06 audit](FINAL-AUDIT.md)
 - [Day 07 audit](DAY-07-AUDIT.md)
 - [Day 08 audit](DAY-08-AUDIT.md)
+- [Day 09 audit](DAY-09-AUDIT.md)
 
 ## Completion pass — October 8, 2026
 
@@ -69,3 +71,11 @@ CI now runs each day's complete HTTP workflow against its actual standalone cont
 Hosted full workflow evidence: [run 37860191053](https://github.com/EverEye-El/dapptober-agents/actions/runs/37860191053), commit `10be663`: all eight actual standalone containers passed their complete daily HTTP workflows, including receipt verification; the worker image built successfully. The shared check exposed the 30-second escrow test timeout (and a resulting nonce collision in the next test). The harness now uses fast uncached local receipt polling, explicit pending nonces for owner fixture transactions, and a 90-second case allowance. A deliberately slow two-second-block escrow run passed in **33.6 seconds**, reproducing why the old limit was too short; all four normal-speed cases and the existing senate integration also pass. The final shared hosted check passed with this correction.
 
 Final hosted audit: [run 37860650867](https://github.com/EverEye-El/dapptober-agents/actions/runs/37860650867), implementation commit `7e8579961350de2319cbe11aaa88767f8b60b2ac`, **passed all jobs**: frozen install, lint/typecheck, 46 application tests, 28 contract tests, five actual Anvil integrations, complete HTTP/receipt workflows for all eight independent standalone containers, and the confidential worker image build. New documentation-only revisions may trigger another automatic run; this evidence identifies the tested implementation commit. Live deployment and the owner inputs above remain uncompleted.
+
+## Day 09 completion update — October 9, 2026
+
+Day 09 adds the shared `forecast` capability and independent port 3009 app. Frozen install, lint/typecheck, 56 application tests, 36 contract tests, all six separate real local-chain acceptance cases, nine production builds and nine complete HTTP workflows pass. Browser trading and settlement update pools, leaderboard and calibration. No public deployment or live oracle/provider evidence is claimed. [Day 09 audit](DAY-09-AUDIT.md) records exact boundaries.
+
+Day 06: fixed the Friday deadline parser and added a regression test; live CoW requirements are unchanged. Shared CI/container matrix and production/readiness scripts now include Day 09. Production dependency audit remains zero critical/high/moderate and one low inherited elliptic advisory.
+
+Repository release: PR #1 merged into main; PR #2 merged into the pnpm branch. The new Day 09 branch incorporates both merged branches and will deliver the readiness work to main through its PR. Verify that PR’s hosted CI and merge it; public setup/funding/verification and independent security review remain open.

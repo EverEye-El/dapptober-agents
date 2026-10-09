@@ -18,3 +18,4 @@ it('accepts complete syntactic configuration without claiming live acceptance',(
   const address='0x'+'11'.repeat(20);
   expect(assess(3,{AGENT_MODE:'real',OWNER_ADDRESS:address,OPERATOR_TOKEN:'a'.repeat(32),DATABASE_URL:'postgresql://fixture:fixture@localhost/fixture',RPC_URL:'https://rpc.example',TYPESAFE_API_KEY:'fixture',AI_API_KEY:'fixture',CHAIN_ID:'84532',PUBLIC_ORIGIN:'https://passport.example',PASSPORT_REGISTRY:address})).toEqual([]);
 });
+it('requires the independent forecast deployment and UMA oracle configuration',()=>{const gaps=assess(9,{AGENT_MODE:'real',FORECAST_MARKET:'invalid'});expect(gaps).toContain('UMA_ORACLE: missing');expect(gaps).toContain('USDC_ADDRESS: missing');expect(gaps).toContain('FORECAST_MARKET: invalid address');});

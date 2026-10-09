@@ -10,7 +10,7 @@ const children=[];const ready=new Set();const base=3100;
 const stop=()=>{for(const child of children)child.kill('SIGTERM');};
 for(const signal of ['SIGINT','SIGTERM'])process.on(signal,()=>{stop();process.exitCode=1;});
 try{
-  const apps=readdirSync(resolve(root,'apps/agents')).filter(dir=>/^day-0[1-8]-/.test(dir)).sort();
+  const apps=readdirSync(resolve(root,'apps/agents')).filter(dir=>/^day-0[1-9]-/.test(dir)).sort();
   for(const dir of apps){
     const day=Number(dir.match(/^day-(\d+)-/)[1]),port=base+day;
     const child=spawn(process.execPath,[next,'start','--port',String(port),'--hostname','127.0.0.1'],{cwd:resolve(root,'apps/agents',dir),env:{...process.env,AGENT_MODE:'demo',PUBLIC_ORIGIN:`http://localhost:${port}`},stdio:['ignore','pipe','ignore']});
@@ -18,7 +18,7 @@ try{
     child.on('error',()=>{process.exitCode=1;});
   }
   for(let attempt=0;attempt<60;attempt++){
-    if(children.some(child=>child.exitCode!==null||child.signalCode!==null))throw new Error('A production server exited before the audit; ensure ports 3101–3108 are free');
+    if(children.some(child=>child.exitCode!==null||child.signalCode!==null))throw new Error('A production server exited before the audit; ensure ports 3101–3109 are free');
     const states=await Promise.all(apps.map(async dir=>{try{return (await fetch(`http://127.0.0.1:${base+Number(dir.match(/^day-(\d+)-/)[1])}`,{signal:AbortSignal.timeout(1000)})).status===200;}catch{return false;}}));
     if(ready.size===children.length&&states.every(Boolean))break;
     if(attempt===59)throw new Error('Production servers did not become ready');

@@ -13,6 +13,7 @@ const required={
   6:[...common,'COW_USDC','COW_WETH'],
   7:['OWNER_ADDRESS','OPERATOR_TOKEN','DATABASE_URL','TYPESAFE_API_KEY','TEE_WORKER_URL','TEE_WORKER_TOKEN','TEE_MODEL_DIGEST'],
   8:[...common,'AGENT_PRIVATE_KEY','SENATE_TOKEN','SENATE_GOVERNOR','SENATE_START_BLOCK'],
+  9:[...common,'AGENT_PRIVATE_KEY','FORECAST_MARKET','UMA_ORACLE','USDC_ADDRESS'],
 };
 export function assess(day,env){
   const gaps=[];
@@ -20,7 +21,7 @@ export function assess(day,env){
   for(const key of required[day])if(!env[key]?.trim())gaps.push(`${key}: missing`);
   for(const key of ['OPERATOR_TOKEN','TEE_WORKER_TOKEN'])if(env[key]&&env[key].length<32)gaps.push(`${key}: requires at least 32 characters`);
   for(const [key,value] of Object.entries(env)){
-    if(value&&(/_ADDRESS$/.test(key)||['SESSION_VAULT','PASSPORT_REGISTRY','QUEST_ESCROW','FLIGHT_TREASURY','COW_USDC','COW_WETH','SENATE_TOKEN','SENATE_GOVERNOR','INFERENCE_ANCHOR','PAY_TO'].includes(key))&&!/^0x[0-9a-fA-F]{40}$/.test(value))gaps.push(`${key}: invalid address`);
+    if(value&&(/_ADDRESS$/.test(key)||['SESSION_VAULT','PASSPORT_REGISTRY','QUEST_ESCROW','FLIGHT_TREASURY','COW_USDC','COW_WETH','SENATE_TOKEN','SENATE_GOVERNOR','FORECAST_MARKET','UMA_ORACLE','INFERENCE_ANCHOR','PAY_TO'].includes(key))&&!/^0x[0-9a-fA-F]{40}$/.test(value))gaps.push(`${key}: invalid address`);
   }
   if(env.AGENT_PRIVATE_KEY&&!/^0x[0-9a-fA-F]{64}$/.test(env.AGENT_PRIVATE_KEY))gaps.push('AGENT_PRIVATE_KEY: invalid key format');
   for(const key of ['PUBLIC_ORIGIN','TEE_WORKER_URL'])if(env[key]){try{if(new URL(env[key]).protocol!=='https:')gaps.push(`${key}: HTTPS required for release`);}catch{gaps.push(`${key}: invalid URL`);}}
@@ -37,7 +38,7 @@ export function assess(day,env){
 
 async function main(){
   const flags=process.argv.slice(2),selection=flags.find(x=>/^\d{1,2}$/.test(x));
-  if(flags.some(x=>!['--init','--online'].includes(x)&&x!==selection)||selection&&(Number(selection)<1||Number(selection)>8))throw new Error('Usage: pnpm readiness [01–08] [--init] [--online]');
+  if(flags.some(x=>!['--init','--online'].includes(x)&&x!==selection)||selection&&(Number(selection)<1||Number(selection)>9))throw new Error('Usage: pnpm readiness [01–09] [--init] [--online]');
   const root=fileURLToPath(new URL('../',import.meta.url));let failed=false;
   for(const dir of readdirSync(resolve(root,'apps/agents')).sort()){
     const day=Number(dir.match(/^day-(\d+)-/)?.[1]);if(!required[day]||selection&&day!==Number(selection))continue;
@@ -51,7 +52,7 @@ async function main(){
       try{
         const rpc=async(method,params)=>{const r=await fetch(env.RPC_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({jsonrpc:'2.0',id:1,method,params}),signal:AbortSignal.timeout(10000)});const data=await r.json();if(!r.ok||data.error||data.result===undefined)throw new Error('RPC rejected request');return data.result;};
         if(Number(BigInt(await rpc('eth_chainId',[])))!==Number(env.CHAIN_ID))gaps.push('RPC_URL: wrong chain');
-        for(const key of ['SESSION_VAULT','PASSPORT_REGISTRY','QUEST_ESCROW','FLIGHT_TREASURY','SENATE_TOKEN','SENATE_GOVERNOR','INFERENCE_ANCHOR','USDC_ADDRESS','COW_USDC','COW_WETH'])if(/^0x[0-9a-fA-F]{40}$/.test(env[key]??'')&&await rpc('eth_getCode',[env[key],'latest'])==='0x')gaps.push(`${key}: no deployed bytecode`);
+        for(const key of ['SESSION_VAULT','PASSPORT_REGISTRY','QUEST_ESCROW','FLIGHT_TREASURY','SENATE_TOKEN','SENATE_GOVERNOR','FORECAST_MARKET','UMA_ORACLE','INFERENCE_ANCHOR','USDC_ADDRESS','COW_USDC','COW_WETH'])if(/^0x[0-9a-fA-F]{40}$/.test(env[key]??'')&&await rpc('eth_getCode',[env[key],'latest'])==='0x')gaps.push(`${key}: no deployed bytecode`);
       }catch{gaps.push('RPC_URL: read-only connectivity check failed (details withheld to protect secrets)');}
     }
     console.log(`Day ${String(day).padStart(2,'0')}: ${gaps.length?'BLOCKED':'CONFIGURED — live acceptance still required'}`);for(const gap of gaps)console.log(`  - ${gap}`);failed ||= gaps.length>0;

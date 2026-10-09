@@ -15,7 +15,8 @@
     "test:senate-chain": "node scripts/senate-chain-test.mjs",
     "readiness": "node scripts/readiness.mjs",
     "test:release-chain": "node scripts/senate-chain-test.mjs --release",
-    "test:production": "node scripts/production-smoke.mjs"
+    "test:production": "node scripts/production-smoke.mjs",
+    "test:forecast-chain": "node scripts/forecast-chain-test.mjs"
   },
   "dependencies": {
     "@ai-sdk/openai-compatible": "^2.0.0",
@@ -54,7 +55,8 @@
     "thirdweb": "^5.0.0",
     "viem": "^2.38.0",
     "zod": "^4.0.0",
-    "@solana/kit": "5.5.1"
+    "@solana/kit": "5.5.1",
+    "@dapptober/forecast": "workspace:*"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.0.0",
