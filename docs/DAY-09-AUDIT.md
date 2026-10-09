@@ -15,7 +15,7 @@
 ## Tested evidence
 
 - Frozen pnpm install; lint/typecheck pass.
-- 56 application tests pass; six real-chain cases are intentionally skipped in the default run and pass via their separate runners.
+- 57 application tests pass; six real-chain cases are intentionally skipped in the default run and pass via their separate runners.
 - 36 Solidity tests pass, including eight Day 09 tests and 256-run collateral conservation fuzzing.
 - Six real local-chain integrations pass: Day 09, Day 08 and four earlier release workflows. Day 09 deploys custom contract, MockUSDC and an explicit OOv3-compatible oracle double, then checks human/agent stakes, direct cap rejection, dispute lockout, false reset, corrected assertion, settlement and actual token payout. AI/Jev are explicit provider doubles in this run. **This is not UMA DVM evidence.**
 - All nine production builds and complete fresh-server HTTP workflows pass. Day 09 includes the dedicated agent endpoint and hash-chain receipt verification.
@@ -33,3 +33,5 @@ Public release still needs exact UMA deployment/currency/identifier checks, supp
 ## Repository synchronization
 
 PR #1 merged into `main`; PR #2 merged into `codex/migrate-to-pnpm`, not `main`. The Day 09 branch starts from synced `origin/main` and merges that already-completed branch so its readiness fixes are included in the new PR. No direct main push or merge was performed. During regression testing, a Day 06 Friday parser bug was fixed: upcoming Friday includes today and stays within the declared seven-day window.
+
+Final oracle hardening: dispute approvals use the original posted assertion bond, verified after a local minimum-bond change. Assertion deadlines are recorded onchain and expired dispute requests are rejected. Confirmed transaction receipts survive a later failed workflow step; application state still rolls back. A shared regression test covers that distinction, so earlier days retain mined approval evidence too.

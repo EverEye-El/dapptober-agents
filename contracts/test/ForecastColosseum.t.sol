@@ -5,13 +5,14 @@ import {MockUSDC,Vm} from "./Agents.t.sol";
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 // Explicit local oracle double: exercises OOv3 callbacks and bonds, not UMA's DVM.
 contract MockForecastOracle {
- struct Assertion {address recipient;address asserter;uint256 end;bool disputed;bool settled;}
- mapping(bytes32=>Assertion) public assertions;uint256 public nonce;IERC20 public token;uint256 public constant BOND=10e6;
+ struct Assertion {address recipient;address asserter;uint256 end;bool disputed;bool settled;uint256 bond;}
+ mapping(bytes32=>Assertion) public assertions;uint256 public nonce;IERC20 public token;uint256 public minimumBond=10e6;
  constructor(address t){token=IERC20(t);}
- function getMinimumBond(address) external pure returns(uint256){return BOND;}
- function assertTruth(bytes calldata,address asserter,address recipient,address,uint64 liveness,address,uint256 bond,bytes32 identifier,bytes32) external returns(bytes32 id){require(identifier==bytes32("ASSERT_TRUTH2"),"identifier");require(bond==BOND,"bond");token.transferFrom(msg.sender,address(this),bond);id=keccak256(abi.encode(++nonce));assertions[id]=Assertion(recipient,asserter,block.timestamp+liveness,false,false);}
- function disputeAssertion(bytes32 id,address) external {Assertion storage a=assertions[id];require(block.timestamp<a.end&&!a.disputed&&!a.settled,"not disputable");token.transferFrom(msg.sender,address(this),BOND);a.disputed=true;ForecastColosseum(a.recipient).assertionDisputedCallback(id);}
- function settleAssertion(bytes32 id) external {Assertion storage a=assertions[id];require(block.timestamp>=a.end&&!a.disputed&&!a.settled,"window or dispute");a.settled=true;token.transfer(a.asserter,BOND);ForecastColosseum(a.recipient).assertionResolvedCallback(id,true);}
+ function getMinimumBond(address) external view returns(uint256){return minimumBond;}
+ function setMinimumBond(uint256 value) external {minimumBond=value;}
+ function assertTruth(bytes calldata,address asserter,address recipient,address,uint64 liveness,address,uint256 bond,bytes32 identifier,bytes32) external returns(bytes32 id){require(identifier==bytes32("ASSERT_TRUTH2"),"identifier");require(bond==minimumBond,"bond");token.transferFrom(msg.sender,address(this),bond);id=keccak256(abi.encode(++nonce));assertions[id]=Assertion(recipient,asserter,block.timestamp+liveness,false,false,bond);}
+ function disputeAssertion(bytes32 id,address) external {Assertion storage a=assertions[id];require(block.timestamp<a.end&&!a.disputed&&!a.settled,"not disputable");token.transferFrom(msg.sender,address(this),a.bond);a.disputed=true;ForecastColosseum(a.recipient).assertionDisputedCallback(id);}
+ function settleAssertion(bytes32 id) external {Assertion storage a=assertions[id];require(block.timestamp>=a.end&&!a.disputed&&!a.settled,"window or dispute");a.settled=true;token.transfer(a.asserter,a.bond);ForecastColosseum(a.recipient).assertionResolvedCallback(id,true);}
  function arbitrate(bytes32 id,bool truth) external {Assertion storage a=assertions[id];require(a.disputed&&!a.settled,"not disputed");a.settled=true;ForecastColosseum(a.recipient).assertionResolvedCallback(id,truth);}
 }
 contract ForecastColosseumTest {

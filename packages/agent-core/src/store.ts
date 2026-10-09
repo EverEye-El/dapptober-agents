@@ -21,3 +21,6 @@ export async function withState<T>(day:number,id:string,c:Config,work:(state:Sta
  const previous=queues.get(key)??Promise.resolve();
  const task=previous.catch(()=>{}).then(async()=>{const dir=join(process.cwd(),'.data');await mkdir(dir,{recursive:true});const file=join(dir,`${day}-${id}.json`);let state:State;try{state=JSON.parse(await readFile(file,'utf8')) as State;}catch(err){if((err as NodeJS.ErrnoException).code!=='ENOENT')throw err;state=initialState(day,c);}state.chainId=day===6?c.COW_CHAIN_ID:c.CHAIN_ID;const result=await work(state);const temp=file+'.'+randomUUID()+'.tmp';await writeFile(temp,JSON.stringify(state),{mode:0o600});await rename(temp,file);return {state,result};});queues.set(key,task);try{return await task;}finally{if(queues.get(key)===task)queues.delete(key);}
 }
+
+// Confirmed chain effects cannot be undone by rolling back application state.
+export function restoreAfterFailure(state:State,before:State){const emitted=state.receipts.slice(before.receipts.length);const confirmed=emitted.some(r=>r.mode==='real'&&r.status==='success'&&r.txHash);Object.assign(state,before);if(confirmed)state.receipts.push(...emitted);}

@@ -27,6 +27,8 @@ contract ForecastColosseum is Ownable, ReentrancyGuard {
  mapping(address=>Risk) public risks;
  mapping(address=>mapping(uint256=>uint256)) public spent;
  mapping(bytes32=>uint256) public assertionMarket;
+ mapping(bytes32=>uint256) public assertionBond;
+ mapping(bytes32=>uint256) public assertionDeadline;
  event Created(uint256 indexed id,string question,string rules,uint64 close);
  event Traded(uint256 indexed id,address indexed trader,bool yes,uint256 amount,uint16 probability,bool agent);
  event Asserted(uint256 indexed id,bytes32 indexed assertionId,uint8 outcome);
@@ -66,7 +68,7 @@ contract ForecastColosseum is Ownable, ReentrancyGuard {
   uint256 bond=oracle.getMinimumBond(address(usdc));usdc.safeTransferFrom(msg.sender,address(this),bond);usdc.forceApprove(address(oracle),bond);
   bytes memory claimBytes=abi.encodePacked("Forecast Colosseum market ",StringsLike.uintString(id)," at ",StringsLike.addressString(address(this))," on chain ",StringsLike.uintString(block.chainid),". Question: ",m.question,". Trading cutoff UNIX seconds: ",StringsLike.uintString(m.close),". Binding resolution rules: ",m.rules,". Outcome: ",outcome==1?"YES":outcome==2?"NO":"INVALID", ". Evidence: ",evidence);
   assertionId=oracle.assertTruth(claimBytes,msg.sender,address(this),address(0),liveness,address(usdc),bond,identifier,bytes32(0));
-  require(assertionId!=bytes32(0)&&assertionMarket[assertionId]==0,"invalid assertion");m.assertionId=assertionId;m.proposed=outcome;m.disputed=false;assertionMarket[assertionId]=id;emit Asserted(id,assertionId,outcome);
+  require(assertionId!=bytes32(0)&&assertionMarket[assertionId]==0,"invalid assertion");m.assertionId=assertionId;m.proposed=outcome;m.disputed=false;assertionMarket[assertionId]=id;assertionBond[assertionId]=bond;assertionDeadline[assertionId]=block.timestamp+liveness;emit Asserted(id,assertionId,outcome);
  }
  function assertionDisputedCallback(bytes32 assertionId) external {require(msg.sender==address(oracle),"oracle only");uint256 id=assertionMarket[assertionId];require(id>0&&markets[id].assertionId==assertionId,"unknown assertion");markets[id].disputed=true;}
  function assertionResolvedCallback(bytes32 assertionId,bool truth) external {

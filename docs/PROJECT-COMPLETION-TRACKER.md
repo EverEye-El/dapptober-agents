@@ -74,8 +74,10 @@ Final hosted audit: [run 37860650867](https://github.com/EverEye-El/dapptober-ag
 
 ## Day 09 completion update — October 9, 2026
 
-Day 09 adds the shared `forecast` capability and independent port 3009 app. Frozen install, lint/typecheck, 56 application tests, 36 contract tests, all six separate real local-chain acceptance cases, nine production builds and nine complete HTTP workflows pass. Browser trading and settlement update pools, leaderboard and calibration. No public deployment or live oracle/provider evidence is claimed. [Day 09 audit](DAY-09-AUDIT.md) records exact boundaries.
+Day 09 adds the shared `forecast` capability and independent port 3009 app. Frozen install, lint/typecheck, 57 application tests, 36 contract tests, all six separate real local-chain acceptance cases, nine production builds and nine complete HTTP workflows pass. Browser trading and settlement update pools, leaderboard and calibration. No public deployment or live oracle/provider evidence is claimed. [Day 09 audit](DAY-09-AUDIT.md) records exact boundaries.
 
 Day 06: fixed the Friday deadline parser and added a regression test; live CoW requirements are unchanged. Shared CI/container matrix and production/readiness scripts now include Day 09. Production dependency audit remains zero critical/high/moderate and one low inherited elliptic advisory.
 
 Repository release: PR #1 merged into main; PR #2 merged into the pnpm branch. The new Day 09 branch incorporates both merged branches and will deliver the readiness work to main through its PR. Verify that PR’s hosted CI and merge it; public setup/funding/verification and independent security review remain open.
+
+Final oracle hardening: dispute approvals use the original posted assertion bond, verified after a local minimum-bond change. Assertion deadlines are recorded onchain and expired dispute requests are rejected. Confirmed transaction receipts survive a later failed workflow step; application state still rolls back. A shared regression test covers that distinction, so earlier days retain mined approval evidence too.
