@@ -1,7 +1,9 @@
 import assert from 'node:assert/strict';
 const days=process.argv[2]?[Number(process.argv[2])]:[1,2,3,4,5,6,7,8];
+const portBase=Number(process.env.SMOKE_PORT_BASE??3000);
+assert(Number.isInteger(portBase)&&portBase>0&&portBase<=65527,'Invalid SMOKE_PORT_BASE');
 for(const day of days){
- const origin=`http://localhost:${3000+day}`;
+ const origin=`http://localhost:${portBase+day}`;
  const page=await fetch(origin);assert.equal(page.status,200,`Day ${day} page`);
  const init=await fetch(origin+'/api/agent');assert.equal(init.status,200);
  const cookie=init.headers.get('set-cookie')?.split(';')[0];const initial=await init.json();assert.equal(initial.state.day,day);assert.equal(initial.state.mode,'demo');

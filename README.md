@@ -32,7 +32,7 @@ pnpm run dev
 
 Local simulation is the default and needs no secrets. Every simulated balance, signature, payment and attestation is labelled. State and receipts persist under each application's ignored `.data/` directory, isolated by HttpOnly session cookie. Local mode supports one process per app; use PostgreSQL for real/serverless mode. The agents never fabricate real transaction hashes.
 
-Real mode uses configured RPCs, contracts, Jev, generative AI, thirdweb, x402 or CoW as relevant. Copy an app's `.env.example` to its `.env.local`. [Deployment instructions](docs/DEPLOYMENT.md) explain every required variable, funding and contract step. Each deployment is a single-operator control room; real server actions require a deployment-specific bearer token. Human owner/client signatures remain in their browser wallet.
+Real mode uses configured RPCs, contracts, Jev, generative AI, thirdweb, x402 or CoW as relevant. Copy an app's `.env.example` to its `.env.local`. [Deployment instructions](docs/DEPLOYMENT.md) explain every required variable, funding and contract step. [Live setup checklist](docs/LIVE-SETUP-CHECKLIST.md) lists the owner inputs and acceptance runs; `pnpm readiness` reports missing live configuration without printing secrets. Each deployment is a single-operator control room; real server actions require a deployment-specific bearer token. Human owner/client signatures remain in their browser wallet.
 
 ## Commands
 
