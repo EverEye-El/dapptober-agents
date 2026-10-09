@@ -6,5 +6,12 @@
   "exports": {
     ".": "./src/index.ts",
     "./src/*": "./src/*.ts"
+  },
+  "dependencies": {
+    "@dapptober/chain": "workspace:*",
+    "@dapptober/config": "workspace:*",
+    "@dapptober/types": "workspace:*",
+    "viem": "^2.38.0",
+    "zod": "^4.0.0"
   }
 }

@@ -27,9 +27,9 @@ Owner-signed previews control real administrative transactions. Server financial
 From the repository root:
 
 ```sh
-npm ci
+pnpm install --frozen-lockfile
 cp apps/agents/day-04-mcp-mercenary/.env.example apps/agents/day-04-mcp-mercenary/.env.local
-npm run dev -- 04
+pnpm run dev 04
 ```
 
 Open http://localhost:3004. Local mode works without credentials. For real mode, configure this application's `.env.local`, set `AGENT_MODE=real`, and follow [`docs/DEPLOYMENT.md`](../../../docs/DEPLOYMENT.md). Blank optional variables are ignored; required real-mode values produce explicit errors. `PUBLIC_ORIGIN` must exactly match the deployment origin. The operator token must be at least 32 random characters; enter it in the control room.
@@ -37,12 +37,12 @@ Open http://localhost:3004. Local mode works without credentials. For real mode,
 ## Test and build independently
 
 ```sh
-npm run test --workspace @dapptober/day-04
-npm run build -- 04
-npm run start --workspace @dapptober/day-04
+pnpm --filter @dapptober/day-04 run test
+pnpm run build 04
+pnpm --filter @dapptober/day-04 run start
 ```
 
-Contract and shared checks: `npm run test:contracts`, `npm test`, `npm run typecheck`, `npm run lint`.
+Contract and shared checks: `pnpm run test:contracts`, `pnpm test`, `pnpm run typecheck`, `pnpm run lint`.
 
 ## Deploy independently
 

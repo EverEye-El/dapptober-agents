@@ -6,5 +6,15 @@
   "exports": {
     ".": "./src/index.ts",
     "./src/*": "./src/*.ts"
+  },
+  "dependencies": {
+    "@dapptober/agent-core": "workspace:*",
+    "@dapptober/chain": "workspace:*",
+    "@dapptober/config": "workspace:*",
+    "@dapptober/guardrails": "workspace:*",
+    "@dapptober/receipts": "workspace:*",
+    "@dapptober/types": "workspace:*",
+    "viem": "^2.38.0",
+    "zod": "^4.0.0"
   }
 }

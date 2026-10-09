@@ -5,13 +5,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
+          cache: pnpm
       - uses: foundry-rs/foundry-toolchain@v1
-      - run: npm ci
-      - run: npm run check
-      - run: npm run test:senate-chain
-      - run: npm start > /tmp/agents.log 2>&1 &
-      - run: sleep 15 && npm run smoke
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run check
+      - run: pnpm run test:senate-chain
+      - run: pnpm start > /tmp/agents.log 2>&1 &
+      - run: sleep 15 && pnpm run smoke
