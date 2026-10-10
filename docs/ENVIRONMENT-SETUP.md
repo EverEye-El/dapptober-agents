@@ -1,0 +1,31 @@
+# Where to enter configuration
+
+Edit `apps/agents/day-XX-<name>/.env.local` for each app. Each private file now contains the same field explanations as its `.env.example`. The root `.env.example` only points to these files.
+
+## Provider settings
+
+| Setting | What it is | Where to obtain it |
+| --- | --- | --- |
+| `SUPABASE_DATABASE_URL` | Full private database connection URI, including your database credentials | Supabase project → Connect → Session pooler; copy the URI with your actual database password |
+| `OPENAI_API_KEY` | OpenAI server API key for the reasoning model | Your OpenAI API project; enable billing and access to the configured models |
+| `OPENAI_BASE_URL` | Reasoning API endpoint | Already filled with `https://api.openai.com/v1`; change only for another compatible provider |
+| `OPENAI_SMALL_MODEL` | Model Jev selects for simple reasoning | Already filled with `gpt-4.1-mini` |
+| `OPENAI_LARGE_MODEL` | Model Jev selects for complex reasoning | Already filled with `gpt-4.1` |
+| `JEV_API_KEY` | TypeSafe/Jev key for screening, confidence and model routing | Your TypeSafe/Jev account with `jev-latest` access |
+| `THIRDWEB_SECRET_KEY` | Day 01 thirdweb server secret | thirdweb project/API key settings; use the secret, not the public client ID |
+
+Day 07 uses Ollama in the confidential worker and has no OpenAI settings. Its template explains worker URL, token, model digest and attestation measurements. Day 10's template explains the World ID app, RP and private signing key separately.
+
+## Wallets, secrets and addresses
+
+`OWNER_ADDRESS` is your public owner wallet address. `AGENT_PRIVATE_KEY` is a separate day-specific signer; its exact purpose is described in that day's file. `OPERATOR_TOKEN` is a random secret you generate, not a provider key. Generate a separate token per app. Day 10 also needs a stable random `CHECKPOINT_SESSION_SECRET`.
+
+Contract fields such as `SESSION_VAULT` and `FORECAST_MARKET` must contain the address from that contract's actual deployment receipt. API keys do not deploy contracts. The completion tracker lists deployment and funding steps for each day.
+
+You may reuse the same testing Supabase connection URI across days: shared storage separates records by day/operator, and Day 10 has its own checkpoint table. Use a separate production Supabase project. Keep all private values in `.env.local` or the host's secret manager; never enter them in committed `.env.example` files.
+
+## Renamed settings
+
+The runtime now reads `SUPABASE_DATABASE_URL`, `OPENAI_API_KEY`, `OPENAI_BASE_URL`, `OPENAI_SMALL_MODEL`, `OPENAI_LARGE_MODEL` and `JEV_API_KEY`. These replace the previous generic database, AI and TypeSafe names. Local private files were migrated with values preserved. If you previously configured a hosting service or secret manager, rename those settings there too. The old names are no longer consumed.
+
+Keep `AGENT_MODE=demo` while required accounts/contracts are missing. Once that day's real prerequisites are configured, change it to `real`, restart the app, and run its readiness check. Restart running apps after editing environment settings.

@@ -1,0 +1,392 @@
+[
+  {
+    "index": 1,
+    "title": "Pinned / launch",
+    "copy": "DAPPTOBER 2026 is armed.\n\n31 days. 31 prompts. Agents with wallets, tolls, passports, and kill switches.\n\nGTFOL. If it is still on localhost, it does not exist.\n\nPrompts: https://dapptober.xyz\nRules: https://dapptober.xyz/rules\n\n@dapptober #Dapptober2026",
+    "filename": "01-pinned-launch.png",
+    "daily": false,
+    "width": 1122,
+    "height": 1402
+  },
+  {
+    "index": 2,
+    "title": "What it is, one post",
+    "copy": "Not a hackathon. A rite.\n\nFree track: pick a prompt, ship an agent, drop it in the Showcase.\nGlory track: likes, comments, gm.\n\nCash track: Pot starts at 100 USDC and rises. 5 USDC entry.\nVotes run Oct 1 through Nov 5. Winner called by Nov 10.\n\nA like is not a vote. Read that twice.\n\nhttps://dapptober.xyz/showcase#votes",
+    "filename": "02-what-it-is-one-post.png",
+    "daily": false,
+    "width": 1122,
+    "height": 1402,
+    "footer": "Base mainnet • Pot starts at 100 USDC and rises. • 5 USDC entry.\nLikes are not votes • One wallet / one vote per agent\nVoting Oct 1–Nov 5, 2026, US Eastern • Winner announced by Nov 10"
+  },
+  {
+    "index": 3,
+    "title": "GTFOL",
+    "copy": "Get the fuck off localhost.\n\nTestnets count. Vibes do not.\nShip one real dapp this month or you spectated.\n\nhttps://dapptober.xyz\n#Dapptober2026",
+    "filename": "03-gtfol.png",
+    "daily": false,
+    "width": 1122,
+    "height": 1402
+  },
+  {
+    "index": 4,
+    "title": "Guardrails",
+    "copy": "A system prompt is not a lock.\n\nIf your agent can move money, the spend cap, the allowlist, and the kill switch live in the contract.\nOtherwise it is a chatbot with a private key. NGMI.\n\nRule 5: https://dapptober.xyz/rules",
+    "filename": "04-guardrails.png",
+    "daily": false,
+    "width": 1122,
+    "height": 1402
+  },
+  {
+    "index": 5,
+    "title": "Competition",
+    "copy": "Want the pot? Put up or NGMI.\n\nPot starts at 100 USDC and rises. 5 USDC entry. Stack entries until the wallet says no.\nOne pile of agents. One pot. The favorite walks away with it.\n\nVoting is open through Nov 5, US Eastern.\nhttps://dapptober.xyz/showcase#votes\n\n#Dapptober2026",
+    "filename": "05-competition.png",
+    "daily": false,
+    "width": 1122,
+    "height": 1402,
+    "footer": "Base mainnet • Pot starts at 100 USDC and rises. • 5 USDC entry.\nLikes are not votes • One wallet / one vote per agent\nVoting Oct 1–Nov 5, 2026, US Eastern • Winner announced by Nov 10"
+  },
+  {
+    "index": 6,
+    "title": "Showcase",
+    "copy": "Shipped? Prove it.\n\nTag @dapptober\n#Dapptober2026\nConnect a wallet. Drop the build in the Showcase.\nSay gm like your agent depends on it.\n\nhttps://dapptober.xyz/showcase",
+    "filename": "06-showcase.png",
+    "daily": false,
+    "width": 1122,
+    "height": 1402
+  },
+  {
+    "index": 7,
+    "title": "Catch-up",
+    "copy": "Missed a day? The chain did not close.\n\nOctober is the whole window. Ship 1. Ship 31. Ship chaos.\nCatch up and still make the Showcase.\n\nhttps://dapptober.xyz",
+    "filename": "07-catch-up.png",
+    "daily": false,
+    "width": 1122,
+    "height": 1402
+  },
+  {
+    "index": 8,
+    "title": "Reply when someone asks \"is there a prize?\"",
+    "copy": "Free track: no prize. Glory, receipts, and your commit history.\n\nCompetition track: Pot starts at 100 USDC and rises. 5 USDC entry.\nLikes on a prompt page are not votes. Do not mix them.",
+    "filename": "08-reply-when-someone-asks-is-there-a-prize.png",
+    "daily": false,
+    "width": 1122,
+    "height": 1402,
+    "footer": "Base mainnet • Pot starts at 100 USDC and rises. • 5 USDC entry.\nLikes are not votes • One wallet / one vote per agent\nVoting Oct 1–Nov 5, 2026, US Eastern • Winner announced by Nov 10"
+  },
+  {
+    "index": 9,
+    "title": "Reply when someone asks what to build",
+    "copy": "Open today's prompt. Steal the vibe. Change the mechanic if you want.\nIf a model can read it, sign it, or pay for it, you are on theme.\n\nhttps://dapptober.xyz",
+    "filename": "09-reply-when-someone-asks-what-to-build.png",
+    "daily": false,
+    "width": 1122,
+    "height": 1402
+  },
+  {
+    "index": 10,
+    "title": "Day 27, when October gets weird",
+    "copy": "DAY 27 · THE HAUNTED CONTRACT\n\nGhost agents. Onchain treasure. Prompt injection does not open the chest.\nThe contract does.\n\nhttps://dapptober.xyz/dapp/27\n#Dapptober2026",
+    "filename": "10-day-27-when-october-gets-weird.png",
+    "daily": false,
+    "width": 1122,
+    "height": 1402
+  },
+  {
+    "index": 11,
+    "title": "Day 31 close of the build month",
+    "copy": "DAY 31 · THE ULTIMATE AGENT ARCHITECT\n\nLast blueprint. Skills, wallet, identity, a price, a deploy.\nYour agent gets a public page. Other agents can find it.\n\nThen the votes keep running through Nov 5.\n\nhttps://dapptober.xyz/dapp/31\nhttps://dapptober.xyz/showcase#votes",
+    "filename": "11-day-31-close-of-the-build-month.png",
+    "daily": false,
+    "width": 1122,
+    "height": 1402
+  },
+  {
+    "index": 12,
+    "title": "Sign-off",
+    "copy": "gm & good luck, builder.\nYour commit history is your legacy.\nYour agent's logs are its alibi.",
+    "filename": "12-sign-off.png",
+    "daily": false,
+    "width": 1122,
+    "height": 1402
+  },
+  {
+    "index": 13,
+    "title": "All 31 day posts",
+    "copy": "DAY 01 · THE AGENT WALLET GENESIS\nClean-room lab. First light.\n\nBirth an agent. Give it a smart wallet, a spend cap, and a chat box.\nEvery tx gets a preview before it moves.\n\nhttps://dapptober.xyz/dapp/1\n#Dapptober2026",
+    "filename": "13-day-01.png",
+    "daily": true,
+    "width": 1122,
+    "height": 1402
+  },
+  {
+    "index": 14,
+    "title": "All 31 day posts",
+    "copy": "DAY 02 · THE PAY-PER-PROMPT TOLLBOOTH\nNeon highway. Machines paying machines.\n\nYour API answers 402 until an agent drops a few cents of USDC and retries alone.\nNo human in the toll lane.\n\nhttps://dapptober.xyz/dapp/2\n#Dapptober2026",
+    "filename": "14-day-02.png",
+    "daily": true,
+    "width": 1122,
+    "height": 1402
+  },
+  {
+    "index": 15,
+    "title": "All 31 day posts",
+    "copy": "DAY 03 · THE AGENT PASSPORT OFFICE\nCyberpunk bureaucracy. Stamp the page.\n\nOnchain identity. Reputation. A passport other agents can trust\nbefore they hire yours.\n\nhttps://dapptober.xyz/dapp/3\n#Dapptober2026",
+    "filename": "15-day-03.png",
+    "daily": true,
+    "width": 1122,
+    "height": 1402
+  },
+  {
+    "index": 16,
+    "title": "All 31 day posts",
+    "copy": "DAY 04 · THE MCP MERCENARY GUILD\nCandlelit guild hall. Quests on the board.\n\nUSDC sits in escrow. Agents claim the work through MCP.\nThe wax seal breaks when it clears.\n\nhttps://dapptober.xyz/dapp/4\n#Dapptober2026",
+    "filename": "16-day-04.png",
+    "daily": true,
+    "width": 1122,
+    "height": 1402
+  },
+  {
+    "index": 17,
+    "title": "All 31 day posts",
+    "copy": "DAY 05 · THE STABLECOIN AUTOPILOT\nAmber cockpit. Hands off the yoke.\n\nSet the flight plan. The agent rebalances the treasury only inside it.\nOne switch. Disengage. You fly again.\n\nhttps://dapptober.xyz/dapp/5\n#Dapptober2026",
+    "filename": "17-day-05.png",
+    "daily": true,
+    "width": 1122,
+    "height": 1402
+  },
+  {
+    "index": 18,
+    "title": "All 31 day posts",
+    "copy": "DAY 06 · THE INTENT CALLIGRAPHER\nInk brush. One sentence.\n\n\"Get me 0.5 ETH under this price before Friday.\"\nThe agent writes the intent. Solvers fight to fill it. You sign once.\n\nhttps://dapptober.xyz/dapp/6\n#Dapptober2026",
+    "filename": "18-day-06.png",
+    "daily": true,
+    "width": 1122,
+    "height": 1402
+  },
+  {
+    "index": 19,
+    "title": "All 31 day posts",
+    "copy": "DAY 07 · THE GLASS-BOX MIND\nClinical cyan. X-ray the answer.\n\nProve which model said it, and that nobody edited the receipt.\nGreen glass when it verifies. Cracked red when it lies.\n\nhttps://dapptober.xyz/dapp/7\n#Dapptober2026",
+    "filename": "19-day-07.png",
+    "daily": true,
+    "width": 1122,
+    "height": 1402
+  },
+  {
+    "index": 20,
+    "title": "All 31 day posts",
+    "copy": "DAY 08 · THE SWARM SENATE\nMarble and holograms. Agents on the floor.\n\nDelegate agents debate the proposal in public.\nHumans keep the veto. Always.\n\nhttps://dapptober.xyz/dapp/8\n#Dapptober2026",
+    "filename": "20-day-08.png",
+    "daily": true,
+    "width": 1122,
+    "height": 1402
+  },
+  {
+    "index": 21,
+    "title": "All 31 day posts",
+    "copy": "DAY 09 · THE FORECAST COLOSSEUM\nJumbotron odds. Agents versus humans.\n\nCall the market. Get ranked on whether you were right.\nNot on how loud the thread was.\n\nhttps://dapptober.xyz/dapp/9\n#Dapptober2026",
+    "filename": "21-day-09.png",
+    "daily": true,
+    "width": 1122,
+    "height": 1402
+  },
+  {
+    "index": 22,
+    "title": "All 31 day posts",
+    "copy": "DAY 10 · THE HUMAN CHECKPOINT\nNoir room. Empathy test.\n\nHuman-only doors stay human.\nLabeled agents use the other entrance. Sybils get turned around.\n\nhttps://dapptober.xyz/dapp/10\n#Dapptober2026",
+    "filename": "22-day-10.png",
+    "daily": true,
+    "width": 1122,
+    "height": 1402
+  },
+  {
+    "index": 23,
+    "title": "All 31 day posts",
+    "copy": "DAY 11 · THE GPU NIGHT MARKET\nLanterns. Racks humming.\n\nAgents bid for GPU time, run the job, pay for the inference.\nNo landlord. A bazaar.\n\nhttps://dapptober.xyz/dapp/11\n#Dapptober2026",
+    "filename": "23-day-11.png",
+    "daily": true,
+    "width": 1122,
+    "height": 1402
+  },
+  {
+    "index": 24,
+    "title": "All 31 day posts",
+    "copy": "DAY 12 · THE PROVENANCE PRESS\nLetterpress. Brass type. Ink still wet.\n\nRegister the work as programmable IP.\nModels license it. Royalties hit onchain. The press keeps the ledger.\n\nhttps://dapptober.xyz/dapp/12\n#Dapptober2026",
+    "filename": "24-day-12.png",
+    "daily": true,
+    "width": 1122,
+    "height": 1402
+  },
+  {
+    "index": 25,
+    "title": "All 31 day posts",
+    "copy": "DAY 13 · THE AGENT LAUNCH GANTRY\nDusk. Countdown clocks.\n\nTokenize an agent. Revenue flows back to holders.\nAnti-rug rails are bolted on before ignition.\n\nhttps://dapptober.xyz/dapp/13\n#Dapptober2026",
+    "filename": "25-day-13.png",
+    "daily": true,
+    "width": 1122,
+    "height": 1402
+  },
+  {
+    "index": 26,
+    "title": "All 31 day posts",
+    "copy": "DAY 14 · THE GUARDRAIL SENTINEL\nDark glass. Red alert.\n\nOne control room for every agent you run.\nSpend policy. Allowlist. Alerts. Kill switch.\n\nhttps://dapptober.xyz/dapp/14\n#Dapptober2026",
+    "filename": "26-day-14.png",
+    "daily": true,
+    "width": 1122,
+    "height": 1402
+  },
+  {
+    "index": 27,
+    "title": "All 31 day posts",
+    "copy": "DAY 15 · THE REAL-WORLD CONCIERGE\nGold leaf. Velvet rope.\n\nAn agent that explains tokenized real-world assets\nand helps you allocate without the brochure voice.\n\nhttps://dapptober.xyz/dapp/15\n#Dapptober2026",
+    "filename": "27-day-15.png",
+    "daily": true,
+    "width": 1122,
+    "height": 1402
+  },
+  {
+    "index": 28,
+    "title": "All 31 day posts",
+    "copy": "DAY 16 · THE BOT-TO-BOT BOURSE\nTicker tape. Brass bells.\n\nAgents find each other, negotiate the deal, settle it in escrow.\nHumans can watch the floor. They do not have to stand on it.\n\nhttps://dapptober.xyz/dapp/16\n#Dapptober2026",
+    "filename": "28-day-16.png",
+    "daily": true,
+    "width": 1122,
+    "height": 1402
+  },
+  {
+    "index": 29,
+    "title": "All 31 day posts",
+    "copy": "DAY 17 · THE MEMECOIN CORONER\nFlickering lamps. The contract is on the slab.\n\nA forensic agent opens the token and looks for the rug and the honeypot.\nFindings go on the record.\n\nhttps://dapptober.xyz/dapp/17\n#Dapptober2026",
+    "filename": "29-day-17.png",
+    "daily": true,
+    "width": 1122,
+    "height": 1402
+  },
+  {
+    "index": 30,
+    "title": "All 31 day posts",
+    "copy": "DAY 18 · THE ENCRYPTED CONFIDANT\nVelvet booth. Cipher text.\n\nA private agent manages the position on encrypted state.\nThe strategy stays in the dark. The chain still settles.\n\nhttps://dapptober.xyz/dapp/18\n#Dapptober2026",
+    "filename": "30-day-18.png",
+    "daily": true,
+    "width": 1122,
+    "height": 1402
+  },
+  {
+    "index": 31,
+    "title": "All 31 day posts",
+    "copy": "DAY 19 · THE GROUP-CHAT FAMILIAR\nSticker bombs. Pastel neon.\n\nAn agent that lives in the feed.\nIt tips, mints, splits the bill, and runs the poll.\n\nhttps://dapptober.xyz/dapp/19\n#Dapptober2026",
+    "filename": "31-day-19.png",
+    "daily": true,
+    "width": 1122,
+    "height": 1402
+  },
+  {
+    "index": 32,
+    "title": "All 31 day posts",
+    "copy": "DAY 20 · THE RESTAKED REFEREE\nStadium lights. Instant replay.\n\nAgents say the task is done. Restaked operators check the tape.\nLie on the verdict and the collateral gets slashed.\n\nhttps://dapptober.xyz/dapp/20\n#Dapptober2026",
+    "filename": "32-day-20.png",
+    "daily": true,
+    "width": 1122,
+    "height": 1402
+  },
+  {
+    "index": 33,
+    "title": "All 31 day posts",
+    "copy": "DAY 21 · THE CHAINLESS TRAVELER\nSplit-flap board. One balance.\n\nThe agent picks the bridge, the swap, the gas.\nYou never pick a chain. The departure board shows the legs.\n\nhttps://dapptober.xyz/dapp/21\n#Dapptober2026",
+    "filename": "33-day-21.png",
+    "daily": true,
+    "width": 1122,
+    "height": 1402
+  },
+  {
+    "index": 34,
+    "title": "All 31 day posts",
+    "copy": "DAY 22 · THE AGENT ARENA\nEsports colosseum. Holographic gladiators.\n\nTrain an agent. It fights onchain.\nSpectators stake the champion. The ladder remembers.\n\nhttps://dapptober.xyz/dapp/22\n#Dapptober2026",
+    "filename": "34-day-22.png",
+    "daily": true,
+    "width": 1122,
+    "height": 1402
+  },
+  {
+    "index": 35,
+    "title": "All 31 day posts",
+    "copy": "DAY 23 · THE PERP PIT WALL\nCarbon fiber. Telemetry screaming.\n\nA race engineer for your perps.\nLeverage, funding, liquidation distance, in plain speech, before you bin it.\n\nhttps://dapptober.xyz/dapp/23\n#Dapptober2026",
+    "filename": "35-day-23.png",
+    "daily": true,
+    "width": 1122,
+    "height": 1402
+  },
+  {
+    "index": 36,
+    "title": "All 31 day posts",
+    "copy": "DAY 24 · THE AGENT MISHAP MUTUAL\nVictorian ledger. Wax seal.\n\nYour agent fat-fingered the trade.\nBuy cover. Stake the pool. Claims need logs, not a story.\n\nhttps://dapptober.xyz/dapp/24\n#Dapptober2026",
+    "filename": "36-day-24.png",
+    "daily": true,
+    "width": 1122,
+    "height": 1402
+  },
+  {
+    "index": 37,
+    "title": "All 31 day posts",
+    "copy": "DAY 25 · THE MEMORY CATHEDRAL\nBaroque shelves. Glowing tomes.\n\nLong-term memory that belongs to you, not the app.\nGrant an agent the book. Revoke it. Carry it to the next one.\n\nhttps://dapptober.xyz/dapp/25\n#Dapptober2026",
+    "filename": "37-day-25.png",
+    "daily": true,
+    "width": 1122,
+    "height": 1402
+  },
+  {
+    "index": 38,
+    "title": "All 31 day posts",
+    "copy": "DAY 26 · THE CREDENTIALED STUDIO\nClapperboard. Spotlight. Take one.\n\nGenerate the image. Stamp who made it and which model.\nMint the provenance. Anyone can drop the file and verify.\n\nhttps://dapptober.xyz/dapp/26\n#Dapptober2026",
+    "filename": "38-day-26.png",
+    "daily": true,
+    "width": 1122,
+    "height": 1402
+  },
+  {
+    "index": 39,
+    "title": "All 31 day posts",
+    "copy": "DAY 27 · THE HAUNTED CONTRACT\nJack-o'-lantern glow. Spectral glitch.\n\nGhost agents guard the chest.\nPrompt injection does not open it. The contract does.\n\nhttps://dapptober.xyz/dapp/27\n#Dapptober2026",
+    "filename": "39-day-27.png",
+    "daily": true,
+    "width": 1122,
+    "height": 1402
+  },
+  {
+    "index": 40,
+    "title": "All 31 day posts",
+    "copy": "DAY 28 · THE PER-SECOND WATERFALL\nLiquid light. Balances ticking.\n\nStream USDC by the second to a creator, a contributor, or an agent.\nOnly while the job runs. Pause it. Top it up. Watch it fall.\n\nhttps://dapptober.xyz/dapp/28\n#Dapptober2026",
+    "filename": "40-day-28.png",
+    "daily": true,
+    "width": 1122,
+    "height": 1402
+  },
+  {
+    "index": 41,
+    "title": "All 31 day posts",
+    "copy": "DAY 29 · THE BLACK BOX RECORDER\nOrange casing. Waveforms.\n\nEvery prompt, tool call, and tx gets hashed, signed, and anchored.\nReplay the flight. Prove the log was not edited after.\n\nhttps://dapptober.xyz/dapp/29\n#Dapptober2026",
+    "filename": "41-day-29.png",
+    "daily": true,
+    "width": 1122,
+    "height": 1402
+  },
+  {
+    "index": 42,
+    "title": "All 31 day posts",
+    "copy": "DAY 30 · THE AGENTIC CHECKOUT MALL\nVaporwave sunset. Palm trees in the atrium.\n\nA catalog agents can read. Stablecoin checkout.\nThe shopping agent stays inside the budget or it does not buy.\n\nhttps://dapptober.xyz/dapp/30\n#Dapptober2026",
+    "filename": "42-day-30.png",
+    "daily": true,
+    "width": 1122,
+    "height": 1402
+  },
+  {
+    "index": 43,
+    "title": "All 31 day posts",
+    "copy": "DAY 31 · THE ULTIMATE AGENT ARCHITECT\nDrafting table. Last schematic.\n\nSkills. Wallet. Identity. A price. Deploy.\nYour agent gets a public page. Other agents can find it.\n\nVotes keep running through Nov 5.\nhttps://dapptober.xyz/dapp/31\nhttps://dapptober.xyz/showcase#votes\n#Dapptober2026",
+    "filename": "43-day-31.png",
+    "daily": true,
+    "width": 1122,
+    "height": 1402
+  }
+]

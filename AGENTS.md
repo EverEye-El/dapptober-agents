@@ -11,3 +11,7 @@ After each daily build, update `docs/PROJECT-COMPLETION-TRACKER.md`. Add the new
 ## Daily visual inspiration
 
 The user supplied `2026SocialPosts/` graphics. Inspect the matching day graphic when designing subsequent daily agents; use it as inspiration while retaining the established copper hyper-tech terminal UI. Day 10 uses `22-day-10.png`. Preserve the source collection.
+
+## Credential-free test fixtures
+
+For mocked database tests, use credential-free connection URLs on reserved `.invalid` hosts. Do not embed invented username/password pairs or plausible Supabase project hosts. Test URL parsing with harmless path/query values when possible. Keep secret scanning enabled; do not add blanket test-directory exclusions.

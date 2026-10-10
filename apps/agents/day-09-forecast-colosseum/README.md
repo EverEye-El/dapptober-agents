@@ -32,7 +32,7 @@ Human trade actions return an exact token approval and market call for the selec
 
 ## Live deployment
 
-Copy `.env.example` to private `.env.local`, configure real mode, HTTPS origin, PostgreSQL, owner/operator, RPC, exact USDC, UMA OOv3, Jev/AI and agent key. Run `pnpm readiness 09 --online`; configuration checks do not certify UMA support or production truth.
+Copy `.env.example` to private `.env.local`, configure real mode, HTTPS origin, Supabase PostgreSQL, owner/operator, RPC, exact USDC, UMA OOv3, Jev/AI and agent key. Run `pnpm readiness 09 --online`; configuration checks do not certify UMA support or production truth.
 
 1. Verify current addresses in UMA's official network registry. Check bytecode, supported currency whitelist, minimum bond, `ASSERT_TRUTH2` approval and actual dispute support on the chosen network. Testnets have no production DVM support. Native six-decimal USDC is required; no fee/rebasing token support.
 2. Deploy `contracts/src/ForecastColosseum.sol` with `(owner, USDC, OOv3, 7200, bytes32("ASSERT_TRUTH2"))`. Use at least a two-hour live dispute window and independent monitoring. Contract deployment permits 60 seconds–7 days for test flexibility, so verify live configuration yourself.
@@ -50,3 +50,9 @@ forge create --root contracts src/ForecastColosseum.sol:ForecastColosseum \
 ```
 
 No public contracts or paid providers were used during the build. The local-chain suite deploys real custom contracts and tokens on Anvil but deliberately substitutes UMA arbitration and AI providers. See [research](../../../docs/DAY-09-RESEARCH.md), [audit](../../../docs/DAY-09-AUDIT.md) and [completion tracker](../../../docs/PROJECT-COMPLETION-TRACKER.md).
+
+## Base networks and Supabase
+
+Testing uses Base Sepolia (`CHAIN_ID=84532`); production uses Base (`CHAIN_ID=8453`). Copy that network's deployed contract addresses and RPC into this app's private environment. For USDC workflows, use Circle's token on the same network; do not retain the testnet USDC address when switching to Base. Local Anvil (`31337`) remains a separate integration-test environment.
+
+Use the **Supabase database URI** in `SUPABASE_DATABASE_URL`, not a Supabase project URL or anon/service-role API key. The server supports direct, session-pooler and transaction-pooler connections with prepared statements disabled and remote TLS required. Use a private table-owner connection: app tables enable RLS without public visitor policies. Keep testing and production in separate Supabase projects; verify persistence/restore against the actual account before release. See the [alignment audit](../../../docs/BASE-SUPABASE-ALIGNMENT-AUDIT.md) and [production tracker](../../../docs/PROJECT-COMPLETION-TRACKER.md).

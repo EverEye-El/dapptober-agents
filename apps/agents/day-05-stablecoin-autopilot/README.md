@@ -46,10 +46,16 @@ Contract and shared checks: `pnpm run test:contracts`, `pnpm test`, `pnpm run ty
 
 ## Deploy independently
 
-Use this app directory as the Vercel project root, enable files outside the root, install from the workspace root and build this workspace. Or use the root Dockerfile with `--build-arg APP=day-05-stablecoin-autopilot`. Each app needs its own environment and PostgreSQL state namespace; no other day must be deployed. See [`docs/DEPLOYMENT.md`](../../../docs/DEPLOYMENT.md) for complete setup, contract commands and worker operation.
+Use this app directory as the Vercel project root, enable files outside the root, install from the workspace root and build this workspace. Or use the root Dockerfile with `--build-arg APP=day-05-stablecoin-autopilot`. Each app needs its own environment and Supabase PostgreSQL state namespace; no other day must be deployed. See [`docs/DEPLOYMENT.md`](../../../docs/DEPLOYMENT.md) for complete setup, contract commands and worker operation.
 
 ## Known limitations
 
 No yield guarantees. Real APY requires two share-price samples at least 60 seconds apart; it is historical annualization, not a forecast. Vault liquidity/losses can prevent withdraw-all, so individual owner withdrawal and recoverLiquid remain available. Monitoring/rebalancing is operator-triggered; deploy the bounded worker for scheduled runs. Coinbase AgentKit is a suggested alternative, while this implementation uses viem to minimize authority and expose exact calls.
 
 Credential-dependent live transactions and paid AI inference cannot be claimed tested without the user's credentials and funded wallets. Consult the final audit for actual verification evidence.
+
+## Base networks and Supabase
+
+Testing uses Base Sepolia (`CHAIN_ID=84532`); production uses Base (`CHAIN_ID=8453`). Copy that network's deployed contract addresses and RPC into this app's private environment. For USDC workflows, use Circle's token on the same network; do not retain the testnet USDC address when switching to Base. Local Anvil (`31337`) remains a separate integration-test environment.
+
+Use the **Supabase database URI** in `SUPABASE_DATABASE_URL`, not a Supabase project URL or anon/service-role API key. The server supports direct, session-pooler and transaction-pooler connections with prepared statements disabled and remote TLS required. Use a private table-owner connection: app tables enable RLS without public visitor policies. Keep testing and production in separate Supabase projects; verify persistence/restore against the actual account before release. See the [alignment audit](../../../docs/BASE-SUPABASE-ALIGNMENT-AUDIT.md) and [production tracker](../../../docs/PROJECT-COMPLETION-TRACKER.md).
