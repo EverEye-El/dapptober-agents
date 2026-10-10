@@ -19,9 +19,9 @@ it('rejects copied testnet USDC in a real Base deployment and preserves explicit
  expect(()=>tokenAddress(config({AGENT_MODE:'real',CHAIN_ID:'8453',USDC_ADDRESS:BASE_SEPOLIA_USDC}))).toThrow('must match');
  expect(tokenAddress(config({CHAIN_ID:'31337',USDC_ADDRESS:'0x'+'11'.repeat(20)}))).toBe('0x'+'11'.repeat(20));
 });
-it('requires TLS for a remote Supabase URL even if its password contains localhost and disables prepared statements',()=>{
- expect(databaseOptions('postgresql://postgres:localhost@db.example.supabase.co:5432/postgres')).toEqual({max:5,prepare:false,ssl:'require'});
- expect(databaseOptions('postgresql://fixture:fixture@127.0.0.1:5432/postgres').ssl).toBe(false);
+it('requires TLS for a remote Supabase URL even if its query contains localhost and disables prepared statements',()=>{
+ expect(databaseOptions('postgresql://db.supabase.invalid:5432/postgres?application_name=localhost')).toEqual({max:5,prepare:false,ssl:'require'});
+ expect(databaseOptions('postgresql://127.0.0.1:5432/postgres').ssl).toBe(false);
 });
 it('rejects RPC chain mismatch before accepting a block number',async()=>{
  const fetchMock=vi.spyOn(globalThis,'fetch').mockImplementation(async(_url,options)=>{const body=JSON.parse(String(options?.body));return new Response(JSON.stringify({jsonrpc:'2.0',id:body.id,result:body.method==='eth_chainId'?'0x1':'0x123'}),{headers:{'Content-Type':'application/json'}});});
