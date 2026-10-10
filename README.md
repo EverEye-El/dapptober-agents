@@ -33,7 +33,7 @@ pnpm run dev 01
 pnpm run dev
 ```
 
-Local simulation is the default and needs no secrets. Every simulated balance, signature, payment and attestation is labelled. State and receipts persist under each application's ignored `.data/` directory, isolated by HttpOnly session cookie. Local mode supports one process per app; use PostgreSQL for real/serverless mode. The agents never fabricate real transaction hashes.
+Local simulation is the default and needs no secrets. Every simulated balance, signature, payment and attestation is labelled. State and receipts persist under each application's ignored `.data/` directory, isolated by HttpOnly session cookie. Local mode supports one process per app; use Supabase PostgreSQL for real/serverless mode. The agents never fabricate real transaction hashes.
 
 Real mode uses configured RPCs, contracts, Jev, generative AI, thirdweb, x402 or CoW as relevant. Copy an app's `.env.example` to its `.env.local`. [Deployment instructions](docs/DEPLOYMENT.md) explain every required variable, funding and contract step. [Live setup checklist](docs/LIVE-SETUP-CHECKLIST.md) lists the owner inputs and acceptance runs; `pnpm readiness` reports missing live configuration without printing secrets. Days 01–09 use single-operator control rooms; Day 10 has private visitor sessions and separately authenticated operator pause controls. For Days 01–09, real server actions require a deployment-specific bearer token. Human owner/client signatures remain in their browser wallet.
 
@@ -69,3 +69,7 @@ Day 08 adds member-signed value mandates, routed multi-agent debates, publicly a
 Day 09 adds funded binary markets, permanent agent registration with onchain risk limits, typed evidence forecasts, UMA assertions/disputes and stablecoin claims. [Day 9 audit](docs/DAY-09-AUDIT.md). `pnpm run test:forecast-chain` runs its real local-contract acceptance; oracle arbitration and AI are explicit test doubles.
 
 Day 10 adds private World ID uniqueness, returning verified passkeys, an isolated human chat, current registered agent authority and contract-bound single USDC claims. [Day 10 audit](docs/DAY-10-AUDIT.md). `pnpm run test:checkpoint-chain` verifies actual local reward transactions with explicitly substituted personhood/provider fixtures.
+
+### Network and storage policy
+
+All ten apps default to Base Sepolia (84532) for testing and target Base (8453) for production. Local Anvil (31337) is reserved for isolated integrations. Use separate Supabase projects and private database connection URIs for testing/production; no Supabase browser API keys are required. See [the alignment audit](docs/BASE-SUPABASE-ALIGNMENT-AUDIT.md) for per-day contracts, provider dependencies and unavailable live CoW settlement on Base Sepolia.

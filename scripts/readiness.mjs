@@ -29,8 +29,11 @@ export function assess(day,env){
   for(const key of ['RPC_URL','AI_BASE_URL','FACILITATOR_URL'])if(env[key]){try{if(!['http:','https:'].includes(new URL(env[key]).protocol))gaps.push(`${key}: HTTP(S) URL required`);}catch{gaps.push(`${key}: invalid URL`);}}
   if(!env.PUBLIC_ORIGIN)gaps.push('PUBLIC_ORIGIN: missing');
   if(env.DATABASE_URL&&!/^postgres(ql)?:\/\//.test(env.DATABASE_URL))gaps.push('DATABASE_URL: PostgreSQL URL required');
-  if(day!==7&&!['8453','84532','11155111'].includes(env.CHAIN_ID))gaps.push('CHAIN_ID: select a supported public chain');
-  if(day===6&&(!['8453','84532','11155111'].includes(env.COW_CHAIN_ID)||env.CHAIN_ID!==env.COW_CHAIN_ID))gaps.push('COW_CHAIN_ID: must match CHAIN_ID');
+  if(!['8453','84532'].includes(env.CHAIN_ID))gaps.push('CHAIN_ID: use Base Sepolia (84532) for testing or Base (8453) for production');
+  const usdc=env.CHAIN_ID==='8453'?'0x833589fcd6edb6e08f4c7c32d4f71b54bda02913':'0x036cbd53842c5426634e7929541ec2318f3dcf7e';
+  if([1,2,4,5,9,10].includes(day)&&env.USDC_ADDRESS&&env.USDC_ADDRESS.toLowerCase()!==usdc)gaps.push('USDC_ADDRESS: wrong Circle USDC for this Base network');
+  if(day===6&&env.COW_USDC&&env.COW_USDC.toLowerCase()!==usdc)gaps.push('COW_USDC: wrong Circle USDC for this Base network');
+  if(day===6&&(!['8453','84532'].includes(env.COW_CHAIN_ID)||env.CHAIN_ID!==env.COW_CHAIN_ID))gaps.push('COW_CHAIN_ID: must match CHAIN_ID');
   if(day===6&&env.COW_CHAIN_ID==='84532')gaps.push('CoW settlement: no supported Base Sepolia solver endpoint; testing configuration is valid but live settlement is unavailable');
   if(env.SENATE_START_BLOCK&&!/^\d+$/.test(env.SENATE_START_BLOCK))gaps.push('SENATE_START_BLOCK: invalid block');
   if(day===5){try{const vaults=JSON.parse(env.VAULT_CONFIG??'[]');if(!Array.isArray(vaults)||vaults.length<2||vaults.length>16||!['lending','savings'].every(kind=>vaults.some(v=>v.kind===kind))||vaults.some(v=>!/^0x[0-9a-fA-F]{40}$/.test(v.address)||!Number.isInteger(v.risk)||v.risk<0||v.risk>3||!v.name)||new Set(vaults.map(v=>v.address.toLowerCase())).size!==vaults.length)gaps.push('VAULT_CONFIG: requires distinct valid lending and savings vaults (2–16)');}catch{gaps.push('VAULT_CONFIG: invalid JSON');}}

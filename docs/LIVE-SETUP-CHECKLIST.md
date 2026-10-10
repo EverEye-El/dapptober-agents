@@ -6,10 +6,10 @@ The authoritative, itemized production checklist for every Day 01–10 is in [th
 
 ## Shared setup
 
-1. Provide access to the hosting account and a PostgreSQL service. Deploy each app independently, with its own HTTPS origin and private environment. One database can serve the ten apps with their separate stores; deployment credentials need access to `dapptober_state`.
+1. Provide access to the hosting account and a Supabase PostgreSQL service. Deploy each app independently, with its own HTTPS origin and private environment. One database can serve the ten apps with their separate stores; deployment credentials need access to `dapptober_state`.
 2. Supply a TypeSafe/Jev API key and an OpenAI-compatible model provider key for Days 01–06 and 08–10. Day 07 uses Jev plus its own model inside a confidential worker. Put credentials in each app's ignored `.env.local` or the host's secret manager, never in chat or Git.
 3. Supply public owner wallet addresses. Keep owner wallet keys in the browser wallet or an encrypted deployment keystore. Days 03 and 04 need independent client/validator identities; Day 08 needs at least three member wallets.
-4. Fund dedicated agent/deployment wallets with native gas, and fund the USDC workflows with the appropriate chain's token. Testnet tokens and gas suffice where the protocol supports that testnet. Day 06 needs CoW-supported tokens/liquidity; Base Sepolia is not a CoW deployment.
+4. Fund dedicated agent/deployment wallets with native gas, and fund the USDC workflows with the selected Base network's Circle USDC. Testnet tokens and gas suffice where the protocol supports that testnet. Day 06 needs CoW-supported tokens/liquidity; Base Sepolia is not a CoW deployment.
 5. Review and merge PRs when ready. No automatic merging or direct pushes to main are part of this work.
 
 For supported testnet USDC, [Circle's official faucet](https://faucet.circle.com/) supports Base Sepolia and Ethereum Sepolia without an account. Match the chain and token address to the app configuration; faucet tokens alone do not establish CoW liquidity or vault compatibility. Native gas is a separate requirement.
@@ -44,7 +44,7 @@ pnpm run test:senate-chain        # temporary Anvil: Day 08
 pnpm run test:production          # fresh built servers on 3101–3110; stops them after audit
 ```
 
-Run local-chain tests after building contract artifacts (`pnpm run test:contracts`). Anvil must be installed and ports 18548/18549 free. `SMOKE_PORT_BASE=3100 pnpm run smoke` can verify production servers on ports 3101–3110 without disturbing the usual browser ports. The checks print field names, not secrets. Missing live configuration intentionally exits with status 1. Online checks only query RPC chain ID/bytecode; they do not send transactions, query balances, probe paid providers, establish contract ownership, validate PostgreSQL, or certify deployment readiness. Passing configuration checks still requires the acceptance steps above.
+Run local-chain tests after building contract artifacts (`pnpm run test:contracts`). Anvil must be installed and ports 18548/18549 free. `SMOKE_PORT_BASE=3100 pnpm run smoke` can verify production servers on ports 3101–3110 without disturbing the usual browser ports. The checks print field names, not secrets. Missing live configuration intentionally exits with status 1. Online checks only query RPC chain ID/bytecode; they do not send transactions, query balances, probe paid providers, establish contract ownership, validate Supabase PostgreSQL, or certify deployment readiness. Passing configuration checks still requires the acceptance steps above.
 
 ## Evidence and unresolved infrastructure
 
@@ -56,12 +56,12 @@ Official protocol references rechecked during this pass: [CoW](https://docs.cow.
 
 ## Day 09 owner inputs and acceptance
 
-See [Day 09 README](../apps/agents/day-09-forecast-colosseum/README.md) and [audit](DAY-09-AUDIT.md). Deploy `ForecastColosseum` with verified six-decimal USDC, the official UMA OOv3 oracle, `ASSERT_TRUTH2` and at least a two-hour live liveness. Verify whitelist/identifier/minimum bond/dispute support; configure private owner/operator, PostgreSQL, HTTPS, Jev/AI and narrowly funded agent wallet. Register caps before trading. Verify both lanes, oversize rejection, cutoff, bonded assertion, real oracle dispute and settlement, calibrated rankings, duplicate-claim rejection and USDC balances on the public chain. Testnets and the local oracle double do not establish production DVM evidence. Payouts remain available when trading is paused; stakes are locked until settlement, unasserted stale refunds are permissionless after 30 days, pending disputes cannot be bypassed. Independent contract review and ongoing oracle monitoring remain release tasks.
+See [Day 09 README](../apps/agents/day-09-forecast-colosseum/README.md) and [audit](DAY-09-AUDIT.md). Deploy `ForecastColosseum` with verified six-decimal USDC, the official UMA OOv3 oracle, `ASSERT_TRUTH2` and at least a two-hour live liveness. Verify whitelist/identifier/minimum bond/dispute support; configure private owner/operator, Supabase PostgreSQL, HTTPS, Jev/AI and narrowly funded agent wallet. Register caps before trading. Verify both lanes, oversize rejection, cutoff, bonded assertion, real oracle dispute and settlement, calibrated rankings, duplicate-claim rejection and USDC balances on the public chain. Testnets and the local oracle double do not establish production DVM evidence. Payouts remain available when trading is paused; stakes are locked until settlement, unasserted stale refunds are permissionless after 30 days, pending disputes cannot be bypassed. Independent contract review and ongoing oracle monitoring remain release tasks.
 
 ## Day 10 owner setup
 
 - [ ] Production World Developer Portal app/RP, fixed action and private RP signing key.
-- [ ] HTTPS domain (stable passkey RP), private PostgreSQL/Supabase, 32+ character session signing secret, separate operator token, ingress limits and privacy/retention/backups.
+- [ ] HTTPS domain (stable passkey RP), private Supabase PostgreSQL/Supabase, 32+ character session signing secret, separate operator token, ingress limits and privacy/retention/backups.
 - [ ] Supported-chain RPC, actual ERC-8004 registry and registered owner/agent wallet.
 - [ ] Dedicated managed reward verifier and owner; deploy `HumanCheckpointRewards` with matching RP/action hash, USDC and fixed reward; supply its address.
 - [ ] Small funded USDC campaign budget and visitor gas; real Jev/LLM keys.
