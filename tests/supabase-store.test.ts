@@ -16,7 +16,7 @@ import {withState} from '@dapptober/agent-core/src/store';
 import {withCheckpoint} from '@dapptober/checkpoint/src/store';
 it('keeps different Supabase projects isolated and enables RLS before shared state access',async()=>{
  const settings={AGENT_MODE:'real',OPERATOR_TOKEN:'s'.repeat(32)};
- const first=config({...settings,DATABASE_URL:'postgresql://first.supabase.invalid/postgres'}),second=config({...settings,DATABASE_URL:'postgresql://second.supabase.invalid/postgres'});
+ const first=config({...settings,SUPABASE_DATABASE_URL:'postgresql://first.supabase.invalid/postgres'}),second=config({...settings,SUPABASE_DATABASE_URL:'postgresql://second.supabase.invalid/postgres'});
  await withState(1,'operator',first,async s=>{s.balance='7';});
  expect((await withState(1,'operator',second,async s=>s.balance)).result).toBe('0');
  expect((await withState(1,'operator',first,async s=>s.balance)).result).toBe('7');
@@ -26,15 +26,15 @@ it('keeps different Supabase projects isolated and enables RLS before shared sta
  }
 });
 it('applies the same Supabase TLS/pooling policy to checkpoint uniqueness storage',async()=>{
- const c=config({AGENT_MODE:'real',DATABASE_URL:'postgresql://checkpoint.supabase.invalid/postgres'});
+ const c=config({AGENT_MODE:'real',SUPABASE_DATABASE_URL:'postgresql://checkpoint.supabase.invalid/postgres'});
  await withCheckpoint(c,async db=>Object.keys(db.people).length);
- const connection=fixture.connections.find(x=>x.url===c.DATABASE_URL)!;
+ const connection=fixture.connections.find(x=>x.url===c.SUPABASE_DATABASE_URL)!;
  expect(connection.options).toEqual({max:5,prepare:false,ssl:'require'});
  expect(connection.queries).toContain('ALTER TABLE dapptober_checkpoint ENABLE ROW LEVEL SECURITY');
 });
 
 it('refuses to relabel testnet receipts and balances as Base production state',async()=>{
- const settings={AGENT_MODE:'real',OPERATOR_TOKEN:'t'.repeat(32),DATABASE_URL:'postgresql://network.supabase.invalid/postgres'};
+ const settings={AGENT_MODE:'real',OPERATOR_TOKEN:'t'.repeat(32),SUPABASE_DATABASE_URL:'postgresql://network.supabase.invalid/postgres'};
  const test=config({...settings,CHAIN_ID:'84532'}),production=config({...settings,CHAIN_ID:'8453'});
  await withState(2,'operator',test,async s=>{s.balance='12';});
  await expect(withState(2,'operator',production,async s=>s.balance)).rejects.toThrow('Stored workspace belongs to another chain');

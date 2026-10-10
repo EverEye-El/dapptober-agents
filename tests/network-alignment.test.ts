@@ -8,7 +8,7 @@ import {deploymentNetworkAllowed,checkDeploymentNetwork} from '../scripts/deploy
 afterEach(()=>vi.restoreAllMocks());
 it('all ten examples use Base Sepolia and a private Supabase database URI field',()=>{
  const folders=readdirSync('apps/agents').filter(x=>/^day-\d+-/.test(x));expect(folders).toHaveLength(10);
- for(const folder of folders){const env=parseEnv(readFileSync(`apps/agents/${folder}/.env.example`,'utf8'));expect(config(env).CHAIN_ID).toBe(84532);expect(env).toHaveProperty('DATABASE_URL');if(folder.startsWith('day-06'))expect(env.COW_CHAIN_ID).toBe('84532');}
+ for(const folder of folders){const env=parseEnv(readFileSync(`apps/agents/${folder}/.env.example`,'utf8'));expect(config(env).CHAIN_ID).toBe(84532);expect(env).toHaveProperty('SUPABASE_DATABASE_URL');if(folder.startsWith('day-06'))expect(env.COW_CHAIN_ID).toBe('84532');}
 });
 it('uses Base network metadata and rejects Ethereum Sepolia configuration',()=>{
  expect(chain(config({CHAIN_ID:'8453'})).id).toBe(8453);expect(chain(config({CHAIN_ID:'84532'})).id).toBe(84532);expect(()=>config({CHAIN_ID:'11155111'})).toThrow();

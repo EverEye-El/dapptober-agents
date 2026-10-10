@@ -73,3 +73,5 @@ Day 10 adds private World ID uniqueness, returning verified passkeys, an isolate
 ### Network and storage policy
 
 All ten apps default to Base Sepolia (84532) for testing and target Base (8453) for production. Local Anvil (31337) is reserved for isolated integrations. Use separate Supabase projects and private database connection URIs for testing/production; no Supabase browser API keys are required. See [the alignment audit](docs/BASE-SUPABASE-ALIGNMENT-AUDIT.md) for per-day contracts, provider dependencies and unavailable live CoW settlement on Base Sepolia.
+
+Configuration names and where to enter each value: [environment setup](docs/ENVIRONMENT-SETUP.md). Each daily `.env.local` includes field explanations; private values belong there, not in `.env.example`.

@@ -110,7 +110,7 @@ export async function checkpointAction(db:CheckpointDB,client:Client,c:Config,ac
  throw new Error('Unknown checkpoint capability');
 }
 async function handle(request:Request,post:boolean,forced?:string){let token:string|undefined;try{
- const c=config();requireReal(c,['CHECKPOINT_SESSION_SECRET','DATABASE_URL','WORLD_RP_ID']);if(c.AGENT_MODE==='real'&&new URL(c.PUBLIC_ORIGIN).protocol!=='https:'&&new URL(c.PUBLIC_ORIGIN).hostname!=='localhost')throw new Error('Production checkpoint requires HTTPS');
+ const c=config();requireReal(c,['CHECKPOINT_SESSION_SECRET','SUPABASE_DATABASE_URL','WORLD_RP_ID']);if(c.AGENT_MODE==='real'&&new URL(c.PUBLIC_ORIGIN).protocol!=='https:'&&new URL(c.PUBLIC_ORIGIN).hostname!=='localhost')throw new Error('Production checkpoint requires HTTPS');
  const origin=request.headers.get('origin');if(origin&&origin!==new URL(c.PUBLIC_ORIGIN).origin)throw new Error('Untrusted request origin');if(post&&request.headers.get('sec-fetch-site')==='cross-site')throw new Error('Cross-site request rejected');
  const session=signedSession(c,request);token=session.token;let input:Record<string,unknown>={},action='';if(post){if(Number(request.headers.get('content-length')??0)>65536)throw new Error('Request too large');const raw=await request.text();if(raw.length>65536)throw new Error('Request too large');const parsed=z.object({action:z.string().max(64).optional(),input:z.record(z.string(),z.unknown()).default({})}).parse(JSON.parse(raw));action=forced??parsed.action??'';input=parsed.input;}
  const result=await withCheckpoint(c,async db=>{

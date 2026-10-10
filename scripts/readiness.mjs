@@ -3,7 +3,7 @@ import {parseEnv} from 'node:util';
 import {fileURLToPath} from 'node:url';
 import {resolve} from 'node:path';
 
-const common=['OWNER_ADDRESS','OPERATOR_TOKEN','DATABASE_URL','RPC_URL','TYPESAFE_API_KEY','AI_API_KEY'];
+const common=['OWNER_ADDRESS','OPERATOR_TOKEN','SUPABASE_DATABASE_URL','RPC_URL','JEV_API_KEY','OPENAI_API_KEY'];
 const required={
   1:[...common,'AGENT_PRIVATE_KEY','THIRDWEB_SECRET_KEY','SESSION_VAULT'],
   2:[...common,'AGENT_PRIVATE_KEY','PAY_TO'],
@@ -11,7 +11,7 @@ const required={
   4:[...common,'AGENT_PRIVATE_KEY','QUEST_ESCROW'],
   5:[...common,'AGENT_PRIVATE_KEY','FLIGHT_TREASURY'],
   6:[...common,'COW_USDC','COW_WETH'],
-  7:['OWNER_ADDRESS','OPERATOR_TOKEN','DATABASE_URL','TYPESAFE_API_KEY','TEE_WORKER_URL','TEE_WORKER_TOKEN','TEE_MODEL_DIGEST'],
+  7:['OWNER_ADDRESS','OPERATOR_TOKEN','SUPABASE_DATABASE_URL','JEV_API_KEY','TEE_WORKER_URL','TEE_WORKER_TOKEN','TEE_MODEL_DIGEST'],
   8:[...common,'AGENT_PRIVATE_KEY','SENATE_TOKEN','SENATE_GOVERNOR','SENATE_START_BLOCK'],
   9:[...common,'AGENT_PRIVATE_KEY','FORECAST_MARKET','UMA_ORACLE','USDC_ADDRESS'],
   10:[...common,'AGENT_PRIVATE_KEY','WORLD_APP_ID','WORLD_RP_ID','WORLD_SIGNING_KEY','WORLD_ACTION','CHECKPOINT_SESSION_SECRET','CHECKPOINT_REGISTRY','CHECKPOINT_REWARDS','USDC_ADDRESS'],
@@ -26,9 +26,9 @@ export function assess(day,env){
   }
   if(env.AGENT_PRIVATE_KEY&&!/^0x[0-9a-fA-F]{64}$/.test(env.AGENT_PRIVATE_KEY))gaps.push('AGENT_PRIVATE_KEY: invalid key format');
   for(const key of ['PUBLIC_ORIGIN','TEE_WORKER_URL'])if(env[key]){try{if(new URL(env[key]).protocol!=='https:')gaps.push(`${key}: HTTPS required for release`);}catch{gaps.push(`${key}: invalid URL`);}}
-  for(const key of ['RPC_URL','AI_BASE_URL','FACILITATOR_URL'])if(env[key]){try{if(!['http:','https:'].includes(new URL(env[key]).protocol))gaps.push(`${key}: HTTP(S) URL required`);}catch{gaps.push(`${key}: invalid URL`);}}
+  for(const key of ['RPC_URL','OPENAI_BASE_URL','FACILITATOR_URL'])if(env[key]){try{if(!['http:','https:'].includes(new URL(env[key]).protocol))gaps.push(`${key}: HTTP(S) URL required`);}catch{gaps.push(`${key}: invalid URL`);}}
   if(!env.PUBLIC_ORIGIN)gaps.push('PUBLIC_ORIGIN: missing');
-  if(env.DATABASE_URL&&!/^postgres(ql)?:\/\//.test(env.DATABASE_URL))gaps.push('DATABASE_URL: PostgreSQL URL required');
+  if(env.SUPABASE_DATABASE_URL&&!/^postgres(ql)?:\/\//.test(env.SUPABASE_DATABASE_URL))gaps.push('SUPABASE_DATABASE_URL: PostgreSQL URL required');
   if(!['8453','84532'].includes(env.CHAIN_ID))gaps.push('CHAIN_ID: use Base Sepolia (84532) for testing or Base (8453) for production');
   const usdc=env.CHAIN_ID==='8453'?'0x833589fcd6edb6e08f4c7c32d4f71b54bda02913':'0x036cbd53842c5426634e7929541ec2318f3dcf7e';
   if([1,2,4,5,9,10].includes(day)&&env.USDC_ADDRESS&&env.USDC_ADDRESS.toLowerCase()!==usdc)gaps.push('USDC_ADDRESS: wrong Circle USDC for this Base network');

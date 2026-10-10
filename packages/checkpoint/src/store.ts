@@ -11,7 +11,7 @@ export function checkpointScope(c:Config){return `${c.WORLD_RP_ID??'demo-rp'}:${
 export async function withCheckpoint<T>(c:Config,work:(db:CheckpointDB)=>Promise<T>):Promise<T>{
  const key=createHash('sha256').update(checkpointScope(c)).digest('hex');
  if(c.AGENT_MODE==='real'){
-  if(!c.DATABASE_URL)throw new Error('Real mode requires DATABASE_URL');let sql=databases.get(c.DATABASE_URL);if(!sql){sql=postgres(c.DATABASE_URL,databaseOptions(c.DATABASE_URL));databases.set(c.DATABASE_URL,sql);}
+  if(!c.SUPABASE_DATABASE_URL)throw new Error('Real mode requires SUPABASE_DATABASE_URL');let sql=databases.get(c.SUPABASE_DATABASE_URL);if(!sql){sql=postgres(c.SUPABASE_DATABASE_URL,databaseOptions(c.SUPABASE_DATABASE_URL));databases.set(c.SUPABASE_DATABASE_URL,sql);}
   await sql`CREATE TABLE IF NOT EXISTS dapptober_checkpoint (id text PRIMARY KEY, body jsonb NOT NULL)`;
   await sql`ALTER TABLE dapptober_checkpoint ENABLE ROW LEVEL SECURITY`;
   return await sql.begin(async tx=>{await tx`INSERT INTO dapptober_checkpoint (id,body) VALUES (${key},${tx.json(emptyDB() as unknown as postgres.JSONValue)}) ON CONFLICT DO NOTHING`;const rows=await tx`SELECT body FROM dapptober_checkpoint WHERE id=${key} FOR UPDATE`;const db=rows[0].body as CheckpointDB;const result=await work(db);await tx`UPDATE dapptober_checkpoint SET body=${tx.json(db as unknown as postgres.JSONValue)} WHERE id=${key}`;return result;}) as T;
