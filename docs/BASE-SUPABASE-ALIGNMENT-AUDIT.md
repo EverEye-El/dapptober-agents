@@ -48,3 +48,5 @@ Final local validation passes: lint, type checking, **82 application tests**, **
 - [UMA network support and DVM boundaries](https://docs.uma.xyz/resources/network-addresses)
 
 The live Dapptober site fetch failed during this pass; the complete repository prompts for Days 01–10 were reread as the canonical specification. No paid account, production database, external provider key, funded public wallet or public deployment is claimed.
+
+Hosted check status for implementation commit `8193788`: build/container CI is pending. GitGuardian flags five invented PostgreSQL URI fixtures in `tests/supabase-store.test.ts` and `tests/network-alignment.test.ts`; these are mock-driver/fetch tests, not provisioned credentials or reachable database accounts. Review and dismiss those specific false-positive incidents in GitGuardian before treating the security check as passing. No real secret rotation is required for these fixtures.
