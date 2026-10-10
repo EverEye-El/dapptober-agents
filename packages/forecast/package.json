@@ -1,0 +1,20 @@
+{
+  "name": "@dapptober/forecast",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./src/*": "./src/*.ts"
+  },
+  "dependencies": {
+    "@dapptober/types": "workspace:*",
+    "@dapptober/config": "workspace:*",
+    "@dapptober/chain": "workspace:*",
+    "@dapptober/guardrails": "workspace:*",
+    "@dapptober/receipts": "workspace:*",
+    "@dapptober/agent-core": "workspace:*",
+    "viem": "^2.38.0",
+    "zod": "^4.0.0"
+  }
+}

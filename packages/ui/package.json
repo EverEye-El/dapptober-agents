@@ -14,6 +14,8 @@
     "@dapptober/inference": "workspace:*",
     "@dapptober/types": "workspace:*",
     "react": "^19.2.0",
-    "viem": "^2.38.0"
+    "viem": "^2.38.0",
+    "recharts": "^3.0.0",
+    "@dapptober/forecast": "workspace:*"
   }
 }

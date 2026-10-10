@@ -1,0 +1,32 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.24;
+import {ForecastColosseum} from "../src/ForecastColosseum.sol";
+import {MockUSDC,Vm} from "./Agents.t.sol";
+import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+// Explicit local oracle double: exercises OOv3 callbacks and bonds, not UMA's DVM.
+contract MockForecastOracle {
+ struct Assertion {address recipient;address asserter;uint256 end;bool disputed;bool settled;uint256 bond;}
+ mapping(bytes32=>Assertion) public assertions;uint256 public nonce;IERC20 public token;uint256 public minimumBond=10e6;
+ constructor(address t){token=IERC20(t);}
+ function getMinimumBond(address) external view returns(uint256){return minimumBond;}
+ function setMinimumBond(uint256 value) external {minimumBond=value;}
+ function assertTruth(bytes calldata,address asserter,address recipient,address,uint64 liveness,address,uint256 bond,bytes32 identifier,bytes32) external returns(bytes32 id){require(identifier==bytes32("ASSERT_TRUTH2"),"identifier");require(bond==minimumBond,"bond");token.transferFrom(msg.sender,address(this),bond);id=keccak256(abi.encode(++nonce));assertions[id]=Assertion(recipient,asserter,block.timestamp+liveness,false,false,bond);}
+ function disputeAssertion(bytes32 id,address) external {Assertion storage a=assertions[id];require(block.timestamp<a.end&&!a.disputed&&!a.settled,"not disputable");token.transferFrom(msg.sender,address(this),a.bond);a.disputed=true;ForecastColosseum(a.recipient).assertionDisputedCallback(id);}
+ function settleAssertion(bytes32 id) external {Assertion storage a=assertions[id];require(block.timestamp>=a.end&&!a.disputed&&!a.settled,"window or dispute");a.settled=true;token.transfer(a.asserter,a.bond);ForecastColosseum(a.recipient).assertionResolvedCallback(id,true);}
+ function arbitrate(bytes32 id,bool truth) external {Assertion storage a=assertions[id];require(a.disputed&&!a.settled,"not disputed");a.settled=true;ForecastColosseum(a.recipient).assertionResolvedCallback(id,truth);}
+}
+contract ForecastColosseumTest {
+ Vm constant vm=Vm(address(uint160(uint256(keccak256("hevm cheat code")))));
+ MockUSDC token;MockForecastOracle oracle;ForecastColosseum arena;address human=address(0x11);address agent=address(0x22);uint256 id;
+ function setUp() public {token=new MockUSDC();oracle=new MockForecastOracle(address(token));arena=new ForecastColosseum(address(this),address(token),address(oracle),120,bytes32("ASSERT_TRUTH2"));token.mint(address(this),100e6);token.approve(address(arena),type(uint256).max);token.mint(human,100e6);token.mint(agent,100e6);vm.prank(human);token.approve(address(arena),type(uint256).max);vm.prank(agent);token.approve(address(arena),type(uint256).max);arena.setRisk(agent,5e6,10e6,15e6,false);id=arena.create("Will it rain?","YES if official station exceeds 10mm at cutoff; NO otherwise; INVALID if source missing.",uint64(block.timestamp+600));}
+ function buy(address who,bool yes,uint256 amount,uint16 probability) internal {vm.prank(who);arena.trade(id,yes,amount,probability);}
+ function assertYes() internal returns(bytes32){vm.warp(block.timestamp+601);return arena.assertOutcome(id,1,"Official station reports 12mm");}
+ function testPayoutCollateralAndReplay() public {buy(human,false,6e6,2000);buy(agent,true,4e6,8000);assertYes();vm.warp(block.timestamp+121);arena.settle(id);require(arena.payout(id,agent)==10e6,"payout");vm.prank(agent);arena.claim(id);require(token.balanceOf(agent)==106e6,"net winnings");vm.expectRevert();vm.prank(agent);arena.claim(id);require(token.balanceOf(address(arena))==0,"pool drained incorrectly");}
+ function testContractCapsPauseAndDaily() public {buy(agent,true,5e6,7000);vm.expectRevert();buy(agent,true,6e6,7000);buy(agent,true,5e6,7000);vm.expectRevert();buy(agent,false,1e6,7000);arena.setRisk(agent,5e6,20e6,15e6,true);vm.expectRevert();buy(agent,false,1e6,7000);arena.setRisk(agent,5e6,20e6,15e6,false);buy(agent,false,5e6,7000);vm.expectRevert();buy(agent,false,1e6,7000);arena.setPaused(true);vm.expectRevert();buy(human,true,1e6,5000);}
+ function testSpoofCallbackAndEarlySettlement() public {buy(human,true,2e6,6000);vm.expectRevert();arena.assertionResolvedCallback(bytes32(uint256(1)),true);bytes32 assertion=assertYes();vm.expectRevert();arena.settle(id);vm.expectRevert();arena.assertionDisputedCallback(assertion);vm.expectRevert();buy(human,true,1e6,9000);}
+ function testDisputeBlocksUntilOracleAndFalseCanReassert() public {buy(human,true,3e6,7000);bytes32 assertion=assertYes();token.approve(address(oracle),10e6);oracle.disputeAssertion(assertion,address(this));vm.warp(block.timestamp+121);vm.expectRevert();arena.settle(id);vm.expectRevert();vm.prank(human);arena.claim(id);oracle.arbitrate(assertion,false);arena.assertOutcome(id,2,"Correction: official station reports 2mm");vm.warp(100000);arena.settle(id);require(arena.payout(id,human)==3e6,"empty winning pool refund");}
+ function testInvalidRefundAndPauseDoesNotBlockClaims() public {buy(human,true,3e6,9000);buy(agent,false,2e6,1000);vm.warp(block.timestamp+601);arena.assertOutcome(id,3,"Official station unavailable");vm.warp(block.timestamp+121);arena.settle(id);arena.setPaused(true);require(arena.payout(id,human)==3e6&&arena.payout(id,agent)==2e6,"refund");vm.prank(human);arena.claim(id);}
+ function testStaleRecoveryAndCannotBypassAssertion() public {buy(human,true,2e6,7000);vm.warp(block.timestamp+31 days);arena.voidStale(id);require(arena.payout(id,human)==2e6,"stale refund");uint256 next=arena.create("Next?","Official source",uint64(block.timestamp+60));vm.warp(block.timestamp+61);arena.assertOutcome(next,1,"Source confirms");vm.warp(block.timestamp+31 days);vm.expectRevert();arena.voidStale(next);}
+ function testFuzzPayoutNeverExceedsCollateral(uint32 x,uint32 y) public {uint256 first=uint256(x)%20e6+1;uint256 second=uint256(y)%20e6+1;address other=address(0x33);token.mint(other,100e6);vm.prank(other);token.approve(address(arena),type(uint256).max);buy(human,true,first,6000);buy(other,true,second,7000);buy(agent,false,2e6,1000);assertYes();vm.warp(block.timestamp+121);arena.settle(id);uint256 paid=arena.payout(id,human)+arena.payout(id,other)+arena.payout(id,agent);require(paid<=first+second+2e6,"unfunded payout");require(first+second+2e6-paid<=1,"unexpected rounding loss");}
+ function testLaneSnapshotAndProbabilityBounds() public {buy(human,true,2e6,5000);arena.setRisk(human,5e6,10e6,15e6,false);vm.expectRevert();buy(human,true,1e6,5000);vm.expectRevert();buy(agent,true,1e6,10001);vm.expectRevert();buy(agent,true,0,5000);}
+}

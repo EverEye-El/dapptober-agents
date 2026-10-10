@@ -1,23 +1,23 @@
 import {readFileSync} from 'node:fs';
 import {it,expect,vi} from 'vitest';
-import {createWalletClient,http,type Abi,type Hex,type TransactionRequest} from 'viem';
+import {createPublicClient,createWalletClient,http,type Abi,type Hex,type TransactionRequest} from 'viem';
 import {mnemonicToAccount,privateKeyToAccount} from 'viem/accounts';
 import {foundry} from 'viem/chains';
 import {config} from '@dapptober/config';
 import {initialState} from '@dapptober/agent-core/src/store';
 import {governanceAction,refreshSenate,delegateKey,governorAbi} from '@dapptober/governance';
-import {publicClient} from '@dapptober/chain';
 import {overrideCalldata} from '@dapptober/governance/src/protocol';
 import type {Transaction} from '@dapptober/types';
 // Only external cognition is mocked. All membership signatures, RPCs, deployments, votes and overrides are real Anvil transactions.
 vi.mock('@dapptober/agent-core/src/ai',()=>({judge:async()=>({allow:true,confidence:.97,fit:1,abuse:0,route:'large',source:'jev',reason:'Integration fixture; no Jev service contacted'}),reasoner:()=>({structured:async()=>({support:1,confidence:.95,statement:'Provider fixture supports the policy resolution.'}),text:async()=> 'Provider fixture debate reply / summary.'})}));
 const enabled=process.env.SENATE_CHAIN_TEST==='1';
 it.skipIf(!enabled)('deploys and exercises real membership, profile signatures, delegation, provisional votes, independent overrides and event reconciliation',async()=>{
- const rpc='http://127.0.0.1:18548',mnemonic='test test test test test test test test test test test junk';const members=[0,1,2].map(addressIndex=>mnemonicToAccount(mnemonic,{addressIndex}));const wallet=createWalletClient({account:members[0],chain:foundry,transport:http(rpc)});let c=config({AGENT_MODE:'real',CHAIN_ID:'31337',RPC_URL:rpc,AGENT_PRIVATE_KEY:'0x'+'08'.repeat(32)});const pub=publicClient(c);
+ const rpc='http://127.0.0.1:18548',mnemonic='test test test test test test test test test test test junk';const members=[0,1,2].map(addressIndex=>mnemonicToAccount(mnemonic,{addressIndex}));const wallet=createWalletClient({account:members[0],chain:foundry,transport:http(rpc)});let c=config({AGENT_MODE:'real',CHAIN_ID:'31337',RPC_URL:rpc,AGENT_PRIVATE_KEY:'0x'+'08'.repeat(32)});const pub=createPublicClient({chain:foundry,transport:http(rpc),pollingInterval:50,cacheTime:0});
  function artifact(name:string){const a=JSON.parse(readFileSync(new URL('../contracts/out/'+name+'.sol/'+name+'.json',import.meta.url),'utf8'));return {abi:a.abi as Abi,bytecode:('0x'+a.bytecode.object.replace(/^0x/,'')) as Hex};}
  const tokenHash=await wallet.deployContract({...artifact('SenateVoice'),args:[members.map(x=>x.address)]});const token=(await pub.waitForTransactionReceipt({hash:tokenHash})).contractAddress!;
  const govHash=await wallet.deployContract({...artifact('SwarmGovernor'),args:[token,10n,3600n,900n]});const govReceipt=await pub.waitForTransactionReceipt({hash:govHash}),governor=govReceipt.contractAddress!;c={...c,SENATE_TOKEN:token,SENATE_GOVERNOR:governor,SENATE_START_BLOCK:Number(govReceipt.blockNumber)};const s=initialState(8,c);
- async function send(tx:Transaction,index:number){const account=members[index],w=createWalletClient({account,chain:foundry,transport:http(rpc)});const hash=await w.sendTransaction({to:tx.to,data:tx.data} as TransactionRequest);expect((await pub.waitForTransactionReceipt({hash})).status).toBe('success');}
+ async function send(tx:Transaction,index:number){const account=members[index],w=createWalletClient({account,chain:foundry,transport:http(rpc)});// Mine across a timestamp boundary: checkpoint creation costs more than same-block replacement.
+ const gas=(await pub.estimateGas({account,to:tx.to,data:tx.data}))*120n/100n+50000n;await jump(Number((await pub.getBlock()).timestamp)+1);const hash=await w.sendTransaction({to:tx.to,data:tx.data,gas} as TransactionRequest);const mined=await pub.waitForTransactionReceipt({hash});expect(mined.status,`${tx.description}: gas used ${mined.gasUsed} / limit ${gas}`).toBe('success');}
  async function jump(timestamp:number){const r=await fetch(rpc,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({jsonrpc:'2.0',id:1,method:'evm_setNextBlockTimestamp',params:[timestamp]})});expect((await r.json()).error).toBeUndefined();await fetch(rpc,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({jsonrpc:'2.0',id:2,method:'evm_mine',params:[]})});}
  for(let i=0;i<members.length;i++){const member=members[i];const profile={member:member.address,name:'Member '+i,values:'Support public goods with transparent reporting.',priorities:{publicGoods:100,security:50,growth:60,reserves:0},paused:false};const prepared=await governanceAction(s,c,'senate.profile.prepare',{profile}) as {typedData:Parameters<typeof member.signTypedData>[0];expires:number};const signature=await member.signTypedData(prepared.typedData);await governanceAction(s,c,'senate.profile.save',{profile,signature,expires:prepared.expires});await expect(governanceAction(s,c,'senate.profile.save',{profile,signature,expires:prepared.expires})).rejects.toThrow('signature');const delegated=await governanceAction(s,c,'senate.delegate',{member:member.address}) as {transaction:Transaction};await send(delegated.transaction,i);const agent=privateKeyToAccount(delegateKey(c,member.address));await pub.waitForTransactionReceipt({hash:await wallet.sendTransaction({to:agent.address,value:10n**17n})});}
  await jump(Number((await pub.getBlock()).timestamp)+2);
