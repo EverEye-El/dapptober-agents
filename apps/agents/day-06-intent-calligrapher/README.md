@@ -50,6 +50,6 @@ Use this app directory as the Vercel project root, enable files outside the root
 
 ## Known limitations
 
-Only explicit USDC→WETH buy intents, complete fills, EOA signatures; ETH is delivered as WETH. CoW supports Base mainnet and Ethereum Sepolia, not Base Sepolia. Real solver competition arrives after settlement; pre-sign quote is a verified estimate, not a full auction. Friday is next Friday 23:59:59 UTC. Deadline capped at seven days. Real fills need liquidity/funds; cancellation may race settlement.
+Only explicit USDC→WETH buy intents, complete fills, EOA signatures; ETH is delivered as WETH. Testing is configured for Base Sepolia (`CHAIN_ID=COW_CHAIN_ID=84532`); production uses Base (`8453`). Base Sepolia demo actions are simulated. Real CoW actions are explicitly blocked because the external solver API does not support Base Sepolia; no fallback to Ethereum Sepolia occurs. Real solver competition arrives after settlement; pre-sign quote is a verified estimate, not a full auction. Friday is next Friday 23:59:59 UTC. Deadline capped at seven days. Real fills need liquidity/funds; cancellation may race settlement.
 
 Credential-dependent live transactions and paid AI inference cannot be claimed tested without the user's credentials and funded wallets. Consult the final audit for actual verification evidence.

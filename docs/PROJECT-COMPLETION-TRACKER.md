@@ -81,7 +81,7 @@ All rows also require the shared Supabase/Base/Jev configuration above; OpenAI a
 - [ ] Open each daily folder's ignored `.env.local`; copy required fields from its `.env.example` and the dependency table above. Keep these files out of Git. Leave `AGENT_MODE=demo` until that day's required fields/contracts are ready.
 - [ ] Generate a different random 32+ character `OPERATOR_TOKEN` for each app. This is a secret you create, not a provider-issued credential. Days 01–09 require it to open the real control room; Day 10 uses it for administration only.
 - [ ] Set the Supabase testing `DATABASE_URL` in each app and verify a real database write/read. Confirm `dapptober_state` is created for shared state and Day 10's checkpoint tables are private/RLS-enabled; do not expose database passwords in browser variables.
-- [ ] Set Base Sepolia `RPC_URL`, `CHAIN_ID=84532`, `OWNER_ADDRESS` and applicable `USDC_ADDRESS`; set `PUBLIC_ORIGIN=http://localhost:3000+DD` using the actual port (for example Day 01 `http://localhost:3001`). Day 06 cannot enter real CoW mode with 84532 yet; retain that blocker.
+- [ ] Set Base Sepolia `RPC_URL`, `CHAIN_ID=84532`, `OWNER_ADDRESS` and applicable `USDC_ADDRESS`; set `PUBLIC_ORIGIN=http://localhost:3000+DD` using the actual port (for example Day 01 `http://localhost:3001`). Day 06 now defaults to `CHAIN_ID=COW_CHAIN_ID=84532`; demo works, but real CoW settlement is explicitly blocked without a supported endpoint.
 - [ ] Complete the selected day's preparation below: provider setup, reviewed test contract deployment, address configuration, narrowly funded test wallets and required permissions. Set `AGENT_MODE=real` only when configuration is complete.
 - [ ] Test Jev and OpenAI access from that app (Ollama/TDX for Day 07), then proceed to phase 3. Missing keys/provider errors must remain visible failures, not silently simulated success.
 
@@ -344,3 +344,7 @@ Hosted Day 10 acceptance: [run 38069383828](https://github.com/EverEye-El/dappto
 ## Configuration references — October 10, 2026
 
 The credential names above were checked against `packages/config/src/index.ts`, `scripts/readiness.mjs`, each app's `.env.example`, and the actual wallet/payment/database adapters. [Supabase database connections](https://supabase.com/docs/guides/database/connecting-to-postgres), [thirdweb server SDK setup](https://portal.thirdweb.com/typescript/v5/getting-started), and [CoW API networks/authentication](https://docs.cow.fi/cow-protocol/integrate/api) were rechecked. Supabase session pooling is chosen for the shared driver's current prepared-statement behavior. This documentation does not claim that any accounts, keys or contracts have been provisioned.
+
+## Day 06 network configuration update — October 10, 2026
+
+Day 06 now defaults to Base Sepolia (`CHAIN_ID=COW_CHAIN_ID=84532`), including its private local configuration, matching the owner's testing requirement. Production remains Base (8453). The adapter explicitly rejects unavailable Base Sepolia live CoW operations before issuing a signing payload or approval, rather than falling through to Ethereum Sepolia. Remaining implementation/dependency work: establish a genuine Base Sepolia solver/settlement path; changing configuration cannot provision an external CoW deployment. Local demo testing remains available and labelled simulated.
