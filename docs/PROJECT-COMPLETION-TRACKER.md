@@ -35,6 +35,220 @@ Release work also remains: verify hosted CI for subsequent changes, address the 
 
 Day 07 has the most infrastructure left. Days 01, 03, 04, 05, 08, 09 and 10 have actual local-chain acceptance evidence; production protocol acceptance remains separate.
 
+## Production launch checklists — Days 01–10
+
+These are remaining tasks **from the current built/tested repository to production**, in execution order. Work on one day at a time: shared phases 1–2 → that day's preparation → shared phase 3 rehearsal → shared phase 4 deployment → that day's acceptance → shared phase 5 release. Do not finish every shared step before starting the daily checklist. Check an item only after its stated environment has been verified; testnet rehearsals are separate from production acceptance.
+
+The owner supplies accounts, secrets, signatures, funding and release approval; engineering completes configuration, deployment and verification. Store secrets privately, never in this tracker. All ten days follow this sequence. Day 07's confidential worker must exist before hardware rehearsal; Day 10 needs a stable HTTPS origin before real World ID/passkey acceptance. Public release still comes last.
+
+### Shared phase 1 — Confirm scope and review, before spending
+
+- [ ] Select this day's target chain and responsible operator; verify required protocols, tokens and official deployments support it. Decide which optional features will ship.
+- [ ] Review the existing daily audit and remaining gaps; identify needed provider accounts, wallets, contract deployments and operating budget using the daily preparation checklist below.
+- [ ] Review custom contracts and authentication/provider boundaries independently before meaningful funding. Recheck dependency advisories, resolve the inherited low elliptic advisory when a reviewed fix is available, or document an explicit release risk decision.
+
+### Shared phase 2 — Prepare private configuration and storage
+
+- [ ] Obtain the required provider accounts and credentials; prepare owner/deployer and dedicated agent wallets with scoped key custody and recovery procedures. Keep owner keys in browser wallets or encrypted deployment keystores.
+- [ ] Prepare PostgreSQL for real-mode rehearsal with private access and compatible pooling/schema permissions. Days 01–09 use `dapptober_state`; Day 10 additionally uses its checkpoint store. A local database can precede hosted production storage.
+- [ ] Populate the app's `.env.example` fields in ignored private configuration. Set matching RPC/chain, owner, a unique 32+ character operator token and a rehearsal origin; keep signing keys out of browser bundles and logs. Set `AGENT_MODE=real` only when required configuration is ready.
+- [ ] Configure real Jev credentials and required model provider/models; Day 07 uses the model inside its confidential worker. Confirm access before funded acceptance and test that provider failures deny protected actions.
+- [ ] Complete this day's preparation checklist below, including contract configuration and limited rehearsal funding where needed.
+
+### Shared phase 3 — Rehearse before deploying the public app
+
+- [ ] Run `pnpm readiness DD --init --online` after configuring deployed addresses; resolve missing fields. It does not deploy, spend, validate provider accounts or certify readiness.
+- [ ] Verify CI for the chosen implementation and build the selected app independently with `pnpm run build DD`.
+- [ ] Run available real-provider and supported-testnet rehearsals from the local app with small controlled amounts; inspect receipts, rejected actions and recovery paths. Record unsupported testnet/provider paths explicitly for later production acceptance.
+- [ ] Resolve rehearsal failures and document expected operating limits before provisioning the public app. Do not count mock/local-chain results as live provider or production acceptance.
+
+### Shared phase 4 — Deploy privately, then validate the hosted app
+
+- [ ] Choose the stable production domain and hosting project with sufficient request duration; provision production PostgreSQL, private TLS/pooling, backups and a tested restore.
+- [ ] Deploy the selected standalone container or separate hosting project with private secrets, `AGENT_MODE=real` and the final HTTPS `PUBLIC_ORIGIN`. Configure production contract/RPC addresses and deploy remaining production-chain contracts from the daily preparation steps if rehearsal used testnet deployments.
+- [ ] Reconcile rehearsal versus production namespaces, addresses and funding; do not copy simulated balances/identities into production. For Days 01–09, changing the operator token changes the workspace namespace; reconcile stored/chain history before resuming workers.
+- [ ] Confirm HTTPS, operator authentication, public/private route boundaries, durable state across restarts, receipt export and error handling. Configure ingress rate limits and request-size limits before public access.
+- [ ] Complete this day's production acceptance checklist below on the hosted origin, with small funded amounts and actual providers; reconcile transaction events, token balances and provider receipts.
+
+### Shared phase 5 — Operate and release, after acceptance
+
+- [ ] Configure monitoring/alerts for RPC/provider failures, balances, expiring permissions and stuck workflows; enable bounded scheduling where required and test incident pause/revocation and rollback.
+- [ ] Publish applicable privacy/retention/provider terms; verify key handling and backup/restore procedures preserve the production state and claim history.
+- [ ] Record the release commit, date, deployed origin, chain, contract addresses, transaction hashes, redacted provider evidence and reviewer sign-off here or in a linked daily audit.
+- [ ] Confirm required checks pass for the final release commit, resolve remaining acceptance failures and obtain approval before opening public access or increasing funding/permissions.
+
+### Day 01 — Wallet Genesis
+
+Setup: [app README](../apps/agents/day-01-wallet-genesis/README.md).
+
+**Preparation — shared phase 2, then rehearse in phase 3.** Use supported testnets for rehearsal; repeat chain-specific deployment/configuration on the production chain before acceptance.
+
+- [ ] Configure thirdweb credentials, the owner wallet, dedicated agent signer and supported account-abstraction chain/RPC; confirm bundler and gas sponsorship or gas funding.
+- [ ] Deploy `SessionVault` for the intended owner, verify its owner/bytecode and set `SESSION_VAULT`.
+- [ ] Birth the actual thirdweb smart account and record its address. Fund **SessionVault** with the selected USDC; fund or sponsor the smart account's transaction gas.
+- [ ] Owner grants a scoped session with explicit token/recipient allowlists, per-transfer and daily caps, approval threshold and expiry.
+**Production acceptance — after shared phase 4 deployment.**
+
+- [ ] Execute a small real transfer through the smart account/bundler and reconcile recipient balance and receipt; verify a transfer requiring owner co-signature.
+- [ ] Verify forbidden recipient/token, cap breach, expiry and replay rejection; revoke the session and confirm previously authorized execution fails.
+- [ ] Record thirdweb/bundler production evidence separately from the existing local SessionVault tests; document safe session renewal and owner recovery.
+
+### Day 02 — Pay-Per-Prompt
+
+Setup: [app README](../apps/agents/day-02-pay-per-prompt/README.md). No custom contract deployment.
+
+**Preparation — shared phase 2, then rehearse in phase 3.** Use supported testnets for rehearsal; repeat chain-specific deployment/configuration on the production chain before acceptance.
+
+- [ ] Select an x402 facilitator supporting the exact production network/token; configure its required authentication, `FACILITATOR_URL`, `PAY_TO`, price and daily payer budget.
+- [ ] Fund a dedicated paying signer with the supported USDC and any required native gas; verify the recipient address independently.
+**Production acceptance — after shared phase 4 deployment.**
+
+- [ ] Request the resource without payment and verify the 402 challenge's price, recipient, token and network.
+- [ ] Perform a real agent payment and retry; verify facilitator settlement, transaction hash, recipient balance change and release of the paid resource.
+- [ ] Test invalid/replayed payment proofs, exhausted budget and facilitator outage; confirm unpaid requests cannot obtain the protected resource.
+- [ ] Monitor settlement failures, payer balance and facilitator credentials; record actual settlement evidence rather than simulated payment receipts.
+
+### Day 03 — Agent Passport
+
+Setup: [app README](../apps/agents/day-03-agent-passport/README.md).
+
+**Preparation — shared phase 2, then rehearse in phase 3.** Use supported testnets for rehearsal; repeat chain-specific deployment/configuration on the production chain before acceptance.
+
+- [ ] Prepare separate owner, job-client and validator browser wallets on the same chain, each with native gas; publish reachable registration metadata.
+- [ ] Deploy `AgentPassport`, verify the deployment and set `PASSPORT_REGISTRY`; this custom passport is distinct from Day 10's actual ERC-8004 registry.
+- [ ] Decide whether to enable optional EAS. If enabled, verify its official chain deployment, register the exact `bytes32 job,bytes32 evidence,uint8 score` schema, configure address/schema ; verify a real attestation during production acceptance. If omitted, record that scope decision.
+
+**Production acceptance — after shared phase 4 deployment.**
+
+- [ ] Register the passport and verify its owner/metadata in the live directory; record a completed job.
+- [ ] Obtain independent client signed feedback and validator attestation; reconcile signatures, chain events and the directory's trust summary.
+- [ ] Verify self-feedback, unauthorized job updates, invalid signatures and duplicate feedback are rejected.
+- [ ] Document metadata availability and trusted-client/validator policy; preserve provenance without treating a reputation score as guaranteed truth.
+
+### Day 04 — MCP Mercenary
+
+Setup: [app README](../apps/agents/day-04-mcp-mercenary/README.md).
+
+**Preparation — shared phase 2, then rehearse in phase 3.** Use supported testnets for rehearsal; repeat chain-specific deployment/configuration on the production chain before acceptance.
+
+- [ ] Prepare a funded creator wallet, independent validator and dedicated agent with native gas; set the agent's budget and accepted quest constraints.
+- [ ] Deploy `QuestEscrow` with the correct USDC, verify configuration and set `QUEST_ESCROW`.
+- [ ] Connect an actual external MCP client to authenticated `/api/mcp` or the supplied stdio bridge; verify discovery and authorization on the production origin.
+**Production acceptance — after shared phase 4 deployment.**
+
+- [ ] Creator approves USDC and funds a small bounty with clear brief, validator and deadline.
+- [ ] Complete live discovery → agent claim → real Jev/model work → submission → human approval → payout; reconcile escrow events and recipient USDC balance.
+- [ ] Run a separate dispute/refund case and verify timeout recovery and duplicate-payout rejection.
+- [ ] If unattended execution is required, schedule bounded Day 04 worker runs with private credentials and deadline/gas alerts; verify it cannot approve its own payout. Otherwise document manual operation.
+
+### Day 05 — Stablecoin Autopilot
+
+Setup: [app README](../apps/agents/day-05-stablecoin-autopilot/README.md).
+
+**Preparation — shared phase 2, then rehearse in phase 3.** Use supported testnets for rehearsal; repeat chain-specific deployment/configuration on the production chain before acceptance.
+
+- [ ] Identify at least two distinct existing USDC ERC4626 vaults, one lending and one savings; verify official addresses, underlying asset, share conversion, liquidity and withdrawal behavior on the selected chain.
+- [ ] Review protocol/vault risks and configure `VAULT_CONFIG` with approved names, kinds and risk ratings; fixture vaults and test APY are not production yield evidence.
+- [ ] Deploy owner-controlled `FlightTreasury` with correct USDC; verify owner/token, set `FLIGHT_TREASURY`, fund its small USDC budget and fund agent gas.
+**Production acceptance — after shared phase 4 deployment.**
+
+- [ ] Owner allowlists approved vaults and grants an expiring flight plan with daily movement, allocation, liquidity and risk limits.
+- [ ] Collect real dated share-price samples at least 60 seconds apart; verify rate calculations and live Jev/model policy review.
+- [ ] Perform small deposits, withdrawals and a permitted rebalance; reconcile shares/assets and confirm cap, non-allowlisted-vault and policy violations are rejected.
+- [ ] Disengage the agent and verify owner withdrawal/liquid recovery; document recovery limits for illiquid vaults.
+- [ ] Schedule bounded monitoring/rebalance runs, or explicitly choose manual operation; alert on liquidity changes, failed withdrawals, permission expiry and gas depletion.
+
+### Day 06 — Intent Calligrapher
+
+Setup: [app README](../apps/agents/day-06-intent-calligrapher/README.md). No custom contract deployment.
+
+**Preparation — shared phase 2, then rehearse in phase 3.** Use supported testnets for rehearsal; repeat chain-specific deployment/configuration on the production chain before acceptance.
+
+- [ ] Configure an implemented CoW-supported chain (Base or Ethereum Sepolia), matching `COW_CHAIN_ID`/RPC and official USDC/WETH/relayer addresses; verify actual quote availability and liquidity. Base Sepolia is not supported by this adapter.
+- [ ] Fund the browser owner wallet with supported tokens and gas; approve only the verified CoW vault relayer with an appropriate allowance.
+**Production acceptance — after shared phase 4 deployment.**
+
+- [ ] Generate an intent using real providers and inspect amount, minimum output, recipient and deadline against the actual quote before signing.
+- [ ] Sign and submit a real EIP-712 order; record its UID and verify a solver fill, settlement transaction and resulting wallet balances.
+- [ ] Submit and cancel a separate real order; verify cancellation status and that it cannot subsequently fill.
+- [ ] Verify expired/invalid intents and breached amount/recipient/deadline constraints fail; document unfilled-order monitoring and allowance revocation.
+
+### Day 07 — Glass-Box Mind
+
+Setup: [app and worker README](../apps/agents/day-07-glass-box-mind/README.md). Confidential infrastructure is required; onchain anchoring is optional.
+
+**Preparation — shared phase 2, then rehearse in phase 3.** Use supported testnets for rehearsal; repeat chain-specific deployment/configuration on the production chain before acceptance.
+
+- [ ] Review the worker/container images, model and deployment configuration; pin immutable image digests and approve the confidential hosting budget.
+- [ ] Provision an actual Intel TDX dstack CVM and run Ollama/model inference entirely inside it; configure dstack quote/key socket access and private authenticated HTTPS worker ingress. This worker infrastructure is needed for phase 3 hardware rehearsal, before public app deployment.
+- [ ] Independently approve the exact model manifest/weights and digest; pin `TEE_MODEL`/`TEE_MODEL_DIGEST`, protect model storage and verify integrity before/after inference.
+- [ ] Independently derive and approve `mrtd` and all four RTMR measurements for the reviewed workload; configure `TEE_MEASUREMENTS`, worker URL/token and Jev credentials.
+**Production acceptance — after shared phase 4 deployment.**
+
+- [ ] Obtain a fresh nonce-bound inference receipt and hardware quote; verify signature/report-data binding, current Intel collateral, revocation/TCB status, non-debug policy and approved measurements/model.
+- [ ] Test tampering, stale/replayed receipts and model/workload mismatches; verify the independent sharing/verifier flow rejects them. Historical quote fixtures do not satisfy this item.
+- [ ] Decide whether to publish commitments onchain. If enabled, deploy/configure `InferenceAnchor` on the supported chain, fund owner gas and verify the actual commitment/URI; anchoring alone does not prove hardware trust or answer accuracy.
+- [ ] Monitor quote/collateral and worker availability; require renewed review and measurement approval after workload/model changes.
+
+### Day 08 — Swarm Senate
+
+Setup: [app README](../apps/agents/day-08-swarm-senate/README.md).
+
+**Preparation — shared phase 2, then rehearse in phase 3.** Use supported testnets for rehearsal; repeat chain-specific deployment/configuration on the production chain before acceptance.
+
+- [ ] Agree the fixed founding membership (3–32 addresses) and voting/override windows; account for the app's smaller profile/proposal bounds before enrolling.
+- [ ] Configure a dedicated delegate seed, durable profile/transcript storage and live Jev/model reasoning; use hosting that supports debate request duration.
+- [ ] Deploy `SenateVoice` and `SwarmGovernor`; verify membership, token/governor wiring and windows, and configure addresses plus `SENATE_START_BLOCK`.
+**Production acceptance — after shared phase 4 deployment.**
+
+- [ ] Each member signs a current values profile and delegates before the proposal snapshot; fund member and derived delegate wallets with native gas.
+- [ ] Create a live proposal, run debate and cast provisional agent votes; verify snapshot weights and the resulting public-chain tally.
+- [ ] Exercise human override before/after an agent vote and confirm no double counting; verify nonmembers, late agent votes and repeated overrides are rejected.
+- [ ] Verify quorum/majority outcomes and explicit human adoption of an approved policy; record failed-proposal behavior too.
+- [ ] Schedule bounded senate worker runs if desired; monitor voting deadlines and delegate gas. Document that seed changes require new delegation and existing snapshot votes require human override.
+
+### Day 09 — Forecast Colosseum
+
+Setup: [app README](../apps/agents/day-09-forecast-colosseum/README.md).
+
+**Preparation — shared phase 2, then rehearse in phase 3.** Use supported testnets for rehearsal; repeat chain-specific deployment/configuration on the production chain before acceptance.
+
+- [ ] Verify the official UMA OOv3 deployment, production dispute/DVM support, approved `ASSERT_TRUTH2`, whitelisted six-decimal USDC and current minimum bond on the chosen chain.
+- [ ] Deploy `ForecastColosseum` with intended owner/token/oracle/identifier and at least a two-hour live dispute window; verify immutables and configure addresses.
+- [ ] Fund human/agent trading wallets with USDC/gas and reserve **separate assertion/dispute bond budgets**; configure actual Jev/model credentials.
+**Production acceptance — after shared phase 4 deployment.**
+
+- [ ] Register agent per-trade, cumulative market and daily caps before trading; verify direct contract enforcement and owner trading-pause controls.
+- [ ] Publish precise immutable market rules, cutoff/time zone, authoritative resolution sources and missing-data/INVALID handling; perform both human and agent trades with real evidence.
+- [ ] Verify cap/confidence/cutoff rejection; make an actual bonded assertion, exercise a real oracle dispute and wait for supported oracle resolution/settlement.
+- [ ] Claim actual USDC winnings/refunds and reconcile events/balances; verify duplicate claims, INVALID/no-winner outcomes and ranking/calibration updates.
+- [ ] Verify/document trading pause versus available claims, 30-day unasserted stale recovery and pending-dispute restrictions; no local oracle double counts as DVM acceptance.
+- [ ] Operate oracle/dispute monitoring with funded bond budgets and incident response; obtain independent contract review before increasing stakes.
+
+### Day 10 — Human Checkpoint
+
+Setup: [app README](../apps/agents/day-10-human-checkpoint/README.md).
+
+**Preparation — shared phase 2, then rehearse in phase 3.** Use supported testnets for rehearsal; repeat chain-specific deployment/configuration on the production chain before acceptance.
+
+- [ ] Create the production World ID app/RP and fixed action; configure private `WORLD_APP_ID`, `WORLD_RP_ID`, `WORLD_SIGNING_KEY` and `WORLD_ACTION` with the actual production proof flow.
+- [ ] Prepare private PostgreSQL/Supabase and a 32+ character `CHECKPOINT_SESSION_SECRET`; verify checkpoint schema/RLS and persistence. Plan the final passkey RP/domain; establish its stable HTTPS origin during shared phase 4 before real identity acceptance. Keep the operator token separate from visitor identity.
+- [ ] Verify an actual ERC-8004 IdentityRegistry on the selected chain, configure `CHECKPOINT_REGISTRY` and register the agent wallet; do not substitute Day 03's custom passport.
+- [ ] Provision a dedicated managed voucher signer. Deploy `HumanCheckpointRewards` with intended owner, six-decimal USDC, verifier, fixed reward and `keccak256(UTF8(WORLD_RP_ID + ':' + WORLD_ACTION))`; verify configuration matches its immutables.
+- [ ] Fund only the intended USDC reward budget and ensure visitors can pay claim gas. Document that the offchain verifier is trusted to authorize rewards and protect that signing key accordingly.
+**Production acceptance — after shared phase 4 deployment.**
+
+- [ ] Verify real World ID enrollment and a real browser/hardware passkey return; prove the same human cannot reenroll in another session/wallet, and returning/renewed credentials preserve history and claim status.
+- [ ] Verify current registered-agent signatures and authority transfers; reject transferred/unset authority and ensure guest/agent lanes cannot access human-only chat or rewards.
+- [ ] Exercise real Jev/model moderation/routing and provider failure behavior; inspect receipts/model inputs for private proof or human-chat leakage.
+- [ ] Claim a real funded reward and reconcile exact `Claimed` event, recipient and USDC balance; verify duplicate, expired and mismatched vouchers fail.
+- [ ] Test both operator application pause and owner contract pause; application pause alone does not invalidate already-issued vouchers.
+- [ ] Publish privacy/retention/provider disclosures, configure edge quotas/monitoring and verify restore preserves uniqueness. Never reset enrollment data or change RP/action within an existing campaign; document wallet-loss limitations and obtain independent security review.
+
+### Production evidence log
+
+For each checked acceptance item, add a dated entry with day, release commit, environment (simulation/local chain/testnet/production), result and an audit link or public transaction/provider reference. Record failed checks and follow-up tasks too. No production checklist item has been marked complete in this documentation update.
+
 ## Shared tooling — pnpm migration
 
 The workspace now uses pinned pnpm 10.2.0 and `pnpm-lock.yaml`. Fresh frozen installation, an isolated production-only worker installation, lint/typecheck, 40 application tests, 28 contract tests, the real Anvil integration, all eight production builds and all eight production HTTP workflows pass. Direct external dependency versions are preserved; scripts, CI, Docker, existing Vercel configurations and active setup docs use pnpm. See [migration audit](PNPM-MIGRATION.md).
@@ -80,7 +294,7 @@ Day 09 adds the shared `forecast` capability and independent port 3009 app. Froz
 
 Day 06: fixed the Friday deadline parser and added a regression test; live CoW requirements are unchanged. Shared CI/container matrix and production/readiness scripts now include Day 09. Production dependency audit remains zero critical/high/moderate and one low inherited elliptic advisory.
 
-Repository release: PR #1 merged into main; PR #2 merged into the pnpm branch. The new Day 09 branch incorporates both merged branches and will deliver the readiness work to main through its PR. Hosted CI for the final implementation passed; [PR #3](https://github.com/EverEye-El/dapptober-agents/pull/3) remains to be reviewed and merged; public setup/funding/verification and independent security review remain open.
+Repository release: PR #1 merged into main; PR #2 merged into the pnpm branch. The new Day 09 branch incorporates both merged branches and will deliver the readiness work to main through its PR. Hosted CI for the final implementation passed; [PR #3](https://github.com/EverEye-El/dapptober-agents/pull/3) was subsequently merged on October 10; public setup/funding/verification and independent security review remain open.
 
 Final oracle hardening: dispute approvals use the original posted assertion bond, verified after a local minimum-bond change. Assertion deadlines are recorded onchain and expired dispute requests are rejected. Confirmed transaction receipts survive a later failed workflow step; application state still rolls back. A shared regression test covers that distinction, so earlier days retain mined approval evidence too.
 
@@ -95,4 +309,4 @@ Added the independent Day 10 app and shared `checkpoint` capability package. Per
 
 The shared runner, readiness checker, HTTP workflow, standalone Docker public-asset copying and CI matrix now include ten apps. Earlier apps retain their own APIs and deployment requirements; Day 10 does not weaken operator authentication for Days 01–09. Regression verification and final evidence are recorded in [Day 10 audit](DAY-10-AUDIT.md). No real World ID credential, hosted database, paid AI/Jev call or public-chain deployment/funding was used. Remaining Day 10 configuration and release work is listed above; real production acceptance remains open.
 
-Hosted Day 10 acceptance: [run 38069383828](https://github.com/EverEye-El/dapptober-agents/actions/runs/38069383828), implementation `34fe754359947e83f22f1e65dc321c7c902fdb5b`, **passed every job**: 70 application tests, 41 contract tests, seven real local-chain cases, all ten actual standalone containers and full HTTP/receipt workflows, and the worker image. [PR #4](https://github.com/EverEye-El/dapptober-agents/pull/4) is open on the Day 09 branch; merge PR #3 first and retarget #4 to main. Documentation-only later runs do not change the identified tested implementation. World ID/hardware/database/paid-provider/public-chain production evidence remains open as listed in the Day 10 row.
+Hosted Day 10 acceptance: [run 38069383828](https://github.com/EverEye-El/dapptober-agents/actions/runs/38069383828), implementation `34fe754359947e83f22f1e65dc321c7c902fdb5b`, **passed every job**: 70 application tests, 41 contract tests, seven real local-chain cases, all ten actual standalone containers and full HTTP/receipt workflows, and the worker image. [PR #4](https://github.com/EverEye-El/dapptober-agents/pull/4) was retargeted to main and merged on October 10. Local main was synchronized before adding these production checklists. Documentation-only later runs do not change the identified tested implementation. World ID/hardware/database/paid-provider/public-chain production evidence remains open as listed in the Day 10 row.

@@ -1,11 +1,13 @@
 # What the owner needs to provide
 
-All eight apps currently run in explicit demo mode. Repository code and local-chain tests do not establish live deployment. This checklist is the owner handoff for the remaining items in [the completion tracker](PROJECT-COMPLETION-TRACKER.md).
+All ten apps currently run in explicit demo mode. Repository code and local-chain tests do not establish live deployment. This checklist is the owner handoff for the remaining items in [the completion tracker](PROJECT-COMPLETION-TRACKER.md).
+
+The authoritative, itemized production checklist for every Day 01–10 is in [the completion tracker](PROJECT-COMPLETION-TRACKER.md#production-launch-checklists--days-0110). Use that document to record completion and evidence; this file summarizes owner inputs.
 
 ## Shared setup
 
-1. Provide access to the hosting account and a PostgreSQL service. Deploy each app independently, with its own HTTPS origin and private environment. One database can serve the eight namespaced apps; deployment credentials need access to `dapptober_state`.
-2. Supply a TypeSafe/Jev API key and an OpenAI-compatible model provider key for Days 01–06 and 08. Day 07 uses Jev plus its own model inside a confidential worker. Put credentials in each app's ignored `.env.local` or the host's secret manager, never in chat or Git.
+1. Provide access to the hosting account and a PostgreSQL service. Deploy each app independently, with its own HTTPS origin and private environment. One database can serve the ten apps with their separate stores; deployment credentials need access to `dapptober_state`.
+2. Supply a TypeSafe/Jev API key and an OpenAI-compatible model provider key for Days 01–06 and 08–10. Day 07 uses Jev plus its own model inside a confidential worker. Put credentials in each app's ignored `.env.local` or the host's secret manager, never in chat or Git.
 3. Supply public owner wallet addresses. Keep owner wallet keys in the browser wallet or an encrypted deployment keystore. Days 03 and 04 need independent client/validator identities; Day 08 needs at least three member wallets.
 4. Fund dedicated agent/deployment wallets with native gas, and fund the USDC workflows with the appropriate chain's token. Testnet tokens and gas suffice where the protocol supports that testnet. Day 06 needs CoW-supported tokens/liquidity; Base Sepolia is not a CoW deployment.
 5. Review and merge PRs when ready. No automatic merging or direct pushes to main are part of this work.
@@ -32,17 +34,17 @@ Contract deployments and approvals require actual wallet signatures. Cloud provi
 ## Configuration checks
 
 ```sh
-pnpm readiness                    # all eight private configurations, no network requests
+pnpm readiness                    # all ten private configurations, no network requests
 pnpm readiness 05                # one day
 pnpm readiness --init            # create missing .env.local files without overwriting
 pnpm readiness 05 --online       # read-only RPC chain and deployed-code checks
 pnpm run test:contracts
 pnpm run test:release-chain       # temporary Anvil: Days 01, 03, 04, 05
 pnpm run test:senate-chain        # temporary Anvil: Day 08
-pnpm run test:production          # fresh built servers on 3101–3108; stops them after audit
+pnpm run test:production          # fresh built servers on 3101–3110; stops them after audit
 ```
 
-Run local-chain tests after building contract artifacts (`pnpm run test:contracts`). Anvil must be installed and ports 18548/18549 free. `SMOKE_PORT_BASE=3100 pnpm run smoke` can verify production servers on ports 3101–3108 without disturbing the usual browser ports. The checks print field names, not secrets. Missing live configuration intentionally exits with status 1. Online checks only query RPC chain ID/bytecode; they do not send transactions, query balances, probe paid providers, establish contract ownership, validate PostgreSQL, or certify deployment readiness. Passing configuration checks still requires the acceptance steps above.
+Run local-chain tests after building contract artifacts (`pnpm run test:contracts`). Anvil must be installed and ports 18548/18549 free. `SMOKE_PORT_BASE=3100 pnpm run smoke` can verify production servers on ports 3101–3110 without disturbing the usual browser ports. The checks print field names, not secrets. Missing live configuration intentionally exits with status 1. Online checks only query RPC chain ID/bytecode; they do not send transactions, query balances, probe paid providers, establish contract ownership, validate PostgreSQL, or certify deployment readiness. Passing configuration checks still requires the acceptance steps above.
 
 ## Evidence and unresolved infrastructure
 
