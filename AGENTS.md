@@ -7,3 +7,7 @@ For future changes, work on a dedicated branch (use the `codex/` prefix unless t
 Follow `MasterPrompt-DapptoberAgentsBuild.md` as the primary build specification and read the complete relevant daily prompt in `prompts/dapp-prompts.ts` before implementing each day.
 
 After each daily build, update `docs/PROJECT-COMPLETION-TRACKER.md`. Add the new day and record all remaining implementation, deployment, configuration, funding, verification and release work. Keep earlier days current when shared changes affect them. Distinguish tested simulations, local-chain integrations and live production evidence; only mark remaining work complete after verifying it. Update the tracker whenever a listed task is completed or a new gap is found.
+
+## Daily visual inspiration
+
+The user supplied `2026SocialPosts/` graphics. Inspect the matching day graphic when designing subsequent daily agents; use it as inspiration while retaining the established copper hyper-tech terminal UI. Day 10 uses `22-day-10.png`. Preserve the source collection.

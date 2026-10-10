@@ -10,6 +10,7 @@ RUN pnpm install --frozen-lockfile
 ARG APP=day-01-wallet-genesis
 RUN pnpm --filter ./apps/agents/${APP} run build
 RUN cp -r apps/agents/${APP}/.next/standalone /runtime && mkdir -p /runtime/apps/agents/${APP}/.next && cp -r apps/agents/${APP}/.next/static /runtime/apps/agents/${APP}/.next/static
+RUN if [ -d apps/agents/${APP}/public ]; then cp -r apps/agents/${APP}/public /runtime/apps/agents/${APP}/public; fi
 FROM node:22-bookworm-slim
 ARG APP=day-01-wallet-genesis
 ENV NODE_ENV=production PORT=3000 HOSTNAME=0.0.0.0 APP=${APP}

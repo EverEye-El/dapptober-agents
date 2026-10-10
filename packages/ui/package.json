@@ -7,7 +7,8 @@
     ".": "./src/index.tsx",
     "./src/*": "./src/*.ts",
     "./src/glass-room": "./src/glass-room.tsx",
-    "./src/senate-room": "./src/senate-room.tsx"
+    "./src/senate-room": "./src/senate-room.tsx",
+    "./src/checkpoint-room": "./src/checkpoint-room.tsx"
   },
   "dependencies": {
     "@dapptober/governance": "workspace:*",
@@ -16,6 +17,9 @@
     "react": "^19.2.0",
     "viem": "^2.38.0",
     "recharts": "^3.0.0",
-    "@dapptober/forecast": "workspace:*"
+    "@dapptober/forecast": "workspace:*",
+    "@simplewebauthn/browser": "^13.0.0",
+    "@worldcoin/idkit-core": "^4.0.0",
+    "qrcode": "^1.5.4"
   }
 }

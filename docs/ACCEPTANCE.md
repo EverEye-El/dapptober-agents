@@ -22,3 +22,12 @@ See [Day 7 research](DAY-07-RESEARCH.md), [application and worker deployment](..
 ## Day 09 acceptance
 
 See [Day 09 README](../apps/agents/day-09-forecast-colosseum/README.md) and [audit](DAY-09-AUDIT.md). Deploy `ForecastColosseum` with verified six-decimal USDC, the official UMA OOv3 oracle, `ASSERT_TRUTH2` and at least a two-hour live liveness. Verify whitelist/identifier/minimum bond/dispute support; configure private owner/operator, PostgreSQL, HTTPS, Jev/AI and narrowly funded agent wallet. Register caps before trading. Verify both lanes, oversize rejection, cutoff, bonded assertion, real oracle dispute and settlement, calibrated rankings, duplicate-claim rejection and USDC balances on the public chain. Testnets and the local oracle double do not establish production DVM evidence. Payouts remain available when trading is paused; stakes are locked until settlement, unasserted stale refunds are permissionless after 30 days, pending disputes cannot be bypassed. Independent contract review and ongoing oracle monitoring remain release tasks.
+
+## Day 10 acceptance
+
+- A fresh private human proof verifies once; canonical duplicate proofs from another session/wallet fail. Wrong RP-context nonce/action/signal/environment/issuer, expired/replayed challenges and provider outages fail closed.
+- Passkeys attach only to verified humans. Correct RP/origin/challenge/signature/user verification returns the same human and claim history; incorrect or replayed authentication fails.
+- ERC-8004 signatures open only the labeled agent API; registry authority changes remove access. Guests and agents cannot read human messages, register human passkeys or claim rewards. Body-supplied lane/action cannot override `/api/agents`.
+- Jev moderates/scores/routes from minimal facts; it cannot override proof/lane checks. Actual AI/provider behavior requires live credentials.
+- A fixed funded reward pays its bound wallet once. Replay, recipient/signer/domain changes, expired voucher and paused/unfunded contract are rejected; failed unfunded transfer does not burn claim uniqueness. Confirmed receipts match the exact claim event.
+- Independent production build, full HTTP workflow, copper desktop/mobile UI and standalone public asset inclusion pass. Live release additionally requires production World ID, actual authenticator/registry/database/Jev/AI and public-chain claim evidence.

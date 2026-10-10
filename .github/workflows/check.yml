@@ -16,12 +16,13 @@ jobs:
       - run: pnpm run test:senate-chain
       - run: pnpm run test:release-chain
       - run: pnpm run test:forecast-chain
+      - run: pnpm run test:checkpoint-chain
   containers:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        app: [day-01-wallet-genesis, day-02-pay-per-prompt, day-03-agent-passport, day-04-mcp-mercenary, day-05-stablecoin-autopilot, day-06-intent-calligrapher, day-07-glass-box-mind, day-08-swarm-senate, day-09-forecast-colosseum]
+        app: [day-01-wallet-genesis, day-02-pay-per-prompt, day-03-agent-passport, day-04-mcp-mercenary, day-05-stablecoin-autopilot, day-06-intent-calligrapher, day-07-glass-box-mind, day-08-swarm-senate, day-09-forecast-colosseum, day-10-human-checkpoint]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

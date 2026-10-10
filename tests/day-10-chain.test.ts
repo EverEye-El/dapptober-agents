@@ -1,0 +1,25 @@
+import {it,expect,vi} from 'vitest';
+import {readFileSync} from 'node:fs';
+import {createPublicClient,createWalletClient,http,keccak256,toHex,type Address,type Hex} from 'viem';
+import {foundry} from 'viem/chains';
+import {privateKeyToAccount} from 'viem/accounts';
+import {config} from '@dapptober/config';
+import {checkpointAction,emptyDB,rewardAbi,checkpointScope,type Client} from '@dapptober/checkpoint';
+import type {Transaction} from '@dapptober/types';
+import {verifyReceipts} from '@dapptober/receipts';
+// Explicit Jev/LLM doubles; actual Anvil contract deployment, identity signatures, USDC and claim receipts.
+vi.mock('@dapptober/agent-core/src/ai',()=>({judge:async()=>({allow:true,confidence:.97,fit:.96,abuse:.02,route:'small',source:'simulated',reason:'Explicit provider fixture'}),reasoner:()=>({text:async()=> 'Public information only'})}));
+it.skipIf(process.env.CHECKPOINT_CHAIN_TEST!=='1')('verifies registry authority, rejects transfer-stale identity, redeems signed funded reward exactly once',async()=>{
+ const url='http://127.0.0.1:18551',owner=privateKeyToAccount('0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80'),key='0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d' as Hex,verifier=privateKeyToAccount(key),pub=createPublicClient({chain:foundry,transport:http(url),pollingInterval:50,cacheTime:0}),wc=createWalletClient({account:owner,chain:foundry,transport:http(url)});
+ const artifact=(file:string,name:string)=>JSON.parse(readFileSync(`contracts/out/${file}/${name}.json`,'utf8'));const mined=async(hash:Hex)=>{expect((await pub.waitForTransactionReceipt({hash})).status).toBe('success');return hash;};
+ async function deploy(file:string,name:string,args:unknown[]=[]){const a=artifact(file,name),hash=await wc.deployContract({abi:a.abi,bytecode:a.bytecode.object as Hex,args,nonce:await pub.getTransactionCount({address:owner.address,blockTag:'pending'})});return (await pub.waitForTransactionReceipt({hash})).contractAddress!;}
+ const token=await deploy('Agents.t.sol','MockUSDC'),registry=await deploy('HumanCheckpointRewards.t.sol','MockCheckpointRegistry',[owner.address]),rewards=await deploy('HumanCheckpointRewards.sol','HumanCheckpointRewards',[owner.address,token,verifier.address,keccak256(toHex(checkpointScope(config({WORLD_RP_ID:'rp_fixture'})))),1000000n]);
+ const tokenAbi=artifact('Agents.t.sol','MockUSDC').abi,registryAbi=artifact('HumanCheckpointRewards.t.sol','MockCheckpointRegistry').abi;
+ async function write(address:Address,abi:typeof tokenAbi,functionName:string,args:unknown[]){const {request}=await pub.simulateContract({address,abi,functionName,args,account:owner,nonce:await pub.getTransactionCount({address:owner.address,blockTag:'pending'})});return mined(await wc.writeContract(request));}
+ await write(token,tokenAbi,'mint',[rewards,5000000n]);const c=config({AGENT_MODE:'real',CHAIN_ID:'31337',RPC_URL:url,CHECKPOINT_REGISTRY:registry,CHECKPOINT_REWARDS:rewards,AGENT_PRIVATE_KEY:key,USDC_ADDRESS:token,WORLD_RP_ID:'rp_fixture'}),db=emptyDB();
+ const cl=():Client=>({expires:Date.now(),lane:'guest',rate:{start:Date.now(),count:0},receipts:[]}),a=cl(),h=cl();
+ const begin=await checkpointAction(db,a,c,'agent.begin',{agentId:'1'});const signature=await owner.signTypedData(begin.typedData as Parameters<typeof owner.signTypedData>[0]);await checkpointAction(db,a,c,'agent.verify',{wallet:owner.address,signature});expect(await checkpointAction(db,a,c,'agent.query',{message:'Explain public access'})).toMatchObject({badge:'agent'});await expect(checkpointAction(db,a,c,'human.reward',{})).rejects.toThrow('Human-only');await write(registry,registryAbi,'transfer',[verifier.address]);await expect(checkpointAction(db,a,c,'agent.query',{message:'Public access'})).rejects.toThrow('authority changed');
+ // Personhood enrollment is an explicit test fixture, not a World ID cryptographic proof.
+ const person='a'.repeat(64);db.people[person]={id:person,wallet:owner.address,verifiedAt:0,credentialExpires:Math.floor(Date.now()/1000)+86400,passkeys:[],claimed:false};h.lane='human';h.person=person;
+ const prepared=await checkpointAction(db,h,c,'human.reward',{}),tx=prepared.transaction as Transaction;const hash=await mined(await wc.sendTransaction({to:tx.to,data:tx.data,nonce:await pub.getTransactionCount({address:owner.address,blockTag:'pending'})}));expect(await checkpointAction(db,h,c,'chain.receipt',{txHash:hash})).toMatchObject({confirmed:true});expect(await pub.readContract({address:token,abi:tokenAbi,functionName:'balanceOf',args:[owner.address]})).toBe(1000000n);expect(await pub.readContract({address:token,abi:tokenAbi,functionName:'balanceOf',args:[rewards]})).toBe(4000000n);await expect(pub.simulateContract({account:owner,address:rewards,abi:rewardAbi,functionName:'claim',args:[keccak256(toHex('fake')) ,owner.address,BigInt(Math.floor(Date.now()/1000)+300),'0x01']})).rejects.toThrow();await expect(checkpointAction(db,h,c,'human.reward',{})).rejects.toThrow('already claimed');expect(h.receipts.some(r=>r.txHash===hash)).toBe(true);expect(verifyReceipts(h.receipts)).toBe(true);
+},60000);
