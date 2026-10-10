@@ -1,18 +1,18 @@
 # Independent deployment
 
-Use Node 22.12+, pnpm 10.2.0 and Foundry. Run `pnpm install --frozen-lockfile` at the repository root. The eight apps compile shared packages into their own deployment; they never call another daily server. Choose one app from the root README and copy its `.env.example` to `.env.local` inside that app. Blank optional variables are ignored.
+Use Node 22.12+, pnpm 10.2.0 and Foundry. Run `pnpm install --frozen-lockfile` at the repository root. The ten apps compile shared packages into their own deployment; they never call another daily server. Choose one app from the root README and copy its `.env.example` to `.env.local` inside that app. Blank optional variables are ignored.
 
 Use the version in the root `packageManager` field. Run `corepack enable` and `corepack prepare pnpm@10.2.0 --activate`, or install `pnpm@10.2.0` through npm. All workspace imports are declared explicitly with `workspace:*`. CI and Docker install with `--frozen-lockfile`. Only Tailwind oxide, esbuild and sharp dependency build scripts are permitted; optional bufferutil/keccak/utf-8-validate hooks remain disabled.
 
 ## Local and production
 
-`pnpm run dev 01` starts Day 01; replace the number for another day. `pnpm run build 01` builds that app, and `pnpm --filter @dapptober/day-01 run start` serves it on port 3001. Omit the day to build/start all eight. Demo mode uses a local `.data` directory and is intended for one persistent process. It is explicitly simulated and requires no credentials.
+`pnpm run dev 01` starts Day 01; replace the number for another day. `pnpm run build 01` builds that app, and `pnpm --filter @dapptober/day-01 run start` serves it on port 3001. Omit the day to build/start all ten. Demo mode uses a local `.data` directory and is intended for one persistent process. It is explicitly simulated and requires no credentials.
 
-For Vercel, create eight separate projects as needed. Set the daily app directory as Root Directory and enable access to files outside it. Each app contains a `vercel.json` with root install and workspace build commands. Select Node 22 and set that project's environment variables. Real mode requires PostgreSQL because serverless local files are ephemeral. Do not deploy demo file storage as a durable multi-instance service.
+For Vercel, create ten separate projects as needed. Set the daily app directory as Root Directory and enable access to files outside it. Each app contains a `vercel.json` with root install and workspace build commands. Select Node 22 and set that project's environment variables. Real mode requires PostgreSQL because serverless local files are ephemeral. Do not deploy demo file storage as a durable multi-instance service.
 
-For a standalone container: `docker build --build-arg APP=day-04-mcp-mercenary -t dapptober-day04 .`, then `docker run --env-file <private-env-file> -p 3004:3000 dapptober-day04`. Set PUBLIC_ORIGIN to the externally reachable origin, not an internal container hostname. Docker builds are supplied but were not executed in this environment; standalone builds were tested.
+For a standalone container: `docker build --build-arg APP=day-04-mcp-mercenary -t dapptober-day04 .`, then `docker run --env-file <private-env-file> -p 3004:3000 dapptober-day04`. Set PUBLIC_ORIGIN to the externally reachable origin, not an internal container hostname. All ten app containers and the confidential worker image have hosted CI build evidence; see the completion tracker for tested commits. Local Docker execution and live hosting remain separate checks.
 
-Run `pnpm readiness --init` to initialize missing private environments without replacing existing files. `pnpm readiness` checks all eight apps; `pnpm readiness 05 --online` also checks RPC chain ID and contract bytecode without spending. See [owner setup and live acceptance](LIVE-SETUP-CHECKLIST.md). A configured environment is not live-operation evidence.
+Run `pnpm readiness --init` to initialize missing private environments without replacing existing files. `pnpm readiness` checks all ten apps; `pnpm readiness 05 --online` also checks RPC chain ID and contract bytecode without spending. See [owner setup and live acceptance](LIVE-SETUP-CHECKLIST.md). A configured environment is not live-operation evidence.
 
 ## Real mode configuration
 
@@ -55,7 +55,7 @@ An MCP client can connect to `/api/mcp` with Streamable HTTP and its bearer toke
 
 ## Release verification
 
-Run `pnpm run check`, start the eight production apps using `pnpm start`, then `pnpm run smoke`. Inspect exported receipts, configure live credentials, and exercise a minimal funded test transaction before increasing owner caps. Public-chain and provider integration is implemented but cannot be certified by a local simulation.
+Run `pnpm run check`, start the ten production apps using `pnpm start`, then `pnpm run smoke`. Inspect exported receipts, configure live credentials, and exercise a minimal funded test transaction before increasing owner caps. Public-chain and provider integration is implemented but cannot be certified by a local simulation.
 
 The convenience `pnpm start` command uses Next's local production server and may warn about standalone output. The Docker recipe executes the generated standalone server directly. In a demo container, mount a writable persistent state directory at the server's `.data` path; real deployment uses PostgreSQL and avoids local persistence.
 
