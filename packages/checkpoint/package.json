@@ -1,0 +1,22 @@
+{
+  "name": "@dapptober/checkpoint",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./src/*": "./src/*.ts"
+  },
+  "dependencies": {
+    "@dapptober/agent-core": "workspace:*",
+    "@dapptober/config": "workspace:*",
+    "@dapptober/types": "workspace:*",
+    "@dapptober/receipts": "workspace:*",
+    "@dapptober/chain": "workspace:*",
+    "@worldcoin/idkit-core": "^4.0.0",
+    "@simplewebauthn/server": "^14.0.0",
+    "viem": "^2.38.0",
+    "zod": "^4.0.0",
+    "postgres": "^3.4.0"
+  }
+}

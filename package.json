@@ -16,7 +16,8 @@
     "readiness": "node scripts/readiness.mjs",
     "test:release-chain": "node scripts/senate-chain-test.mjs --release",
     "test:production": "node scripts/production-smoke.mjs",
-    "test:forecast-chain": "node scripts/forecast-chain-test.mjs"
+    "test:forecast-chain": "node scripts/forecast-chain-test.mjs",
+    "test:checkpoint-chain": "node scripts/checkpoint-chain-test.mjs"
   },
   "dependencies": {
     "@ai-sdk/openai-compatible": "^2.0.0",
@@ -26,6 +27,7 @@
     "@dapptober/agent-core": "workspace:*",
     "@dapptober/chain": "workspace:*",
     "@dapptober/config": "workspace:*",
+    "@dapptober/forecast": "workspace:*",
     "@dapptober/governance": "workspace:*",
     "@dapptober/guardrails": "workspace:*",
     "@dapptober/identity": "workspace:*",
@@ -42,6 +44,10 @@
     "@openzeppelin/contracts": "^5.0.0",
     "@phala/dcap-qvl": "^0.6.5",
     "@phala/dstack-sdk": "^0.5.8",
+    "@simplewebauthn/browser": "^13",
+    "@simplewebauthn/server": "^14",
+    "@solana/kit": "5.5.1",
+    "@worldcoin/idkit-core": "^4",
     "@x402/core": "^2.0.0",
     "@x402/evm": "^2.0.0",
     "@x402/fetch": "^2.0.0",
@@ -50,17 +56,18 @@
     "ai": "^6.0.0",
     "next": "^16.0.0",
     "postgres": "^3.4.0",
+    "qrcode": "^1.5.4",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "thirdweb": "^5.0.0",
     "viem": "^2.38.0",
     "zod": "^4.0.0",
-    "@solana/kit": "5.5.1",
-    "@dapptober/forecast": "workspace:*"
+    "@dapptober/checkpoint": "workspace:*"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.0.0",
     "@types/node": "^22.0.0",
+    "@types/qrcode": "^1.5.6",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "eslint": "^9.0.0",

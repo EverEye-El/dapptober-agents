@@ -12,7 +12,7 @@ This living document tracks every built Dapptober agent from local implementatio
 
 ## Current status
 
-Status as of October 9, 2026: all nine apps work in local demo mode, but none is verified end to end as a live production service. Interfaces, workflows, shared logic and builds were tested. The localhost apps currently simulate financial actions and AI responses.
+Status as of October 10, 2026: all ten apps work in local demo mode, but none is verified end to end as a live production service. Interfaces, workflows, shared logic and builds were tested. The localhost apps currently simulate financial actions and AI responses.
 
 Real protocol integrations are implemented, but deployment, credentials, funding and live verification remain.
 
@@ -27,12 +27,13 @@ Real protocol integrations are implemented, but deployment, credentials, funding
 | **07 — Glass-Box Mind** | Receipt signatures, tamper rejection, sharing and verification; historical Intel-signed quote tests | Deploy confidential worker/model inside an **Intel TDX CVM**; approve/pin workload measurements and model digest; verify fresh hardware-backed inference. **InferenceAnchor** deployment is needed only for onchain publication |
 | **08 — Swarm Senate** | Debate/override workflow; contract tests; **actual local Anvil deployment, delegation, votes, override and adoption** | Deploy **SenateVoice + SwarmGovernor** on the chosen public chain; enroll members, sign profiles, delegate and fund agent gas; configure live reasoning; verify public-chain lifecycle; schedule worker if desired |
 | **09 — Forecast Colosseum** | Funded binary pools, agent API and hard risk limits, Brier/calibration ranking, confidence review; eight contract tests with collateral fuzzing; **actual Anvil human/agent trades, direct cap rejection, oracle-double dispute/reset/settlement and USDC payout**; independent production HTTP workflow and browser QA | Deploy **ForecastColosseum** with verified UMA OOv3, whitelisted six-decimal USDC and approved **ASSERT_TRUTH2**; set ≥2 hour live dispute window; fund human/agent USDC/gas and separate oracle bonds; register caps; configure real Jev/AI, HTTPS/PostgreSQL; verify public-chain assertion/dispute/settlement and standings; operate oracle monitoring and obtain contract review. Local oracle/provider doubles are not production DVM/AI evidence |
+| **10 — Human Checkpoint** | Private proof adapter with explicit provider doubles; cross-session uniqueness/race/expiry and lane exclusion; real P-256 WebAuthn verification; registered agent signature/transfer checks; five reward contract tests including 256-run claim fuzzing; **actual Anvil deployment, signed funded USDC payout, exact claim receipt and duplicate rejection**; copper noir UI based on supplied Day 10 graphic | Create production World ID app/RP/action and private signing key; configure actual ERC-8004 registry on selected chain, HTTPS/passkey RP, PostgreSQL/Supabase, stable cookie secret and Jev/AI; deploy **HumanCheckpointRewards** with RP/action campaign hash, fixed USDC and dedicated verifier; fund reward pool and visitor gas; verify real World proof, hardware passkey, duplicate enrollment, registry transfer and funded public-chain claim; configure ingress limits, storage/retention/privacy policy, monitoring/backups/key handling and independent security review. Provider/personhood/registry fixtures are not production evidence |
 
-For every live app, remaining setup includes HTTPS hosting, PostgreSQL, private environment configuration, operator authentication and its required AI/Jev credentials. Each then needs a live acceptance run: passing demo tests does not establish that providers, wallets and public-chain transactions work together.
+For every live app, remaining setup includes HTTPS hosting, PostgreSQL, private environment configuration, operator authentication and its required AI/Jev credentials. Day 10 has isolated visitor sessions; its operator token authorizes administration only. Each then needs a live acceptance run: passing demo tests does not establish that providers, wallets and public-chain transactions work together.
 
 Release work also remains: verify hosted CI for subsequent changes, address the remaining low elliptic dependency advisory and review the custom contracts before putting meaningful funds into them. Keep subsequent daily work committed and pushed. The contracts have automated tests, not an independent security audit.
 
-Day 07 has the most infrastructure left. Days 01, 03, 04, 05, 08 and 09 have actual local-chain acceptance evidence; production protocol acceptance remains separate.
+Day 07 has the most infrastructure left. Days 01, 03, 04, 05, 08, 09 and 10 have actual local-chain acceptance evidence; production protocol acceptance remains separate.
 
 ## Shared tooling — pnpm migration
 
@@ -48,6 +49,7 @@ Hosted migration GitHub CI was verified passing on October 8 (push and PR runs l
 - [Day 07 audit](DAY-07-AUDIT.md)
 - [Day 08 audit](DAY-08-AUDIT.md)
 - [Day 09 audit](DAY-09-AUDIT.md)
+- [Day 10 audit](DAY-10-AUDIT.md)
 
 ## Completion pass — October 8, 2026
 
@@ -85,3 +87,12 @@ Final oracle hardening: dispute approvals use the original posted assertion bond
 Hosted regression hardening: reproduced Day 08 delegation running out of gas at a timestamp boundary (95,883 gas consumed against a 95,883 estimate). The fixture now uses uncached reads, a conservative gas margin and deliberately mines across that boundary. The deterministic reproduction fails without the margin and passes with it; contract voting semantics are unchanged.
 
 Final hosted acceptance: [run 37982145028](https://github.com/EverEye-El/dapptober-agents/actions/runs/37982145028), implementation commit `8768a460c651a16d297303968ae3d4eb0dd29120`, **passed every job**: frozen install, lint/typecheck, 57 application tests, 36 Solidity tests, all six real Anvil integrations, all nine independently built standalone containers with complete HTTP/receipt workflows, and the confidential worker image. This verifies packaging and tested integrations, not public deployment or live UMA/AI evidence. Documentation-only follow-up commits may trigger additional runs; the tested implementation is identified above.
+
+
+## Day 10 completion update — October 10, 2026
+
+Added the independent Day 10 app and shared `checkpoint` capability package. Personhood admission, returning passkeys, real registered agent authority, human-only chat, Jev risk/routing, exact signed reward transactions, sanitized receipts and durable uniqueness are implemented. The supplied Day 10 graphic is included in its own public assets; source graphics remain preserved. API identity is server-derived and operator-secret rotation does not reset human claims. Reward campaigns are pinned to the RP/action, and token/verifier configuration must match the contract.
+
+The shared runner, readiness checker, HTTP workflow, standalone Docker public-asset copying and CI matrix now include ten apps. Earlier apps retain their own APIs and deployment requirements; Day 10 does not weaken operator authentication for Days 01–09. Regression verification and final evidence are recorded in [Day 10 audit](DAY-10-AUDIT.md). No real World ID credential, hosted database, paid AI/Jev call or public-chain deployment/funding was used. Remaining Day 10 configuration and release work is listed above; real production acceptance remains open.
+
+Hosted Day 10 acceptance: [run 38069383828](https://github.com/EverEye-El/dapptober-agents/actions/runs/38069383828), implementation `34fe754359947e83f22f1e65dc321c7c902fdb5b`, **passed every job**: 70 application tests, 41 contract tests, seven real local-chain cases, all ten actual standalone containers and full HTTP/receipt workflows, and the worker image. [PR #4](https://github.com/EverEye-El/dapptober-agents/pull/4) is open on the Day 09 branch; merge PR #3 first and retarget #4 to main. Documentation-only later runs do not change the identified tested implementation. World ID/hardware/database/paid-provider/public-chain production evidence remains open as listed in the Day 10 row.

@@ -19,3 +19,5 @@ it('accepts complete syntactic configuration without claiming live acceptance',(
   expect(assess(3,{AGENT_MODE:'real',OWNER_ADDRESS:address,OPERATOR_TOKEN:'a'.repeat(32),DATABASE_URL:'postgresql://fixture:fixture@localhost/fixture',RPC_URL:'https://rpc.example',TYPESAFE_API_KEY:'fixture',AI_API_KEY:'fixture',CHAIN_ID:'84532',PUBLIC_ORIGIN:'https://passport.example',PASSPORT_REGISTRY:address})).toEqual([]);
 });
 it('requires the independent forecast deployment and UMA oracle configuration',()=>{const gaps=assess(9,{AGENT_MODE:'real',FORECAST_MARKET:'invalid'});expect(gaps).toContain('UMA_ORACLE: missing');expect(gaps).toContain('USDC_ADDRESS: missing');expect(gaps).toContain('FORECAST_MARKET: invalid address');});
+
+it('requires production personhood, durable uniqueness, registered identity and funded reward configuration for Day 10',()=>{const gaps=assess(10,{AGENT_MODE:'real',CHECKPOINT_REGISTRY:'bad',CHECKPOINT_SESSION_SECRET:'short'});expect(gaps).toContain('WORLD_SIGNING_KEY: missing');expect(gaps).toContain('CHECKPOINT_REGISTRY: invalid address');expect(gaps).toContain('CHECKPOINT_SESSION_SECRET: requires at least 32 characters');});

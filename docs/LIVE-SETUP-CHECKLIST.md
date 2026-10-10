@@ -55,3 +55,16 @@ Official protocol references rechecked during this pass: [CoW](https://docs.cow.
 ## Day 09 owner inputs and acceptance
 
 See [Day 09 README](../apps/agents/day-09-forecast-colosseum/README.md) and [audit](DAY-09-AUDIT.md). Deploy `ForecastColosseum` with verified six-decimal USDC, the official UMA OOv3 oracle, `ASSERT_TRUTH2` and at least a two-hour live liveness. Verify whitelist/identifier/minimum bond/dispute support; configure private owner/operator, PostgreSQL, HTTPS, Jev/AI and narrowly funded agent wallet. Register caps before trading. Verify both lanes, oversize rejection, cutoff, bonded assertion, real oracle dispute and settlement, calibrated rankings, duplicate-claim rejection and USDC balances on the public chain. Testnets and the local oracle double do not establish production DVM evidence. Payouts remain available when trading is paused; stakes are locked until settlement, unasserted stale refunds are permissionless after 30 days, pending disputes cannot be bypassed. Independent contract review and ongoing oracle monitoring remain release tasks.
+
+## Day 10 owner setup
+
+- [ ] Production World Developer Portal app/RP, fixed action and private RP signing key.
+- [ ] HTTPS domain (stable passkey RP), private PostgreSQL/Supabase, 32+ character session signing secret, separate operator token, ingress limits and privacy/retention/backups.
+- [ ] Supported-chain RPC, actual ERC-8004 registry and registered owner/agent wallet.
+- [ ] Dedicated managed reward verifier and owner; deploy `HumanCheckpointRewards` with matching RP/action hash, USDC and fixed reward; supply its address.
+- [ ] Small funded USDC campaign budget and visitor gas; real Jev/LLM keys.
+- [ ] Live World ID enrollment, browser/hardware passkey return, cross-session duplicate rejection and agent registry transfer/lane exclusion.
+- [ ] Public-chain payout, duplicate claim rejection, exact receipts, balance reconciliation and both application/contract pause controls.
+- [ ] Independent contract/security review, hosted CI, monitoring and release approval.
+
+Local software passkey signatures and Anvil test USDC are tested evidence, not live World ID/hardware/provider acceptance. `pnpm readiness 10 --init --online` initializes private config without overwriting and reports remaining fields; it does not perform deployments or paid operations.
