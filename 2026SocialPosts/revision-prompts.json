@@ -1,0 +1,18 @@
+[
+  [
+    13,
+    "Remove both OpenAI knot logos from the tollbooth pillars. Replace with simple abstract copper circuit symbols. Preserve all canonical post text, all other imagery, composition, colors, and layout exactly."
+  ],
+  [
+    18,
+    "Remove the model names 'gpt-4o' and 'claude-3-5' from both decorative receipt displays. Replace both names with the neutral word 'MODEL'. Preserve all canonical post text, all other imagery, composition, colors, and layout exactly."
+  ],
+  [
+    27,
+    "Remove all invented dollar ticker symbols ($AGT, $BOT, $DEAL, $ESCROW, $SYNC) and percentage gains from the upper right screen. Replace that screen's contents with a simple abstract copper waveform with no words or numbers. Preserve all canonical post text and all other imagery, composition, colors, and layout exactly."
+  ],
+  [
+    37,
+    "Remove the lower left OpenAI logo and MADE BY CHATGPT (GPT-5) label entirely. Replace the bottom decorative text areas with one readable full-width copy area displaying this exact complete body text: 'Generate the image. Stamp who made it and which model.' then 'Mint the provenance. Anyone can drop the file and verify.' Preserve the existing DAY 26 title, vibe line, URL, hashtag, scene and copper styling. Do not omit or paraphrase any body text. No model names or vendor logos."
+  ]
+]
