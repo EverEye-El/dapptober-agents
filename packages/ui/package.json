@@ -8,7 +8,8 @@
     "./src/*": "./src/*.ts",
     "./src/glass-room": "./src/glass-room.tsx",
     "./src/senate-room": "./src/senate-room.tsx",
-    "./src/checkpoint-room": "./src/checkpoint-room.tsx"
+    "./src/checkpoint-room": "./src/checkpoint-room.tsx",
+    "./src/market-room": "./src/market-room.tsx"
   },
   "dependencies": {
     "@dapptober/governance": "workspace:*",
@@ -20,6 +21,7 @@
     "@dapptober/forecast": "workspace:*",
     "@simplewebauthn/browser": "^13.0.0",
     "@worldcoin/idkit-core": "^4.0.0",
-    "qrcode": "^1.5.4"
+    "qrcode": "^1.5.4",
+    "@dapptober/compute": "workspace:*"
   }
 }

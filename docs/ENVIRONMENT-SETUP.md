@@ -14,7 +14,7 @@ Edit `apps/agents/day-XX-<name>/.env.local` for each app. Each private file now 
 | `JEV_API_KEY` | TypeSafe/Jev key for screening, confidence and model routing | Your TypeSafe/Jev account with `jev-latest` access |
 | `THIRDWEB_SECRET_KEY` | Day 01 thirdweb server secret | thirdweb project/API key settings; use the secret, not the public client ID |
 
-Day 07 uses Ollama in the confidential worker and has no OpenAI settings. Its template explains worker URL, token, model digest and attestation measurements. Day 10's template explains the World ID app, RP and private signing key separately.
+Days 07 and 11 use Ollama in their own workers and have no OpenAI settings. Its template explains worker URL, token, model digest and attestation measurements. Day 10's template explains the World ID app, RP and private signing key separately.
 
 ## Wallets, secrets and addresses
 
@@ -29,3 +29,5 @@ You may reuse the same testing Supabase connection URI across days: shared stora
 The runtime now reads `SUPABASE_DATABASE_URL`, `OPENAI_API_KEY`, `OPENAI_BASE_URL`, `OPENAI_SMALL_MODEL`, `OPENAI_LARGE_MODEL` and `JEV_API_KEY`. These replace the previous generic database, AI and TypeSafe names. Local private files were migrated with values preserved. If you previously configured a hosting service or secret manager, rename those settings there too. The old names are no longer consumed.
 
 Keep `AGENT_MODE=demo` while required accounts/contracts are missing. Once that day's real prerequisites are configured, change it to `real`, restart the app, and run its readiness check. Restart running apps after editing environment settings.
+
+Day 11 compute/provider settings are documented field by field in its app template and `services/gpu-provider/.env.example`. The app holds only the buyer key; the independently deployed worker holds only the provider key. Akash lease account/funding is separate from Base USDC job settlement.

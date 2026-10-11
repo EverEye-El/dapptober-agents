@@ -1,6 +1,6 @@
 # Dapptober Agents
 
-Ten independently runnable crypto-native agents for Dapptober 2026, built on a shared TypeScript capability layer. The supplied daily prompts are canonical; the master build specification defines the architecture and audit requirements.
+Eleven independently runnable crypto-native agents for Dapptober 2026, built on a shared TypeScript capability layer. The supplied daily prompts are canonical; the master build specification defines the architecture and audit requirements.
 
 [Project completion tracker](docs/PROJECT-COMPLETION-TRACKER.md) records tested functionality and remaining work for every built day and is updated after each daily build.
 
@@ -15,8 +15,9 @@ Ten independently runnable crypto-native agents for Dapptober 2026, built on a s
 | 07 | [The Glass-Box Mind](apps/agents/day-07-glass-box-mind/README.md) | http://localhost:3007 | Intel TDX / dstack, local Ollama, Intel DCAP verifier |
 | 08 | [The Swarm Senate](apps/agents/day-08-swarm-senate/README.md) | http://localhost:3008 | OpenZeppelin Governor, VotesExtended, human overrides |
 | 09 | [The Forecast Colosseum](apps/agents/day-09-forecast-colosseum/README.md) | http://localhost:3009 | UMA OOv3, bounded USDC pools, Brier/calibration rankings |
-
 | 10 | [The Human Checkpoint](apps/agents/day-10-human-checkpoint/README.md) | http://localhost:3010 | World ID 4, verified passkeys, ERC-8004, fixed USDC rewards |
+
+| 11 | [The GPU Night Market](apps/agents/day-11-gpu-night-market/README.md) | http://localhost:3011 | Base USDC compute escrow, Akash/Ollama worker, Jev bidding |
 
 ## Start here
 
@@ -29,13 +30,13 @@ See [pnpm migration and validation](docs/PNPM-MIGRATION.md) for the workspace ch
 ```sh
 pnpm install --frozen-lockfile
 pnpm run dev 01
-# Or run all ten independent servers:
+# Or run all eleven independent servers:
 pnpm run dev
 ```
 
 Local simulation is the default and needs no secrets. Every simulated balance, signature, payment and attestation is labelled. State and receipts persist under each application's ignored `.data/` directory, isolated by HttpOnly session cookie. Local mode supports one process per app; use Supabase PostgreSQL for real/serverless mode. The agents never fabricate real transaction hashes.
 
-Real mode uses configured RPCs, contracts, Jev, generative AI, thirdweb, x402 or CoW as relevant. Copy an app's `.env.example` to its `.env.local`. [Deployment instructions](docs/DEPLOYMENT.md) explain every required variable, funding and contract step. [Live setup checklist](docs/LIVE-SETUP-CHECKLIST.md) lists the owner inputs and acceptance runs; `pnpm readiness` reports missing live configuration without printing secrets. Days 01–09 use single-operator control rooms; Day 10 has private visitor sessions and separately authenticated operator pause controls. For Days 01–09, real server actions require a deployment-specific bearer token. Human owner/client signatures remain in their browser wallet.
+Real mode uses configured RPCs, contracts, Jev, generative AI, thirdweb, x402 or CoW as relevant. Copy an app's `.env.example` to its `.env.local`. [Deployment instructions](docs/DEPLOYMENT.md) explain every required variable, funding and contract step. [Live setup checklist](docs/LIVE-SETUP-CHECKLIST.md) lists the owner inputs and acceptance runs; `pnpm readiness` reports missing live configuration without printing secrets. Days 01–09 use single-operator control rooms; Day 10 has private visitor sessions and separately authenticated operator pause controls. For Days 01–09, real server actions require a deployment-specific bearer token. Human owner/client signatures remain in their browser wallet. Day 11 also uses an authenticated operator control room and bidding API; inference runs in independent GPU workers without an OpenAI key.
 
 ## Commands
 
@@ -47,16 +48,16 @@ pnpm run typecheck
 pnpm run lint
 pnpm test
 pnpm run test:contracts            # Solidity unit and fuzz tests, offline
-pnpm run build                    # all ten independent builds
+pnpm run build                    # all eleven independent builds
 pnpm run check                    # full verification
 pnpm run smoke                    # production HTTP workflow audit (servers must run)
 ```
 
-`pnpm --filter @dapptober/day-01 run start` runs a built app. `pnpm run start` starts all ten after a full build. No other daily server is needed by any real deployment.
+`pnpm --filter @dapptober/day-01 run start` runs a built app. `pnpm run start` starts all eleven after a full build. No other daily server is needed by any real deployment.
 
 ## Shared capabilities
 
-`packages/agent-core` separates typed dispatch, reasoning/provider routing, durable state and HTTP authentication. `guardrails`, `receipts`, `chain`, `wallet`, `payments`, `identity`, `mcp`, `treasury`, `intents`, `inference`, `governance`, `forecast`, `checkpoint` and `ui` encapsulate working functionality reused by the apps. The shared packages are source dependencies compiled into each deployment. See [architecture](docs/ARCHITECTURE.md), [security](docs/SECURITY.md), [research](docs/RESEARCH.md), [acceptance criteria](docs/ACCEPTANCE.md) and [final audit](docs/FINAL-AUDIT.md).
+`packages/agent-core` separates typed dispatch, reasoning/provider routing, durable state and HTTP authentication. `guardrails`, `receipts`, `chain`, `wallet`, `payments`, `identity`, `mcp`, `treasury`, `intents`, `inference`, `governance`, `forecast`, `checkpoint`, `compute` and `ui` encapsulate working functionality reused by the apps. The shared packages are source dependencies compiled into each deployment. See [architecture](docs/ARCHITECTURE.md), [security](docs/SECURITY.md), [research](docs/RESEARCH.md), [acceptance criteria](docs/ACCEPTANCE.md) and [final audit](docs/FINAL-AUDIT.md).
 
 ## Adding the next day
 

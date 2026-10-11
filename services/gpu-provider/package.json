@@ -1,0 +1,1 @@
+{"name":"@dapptober/gpu-provider-worker","private":true,"type":"module","scripts":{"start":"node --env-file=.env.local server.mjs"},"dependencies":{"viem":"^2.38.0","ws":"^8.21.0"}}

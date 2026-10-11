@@ -1,0 +1,17 @@
+{
+  "name": "@dapptober/day-11",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --port 3011",
+    "start": "next start --port 3011",
+    "build": "next build --webpack",
+    "test": "vitest run --root ../../.. tests/day-11.test.ts"
+  },
+  "dependencies": {
+    "@dapptober/compute": "workspace:*",
+    "@dapptober/ui": "workspace:*",
+    "next": "^16.0.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  }
+}

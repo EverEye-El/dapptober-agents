@@ -1,0 +1,65 @@
+# Akash SDL 2.0 deployment reference; build/publish worker image and supply PRIVATE provider credentials first.
+# Only a provider signer belongs here. NEVER deploy the buyer/owner private keys to leased compute.
+# Replace worker image digest and __PLACEHOLDER__ values before opening a funded Akash lease.
+version: "2.0"
+services:
+  ollama:
+    image: ollama/ollama:latest # Pin a reviewed image digest before release.
+    command: ["sh", "-c"]
+    args: ["ollama serve & server=$!; until ollama list; do sleep 2; done; ollama pull qwen3:0.6b; wait $server"]
+    expose:
+      - port: 11434
+        to:
+          - service: worker
+  worker:
+    image: __PUBLISHED_GPU_WORKER_IMAGE_DIGEST__
+    env:
+      - CHAIN_ID=84532
+      - RPC_URL=https://sepolia.base.org
+      - GPU_MARKET=__DEPLOYED_MARKET_ADDRESS__
+      - GPU_PROVIDER_PRIVATE_KEY=__PRIVATE_PROVIDER_SIGNER__
+      - GPU_WORKER_BEARER_TOKEN=__PRIVATE_WORKER_TOKEN__
+      - OLLAMA_BASE_URL=http://ollama:11434
+      - OLLAMA_MODEL=qwen3:0.6b
+      - GPU_WORKER_SLOTS=1
+      - GPU_OUTPUT_DIRECTORY=/app/.outputs
+    params:
+      storage:
+        outputs:
+          mount: /app/.outputs
+          readOnly: false
+    expose:
+      - port: 8080
+        as: 80
+        to:
+          - global: true
+profiles:
+  compute:
+    ollama:
+      resources:
+        cpu: {units: 4}
+        memory: {size: 16Gi}
+        storage: {size: 30Gi}
+        gpu:
+          units: 1
+          attributes:
+            vendor:
+              nvidia:
+                - model: rtx4090
+    worker:
+      resources:
+        cpu: {units: 1}
+        memory: {size: 1Gi}
+        storage:
+          - size: 1Gi
+          - name: outputs
+            size: 5Gi
+            attributes: {persistent: true, class: beta3}
+  placement:
+    akash:
+      pricing:
+        ollama: {denom: uakt, amount: 1000}
+        worker: {denom: uakt, amount: 100}
+deployment:
+  ollama: {akash: {profile: ollama, count: 1}}
+  worker: {akash: {profile: worker, count: 1}}

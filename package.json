@@ -17,7 +17,8 @@
     "test:release-chain": "node scripts/senate-chain-test.mjs --release",
     "test:production": "node scripts/production-smoke.mjs",
     "test:forecast-chain": "node scripts/forecast-chain-test.mjs",
-    "test:checkpoint-chain": "node scripts/checkpoint-chain-test.mjs"
+    "test:checkpoint-chain": "node scripts/checkpoint-chain-test.mjs",
+    "test:compute-chain": "node scripts/compute-chain-test.mjs"
   },
   "dependencies": {
     "@ai-sdk/openai-compatible": "^2.0.0",
@@ -62,7 +63,8 @@
     "thirdweb": "^5.0.0",
     "viem": "^2.38.0",
     "zod": "^4.0.0",
-    "@dapptober/checkpoint": "workspace:*"
+    "@dapptober/checkpoint": "workspace:*",
+    "@dapptober/compute": "workspace:*"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.0.0",
