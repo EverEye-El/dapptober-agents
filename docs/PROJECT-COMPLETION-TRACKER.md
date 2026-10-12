@@ -29,19 +29,21 @@ Real protocol integrations are implemented, but deployment, credentials, funding
 | **09 — Forecast Colosseum** | Funded binary pools, agent API and hard risk limits, Brier/calibration ranking, confidence review; eight contract tests with collateral fuzzing; **actual Anvil human/agent trades, direct cap rejection, oracle-double dispute/reset/settlement and USDC payout**; independent production HTTP workflow and browser QA | Deploy **ForecastColosseum** with verified UMA OOv3, whitelisted six-decimal USDC and approved **ASSERT_TRUTH2**; set ≥2 hour live dispute window; fund human/agent USDC/gas and separate oracle bonds; register caps; configure real Jev/AI, HTTPS/Supabase; verify public-chain assertion/dispute/settlement and standings; operate oracle monitoring and obtain contract review. Local oracle/provider doubles are not production DVM/AI evidence |
 | **10 — Human Checkpoint** | Private proof adapter with explicit provider doubles; cross-session uniqueness/race/expiry and lane exclusion; real P-256 WebAuthn verification; registered agent signature/transfer checks; five reward contract tests including 256-run claim fuzzing; **actual Anvil deployment, signed funded USDC payout, exact claim receipt and duplicate rejection**; copper noir UI based on supplied Day 10 graphic | Create production World ID app/RP/action and private signing key; configure actual ERC-8004 registry on selected chain, HTTPS/passkey RP, PostgreSQL/Supabase, stable cookie secret and Jev/AI; deploy **HumanCheckpointRewards** with RP/action campaign hash, fixed USDC and dedicated verifier; fund reward pool and visitor gas; verify real World proof, hardware passkey, duplicate enrollment, registry transfer and funded public-chain claim; configure ingress limits, storage/retention/privacy policy, monitoring/backups/key handling and independent security review. Provider/personhood/registry fixtures are not production evidence |
 
+| **11 — GPU Night Market** | Provider listings, Jev-gated and fit-weighted ranking, bounded agent/human reservations, replay/capacity/cap/expiry protection; eight contract tests including 256-run conservation fuzzing; **actual Anvil escrow, HTTP provider worker with explicit Jev/Ollama fixtures, WebSocket telemetry, funded agent/human payouts, cached output recovery and expiry refund**; copper lantern UI and browser workflow | Deploy **GpuNightMarket** on Base Sepolia then Base; configure Supabase/Jev, owner/buyer wallets and caps; obtain and fund an actual Akash GPU lease, pin Ollama/worker images/model/hardware, configure provider wallet/token/HTTPS/WSS and persistent outputs, register specs/pricing and approve stalls; fund Base USDC/gas; verify genuine GPU inference, output commitment/payout/refund, provider availability and hosted persistence; contract review, retention, monitoring and release. Local inference/provider doubles are not GPU/Akash/production evidence |
+
 For every live app, remaining setup includes HTTPS hosting, PostgreSQL, private environment configuration, operator authentication and its required AI/Jev credentials. Day 10 has isolated visitor sessions; its operator token authorizes administration only. Each then needs a live acceptance run: passing demo tests does not establish that providers, wallets and public-chain transactions work together.
 
 Remaining dependency/configuration gaps: Day 02 needs facilitator authentication support if required by the production provider; Day 06 cannot currently perform live CoW settlement on the requested Base Sepolia test network. Day 05 vault addresses and Day 09/10 external registry/oracle deployments must be verified for Base Sepolia and Base before configuration can be considered complete.
 
 Release work also remains: verify hosted CI for subsequent changes, address the remaining low elliptic dependency advisory and review the custom contracts before putting meaningful funds into them. Keep subsequent daily work committed and pushed. The contracts have automated tests, not an independent security audit.
 
-Day 07 has the most infrastructure left. Days 01, 03, 04, 05, 08, 09 and 10 have actual local-chain acceptance evidence; production protocol acceptance remains separate.
+Days 07 and 11 require separately provisioned compute infrastructure. Days 01, 03, 04, 05, 08, 09, 10 and 11 have actual local-chain acceptance evidence; production protocol acceptance remains separate.
 
-## Production launch checklists — Days 01–10
+## Production launch checklists — Days 01–11
 
 These are remaining tasks **from the current build/tested repository to production**, in execution order. Work on one day at a time: shared phases 1–2 → that day's preparation → shared phase 3 rehearsal → shared phase 4 deployment → that day's acceptance → shared phase 5 release. Do not finish every shared step before starting the daily checklist. Check an item only after its stated environment has been verified; testnet rehearsals are separate from production acceptance.
 
-The owner supplies accounts, secrets, signatures, funding and release approval; engineering completes configuration, deployment and verification. Store secrets privately, never in this tracker. All ten days follow this sequence. Day 07's confidential worker must exist before hardware rehearsal; Day 10 needs a stable HTTPS origin before real World ID/passkey acceptance. Public release still comes last.
+The owner supplies accounts, secrets, signatures, funding and release approval; engineering completes configuration, deployment and verification. Store secrets privately, never in this tracker. All eleven days follow this sequence. Day 07's confidential worker must exist before hardware rehearsal; Day 10 needs a stable HTTPS origin before real World ID/passkey acceptance. Public release still comes last.
 
 ### Fixed services and networks for this project
 
@@ -54,14 +56,14 @@ The owner supplies accounts, secrets, signatures, funding and release approval; 
 - [ ] **Supabase:** create a `dapptober-testing` project for Base Sepolia testing. Save its database password privately and copy the database connection URI from **Connect → Session pooler** into each app's `SUPABASE_DATABASE_URL`. Both storage drivers now disable prepared statements; direct, session-pooler and transaction-pooler connections are supported. Use a private table-owner URI over TLS, and verify it against the actual Supabase project. The app does not consume Supabase anon/service-role API keys or Supabase Auth.
 - [ ] **Base RPC:** obtain a Base Sepolia RPC URL and put it in `RPC_URL` with `CHAIN_ID=84532`. Record a separate Base mainnet RPC for the later production deployment (`CHAIN_ID=8453`); no particular commercial RPC vendor is built into the code.
 - [ ] **TypeSafe / Jev:** obtain an API key with access to the current `jev-latest` request flow at `https://api.typesafe.ai/v1/systemone`; set `JEV_API_KEY` in all ten apps and verify a real screening request.
-- [ ] **OpenAI:** obtain a server API key and enabled billing/model access. For Days 01–06 and 08–10, set `OPENAI_API_KEY`, `OPENAI_BASE_URL=https://api.openai.com/v1`, `OPENAI_SMALL_MODEL=gpt-4.1-mini` and `OPENAI_LARGE_MODEL=gpt-4.1`, matching current defaults. Verify both configured models respond. Day 07 instead uses Ollama inside the confidential worker and does not need this OpenAI key.
+- [ ] **OpenAI:** obtain a server API key and enabled billing/model access. For Days 01–06 and 08–10, set `OPENAI_API_KEY`, `OPENAI_BASE_URL=https://api.openai.com/v1`, `OPENAI_SMALL_MODEL=gpt-4.1-mini` and `OPENAI_LARGE_MODEL=gpt-4.1`, matching current defaults. Verify both configured models respond. Days 07 and 11 instead use Ollama inside their respective workers and do not need this OpenAI key.
 - [ ] **Browser/deployment wallets:** prepare the owner's wallet address (`OWNER_ADDRESS`) and an encrypted Foundry deployment account for the custom contracts listed below. Prepare dedicated agent signers only for the days listed; fund testing wallets with Base Sepolia ETH and test USDC, not production money.
 - [ ] **Day-specific accounts:** obtain thirdweb for Day 01, an x402 facilitator for Day 02, Phala/dstack Intel TDX hosting for Day 07 and World Developer Portal credentials for Day 10, using the exact fields below. Days 03/04/05/06/08/09 have no additional invented provider API keys.
 - [ ] **Before real money:** arrange review of `SessionVault`, `AgentPassport`, `QuestEscrow`, `FlightTreasury`, `InferenceAnchor` if enabled, `SenateVoice`, `SwarmGovernor`, `ForecastColosseum` and `HumanCheckpointRewards`, plus their authentication paths. Resolve or explicitly review the remaining elliptic advisory before production release.
 
 ### Exact day-specific dependencies and configuration
 
-All rows also require the shared Supabase/Base/Jev configuration above; OpenAI applies except Day 07. Deployed addresses must be copied from verified deployment receipts, not guessed.
+All rows also require the shared Supabase/Base/Jev configuration above; OpenAI applies except Days 07 and 11. Deployed addresses must be copied from verified deployment receipts, not guessed.
 
 | Day | Service or contract used by this build | What to obtain or configure |
 | --- | --- | --- |
@@ -75,6 +77,8 @@ All rows also require the shared Supabase/Base/Jev configuration above; OpenAI a
 | 08 | `SenateVoice` and `SwarmGovernor` | Set `SENATE_TOKEN`, `SENATE_GOVERNOR`, deployment block `SENATE_START_BLOCK`, and a dedicated `AGENT_PRIVATE_KEY` used as delegate seed. Prepare founding member wallets and native ETH for derived delegates. |
 | 09 | UMA Optimistic Oracle v3; `ForecastColosseum` | Set verified `UMA_ORACLE`, deployed `FORECAST_MARKET`, six-decimal `USDC_ADDRESS` and dedicated `AGENT_PRIVATE_KEY`. Verify `ASSERT_TRUTH2`, collateral whitelist and minimum bond; reserve assertion/dispute bonds separately from stakes. No UMA API key consumed. |
 | 10 | World ID production RP; ERC-8004 registry; `HumanCheckpointRewards`; WebAuthn | Obtain `WORLD_APP_ID`, `WORLD_RP_ID`, private `WORLD_SIGNING_KEY`; retain `WORLD_ACTION=dapptober-human-checkpoint-2026`. Set stable random `CHECKPOINT_SESSION_SECRET`, actual `CHECKPOINT_REGISTRY`, deployed `CHECKPOINT_REWARDS`, `USDC_ADDRESS` and dedicated voucher `AGENT_PRIVATE_KEY`. No external passkey-service API key is used. |
+
+Day 11 additional dependencies: `GPU_MARKET`, `GPU_PROVIDERS`, `GPU_AGENT_JOB_CAP`, `GPU_AGENT_DAILY_CAP` and its own buyer signer. Each provider needs `GPU_PROVIDER_PRIVATE_KEY`, `GPU_WORKER_BEARER_TOKEN`, `OLLAMA_BASE_URL`, `OLLAMA_MODEL`, `GPU_WORKER_SLOTS` and durable `GPU_OUTPUT_DIRECTORY`. See the annotated app/worker templates; an Akash lease is separate funding from Base job payments.
 
 ### Shared phase 2 — Configure the local apps against those services
 
@@ -372,3 +376,34 @@ See [environment field guide](ENVIRONMENT-SETUP.md). Empty known non-secret loca
 GitGuardian recurrence clarification: its GitHub skip action tags the check-run findings; it does not make the underlying incidents Ignored. The same five incidents from commit `8193788` remain in PR history. Set incidents 38086180–38086184 to **Ignored → False positive** in the GitGuardian dashboard for persistent dismissal, then rerun the check. Current test fixtures have no credentials. See [GitHub check-run skip behavior](https://docs.gitguardian.com/internal-monitoring/prevent/detect-secrets-in-real-time-in-github) and [ignored incident lifecycle](https://docs.gitguardian.com/internal-repositories-monitoring/remediate/overview).
 
 Environment rename validation: lint/typecheck, all 82 application tests, seven actual local-chain integrations, ten production builds and ten fresh production HTTP workflows pass. All ten private and example environments parse; existing populated values are preserved and private files remain ignored. Hosted CI must verify the new commit independently.
+
+## Day 11 — ordered production completion checklist
+
+Preparation and Base Sepolia rehearsal:
+
+- [ ] Configure Supabase testing URI, unique operator token, actual Jev access, public owner wallet and dedicated compute buyer signer in Day 11’s private environment. No OpenAI key required.
+- [ ] Fund deployer/provider/buyer with Base Sepolia ETH and buyer with test USDC; deploy `GpuNightMarket(owner, USDC)` and set its actual address. Verify constructor owner/token/network.
+- [ ] Obtain an Akash account/lease budget, select verified GPU capacity and storage class, publish/pin reviewed worker and Ollama image digests, and provision the supplied SDL after reviewing lease pricing and private provider key handling.
+- [ ] Pull/pin the Ollama model, verify GPU use with hardware/Ollama evidence and configure persistent output storage, provider signer, token and delivery gas. Verify restart/retry recovery.
+- [ ] Put the worker behind HTTPS and public status behind WSS; keep Ollama internal. Configure ingress limits. Worker HTTPS is an integration prerequisite; public app hosting still comes later.
+- [ ] Register actual provider model/VRAM/slots/minute price from its wallet; reconcile advertised capacity with worker concurrency. Pin its reviewed wallet/origin/private token/public WSS in `GPU_PROVIDERS`.
+- [ ] Owner allowlists stalls and grants the dedicated buyer’s job/daily caps and expiry; verify the caps match app configuration. Keep buyer/owner keys off leased provider machines.
+- [ ] Run small funded Base Sepolia human and agent jobs using real Jev and real GPU inference. Verify input/model/output commitments, exact price protection, allowance, confirmed delivery, USDC payout and observed availability.
+- [ ] Verify direct-contract overspend/replay/capacity rejection; pause preserves delivery/refunds; expire and refund a failed job; recover a paid output without inference or payment duplication. Record actual transaction/lease/GPU/provider evidence.
+
+Production preparation and release:
+
+- [ ] Obtain independent review of the custom escrow, worker signer handling, endpoint admission and failure recovery; explicitly accept output-delivery trust assumptions and retention policy.
+- [ ] Create production Supabase/provider namespaces and deploy Base mainnet market with Circle Base USDC. Configure Base RPC, verified addresses and narrowly funded production buyer/provider wallets. Repeat listings, endpoint bindings, caps and allowlists for production.
+- [ ] Deploy the independent Day 11 app on its final HTTPS origin with private secrets and sufficient request duration; verify authentication, route/rate limits, backups and restart durability.
+- [ ] Complete small funded production human/agent delivery, cache recovery, price/cap rejection, refund and pause acceptance with real Jev/GPU endpoints, reconciled balances and exported receipts.
+- [ ] Monitor capacity, lease expiry, provider health, signing gas, failed/expiring jobs and backup retention; establish incidents/rollback/pause procedures. Address scaling before exceeding 100 providers/1,000 lifetime jobs.
+- [ ] Verify CI for the final release commit, record environment/lease/contract/transaction evidence and owner sign-off, then open public access.
+
+No live Akash lease, actual GPU execution, paid Jev, real Supabase account or public-chain deployment/funding is claimed by local tests. This app is a single-operator control room; a public multi-tenant service and answer-correctness dispute mechanism require separate implementation before advertising them.
+
+## Day 11 local build evidence — October 11, 2026
+
+Lint/typecheck, **87 application tests**, **52 contract tests**, all **eight actual Anvil cases** (including the worker HTTP/WebSocket/human-agent compute flow), and **all eleven production builds** pass. Five compute application tests and eight compute contract tests exercise the new workflow and safety constraints. Browser reservation/delivery and copper layout were verified; [the final audit](DAY-11-AUDIT.md) maps each canonical requirement to implementation/evidence. Hosted CI and local Docker execution are separate checks; no local Docker server was available for container validation. App/container CI now includes Day 11 plus the GPU-worker image. Actual Akash, GPU, Supabase, Jev and public-chain acceptance remain unchecked above.
+
+Final fresh production HTTP audit: all eleven page/API/core-workflow/receipt checks pass, including Day 11 agent reservation/delivery and human expiry refund. Readiness correctly lists the unconfigured live keys, market/worker deployment, operator access and final HTTPS origin; no live item was checked off.

@@ -43,6 +43,9 @@ importers:
       '@dapptober/checkpoint':
         specifier: workspace:*
         version: link:packages/checkpoint
+      '@dapptober/compute':
+        specifier: workspace:*
+        version: link:packages/compute
       '@dapptober/config':
         specifier: workspace:*
         version: link:packages/config
@@ -396,6 +399,24 @@ importers:
         specifier: ^19.2.0
         version: 19.3.0(react@19.3.0)
 
+  apps/agents/day-11-gpu-night-market:
+    dependencies:
+      '@dapptober/compute':
+        specifier: workspace:*
+        version: link:../../../packages/compute
+      '@dapptober/ui':
+        specifier: workspace:*
+        version: link:../../../packages/ui
+      next:
+        specifier: ^16.0.0
+        version: 16.4.0(@opentelemetry/api@1.9.1)(@types/node@22.20.5)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      react:
+        specifier: ^19.2.0
+        version: 19.3.0
+      react-dom:
+        specifier: ^19.2.0
+        version: 19.3.0(react@19.3.0)
+
   packages/agent-core:
     dependencies:
       '@ai-sdk/openai-compatible':
@@ -491,6 +512,33 @@ importers:
       postgres:
         specifier: ^3.4.0
         version: 3.4.9
+      viem:
+        specifier: ^2.38.0
+        version: 2.57.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.6.5)
+      zod:
+        specifier: ^4.0.0
+        version: 4.6.5
+
+  packages/compute:
+    dependencies:
+      '@dapptober/agent-core':
+        specifier: workspace:*
+        version: link:../agent-core
+      '@dapptober/chain':
+        specifier: workspace:*
+        version: link:../chain
+      '@dapptober/config':
+        specifier: workspace:*
+        version: link:../config
+      '@dapptober/guardrails':
+        specifier: workspace:*
+        version: link:../guardrails
+      '@dapptober/receipts':
+        specifier: workspace:*
+        version: link:../receipts
+      '@dapptober/types':
+        specifier: workspace:*
+        version: link:../types
       viem:
         specifier: ^2.38.0
         version: 2.57.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.6.5)
@@ -748,6 +796,9 @@ importers:
 
   packages/ui:
     dependencies:
+      '@dapptober/compute':
+        specifier: workspace:*
+        version: link:../compute
       '@dapptober/forecast':
         specifier: workspace:*
         version: link:../forecast
@@ -799,6 +850,15 @@ importers:
       viem:
         specifier: ^2.38.0
         version: 2.57.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.6.5)
+
+  services/gpu-provider:
+    dependencies:
+      viem:
+        specifier: ^2.38.0
+        version: 2.57.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.6.5)
+      ws:
+        specifier: ^8.21.0
+        version: 8.22.0(bufferutil@4.1.0)(utf-8-validate@5.0.10)
 
 packages:
 
@@ -6215,7 +6275,7 @@ snapshots:
       clsx: 1.2.1
       eventemitter3: 5.0.1
       idb-keyval: 6.2.1
-      ox: 0.6.9(typescript@5.9.3)(zod@3.25.76)
+      ox: 0.6.9(typescript@5.9.3)(zod@4.6.5)
       preact: 10.24.2
       viem: 2.57.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.6.5)
       zustand: 5.0.3(@types/react@19.3.0)(immer@11.1.21)(react@19.3.0)(use-sync-external-store@1.4.0(react@19.3.0))
@@ -6318,7 +6378,7 @@ snapshots:
       clsx: 1.2.1
       eventemitter3: 5.0.1
       idb-keyval: 6.2.1
-      ox: 0.6.9(typescript@5.9.3)(zod@3.25.76)
+      ox: 0.6.9(typescript@5.9.3)(zod@4.6.5)
       preact: 10.24.2
       viem: 2.57.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.6.5)
       zustand: 5.0.3(@types/react@19.3.0)(immer@11.1.21)(react@19.3.0)(use-sync-external-store@1.4.0(react@19.3.0))
@@ -9197,7 +9257,7 @@ snapshots:
       '@wagmi/core': 2.22.1(@tanstack/query-core@5.81.5)(@types/react@19.3.0)(immer@11.1.21)(react@19.3.0)(typescript@5.9.3)(use-sync-external-store@1.4.0(react@19.3.0))(viem@2.57.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.6.5))
       '@walletconnect/ethereum-provider': 2.21.1(@types/react@19.3.0)(bufferutil@4.1.0)(react@19.3.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.25.76)
       cbw-sdk: '@coinbase/wallet-sdk@3.9.3'
-      porto: 0.2.35(d7d6ccdd25e7c595c7cf5915e636f31c)
+      porto: 0.2.35(efe46f18633b1e3dba27807b0a5b98f7)
       viem: 2.57.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.25.76)
     optionalDependencies:
       typescript: 5.9.3
@@ -11614,7 +11674,7 @@ snapshots:
     transitivePeerDependencies:
       - zod
 
-  ox@0.6.9(typescript@5.9.3)(zod@3.25.76):
+  ox@0.6.9(typescript@5.9.3)(zod@4.6.5):
     dependencies:
       '@adraffy/ens-normalize': 1.11.1
       '@noble/curves': 1.9.7
@@ -11799,7 +11859,7 @@ snapshots:
 
   pony-cause@2.1.11: {}
 
-  porto@0.2.35(d7d6ccdd25e7c595c7cf5915e636f31c):
+  porto@0.2.35(efe46f18633b1e3dba27807b0a5b98f7):
     dependencies:
       '@wagmi/core': 2.22.1(@tanstack/query-core@5.81.5)(@types/react@19.3.0)(immer@11.1.21)(react@19.3.0)(typescript@5.9.3)(use-sync-external-store@1.4.0(react@19.3.0))(viem@2.57.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.6.5))
       hono: 4.13.13
