@@ -31,3 +31,5 @@ The runtime now reads `SUPABASE_DATABASE_URL`, `OPENAI_API_KEY`, `OPENAI_BASE_UR
 Keep `AGENT_MODE=demo` while required accounts/contracts are missing. Once that day's real prerequisites are configured, change it to `real`, restart the app, and run its readiness check. Restart running apps after editing environment settings.
 
 Day 11 compute/provider settings are documented field by field in its app template and `services/gpu-provider/.env.example`. The app holds only the buyer key; the independently deployed worker holds only the provider key. Akash lease account/funding is separate from Base USDC job settlement.
+
+Day 12 uses Jev for approved license selection and does not require OpenAI. Its app template documents `PINATA_JWT` (public IPFS upload), `THIRDWEB_SECRET_KEY` (server NFT ownership reads), `PROVENANCE_PRESS` (deployed Base registry), `PRESS_START_BLOCK` (certificate history scan floor), and `PRESS_AGENT_LICENSE_CAP`/`PRESS_AGENT_DAILY_CAP` (USDC agent limits). Native Story/PIL integration remains a separate implementation and network compatibility gap.

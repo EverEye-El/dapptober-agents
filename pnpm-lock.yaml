@@ -73,6 +73,9 @@ importers:
       '@dapptober/payments':
         specifier: workspace:*
         version: link:packages/payments
+      '@dapptober/provenance':
+        specifier: workspace:*
+        version: link:packages/provenance
       '@dapptober/receipts':
         specifier: workspace:*
         version: link:packages/receipts
@@ -404,6 +407,24 @@ importers:
       '@dapptober/compute':
         specifier: workspace:*
         version: link:../../../packages/compute
+      '@dapptober/ui':
+        specifier: workspace:*
+        version: link:../../../packages/ui
+      next:
+        specifier: ^16.0.0
+        version: 16.4.0(@opentelemetry/api@1.9.1)(@types/node@22.20.5)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      react:
+        specifier: ^19.2.0
+        version: 19.3.0
+      react-dom:
+        specifier: ^19.2.0
+        version: 19.3.0(react@19.3.0)
+
+  apps/agents/day-12-provenance-press:
+    dependencies:
+      '@dapptober/provenance':
+        specifier: workspace:*
+        version: link:../../../packages/provenance
       '@dapptober/ui':
         specifier: workspace:*
         version: link:../../../packages/ui
@@ -759,6 +780,36 @@ importers:
         specifier: ^2.38.0
         version: 2.57.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.6.5)
 
+  packages/provenance:
+    dependencies:
+      '@dapptober/agent-core':
+        specifier: workspace:*
+        version: link:../agent-core
+      '@dapptober/chain':
+        specifier: workspace:*
+        version: link:../chain
+      '@dapptober/config':
+        specifier: workspace:*
+        version: link:../config
+      '@dapptober/guardrails':
+        specifier: workspace:*
+        version: link:../guardrails
+      '@dapptober/receipts':
+        specifier: workspace:*
+        version: link:../receipts
+      '@dapptober/types':
+        specifier: workspace:*
+        version: link:../types
+      thirdweb:
+        specifier: ^5.0.0
+        version: 5.121.6(@hey-api/openapi-ts@0.99.0(typescript@5.9.3))(@solana/sysvars@5.5.1(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3))(@tanstack/query-core@5.81.5)(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(@x402/core@2.28.0)(@x402/evm@2.28.0(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10))(@x402/extensions@2.28.0(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10))(@x402/svm@2.28.0(@solana/kit@5.5.1(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(utf-8-validate@5.0.10))(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3))(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(immer@11.1.21)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(typescript@5.9.3)(use-sync-external-store@1.4.0(react@19.3.0))(utf-8-validate@5.0.10)(ws@8.22.0(bufferutil@4.1.0)(utf-8-validate@5.0.10))
+      viem:
+        specifier: ^2.38.0
+        version: 2.57.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.6.5)
+      zod:
+        specifier: ^4.0.0
+        version: 4.6.5
+
   packages/receipts:
     dependencies:
       '@dapptober/types':
@@ -808,6 +859,9 @@ importers:
       '@dapptober/inference':
         specifier: workspace:*
         version: link:../inference
+      '@dapptober/provenance':
+        specifier: workspace:*
+        version: link:../provenance
       '@dapptober/types':
         specifier: workspace:*
         version: link:../types

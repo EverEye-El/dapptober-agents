@@ -63,3 +63,7 @@ See [Day 7 research](DAY-07-RESEARCH.md), [application and worker deployment](..
 ## Day 11 compute capability
 
 `@dapptober/compute` exposes bounded provider discovery/ranking, human previews, agent-funded reservations, worker delivery and refunds. It compiles into its independent daily app. Provider workers verify funded job commitments and deliver from their own signer; they require no other daily server. Shared Supabase state remains partitioned by day/operator, while the contract is the authoritative escrow/capacity/cap ledger. WebSocket worker status is visual telemetry only; private provider tokens remain server configuration. Akash lease procurement and Base USDC job settlement are separate flows.
+
+## Day 12 provenance capability
+
+`@dapptober/provenance` composes approved-template selection, consent-gated Pinata metadata upload, immutable Base registration certificates, scoped license purchasing, recursive royalty credits/claims and public certificate/event queries. It reuses authentication, Supabase namespaces, chain validation and receipts; the 3012 app is independent. The custom Base registry does not implement Story/PIL; native Story interoperability remains an explicit network and implementation gap, preserving the fixed Base network requirement.

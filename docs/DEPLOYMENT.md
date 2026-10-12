@@ -80,3 +80,7 @@ See [Day 10 README](../apps/agents/day-10-human-checkpoint/README.md) for World 
 ## Day 11 deployment
 
 See [Day 11 README](../apps/agents/day-11-gpu-night-market/README.md) and [provider worker](../services/gpu-provider/README.md). Deploy GpuNightMarket(owner,USDC) on Base Sepolia for testing, then Base for production. Set GPU_MARKET, reviewed GPU_PROVIDERS, a dedicated buyer key, owner-approved caps/providers, Jev and Supabase. No OpenAI key required. Deploy Ollama/worker on actual leased GPU capacity with separate provider signer, persistent output storage and private bearer token; configure TLS/WSS. Lease funding is separate from Base USDC escrow. Verify delivery, output commitment, payout, expiry refund, budget/pause controls and hardware/lease evidence before production release.
+
+## Day 12 deployment
+
+See [Provenance Press setup](../apps/agents/day-12-provenance-press/README.md). Deploy ProvenancePress(owner,USDC) on Base Sepolia then Base; set actual registry/deployment block, Circle USDC, private Supabase/Jev/Pinata/thirdweb settings and dedicated buyer wallet. Owner signs caps and approved works. Review public publication consent and legal permissions, then verify funded originals/remixes, license purposes, royalty claims and public credit history. This is a custom Base registry, not Story Protocol/PIL; native Story integration needs a compatible architecture or approved network exception.
