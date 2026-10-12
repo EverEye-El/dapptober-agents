@@ -6,13 +6,13 @@ import {readFileSync,readdirSync} from 'node:fs';
 import {parseEnv} from 'node:util';
 import {deploymentNetworkAllowed,checkDeploymentNetwork} from '../scripts/deployment-network.mjs';
 afterEach(()=>vi.restoreAllMocks());
-it('all eleven examples use Base Sepolia and a private Supabase database URI field',()=>{
- const folders=readdirSync('apps/agents').filter(x=>/^day-\d+-/.test(x));expect(folders).toHaveLength(11);
+it('all twelve examples use Base Sepolia and a private Supabase database URI field',()=>{
+ const folders=readdirSync('apps/agents').filter(x=>/^day-\d+-/.test(x));expect(folders).toHaveLength(12);
  for(const folder of folders){const env=parseEnv(readFileSync(`apps/agents/${folder}/.env.example`,'utf8'));expect(config(env).CHAIN_ID).toBe(84532);expect(env).toHaveProperty('SUPABASE_DATABASE_URL');if(folder.startsWith('day-06'))expect(env.COW_CHAIN_ID).toBe('84532');}
 });
 it('uses Base network metadata and rejects Ethereum Sepolia configuration',()=>{
  expect(chain(config({CHAIN_ID:'8453'})).id).toBe(8453);expect(chain(config({CHAIN_ID:'84532'})).id).toBe(84532);expect(()=>config({CHAIN_ID:'11155111'})).toThrow();
- for(let day=1;day<=11;day++)expect(assess(day,{CHAIN_ID:'11155111'}).some(x=>x.startsWith('CHAIN_ID:'))).toBe(true);
+ for(let day=1;day<=12;day++)expect(assess(day,{CHAIN_ID:'11155111'}).some(x=>x.startsWith('CHAIN_ID:'))).toBe(true);
 });
 it('rejects copied testnet USDC in a real Base deployment and preserves explicit local fixtures',()=>{
  expect(tokenAddress(config({AGENT_MODE:'real',CHAIN_ID:'8453'}))).toBe(BASE_USDC);expect(tokenAddress(config({AGENT_MODE:'real',CHAIN_ID:'84532'}))).toBe(BASE_SEPOLIA_USDC);
