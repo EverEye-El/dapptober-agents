@@ -1,6 +1,6 @@
 # Dapptober Agents
 
-Twelve independently runnable crypto-native agents for Dapptober 2026, built on a shared TypeScript capability layer. The supplied daily prompts are canonical; the master build specification defines the architecture and audit requirements.
+Thirteen independently runnable crypto-native agents for Dapptober 2026, built on a shared TypeScript capability layer. The supplied daily prompts are canonical; the master build specification defines the architecture and audit requirements.
 
 [Project completion tracker](docs/PROJECT-COMPLETION-TRACKER.md) records tested functionality and remaining work for every built day and is updated after each daily build.
 
@@ -18,6 +18,7 @@ Twelve independently runnable crypto-native agents for Dapptober 2026, built on 
 | 10 | [The Human Checkpoint](apps/agents/day-10-human-checkpoint/README.md) | http://localhost:3010 | World ID 4, verified passkeys, ERC-8004, fixed USDC rewards |
 | 11 | [The GPU Night Market](apps/agents/day-11-gpu-night-market/README.md) | http://localhost:3011 | Base USDC compute escrow, Akash/Ollama worker, Jev bidding |
 | 12 | [The Provenance Press](apps/agents/day-12-provenance-press/README.md) | http://localhost:3012 | Custom Base IP licenses, IPFS, USDC derivative royalties; native Story gap explicit |
+| 13 | [Agent Launch Gantry](apps/agents/day-13-agent-launch-gantry/README.md) | http://localhost:3013 | Tokenized agents, curve trading, paid AI services and holder revenue |
 
 ## Start here
 
@@ -30,7 +31,7 @@ See [pnpm migration and validation](docs/PNPM-MIGRATION.md) for the workspace ch
 ```sh
 pnpm install --frozen-lockfile
 pnpm run dev 01
-# Or run all twelve independent servers:
+# Or run all thirteen independent servers:
 pnpm run dev
 ```
 
@@ -48,12 +49,12 @@ pnpm run typecheck
 pnpm run lint
 pnpm test
 pnpm run test:contracts            # Solidity unit and fuzz tests, offline
-pnpm run build                    # all twelve independent builds
+pnpm run build                    # all thirteen independent builds
 pnpm run check                    # full verification
 pnpm run smoke                    # production HTTP workflow audit (servers must run)
 ```
 
-`pnpm --filter @dapptober/day-01 run start` runs a built app. `pnpm run start` starts all twelve after a full build. No other daily server is needed by any real deployment.
+`pnpm --filter @dapptober/day-01 run start` runs a built app. `pnpm run start` starts all thirteen after a full build. No other daily server is needed by any real deployment.
 
 ## Shared capabilities
 
@@ -76,3 +77,5 @@ Day 10 adds private World ID uniqueness, returning verified passkeys, an isolate
 All ten apps default to Base Sepolia (84532) for testing and target Base (8453) for production. Local Anvil (31337) is reserved for isolated integrations. Use separate Supabase projects and private database connection URIs for testing/production; no Supabase browser API keys are required. See [the alignment audit](docs/BASE-SUPABASE-ALIGNMENT-AUDIT.md) for per-day contracts, provider dependencies and unavailable live CoW settlement on Base Sepolia.
 
 Configuration names and where to enter each value: [environment setup](docs/ENVIRONMENT-SETUP.md). Each daily `.env.local` includes field explanations; private values belong there, not in `.env.example`.
+
+Day 13 is `gantry.fun`: a copper agent launchpad with thirdweb-based fixed-supply tokens, perpetual curves and holder revenue. See [its audit](docs/DAY-13-AUDIT.md) for evidence and release limits.

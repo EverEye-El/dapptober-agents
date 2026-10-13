@@ -67,3 +67,5 @@ See [Day 7 research](DAY-07-RESEARCH.md), [application and worker deployment](..
 ## Day 12 provenance capability
 
 `@dapptober/provenance` composes approved-template selection, consent-gated Pinata metadata upload, immutable Base registration certificates, scoped license purchasing, recursive royalty credits/claims and public certificate/event queries. It reuses authentication, Supabase namespaces, chain validation and receipts; the 3012 app is independent. The custom Base registry does not implement Story/PIL; native Story interoperability remains an explicit network and implementation gap, preserving the fixed Base network requirement.
+
+Day 13 promotes `packages/launchpad`: atomic thirdweb-based token/agent factories, perpetual reserve curves, holder revenue distribution, paid text job commitments/caching, risk narration, public feed and supplemental Dune analytics. It shares infrastructure at build time and requires no other daily server.

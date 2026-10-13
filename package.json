@@ -19,7 +19,8 @@
     "test:forecast-chain": "node scripts/forecast-chain-test.mjs",
     "test:checkpoint-chain": "node scripts/checkpoint-chain-test.mjs",
     "test:compute-chain": "node scripts/compute-chain-test.mjs",
-    "test:press-chain": "node scripts/press-chain-test.mjs"
+    "test:press-chain": "node scripts/press-chain-test.mjs",
+    "test:launch-chain": "node scripts/launch-chain-test.mjs"
   },
   "dependencies": {
     "@ai-sdk/openai-compatible": "^2.0.0",
@@ -28,6 +29,8 @@
     "@cowprotocol/sdk-order-signing": "^1.1.16",
     "@dapptober/agent-core": "workspace:*",
     "@dapptober/chain": "workspace:*",
+    "@dapptober/checkpoint": "workspace:*",
+    "@dapptober/compute": "workspace:*",
     "@dapptober/config": "workspace:*",
     "@dapptober/forecast": "workspace:*",
     "@dapptober/governance": "workspace:*",
@@ -37,6 +40,7 @@
     "@dapptober/intents": "workspace:*",
     "@dapptober/mcp": "workspace:*",
     "@dapptober/payments": "workspace:*",
+    "@dapptober/provenance": "workspace:*",
     "@dapptober/receipts": "workspace:*",
     "@dapptober/treasury": "workspace:*",
     "@dapptober/types": "workspace:*",
@@ -64,9 +68,7 @@
     "thirdweb": "^5.0.0",
     "viem": "^2.38.0",
     "zod": "^4.0.0",
-    "@dapptober/checkpoint": "workspace:*",
-    "@dapptober/compute": "workspace:*",
-    "@dapptober/provenance": "workspace:*"
+    "@dapptober/launchpad": "workspace:*"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.0.0",
@@ -79,7 +81,8 @@
     "tailwindcss": "^4.0.0",
     "typescript": "^5.9.0",
     "typescript-eslint": "^8.0.0",
-    "vitest": "^5.0.3"
+    "vitest": "^5.0.3",
+    "@thirdweb-dev/contracts": "3.15.0"
   },
   "packageManager": "pnpm@10.2.0",
   "engines": {

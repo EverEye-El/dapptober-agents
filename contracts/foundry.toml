@@ -4,6 +4,6 @@ test = "test"
 solc = "scripts/solc.mjs"
 optimizer = true
 optimizer_runs = 200
-remappings = ["@openzeppelin/=../node_modules/@openzeppelin/"]
+remappings = ["@thirdweb-dev/contracts/=../node_modules/@thirdweb-dev/contracts/","@openzeppelin/=../node_modules/@openzeppelin/"]
 evm_version = "cancun"
 via_ir = true
