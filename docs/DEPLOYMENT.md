@@ -84,3 +84,7 @@ See [Day 11 README](../apps/agents/day-11-gpu-night-market/README.md) and [provi
 ## Day 12 deployment
 
 See [Provenance Press setup](../apps/agents/day-12-provenance-press/README.md). Deploy ProvenancePress(owner,USDC) on Base Sepolia then Base; set actual registry/deployment block, Circle USDC, private Supabase/Jev/Pinata/thirdweb settings and dedicated buyer wallet. Owner signs caps and approved works. Review public publication consent and legal permissions, then verify funded originals/remixes, license purposes, royalty claims and public credit history. This is a custom Base registry, not Story Protocol/PIL; native Story integration needs a compatible architecture or approved network exception.
+
+Day 13 deploys independently as `day-13-agent-launch-gantry` on port 3013. Deploy AgentLaunchGantry with selected Base Circle USDC, then configure LAUNCH_FACTORY, Supabase/Jev/OpenAI/thirdweb and a capped signer. See the app README and ordered tracker before funding. Dune is supplemental mainnet query analytics; no Base Sepolia index support is assumed.
+
+Day 13 onchain buyer setup: after the factory deployment, deploy `GantryBuyerVault(owner, agentSigner, CircleUSDC, factory)` and set `LAUNCH_BUYER_VAULT`. Owner-signed grants atomically replace the allowed listing IDs and set caps/24-hour expiry; owner-signed revoke stops the vault. Fund the vault with limited USDC, the signer with gas only. Owner recovery and holder-revenue claims use wallet previews. The vault checks the actual factory listing and retains UTC-day spent across renewed grants.

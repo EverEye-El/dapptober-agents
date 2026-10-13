@@ -10,7 +10,8 @@
     "./src/senate-room": "./src/senate-room.tsx",
     "./src/checkpoint-room": "./src/checkpoint-room.tsx",
     "./src/market-room": "./src/market-room.tsx",
-    "./src/press-room": "./src/press-room.tsx"
+    "./src/press-room": "./src/press-room.tsx",
+    "./src/launchpad": "./src/launchpad.tsx"
   },
   "dependencies": {
     "@dapptober/governance": "workspace:*",
@@ -24,6 +25,7 @@
     "@worldcoin/idkit-core": "^4.0.0",
     "qrcode": "^1.5.4",
     "@dapptober/compute": "workspace:*",
-    "@dapptober/provenance": "workspace:*"
+    "@dapptober/provenance": "workspace:*",
+    "@dapptober/launchpad": "workspace:*"
   }
 }

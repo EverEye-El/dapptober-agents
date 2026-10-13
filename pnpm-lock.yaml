@@ -67,6 +67,9 @@ importers:
       '@dapptober/intents':
         specifier: workspace:*
         version: link:packages/intents
+      '@dapptober/launchpad':
+        specifier: workspace:*
+        version: link:packages/launchpad
       '@dapptober/mcp':
         specifier: workspace:*
         version: link:packages/mcp
@@ -161,6 +164,9 @@ importers:
       '@tailwindcss/postcss':
         specifier: ^4.0.0
         version: 4.3.3
+      '@thirdweb-dev/contracts':
+        specifier: 3.15.0
+        version: 3.15.0
       '@types/node':
         specifier: ^22.0.0
         version: 22.20.5
@@ -425,6 +431,24 @@ importers:
       '@dapptober/provenance':
         specifier: workspace:*
         version: link:../../../packages/provenance
+      '@dapptober/ui':
+        specifier: workspace:*
+        version: link:../../../packages/ui
+      next:
+        specifier: ^16.0.0
+        version: 16.4.0(@opentelemetry/api@1.9.1)(@types/node@22.20.5)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      react:
+        specifier: ^19.2.0
+        version: 19.3.0
+      react-dom:
+        specifier: ^19.2.0
+        version: 19.3.0(react@19.3.0)
+
+  apps/agents/day-13-agent-launch-gantry:
+    dependencies:
+      '@dapptober/launchpad':
+        specifier: workspace:*
+        version: link:../../../packages/launchpad
       '@dapptober/ui':
         specifier: workspace:*
         version: link:../../../packages/ui
@@ -717,6 +741,36 @@ importers:
         specifier: ^4.0.0
         version: 4.6.5
 
+  packages/launchpad:
+    dependencies:
+      '@dapptober/agent-core':
+        specifier: workspace:*
+        version: link:../agent-core
+      '@dapptober/chain':
+        specifier: workspace:*
+        version: link:../chain
+      '@dapptober/config':
+        specifier: workspace:*
+        version: link:../config
+      '@dapptober/guardrails':
+        specifier: workspace:*
+        version: link:../guardrails
+      '@dapptober/receipts':
+        specifier: workspace:*
+        version: link:../receipts
+      '@dapptober/types':
+        specifier: workspace:*
+        version: link:../types
+      thirdweb:
+        specifier: ^5.0.0
+        version: 5.121.6(@hey-api/openapi-ts@0.99.0(typescript@5.9.3))(@solana/sysvars@5.5.1(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3))(@tanstack/query-core@5.81.5)(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(@x402/core@2.28.0)(@x402/evm@2.28.0(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10))(@x402/extensions@2.28.0(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10))(@x402/svm@2.28.0(@solana/kit@5.5.1(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(utf-8-validate@5.0.10))(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3))(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(immer@11.1.21)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(typescript@5.9.3)(use-sync-external-store@1.4.0(react@19.3.0))(utf-8-validate@5.0.10)(ws@8.22.0(bufferutil@4.1.0)(utf-8-validate@5.0.10))
+      viem:
+        specifier: ^2.38.0
+        version: 2.57.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.6.5)
+      zod:
+        specifier: ^4.0.0
+        version: 4.6.5
+
   packages/mcp:
     dependencies:
       '@dapptober/agent-core':
@@ -859,6 +913,9 @@ importers:
       '@dapptober/inference':
         specifier: workspace:*
         version: link:../inference
+      '@dapptober/launchpad':
+        specifier: workspace:*
+        version: link:../launchpad
       '@dapptober/provenance':
         specifier: workspace:*
         version: link:../provenance
@@ -1626,6 +1683,12 @@ packages:
   '@opentelemetry/api@1.9.1':
     resolution: {integrity: sha512-gLyJlPHPZYdAk1JENA9LeHejZe1Ti77/pTeFm/nMXmQH/HFZlcS/O2XJB+L8fkbrNSqhdtlvjBVjxwUYanNH5Q==}
     engines: {node: '>=8.0.0'}
+
+  '@openzeppelin/contracts-upgradeable@4.9.6':
+    resolution: {integrity: sha512-m4iHazOsOCv1DgM7eD7GupTJ+NFVujRZt1wzddDPSVGpWdKq1SKkla5htKG7+IS4d2XOCtzkUNwRZ7Vq5aEUMA==}
+
+  '@openzeppelin/contracts@4.9.6':
+    resolution: {integrity: sha512-xSmezSupL+y9VkHZJGDoCBpmnB2ogM13ccaYDWqJTfS3dbuHkgjuwDFUmaFauBCboQMGB/S5UqUl2y54X99BmA==}
 
   '@openzeppelin/contracts@5.6.1':
     resolution: {integrity: sha512-Ly6SlsVJ3mj+b18W3R8gNufB7dTICT105fJhodGAGgyC2oqnBAhqSiNDJ8V8DLY05cCz81GLI0CU5vNYA1EC/w==}
@@ -3145,6 +3208,14 @@ packages:
     peerDependencies:
       react: ^18 || ^19
 
+  '@thirdweb-dev/contracts@3.15.0':
+    resolution: {integrity: sha512-sIXPy6zNqW9K9h8xgCnsRQVrqmmMdxoDqut4eAZj1CJzMax5TyrNBoSYCfAX0et8KApvBeCVeJQhUHSWpBNIVw==}
+    engines: {node: '>=18.0.0'}
+
+  '@thirdweb-dev/dynamic-contracts@1.2.5':
+    resolution: {integrity: sha512-YVsz+jUWbwj+6aF2eTZGMfyw47a1HRmgNl4LQ3gW9gwYL5y5+OX/yOzv6aV5ibvoqCk/k10aIVK2eFrcpMubQA==}
+    engines: {node: '>=18.0.0'}
+
   '@thirdweb-dev/engine@3.4.0':
     resolution: {integrity: sha512-8blTrKJM+d2Z/waX21LsiHFnW+vAVDdXfRdshUsTdoA95ZwrgEfHGR8mWM/94T9MTtp0iR7TjKELLsqx+M45eQ==}
     engines: {node: '>=18'}
@@ -4071,6 +4142,9 @@ packages:
   enhanced-resolve@5.26.0:
     resolution: {integrity: sha512-9vhedylFonb2YGogzUKX6+Ja72gOJbN1QHAqdrvqLwhdl/QWbKopzoUC9EbQNVsAns/bx/4uyqalrQAoy1IByw==}
     engines: {node: '>=10.13.0'}
+
+  erc721a-upgradeable@3.3.0:
+    resolution: {integrity: sha512-ILE0SjKuvhx+PABG0A/41QUp0MFiYmzrgo71htQ0Ov6JfDOmgUzGxDW8gZuYfKrdlYjNwSAqMpUFWBbyW3sWBA==}
 
   error-ex@1.3.4:
     resolution: {integrity: sha512-sqQamAnR14VgCr1A618A3sGrygcpK+HEbenA/HiEAkkUwcZIIB/tgWqHFxWgOyDh4nB4JCRimh79dR5Ywc9MDQ==}
@@ -5557,6 +5631,9 @@ packages:
   socket.io-parser@4.2.7:
     resolution: {integrity: sha512-IH/iSeO9T6gz1KkFleGDWkG9N3dl4jXVYUtMhIqH10Md0ttMer8nUNWiP1DKuNrybD2xBrixLJdCC9J6ECoYkg==}
     engines: {node: '>=10.0.0'}
+
+  solady@0.0.180:
+    resolution: {integrity: sha512-9QVCyMph+wk78Aq/GxtDAQg7dvNoVWx2dS2Zwf11XlwFKDZ+YJG2lrQsK9NEIth9NOebwjBXAYk4itdwOOE4aw==}
 
   solc@0.8.37:
     resolution: {integrity: sha512-ieUYdPDRGNKMsZpCfi9tY64Q+ASoL8tyhLuvf9cFiqDs+6ijlx8Wn2CRi0N71AlCvRx0V092rlUYu3b3PuxWlA==}
@@ -7164,6 +7241,10 @@ snapshots:
   '@noble/secp256k1@2.3.0': {}
 
   '@opentelemetry/api@1.9.1': {}
+
+  '@openzeppelin/contracts-upgradeable@4.9.6': {}
+
+  '@openzeppelin/contracts@4.9.6': {}
 
   '@openzeppelin/contracts@5.6.1': {}
 
@@ -9119,6 +9200,16 @@ snapshots:
       '@tanstack/query-core': 5.81.5
       react: 19.3.0
 
+  '@thirdweb-dev/contracts@3.15.0':
+    dependencies:
+      '@openzeppelin/contracts': 4.9.6
+      '@openzeppelin/contracts-upgradeable': 4.9.6
+      '@thirdweb-dev/dynamic-contracts': 1.2.5
+      erc721a-upgradeable: 3.3.0
+      solady: 0.0.180
+
+  '@thirdweb-dev/dynamic-contracts@1.2.5': {}
+
   '@thirdweb-dev/engine@3.4.0(@hey-api/openapi-ts@0.99.0(typescript@5.9.3))(typescript@5.9.3)':
     dependencies:
       '@hey-api/client-fetch': 0.10.0(@hey-api/openapi-ts@0.99.0(typescript@5.9.3))
@@ -10741,6 +10832,10 @@ snapshots:
       graceful-fs: 4.2.11
       tapable: 2.3.3
 
+  erc721a-upgradeable@3.3.0:
+    dependencies:
+      '@openzeppelin/contracts-upgradeable': 4.9.6
+
   error-ex@1.3.4:
     dependencies:
       is-arrayish: 0.2.1
@@ -12337,6 +12432,8 @@ snapshots:
       debug: 4.4.3
     transitivePeerDependencies:
       - supports-color
+
+  solady@0.0.180: {}
 
   solc@0.8.37:
     dependencies:
