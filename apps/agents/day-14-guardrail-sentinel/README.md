@@ -45,3 +45,9 @@ Production uses **Base 8453**, Circle USDC `0x833589fCD6eDb6E08f4c7C32D4f71b54bd
 ## Limitations and production completion
 
 Five-minute permits are nonce-bound: competing queued requests for one session can become stale after one executes. Policies expire after at most 30 days. The fleet cap is 100, allowlists 32 contracts; larger monitoring needs indexing and pagination. Jev risk is a signal, not a security audit. The custom custody contract needs independent review before meaningful funds. Real provider access, Supabase durability/backup checks, testnet/mainnet deployments, guardian gas/runbook, independent wallets, signed approval/revocation drills, recipient compatibility, previous-wallet migration and hosted release remain in the ordered [completion tracker](../../../docs/PROJECT-COMPLETION-TRACKER.md).
+
+## Three.js fleet projection
+
+The interactive copper 3D topology shows the guardian, enrolled sessions, their latest recorded request states and daily budget usage. Drag to orbit, click a satellite or use the keyboard-accessible agent buttons to select its policy. Motion can be paused and follows reduced-motion preferences; rendering stops while hidden/offscreen, pixel density is capped and GPU resources are disposed on unmount. WebGL2/context failure leaves the full agent controls and textual state available. The library loads only in the browser on this Sentinel route.
+
+Visible pages refresh their state every ten seconds, with bounded single-flight requests and stale-state warnings after refresh failures. Pulses replay recorded request states; they do not imply new transactions, pending confirmations, live chain subscriptions or protection of unrelated wallets. Revoked/expired/paused policy state takes precedence over old execution records. GPU detail is capped at 24 agents; the accessible selector lists the complete fleet.

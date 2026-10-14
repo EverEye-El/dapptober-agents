@@ -30,3 +30,9 @@ Earlier apps are not automatically enrolled and existing wallets are not retroac
 - Production dependency audit reports one inherited low-severity advisory; no moderate-or-higher advisory. Hosted CI/container results are pending for the new commit; local Docker execution is not claimed.
 
 A repeated Day 8 test exposed a full developer demo archive. Its test now uses isolated in-memory archive state instead of accumulating in the user's local demo data. Runtime governance behavior is unchanged. Production smoke errors now retain server diagnostics so restricted-port failures are distinguishable from app failures.
+
+## Three.js design follow-up
+
+Added a client-only 3D guardian topology linked to real application state and the selected policy. Browser checks verified WebGL rendering, drag orbit, satellite picking, accessible selection, motion pause/resume and immediate human-review state updates. Inactive policy status overrides historical executions; two new state-mapping regressions pass. [Projection evidence](day-14-threejs.png).
+
+Follow-up validation: lint/typecheck, 104 application tests, Day 14 production build and all fourteen production HTTP workflows passed. Frozen dependency install passed. No contract or execution authority changed. Context-loss fallback, reduced-motion behavior and resource cleanup are implemented; broader device/hosted GPU acceptance remains in the production checklist.

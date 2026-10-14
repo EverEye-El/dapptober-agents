@@ -15,18 +15,22 @@
     "./src/sentinel": "./src/sentinel.tsx"
   },
   "dependencies": {
+    "@dapptober/compute": "workspace:*",
+    "@dapptober/forecast": "workspace:*",
     "@dapptober/governance": "workspace:*",
     "@dapptober/inference": "workspace:*",
+    "@dapptober/launchpad": "workspace:*",
+    "@dapptober/provenance": "workspace:*",
     "@dapptober/types": "workspace:*",
-    "react": "^19.2.0",
-    "viem": "^2.38.0",
-    "recharts": "^3.0.0",
-    "@dapptober/forecast": "workspace:*",
     "@simplewebauthn/browser": "^13.0.0",
     "@worldcoin/idkit-core": "^4.0.0",
     "qrcode": "^1.5.4",
-    "@dapptober/compute": "workspace:*",
-    "@dapptober/provenance": "workspace:*",
-    "@dapptober/launchpad": "workspace:*"
+    "react": "^19.2.0",
+    "recharts": "^3.0.0",
+    "three": "^0.186.1",
+    "viem": "^2.38.0"
+  },
+  "devDependencies": {
+    "@types/three": "^0.186.0"
   }
 }
