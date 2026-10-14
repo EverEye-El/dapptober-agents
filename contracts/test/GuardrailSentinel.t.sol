@@ -21,4 +21,5 @@ contract SentinelTest {
  function testGuardianSignatureBoundToBaseNetwork() public {vm.chainId(84532);GuardrailSentinel.Permit memory p=permit(1e6,false);bytes memory g=signature(22,sentinel.digest(p));vm.chainId(8453);vm.prank(session);vm.expectRevert(bytes("guardian signature"));sentinel.pay(p,g,"");vm.chainId(84532);vm.prank(session);sentinel.pay(p,g,"");require(sentinel.nonces(0)==1,"nonce");}
  function testTargetAndPerTxCannotBeOverriddenByHuman() public {GuardrailSentinel.Permit memory p=permit(11e6,true);pay(p,true,"target or cap");p=permit(1e6,true);p.target=address(new SentinelTarget());pay(p,true,"target or cap");}
 
+ function testRemoveRevokesPermitAndPreservesRecoverableFunds() public {GuardrailSentinel.Permit memory p=permit(1e6,false);vm.prank(session);vm.expectRevert(bytes("owner only"));sentinel.remove(0);vm.prank(owner);sentinel.remove(0);pay(p,false,"session revoked");require(sentinel.balances(0)==20e6,"funds retained");vm.prank(owner);sentinel.recover(0,20e6);require(token.balanceOf(owner)==20e6,"recovered");grant(0);pay(p,false,"session revoked");}
 }
