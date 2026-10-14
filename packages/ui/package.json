@@ -11,7 +11,8 @@
     "./src/checkpoint-room": "./src/checkpoint-room.tsx",
     "./src/market-room": "./src/market-room.tsx",
     "./src/press-room": "./src/press-room.tsx",
-    "./src/launchpad": "./src/launchpad.tsx"
+    "./src/launchpad": "./src/launchpad.tsx",
+    "./src/sentinel": "./src/sentinel.tsx"
   },
   "dependencies": {
     "@dapptober/governance": "workspace:*",
