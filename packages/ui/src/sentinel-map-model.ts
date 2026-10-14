@@ -7,3 +7,8 @@ export function fleetNodes(p:SentinelState,now:number):FleetNode[]{return p.agen
  const status=!active?'revoked':latest?.status==='pending'?'review':latest?.status==='cancelled'?'idle':latest?.status??'idle';
  return {id:a.id,name:a.name,active,status,requestId:latest?.id,used:Math.max(0,Math.min(1,Number(a.spent)/Number(a.daily)||0)),eventTime:latest?.time};
  });}
+// Rotate the selected satellite onto the camera-facing +Z meridian, using the shortest arc.
+export function focalYaw(index:number,count:number,current:number){
+ const target=index/Math.max(count,1)*Math.PI*2-Math.PI;
+ return current+Math.atan2(Math.sin(target-current),Math.cos(target-current));
+}
