@@ -1,4 +1,15 @@
-import {it,expect} from 'vitest';
+import {it,expect,vi} from 'vitest';
+import type {Config} from '@dapptober/config';
+import type {State} from '@dapptober/types';
+// Keep the public simulation archive isolated from the developer's persisted demo data.
+vi.mock('@dapptober/agent-core/src/store',async importOriginal=>{
+ const original=await importOriginal<typeof import('@dapptober/agent-core/src/store')>();
+ const archives=new Map<string,State>();
+ return {...original,withState:async <T>(day:number,id:string,c:Config,work:(s:State)=>Promise<T>)=>{
+  const key=`${day}:${id}`;let s=archives.get(key);if(!s){s=original.initialState(day,c);archives.set(key,s);}
+  return {state:s,result:await work(s)};
+ }};
+});
 import {dispatch} from '@dapptober/agent-core';
 import {governanceAction,proposalTally,proposalPhase,delegateKey,profileTyped,publicSenate,refreshSenate} from '@dapptober/governance';
 import {config} from '@dapptober/config';

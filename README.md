@@ -1,6 +1,6 @@
 # Dapptober Agents
 
-Thirteen independently runnable crypto-native agents for Dapptober 2026, built on a shared TypeScript capability layer. The supplied daily prompts are canonical; the master build specification defines the architecture and audit requirements.
+Fourteen independently runnable crypto-native agents for Dapptober 2026, built on a shared TypeScript capability layer. The supplied daily prompts are canonical; the master build specification defines the architecture and audit requirements.
 
 [Project completion tracker](docs/PROJECT-COMPLETION-TRACKER.md) records tested functionality and remaining work for every built day and is updated after each daily build.
 
@@ -19,6 +19,7 @@ Thirteen independently runnable crypto-native agents for Dapptober 2026, built o
 | 11 | [The GPU Night Market](apps/agents/day-11-gpu-night-market/README.md) | http://localhost:3011 | Base USDC compute escrow, Akash/Ollama worker, Jev bidding |
 | 12 | [The Provenance Press](apps/agents/day-12-provenance-press/README.md) | http://localhost:3012 | Custom Base IP licenses, IPFS, USDC derivative royalties; native Story gap explicit |
 | 13 | [Agent Launch Gantry](apps/agents/day-13-agent-launch-gantry/README.md) | http://localhost:3013 | Tokenized agents, curve trading, paid AI services and holder revenue |
+| 14 | [Guardrail Sentinel](apps/agents/day-14-guardrail-sentinel/README.md) | http://localhost:3014 | Onchain session policies, signed human approvals, Jev MCP gates and global revocation |
 
 ## Start here
 
@@ -31,7 +32,7 @@ See [pnpm migration and validation](docs/PNPM-MIGRATION.md) for the workspace ch
 ```sh
 pnpm install --frozen-lockfile
 pnpm run dev 01
-# Or run all thirteen independent servers:
+# Or run all fourteen independent servers:
 pnpm run dev
 ```
 
@@ -49,12 +50,12 @@ pnpm run typecheck
 pnpm run lint
 pnpm test
 pnpm run test:contracts            # Solidity unit and fuzz tests, offline
-pnpm run build                    # all thirteen independent builds
+pnpm run build                    # all fourteen independent builds
 pnpm run check                    # full verification
 pnpm run smoke                    # production HTTP workflow audit (servers must run)
 ```
 
-`pnpm --filter @dapptober/day-01 run start` runs a built app. `pnpm run start` starts all thirteen after a full build. No other daily server is needed by any real deployment.
+`pnpm --filter @dapptober/day-01 run start` runs a built app. `pnpm run start` starts all fourteen after a full build. No other daily server is needed by any real deployment.
 
 ## Shared capabilities
 
