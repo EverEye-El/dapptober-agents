@@ -6,13 +6,13 @@ import {readFileSync,readdirSync} from 'node:fs';
 import {parseEnv} from 'node:util';
 import {deploymentNetworkAllowed,checkDeploymentNetwork} from '../scripts/deployment-network.mjs';
 afterEach(()=>vi.restoreAllMocks());
-it('all fourteen examples use Base Sepolia and a private Supabase database URI field',()=>{
- const folders=readdirSync('apps/agents').filter(x=>/^day-\d+-/.test(x));expect(folders).toHaveLength(14);
+it('all fifteen examples use Base Sepolia and a private Supabase database URI field',()=>{
+ const folders=readdirSync('apps/agents').filter(x=>/^day-\d+-/.test(x));expect(folders).toHaveLength(15);
  for(const folder of folders){const env=parseEnv(readFileSync(`apps/agents/${folder}/.env.example`,'utf8'));expect(config(env).CHAIN_ID).toBe(84532);expect(env).toHaveProperty('SUPABASE_DATABASE_URL');if(folder.startsWith('day-06'))expect(env.COW_CHAIN_ID).toBe('84532');}
 });
 it('uses Base network metadata and rejects Ethereum Sepolia configuration',()=>{
  expect(chain(config({CHAIN_ID:'8453'})).id).toBe(8453);expect(chain(config({CHAIN_ID:'84532'})).id).toBe(84532);expect(()=>config({CHAIN_ID:'11155111'})).toThrow();
- for(let day=1;day<=14;day++)expect(assess(day,{CHAIN_ID:'11155111'}).some(x=>x.startsWith('CHAIN_ID:'))).toBe(true);
+ for(let day=1;day<=15;day++)expect(assess(day,{CHAIN_ID:'11155111'}).some(x=>x.startsWith('CHAIN_ID:'))).toBe(true);
 });
 it('rejects copied testnet USDC in a real Base deployment and preserves explicit local fixtures',()=>{
  expect(tokenAddress(config({AGENT_MODE:'real',CHAIN_ID:'8453'}))).toBe(BASE_USDC);expect(tokenAddress(config({AGENT_MODE:'real',CHAIN_ID:'84532'}))).toBe(BASE_SEPOLIA_USDC);
@@ -37,3 +37,5 @@ it('blocks contract deployment to another public chain before broadcast',async()
  vi.spyOn(globalThis,'fetch').mockResolvedValue(new Response(JSON.stringify({result:'0xaa36a7'})));
  await expect(checkDeploymentNetwork('https://fixture.invalid')).rejects.toThrow('Deployment restricted');
 });
+
+it('each independent Vercel deployment builds its own day',()=>{for(const folder of readdirSync('apps/agents').filter(x=>/^day-\d+-/.test(x))){const day=folder.match(/^day-(\d+)-/)![1],deployment=JSON.parse(readFileSync(`apps/agents/${folder}/vercel.json`,'utf8'));expect(deployment.buildCommand).toBe(`cd ../../.. && pnpm run build ${day}`);}});

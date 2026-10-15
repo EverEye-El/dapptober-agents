@@ -71,3 +71,6 @@ See [Day 7 research](DAY-07-RESEARCH.md), [application and worker deployment](..
 Day 13 promotes `packages/launchpad`: atomic thirdweb-based token/agent factories, perpetual reserve curves, holder revenue distribution, paid text job commitments/caching, risk narration, public feed and supplemental Dune analytics. It shares infrastructure at build time and requires no other daily server.
 
 Day 14 promotes `packages/sentinel`: scoped policy custody, guardian/human EIP-712 permits, global revocation, Jev LangChain classification, MCP guard middleware, model routing and simulation. It is standalone and protects enrolled compartments; prior wallets require deliberate migration.
+
+
+Day 15 promotes `packages/rwa`: issuer-reviewed catalogs, Centrifuge AsyncVault portfolio/requests/claims, Jev eligibility and source-bound AI explanations, Chainlink/NAV validation and exact investor wallet previews/receipts. No server signing authority or daily-server dependency is introduced.

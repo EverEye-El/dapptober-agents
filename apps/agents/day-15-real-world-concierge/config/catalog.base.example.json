@@ -1,0 +1,62 @@
+[
+  {
+    "id": "jtrsy",
+    "name": "Janus Henderson Anemoy Treasury Fund",
+    "symbol": "JTRSY",
+    "category": "Treasuries",
+    "vault": "0x1adc510c58b0ee383034b0a42421f516d0baf283",
+    "share": "0x8c213ee79581ff4984583c6a801e5263418c4b86",
+    "chainId": 8453,
+    "asOf": "2026-10-15",
+    "reviewUntil": "2026-10-15T00:00:00Z",
+    "minimum": "100000",
+    "allowedCountries": [],
+    "professionalOnly": true,
+    "indicativeApy": null,
+    "apyAsOf": null,
+    "maturity": null,
+    "facts": {
+      "issuer": {
+        "text": "Anemoy Treasury Fund share class JTRSY; verify the current legal issuer and subscription documents directly with Anemoy before enabling investment.",
+        "sourceId": "issuer"
+      },
+      "yieldSource": {
+        "text": "The issuer describes a strategy investing in short-duration US Treasury bills. No current yield is supplied in this template.",
+        "sourceId": "issuer"
+      },
+      "redemption": {
+        "text": "The issuer describes daily redemptions. This adapter uses asynchronous requests and later claims; actual fulfillment and terms remain issuer-controlled.",
+        "sourceId": "protocol"
+      },
+      "risks": {
+        "text": "Review issuer, custody, liquidity, transfer restrictions, NAV changes, USDC and contract risk; tokenization does not guarantee capital or immediate exit.",
+        "sourceId": "issuer"
+      },
+      "eligibility": {
+        "text": "Issuer onboarding and wallet permission are required. Obtain current permitted jurisdictions, professional-investor criteria and actual minimum directly from the issuer; this template is deliberately disabled.",
+        "sourceId": "issuer"
+      },
+      "maturity": {
+        "text": "The issuer describes underlying Treasury bills of at most six months. That is not a maturity date for the fund token.",
+        "sourceId": "issuer"
+      }
+    },
+    "sources": [
+      {
+        "id": "issuer",
+        "title": "Anemoy: Janus Henderson Anemoy Treasury Fund",
+        "url": "https://www.anemoy.io/funds/jtrsy"
+      },
+      {
+        "id": "protocol",
+        "title": "Centrifuge request / claim guide",
+        "url": "https://docs.centrifuge.io/developer/protocol/guides/invest-into-a-vault/"
+      },
+      {
+        "id": "deployments",
+        "title": "Centrifuge official deployments",
+        "url": "https://docs.centrifuge.io/developer/protocol/deployments/"
+      }
+    ]
+  }
+]
