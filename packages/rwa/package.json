@@ -1,0 +1,19 @@
+{
+  "name": "@dapptober/rwa",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./src/*": "./src/*.ts"
+  },
+  "dependencies": {
+    "@dapptober/agent-core": "workspace:*",
+    "@dapptober/chain": "workspace:*",
+    "@dapptober/config": "workspace:*",
+    "@dapptober/types": "workspace:*",
+    "@dapptober/receipts": "workspace:*",
+    "zod": "^4.0.0",
+    "viem": "^2.38.0"
+  }
+}

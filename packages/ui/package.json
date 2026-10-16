@@ -12,7 +12,8 @@
     "./src/market-room": "./src/market-room.tsx",
     "./src/press-room": "./src/press-room.tsx",
     "./src/launchpad": "./src/launchpad.tsx",
-    "./src/sentinel": "./src/sentinel.tsx"
+    "./src/sentinel": "./src/sentinel.tsx",
+    "./src/concierge": "./src/concierge.tsx"
   },
   "dependencies": {
     "@dapptober/compute": "workspace:*",
@@ -28,7 +29,8 @@
     "react": "^19.2.0",
     "recharts": "^3.0.0",
     "three": "^0.186.1",
-    "viem": "^2.38.0"
+    "viem": "^2.38.0",
+    "@dapptober/rwa": "workspace:*"
   },
   "devDependencies": {
     "@types/three": "^0.186.0"

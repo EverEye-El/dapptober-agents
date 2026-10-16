@@ -1,0 +1,22 @@
+# Day 15 research — October 15, 2026
+
+Read the master build specification and the **complete canonical Day 15 prompt** before implementation. Inspected the live [Day 15 page](https://www.dapptober.xyz/dapp/15) in the in-app browser, including brief, features, Jev and stack. The live page calls Jev optional while the supplied prompt lists its behaviors as requirements; the implementation follows the supplied prompt and includes them. Reviewed the supplied `2026SocialPosts/27-day-15.png`; source is preserved.
+
+## Protocol decisions
+
+- [Centrifuge deployment catalog](https://docs.centrifuge.io/developer/protocol/deployments/) lists Base mainnet and Base Sepolia protocol IDs. It lists the Base JTRSY USDC vault `0x1adc510c58b0ee383034b0a42421f516d0baf283` and share `0x8c213ee79581ff4984583c6a801e5263418c4b86`. Those are **mainnet**, not testnet defaults. Protocol deployment does not establish a particular issuer's testnet pool or investor permission.
+- [Official investment guide](https://docs.centrifuge.io/developer/protocol/guides/invest-into-a-vault/) supplies the request/fulfill/claim flow and distinguishes async vaults from synchronous deposit vaults. Use non-custodial investor calls, not a custom agent-spending wrapper. Avoid `setOperator` delegation.
+- [AsyncVault source](https://raw.githubusercontent.com/centrifuge/protocol/main/src/vaults/AsyncVault.sol) and [BaseVaults source](https://raw.githubusercontent.com/centrifuge/protocol/main/src/vaults/BaseVaults.sol) establish separate share tokens, request ID 0, `isPermissioned`, pending-request views, `maxMint`/`maxWithdraw`, separate controller and owner, conversion methods and NAV update timestamp. Async preview methods revert; do not use ERC-4626 `previewDeposit`. Claim via mint to reduce dust. These interfaces must be verified for each issuer's deployed version.
+- [Anemoy JTRSY page](https://www.anemoy.io/funds/jtrsy) provides issuer strategy/context and underlying bill duration. The app never infers token maturity, current yield, legal eligibility or guaranteed exit from promotional statements. Reviewed source text and current offering documents remain operator responsibilities; the mainnet template is intentionally disabled until reviewed.
+- [Chainlink AggregatorV3 reference](https://docs.chain.link/data-feeds/api-reference) and [sequencer uptime guide](https://docs.chain.link/data-feeds/l2-sequencer-feeds) inform complete positive-round/freshness checks and sequencer recovery protection. Base's mainnet uptime proxy is `0xBCF85224fc0756B9Fa45aA7892530B47e10b6433`; no unverified testnet uptime proxy is assumed. USDC funding price and issuer NAV are separate data. The USDC/USD proxy must come from the official directory for the chosen chain; no unsupported testnet feed is guessed.
+- [Vercel AI SDK structured output](https://ai-sdk.dev/docs/ai-sdk-core/generating-structured-data) confirms `generateText` + `Output.object` and Zod validation. Reuse the installed SDK 6 provider boundary with typed paragraph/source-ID output. Current online docs are SDK 7; the actual installed API and TypeScript checks confirm the reused SDK 6 call shape. TypeSafe Jev uses the existing typed shared provider; it runs before generative explanations and all prepared financial actions.
+
+## Read-only Base evidence
+
+Public Base RPC reads on October 15 returned the official vault's asset as mainnet Circle USDC and share as the documented JTRSY token. `pricePerShare` returned 1119252 in six-decimal USDC units and `priceLastUpdated` returned 1791979200. This was a read-only compatibility check, not a purchase, investor whitelist check, provider acceptance or guarantee of current valuation. No financial mainnet transaction was sent.
+
+## Deliberate boundaries
+
+The app signs nothing, accepts no identity documents and does not certify legal eligibility. One deployment is one operator/investor; Supabase is privately partitioned by day/operator. A reviewed catalog plus actual issuer wallet permission and explicit investor wallet confirmation are required. Jev cannot override hard denial. An uncertain allowed decision needs additional human review; every action still requires ordinary explicit confirmation.
+
+No custom production contract is needed. New Solidity contracts live only under tests and are clearly labeled issuer/share/feed interface doubles. Their actual local-chain transfers validate the adapter; they are not a Centrifuge or Chainlink deployment. Demo assets and rates are fictional and never enter real catalogs automatically.

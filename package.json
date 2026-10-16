@@ -21,7 +21,8 @@
     "test:compute-chain": "node scripts/compute-chain-test.mjs",
     "test:press-chain": "node scripts/press-chain-test.mjs",
     "test:launch-chain": "node scripts/launch-chain-test.mjs",
-    "test:sentinel-chain": "node scripts/sentinel-chain-test.mjs"
+    "test:sentinel-chain": "node scripts/sentinel-chain-test.mjs",
+    "test:rwa-chain": "node scripts/rwa-chain-test.mjs"
   },
   "dependencies": {
     "@ai-sdk/openai-compatible": "^2.0.0",
@@ -71,7 +72,8 @@
     "thirdweb": "^5.0.0",
     "viem": "^2.38.0",
     "zod": "^4.0.0",
-    "@dapptober/sentinel": "workspace:*"
+    "@dapptober/sentinel": "workspace:*",
+    "@dapptober/rwa": "workspace:*"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.0.0",
