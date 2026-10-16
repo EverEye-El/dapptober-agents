@@ -42,3 +42,8 @@ Day 14 uses SENTINEL_VAULT, separate SENTINEL_GUARDIAN_PRIVATE_KEY and private S
 
 
 Day 15 uses its own annotated `.env.local`: Supabase Session pooler, operator token, public investor wallet, Base RPC/Circle USDC, TypeSafe Jev and OpenAI keys, `CHAINLINK_USDC_USD_FEED_ADDRESS`/heartbeat, issuer NAV age and `RWA_CATALOG_JSON`. The supplied mainnet JTRSY template is disabled until issuer review and must not be reused on Base Sepolia. No AGENT_PRIVATE_KEY/thirdweb/Tenderly credential is used.
+
+
+## Day 16 — Brass
+
+Day 16 uses its own annotated app .env.example/.env.local: BOURSE_ESCROW, BOURSE_REGISTRY, BOURSE_BUYER_ID, BOURSE_SELLERS_JSON, BOURSE_SELLER_KEYS_JSON, BOURSE_MAX_USDC, OWNER_ADDRESS, Circle USDC/RPC, SUPABASE_DATABASE_URL, OPERATOR_TOKEN, JEV_API_KEY, and OpenAI fields for local sellers. Seller tokens/keys remain private; no buyer private key, thirdweb, or Tenderly configuration. Root env remains a pointer.

@@ -74,3 +74,8 @@ Day 14 promotes `packages/sentinel`: scoped policy custody, guardian/human EIP-7
 
 
 Day 15 promotes `packages/rwa`: issuer-reviewed catalogs, Centrifuge AsyncVault portfolio/requests/claims, Jev eligibility and source-bound AI explanations, Chainlink/NAV validation and exact investor wallet previews/receipts. No server signing authority or daily-server dependency is introduced.
+
+
+## Day 16 — Brass
+
+Day 16 adds @dapptober/bourse: independently deployable A2A seller actors and buyer negotiation, current registry verification, exact signed USDC settlement. Buyer and each seller use separate durable namespaces; no runtime coupling to earlier apps. The fixed escrow limits financial authority while seller keys only sign offers/delivery. See BOURSE-A2A.md.
