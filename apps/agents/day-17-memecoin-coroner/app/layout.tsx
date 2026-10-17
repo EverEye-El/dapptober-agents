@@ -1,0 +1,1 @@
+import type {Metadata} from 'next';import '@dapptober/ui/src/coroner.css';export const metadata:Metadata={title:'Toe Tag · The Memecoin Coroner',description:'Follow the evidence. Token forensics, sell diagnostics and onchain attestations.'};export default function Layout({children}:{children:React.ReactNode}){return <html lang="en"><body>{children}</body></html>;}

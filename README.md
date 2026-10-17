@@ -1,6 +1,6 @@
 # Dapptober Agents
 
-Sixteen independently runnable crypto-native agents for Dapptober 2026, built on a shared TypeScript capability layer. The supplied daily prompts are canonical; the master build specification defines the architecture and audit requirements.
+Seventeen independently runnable crypto-native agents for Dapptober 2026, built on a shared TypeScript capability layer. The supplied daily prompts are canonical; the master build specification defines the architecture and audit requirements.
 
 [Project completion tracker](docs/PROJECT-COMPLETION-TRACKER.md) records tested functionality and remaining work for every built day and is updated after each daily build.
 
@@ -22,6 +22,7 @@ Sixteen independently runnable crypto-native agents for Dapptober 2026, built on
 | 14 | [Guardrail Sentinel](apps/agents/day-14-guardrail-sentinel/README.md) | http://localhost:3014 | Onchain session policies, signed human approvals, Jev MCP gates and global revocation |
 | 15 | [Aurel — Real-World Concierge](apps/agents/day-15-real-world-concierge/README.md) | http://localhost:3015 | Centrifuge async USDC subscriptions/redemptions, Chainlink, cited Jev/AI concierge |
 | 16 | [Brass — Bot-to-Bot Bourse](apps/agents/day-16-bot-to-bot-bourse/README.md) | http://localhost:3016 | A2A 1.0 agent cards, Jev negotiations, ERC-8004 and signed USDC escrow |
+| 17 | [Toe Tag — Memecoin Coroner](apps/agents/day-17-memecoin-coroner/README.md) | http://localhost:3017 | Blockscout/RPC forensics, reverting Tenderly sell probe, Jev report and EAS |
 
 ## Start here
 

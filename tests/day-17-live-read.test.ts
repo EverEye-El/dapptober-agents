@@ -1,0 +1,6 @@
+import {it,expect} from 'vitest';
+import {config} from '@dapptober/config';
+import {writeFileSync} from 'node:fs';
+import {publicClient} from '@dapptober/chain';
+import {collect,easAbi} from '@dapptober/coroner';
+it.skipIf(process.env.CORONER_READ_ONLY!=='1')('reads actual Base Sepolia token evidence without credentials, signing or publication',async()=>{const c=config({AGENT_MODE:'real',CHAIN_ID:'84532',RPC_URL:'https://sepolia.base.org',BLOCKSCOUT_API_URL:'https://base-sepolia.blockscout.com'}),r=await collect(c,'0x036CbD53842c5426634e7929541eC2318f3dCF7e');expect(r.mode).toBe('real');expect(BigInt(r.block)).toBeGreaterThan(0n);expect(r.codeHash).toMatch(/^0x[0-9a-f]{64}$/);expect(r.decimals).toBe(6);expect(r.simulation.status).toBe('unknown');const registry=await publicClient(c).readContract({address:'0x4200000000000000000000000000000000000021',abi:easAbi,functionName:'getSchemaRegistry'});expect(registry.toLowerCase()).toBe('0x4200000000000000000000000000000000000020');writeFileSync('/tmp/day17-live-evidence.json',JSON.stringify({chain:r.chainId,token:r.token,name:r.name,block:r.block,blockHash:r.blockHash,codeHash:r.codeHash,source:r.findings.find(f=>f.id==='source')?.status,holders:r.holders.length,simulation:r.simulation.status,easRegistry:registry},null,2));},60000);

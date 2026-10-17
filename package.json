@@ -23,7 +23,8 @@
     "test:launch-chain": "node scripts/launch-chain-test.mjs",
     "test:sentinel-chain": "node scripts/sentinel-chain-test.mjs",
     "test:rwa-chain": "node scripts/rwa-chain-test.mjs",
-    "test:bourse-chain": "node scripts/bourse-chain-test.mjs"
+    "test:bourse-chain": "node scripts/bourse-chain-test.mjs",
+    "test:coroner-chain": "node scripts/coroner-chain-test.mjs"
   },
   "dependencies": {
     "@ai-sdk/openai-compatible": "^2.0.0",
@@ -31,10 +32,12 @@
     "@cowprotocol/sdk-order-book": "^4.3.0",
     "@cowprotocol/sdk-order-signing": "^1.1.16",
     "@dapptober/agent-core": "workspace:*",
+    "@dapptober/bourse": "workspace:*",
     "@dapptober/chain": "workspace:*",
     "@dapptober/checkpoint": "workspace:*",
     "@dapptober/compute": "workspace:*",
     "@dapptober/config": "workspace:*",
+    "@dapptober/coroner": "workspace:*",
     "@dapptober/forecast": "workspace:*",
     "@dapptober/governance": "workspace:*",
     "@dapptober/guardrails": "workspace:*",
@@ -46,6 +49,8 @@
     "@dapptober/payments": "workspace:*",
     "@dapptober/provenance": "workspace:*",
     "@dapptober/receipts": "workspace:*",
+    "@dapptober/rwa": "workspace:*",
+    "@dapptober/sentinel": "workspace:*",
     "@dapptober/treasury": "workspace:*",
     "@dapptober/types": "workspace:*",
     "@dapptober/ui": "workspace:*",
@@ -72,12 +77,10 @@
     "react-dom": "^19.2.0",
     "thirdweb": "^5.0.0",
     "viem": "^2.38.0",
-    "zod": "^4.0.0",
-    "@dapptober/sentinel": "workspace:*",
-    "@dapptober/rwa": "workspace:*",
-    "@dapptober/bourse": "workspace:*"
+    "zod": "^4.0.0"
   },
   "devDependencies": {
+    "@ethereum-attestation-service/eas-contracts": "1.9.0",
     "@tailwindcss/postcss": "^4.0.0",
     "@thirdweb-dev/contracts": "3.15.0",
     "@types/node": "^22.0.0",
