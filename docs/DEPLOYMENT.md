@@ -93,3 +93,8 @@ Day 14 runs independently on 3014. Deploy GuardrailSentinel(owner, guardian, Cir
 
 
 Day 15 Aurel deploys independently with `APP=day-15-real-world-concierge`. It needs Supabase, operator authentication, an investor wallet, chain-matched issuer AsyncVault dossiers/permissions, Chainlink USDC/USD and Jev/OpenAI credentials. No custom production contract or agent private key is required. Follow the ordered Day 15 tracker and its annotated app README; verify issuer operations before hosting/public release.
+
+
+## Day 16 — Brass
+
+Day 16 / Brass runs on 3016 and builds independently with pnpm run build 16. Deploy BotBourse first with Circle USDC, verified official ERC-8004 registry, immutable arbiter/cap. Configure Supabase/Jev/OpenAI, reviewed seller catalog and buyer browser wallet; no server buyer key. Test Base Sepolia then separate Base state/deployment; HTTPS hosting follows provider and funded testnet rehearsal. See the app README and ordered tracker.

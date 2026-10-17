@@ -22,7 +22,8 @@
     "test:press-chain": "node scripts/press-chain-test.mjs",
     "test:launch-chain": "node scripts/launch-chain-test.mjs",
     "test:sentinel-chain": "node scripts/sentinel-chain-test.mjs",
-    "test:rwa-chain": "node scripts/rwa-chain-test.mjs"
+    "test:rwa-chain": "node scripts/rwa-chain-test.mjs",
+    "test:bourse-chain": "node scripts/bourse-chain-test.mjs"
   },
   "dependencies": {
     "@ai-sdk/openai-compatible": "^2.0.0",
@@ -73,7 +74,8 @@
     "viem": "^2.38.0",
     "zod": "^4.0.0",
     "@dapptober/sentinel": "workspace:*",
-    "@dapptober/rwa": "workspace:*"
+    "@dapptober/rwa": "workspace:*",
+    "@dapptober/bourse": "workspace:*"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.0.0",

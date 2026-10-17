@@ -1,0 +1,17 @@
+{
+  "name": "@dapptober/day-16",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --port 3016",
+    "start": "next start --port 3016",
+    "build": "next build --webpack",
+    "test": "vitest run --root ../../.. tests/day-16.test.ts tests/day-16-a2a.test.ts"
+  },
+  "dependencies": {
+    "@dapptober/ui": "workspace:*",
+    "next": "^16.0.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "@dapptober/bourse": "workspace:*"
+  }
+}

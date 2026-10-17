@@ -13,7 +13,9 @@
     "./src/press-room": "./src/press-room.tsx",
     "./src/launchpad": "./src/launchpad.tsx",
     "./src/sentinel": "./src/sentinel.tsx",
-    "./src/concierge": "./src/concierge.tsx"
+    "./src/concierge": "./src/concierge.tsx",
+    "./src/bourse": "./src/bourse.tsx",
+    "./src/bourse.css": "./src/bourse.css"
   },
   "dependencies": {
     "@dapptober/compute": "workspace:*",
@@ -30,7 +32,8 @@
     "recharts": "^3.0.0",
     "three": "^0.186.1",
     "viem": "^2.38.0",
-    "@dapptober/rwa": "workspace:*"
+    "@dapptober/rwa": "workspace:*",
+    "@dapptober/bourse": "workspace:*"
   },
   "devDependencies": {
     "@types/three": "^0.186.0"
