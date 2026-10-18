@@ -103,3 +103,8 @@ Day 16 / Brass runs on 3016 and builds independently with pnpm run build 16. Dep
 ## Day17 — Toe Tag
 
 Day17 / Toe Tag runs on3017 and builds independently with pnpm run build 17. Review/deploy CoronerProbe with a verified V2 router, register a dedicated revocable/no-resolver EAS schema, configure actual Supabase/Blockscout/Tenderly/Jev/OpenAI/Pinata and a gas-funded browser attester. Base Sepolia rehearsal precedes separate Base production/HTTPS hosting. See its README and ordered tracker.
+
+
+## Day18 — Hush
+
+Day18 deploys independently with `pnpm run build 18` / Docker APP=day-18-encrypted-confidant. Deploy reviewed EncryptedConfidant on Base Sepolia with actual guardian, set runtime hash, private and explicitly public browser RPCs. Fund gas only; no token/EAS/thirdweb setup. Base mainnet is deliberately blocked until official CoFHE support exists. Follow the app README and ordered tracker for live acceptance before HTTPS release.

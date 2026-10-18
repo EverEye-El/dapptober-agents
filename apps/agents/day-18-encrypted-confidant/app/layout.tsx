@@ -1,0 +1,1 @@
+import type {Metadata} from 'next';import '@dapptober/ui/src/confidant.css';export const metadata:Metadata={title:'Hush · The Encrypted Confidant',description:'A private bidding room. The chain sees the cipher; you see the strategy.'};export default function Layout({children}:{children:React.ReactNode}){return <html lang="en"><body>{children}</body></html>;}
