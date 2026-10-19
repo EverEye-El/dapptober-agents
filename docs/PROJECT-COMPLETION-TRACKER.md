@@ -46,7 +46,7 @@ Release work also remains: verify hosted CI for subsequent changes, address the 
 
 Days 07 and 11 require separately provisioned compute infrastructure. Days 01, 03, 04, 05, 08, 09, 10, 11, 12 and 13 have actual local-chain acceptance evidence; production protocol acceptance remains separate.
 
-## Production launch checklists — Days 01–17
+## Production launch checklists — Days 01–19
 
 These are remaining tasks **from the current build/tested repository to production**, in execution order. Work on one day at a time: shared phases 1–2 → that day's preparation → shared phase 3 rehearsal → shared phase 4 deployment → that day's acceptance → shared phase 5 release. Do not finish every shared step before starting the daily checklist. Check an item only after its stated environment has been verified; testnet rehearsals are separate from production acceptance.
 
