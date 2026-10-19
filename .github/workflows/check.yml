@@ -23,12 +23,13 @@ jobs:
       - run: pnpm run test:sentinel-chain
       - run: pnpm run test:rwa-chain
       - run: pnpm run test:bourse-chain
+      - run: pnpm run test:coroner-chain
   containers:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        app: [day-01-wallet-genesis, day-02-pay-per-prompt, day-03-agent-passport, day-04-mcp-mercenary, day-05-stablecoin-autopilot, day-06-intent-calligrapher, day-07-glass-box-mind, day-08-swarm-senate, day-09-forecast-colosseum, day-10-human-checkpoint, day-11-gpu-night-market, day-12-provenance-press, day-13-agent-launch-gantry, day-14-guardrail-sentinel, day-15-real-world-concierge, day-16-bot-to-bot-bourse]
+        app: [day-01-wallet-genesis, day-02-pay-per-prompt, day-03-agent-passport, day-04-mcp-mercenary, day-05-stablecoin-autopilot, day-06-intent-calligrapher, day-07-glass-box-mind, day-08-swarm-senate, day-09-forecast-colosseum, day-10-human-checkpoint, day-11-gpu-night-market, day-12-provenance-press, day-13-agent-launch-gantry, day-14-guardrail-sentinel, day-15-real-world-concierge, day-16-bot-to-bot-bourse, day-17-memecoin-coroner]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

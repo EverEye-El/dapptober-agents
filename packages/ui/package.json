@@ -15,7 +15,9 @@
     "./src/sentinel": "./src/sentinel.tsx",
     "./src/concierge": "./src/concierge.tsx",
     "./src/bourse": "./src/bourse.tsx",
-    "./src/bourse.css": "./src/bourse.css"
+    "./src/bourse.css": "./src/bourse.css",
+    "./src/coroner": "./src/coroner.tsx",
+    "./src/coroner.css": "./src/coroner.css"
   },
   "dependencies": {
     "@dapptober/compute": "workspace:*",
@@ -33,7 +35,8 @@
     "three": "^0.186.1",
     "viem": "^2.38.0",
     "@dapptober/rwa": "workspace:*",
-    "@dapptober/bourse": "workspace:*"
+    "@dapptober/bourse": "workspace:*",
+    "@dapptober/coroner": "workspace:*"
   },
   "devDependencies": {
     "@types/three": "^0.186.0"

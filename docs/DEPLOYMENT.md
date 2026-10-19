@@ -98,3 +98,8 @@ Day 15 Aurel deploys independently with `APP=day-15-real-world-concierge`. It ne
 ## Day 16 — Brass
 
 Day 16 / Brass runs on 3016 and builds independently with pnpm run build 16. Deploy BotBourse first with Circle USDC, verified official ERC-8004 registry, immutable arbiter/cap. Configure Supabase/Jev/OpenAI, reviewed seller catalog and buyer browser wallet; no server buyer key. Test Base Sepolia then separate Base state/deployment; HTTPS hosting follows provider and funded testnet rehearsal. See the app README and ordered tracker.
+
+
+## Day17 — Toe Tag
+
+Day17 / Toe Tag runs on3017 and builds independently with pnpm run build 17. Review/deploy CoronerProbe with a verified V2 router, register a dedicated revocable/no-resolver EAS schema, configure actual Supabase/Blockscout/Tenderly/Jev/OpenAI/Pinata and a gas-funded browser attester. Base Sepolia rehearsal precedes separate Base production/HTTPS hosting. See its README and ordered tracker.

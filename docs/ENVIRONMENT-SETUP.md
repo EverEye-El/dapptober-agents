@@ -47,3 +47,8 @@ Day 15 uses its own annotated `.env.local`: Supabase Session pooler, operator to
 ## Day 16 — Brass
 
 Day 16 uses its own annotated app .env.example/.env.local: BOURSE_ESCROW, BOURSE_REGISTRY, BOURSE_BUYER_ID, BOURSE_SELLERS_JSON, BOURSE_SELLER_KEYS_JSON, BOURSE_MAX_USDC, OWNER_ADDRESS, Circle USDC/RPC, SUPABASE_DATABASE_URL, OPERATOR_TOKEN, JEV_API_KEY, and OpenAI fields for local sellers. Seller tokens/keys remain private; no buyer private key, thirdweb, or Tenderly configuration. Root env remains a pointer.
+
+
+## Day17 — Toe Tag
+
+Day17 has an annotated per-app .env.example/.env.local. Provider-specific fields include BLOCKSCOUT_API_URL/optional key, CORONER_PROBE/ROUTER/LOCKERS_JSON, Tenderly access/account/project, CORONER_SCHEMA/SCHEMA_REGISTRY, EAS_ADDRESS, Pinata JWT, Supabase pooler, Jev and OpenAI keys. No USDC/thirdweb/server private key needed. Root env remains a pointer.

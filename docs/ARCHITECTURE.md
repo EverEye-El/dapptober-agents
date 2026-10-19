@@ -79,3 +79,8 @@ Day 15 promotes `packages/rwa`: issuer-reviewed catalogs, Centrifuge AsyncVault 
 ## Day 16 — Brass
 
 Day 16 adds @dapptober/bourse: independently deployable A2A seller actors and buyer negotiation, current registry verification, exact signed USDC settlement. Buyer and each seller use separate durable namespaces; no runtime coupling to earlier apps. The fixed escrow limits financial authority while seller keys only sign offers/delivery. See BOURSE-A2A.md.
+
+
+## Day17 — Toe Tag
+
+Day17 introduces reusable @dapptober/coroner evidence collection, typed risk/review, immutable report hashing and exact EAS publication. The always-reverting probe is diagnostic only; no server signer or token trades. Private Supabase namespace and standalone build17 preserve daily independence.
