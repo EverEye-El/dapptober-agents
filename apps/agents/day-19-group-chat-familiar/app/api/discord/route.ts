@@ -1,0 +1,1 @@
+import {after} from 'next/server';import {platformWebhook,drainNative} from '@dapptober/familiar/src/platforms';export const runtime='nodejs';export const maxDuration=120;export async function POST(request:Request){const r=await platformWebhook(request,'discord');if(r.enqueued)after(()=>drainNative());return r.response;}

@@ -5,6 +5,7 @@ import {resolve} from 'node:path';
 
 const common=['OWNER_ADDRESS','OPERATOR_TOKEN','SUPABASE_DATABASE_URL','RPC_URL','JEV_API_KEY','OPENAI_API_KEY'];
 const required={
+  19:['OPERATOR_TOKEN','SUPABASE_DATABASE_URL','RPC_URL','JEV_API_KEY','OPENAI_API_KEY','FAMILIAR_SESSION_SECRET','FAMILIAR_CONTRACT','FAMILIAR_CODE_HASH'],
   18:['OPERATOR_TOKEN','SUPABASE_DATABASE_URL','RPC_URL','JEV_API_KEY','OPENAI_API_KEY','CONFIDANT_CONTRACT','CONFIDANT_CODE_HASH','CONFIDANT_PUBLIC_RPC_URL'],
   17:[...common,'BLOCKSCOUT_API_URL','CONFIDANT_CONTRACT','CORONER_PROBE','CORONER_ROUTER','TENDERLY_ACCESS_KEY','TENDERLY_ACCOUNT_SLUG','TENDERLY_PROJECT_SLUG','PINATA_JWT','EAS_ADDRESS','CORONER_SCHEMA_REGISTRY','CORONER_SCHEMA'],
   16:[...common,'BOURSE_ESCROW','BOURSE_REGISTRY','BOURSE_BUYER_ID','BOURSE_SELLERS_JSON'],
@@ -58,7 +59,7 @@ export function assess(day,env){
 
 async function main(){
   const flags=process.argv.slice(2),selection=flags.find(x=>/^\d{1,2}$/.test(x));
-  if(flags.some(x=>!['--init','--online'].includes(x)&&x!==selection)||selection&&(Number(selection)<1||Number(selection)>18))throw new Error('Usage: pnpm readiness [01–18] [--init] [--online]');
+  if(flags.some(x=>!['--init','--online'].includes(x)&&x!==selection)||selection&&(Number(selection)<1||Number(selection)>19))throw new Error('Usage: pnpm readiness [01–19] [--init] [--online]');
   const root=fileURLToPath(new URL('../',import.meta.url));let failed=false;
   for(const dir of readdirSync(resolve(root,'apps/agents')).sort()){
     const day=Number(dir.match(/^day-(\d+)-/)?.[1]);if(!required[day]||selection&&day!==Number(selection))continue;
