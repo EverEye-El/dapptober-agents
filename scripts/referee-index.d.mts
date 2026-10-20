@@ -1,0 +1,1 @@
+export function indexPage(options:{rpc:(method:string,params:unknown[])=>Promise<unknown>;store:{checkpoint:()=>Promise<{block:string;hash:string}|undefined>;commit:(logs:unknown[],checkpoint:{block:string;hash:string})=>Promise<void>};address:string;startBlock?:bigint;span?:bigint}):Promise<{caughtUp:boolean;events:number;through?:string}>;

@@ -27,6 +27,7 @@
     "test:familiar-chain": "node scripts/familiar-chain-test.mjs",
     "test:coroner-chain": "node scripts/coroner-chain-test.mjs",
     "test:referee-chain": "node scripts/referee-chain-test.mjs",
+    "index:referee": "node --env-file=apps/agents/day-20-restaked-referee/.env.local scripts/referee-index.mjs",
     "worker:referee": "node --env-file=apps/agents/day-20-restaked-referee/.env.local scripts/referee-worker.mjs"
   },
   "dependencies": {
