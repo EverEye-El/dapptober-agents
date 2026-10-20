@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-const days=process.argv[2]?[Number(process.argv[2])]:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19];
+const days=process.argv[2]?[Number(process.argv[2])]:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
 const portBase=Number(process.env.SMOKE_PORT_BASE??3000);
 assert(Number.isInteger(portBase)&&portBase>0&&portBase<=65525,'Invalid SMOKE_PORT_BASE');
 for(const day of days){
@@ -29,5 +29,6 @@ for(const day of days){
 
  if(day===18){const routed=await act('confidant.route',{intent:'sealed-bid'});assert.equal(routed.result.allowed,true);await act('confidant.explain');const unsupported=await act('confidant.route',{intent:'payroll'});assert.equal(unsupported.result.allowed,false);const rejected=await fetch(origin+'/api/agent',{method:'POST',headers:{'Content-Type':'application/json',cookie,origin},body:JSON.stringify({action:'confidant.route',input:{intent:'sealed-bid',amount:'923456789'}})});assert.equal(rejected.status,400);assert(!(await rejected.text()).includes('923456789'));assert.equal((await fetch(origin+'/confidant-booth.png')).status,200);}
  if(day===19){const draft=await act('familiar.message',{text:'tip @milo 2'});const p=draft.state.room.proposals.at(-1);await act('familiar.prepare',{id:p.id,wallet:'0x1111111111111111111111111111111111111111'});await act('familiar.executeDemo',{id:p.id});assert.equal((await fetch(origin+'/.well-known/farcaster.json')).status,200);}
+ if(day===20){const task=await act('referee.create',{title:'HTTP instant replay',agentId:'1',kind:0,inputs:['1','2','3'],claimed:'9'});const id=task.result.task.id;const checked=await act('referee.verify',{id,lie:true});const report=checked.result.report.id;await act('referee.review',{id:report});await act('referee.demoResolve',{id:report,challenge:true});await act('referee.advance',{seconds:61});await act('referee.demoResolve',{id:report});const evidence=await fetch(origin+'/api/evidence?id='+report,{headers:{cookie}});assert.equal((await evidence.json()).hashMatches,true);}
  const verified=await act('receipt.verify');assert.equal(verified.result.valid,true,`Day ${day} receipt chain`);console.log(`Day ${String(day).padStart(2,'0')}: page, API, workflow, receipts passed`);
 }

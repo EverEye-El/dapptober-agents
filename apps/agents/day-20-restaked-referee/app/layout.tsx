@@ -1,0 +1,1 @@
+import '@dapptober/ui/src/referee.css';export const metadata={title:'Overrule · The Restaked Referee',description:'Run the tape. Sign the call. Put collateral behind it.'};export default function Layout({children}:{children:React.ReactNode}){return <html lang="en"><body>{children}</body></html>;}

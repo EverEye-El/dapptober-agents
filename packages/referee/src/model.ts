@@ -1,0 +1,3 @@
+export type ReplayTask={id:string;agentId:string;kind:number;inputs:string[];claimed:string;expected:string;title:string;creator:string;salt:string;hash?:string};
+export type ReplayReport={id:string;taskId:string;operator:string;passed:boolean;evidenceHash:string;evidence:string;signature:string;deadline:number;reviewEnd:number;status:number;risk:string;decision?:{verdict:'slash'|'release';confidence:number;source:string};narration?:string;hash?:string};
+export type RefereeState={tasks:ReplayTask[];reports:ReplayReport[];operators:{address:string;shares:string;locked:string;slashes:number}[];clock:number;paused:boolean;pending?:{method:string;args:unknown[];wallet:string;tx:{to:string;data:string};created:number};};

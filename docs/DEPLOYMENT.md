@@ -108,3 +108,5 @@ Day17 / Toe Tag runs on3017 and builds independently with pnpm run build 17. Rev
 ## Day18 — Hush
 
 Day18 deploys independently with `pnpm run build 18` / Docker APP=day-18-encrypted-confidant. Deploy reviewed EncryptedConfidant on Base Sepolia with actual guardian, set runtime hash, private and explicitly public browser RPCs. Fund gas only; no token/EAS/thirdweb setup. Base mainnet is deliberately blocked until official CoFHE support exists. Follow the app README and ordered tracker for live acceptance before HTTPS release.
+
+Day20 Overrule deploys independently on3020 (or standalone host PORT). Deploy reviewed RestakedReferee with Circle USDC, approved ERC4626 vault, optional actual validation registry and at least3600second review delay on Base Sepolia/Base. Register/fund the dedicated Node operator; configure Supabase/Jev/OpenAI, guardian recovery, indexing and manual/scheduled settlement. Eigen destination certificates require an independently established actual source AVS/table; this Base app does not perform native Ethereum staking/slashing. Follow the ordered Day20 tracker before HTTPS/mainnet release.

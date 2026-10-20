@@ -89,3 +89,5 @@ Day17 introduces reusable @dapptober/coroner evidence collection, typed risk/rev
 ## Day18 — Hush
 
 Day18 promotes `packages/confidant`: strict amount-free server routing/receipts and separate browser FHE wallet/encryption/decryption capability. Private data is excluded from the generic shared state: only categories and public chain metadata persist. EncryptedConfidant is an allocation ledger/auction, not custody. No earlier daily server is called.
+
+Day20 promotes reproducible verification into `@dapptober/referee`: exact task commitments, Node re-execution, EIP712 verdicts, collateral previews, deterministic challenge/settlement, ERC8004 response publication and separate Eigen destination certificate inspection. It compiles into the independent Overrule app and never calls an earlier daily server. The Base share-bond contract is not a substitute claim for EigenLayer source restaking; source allocations/slashing relay remain an explicit integration boundary. Receipt status now includes pending to distinguish successful broadcast from mined confirmation without mutating historical receipt hashes.
