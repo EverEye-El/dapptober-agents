@@ -5,6 +5,7 @@ import {resolve} from 'node:path';
 
 const common=['OWNER_ADDRESS','OPERATOR_TOKEN','SUPABASE_DATABASE_URL','RPC_URL','JEV_API_KEY','OPENAI_API_KEY'];
 export const required={
+  21:['OPERATOR_TOKEN','SUPABASE_DATABASE_URL','THIRDWEB_CLIENT_ID','THIRDWEB_SECRET_KEY','JEV_API_KEY','OPENAI_API_KEY','TRAVEL_SOURCES_JSON','TRAVEL_PASS','TRAVEL_PASS_CODE_HASH'],
   20:['OPERATOR_TOKEN','SUPABASE_DATABASE_URL','RPC_URL','JEV_API_KEY','OPENAI_API_KEY','REFEREE_CONTRACT','REFEREE_CODE_HASH','REFEREE_VAULT','REFEREE_OPERATOR_PRIVATE_KEY'],
   19:['OPERATOR_TOKEN','SUPABASE_DATABASE_URL','RPC_URL','JEV_API_KEY','OPENAI_API_KEY','FAMILIAR_SESSION_SECRET','FAMILIAR_CONTRACT','FAMILIAR_CODE_HASH'],
   18:['OPERATOR_TOKEN','SUPABASE_DATABASE_URL','RPC_URL','JEV_API_KEY','OPENAI_API_KEY','CONFIDANT_CONTRACT','CONFIDANT_CODE_HASH','CONFIDANT_PUBLIC_RPC_URL'],
@@ -28,6 +29,7 @@ export const required={
 };
 export function assess(day,env){
   const gaps=[];
+  if(day===21){if(!/^0x[0-9a-fA-F]{40}$/.test(env.TRAVEL_PASS??''))gaps.push('TRAVEL_PASS: configure the deployed Base pass address');if(!/^0x[0-9a-fA-F]{64}$/.test(env.TRAVEL_PASS_CODE_HASH??''))gaps.push('TRAVEL_PASS_CODE_HASH: independently pin deployed runtime');try{const sources=JSON.parse(env.TRAVEL_SOURCES_JSON??'[]');if(!Array.isArray(sources)||!sources.length||!sources.some(x=>x.chainId===Number(env.CHAIN_ID)))gaps.push('TRAVEL_SOURCES_JSON: configure the Base destination and funding smart accounts');for(const source of sources){if(Number(env.CHAIN_ID)===84532?source.chainId!==84532:![8453,1,10,42161].includes(source.chainId))gaps.push('TRAVEL_SOURCES_JSON: test and production networks cannot mix');for(const key of ['rpc','bundler'])if(!source[key]||new URL(source[key]).protocol!=='https:')gaps.push('TRAVEL_SOURCES_JSON: HTTPS RPC and bundler required');if(!/^0x[0-9a-fA-F]{40}$/.test(source.usdc)||!/^0x[0-9a-fA-F]{40}$/.test(source.entryPoint))gaps.push('TRAVEL_SOURCES_JSON: reviewed USDC and EntryPoint addresses required');}if(!JSON.parse(env.TRAVEL_ROUTERS_JSON??'[]').length)gaps.push('TRAVEL_ROUTERS_JSON: no external bridge/swap routers approved');}catch{gaps.push('TRAVEL_SOURCES_JSON: invalid source configuration');}}
   if(env.AGENT_MODE!=='real')gaps.push('AGENT_MODE: still simulated');
   for(const key of required[day])if(!env[key]?.trim())gaps.push(`${key}: missing`);
   for(const key of ['OPERATOR_TOKEN','TEE_WORKER_TOKEN','CHECKPOINT_SESSION_SECRET','FAMILIAR_SESSION_SECRET'])if(env[key]&&env[key].length<32)gaps.push(`${key}: requires at least 32 characters`);
@@ -62,7 +64,7 @@ export function assess(day,env){
 
 async function main(){
   const flags=process.argv.slice(2),selection=flags.find(x=>/^\d{1,2}$/.test(x));
-  if(flags.some(x=>!['--init','--online'].includes(x)&&x!==selection)||selection&&(Number(selection)<1||Number(selection)>20))throw new Error('Usage: pnpm readiness [01–20] [--init] [--online]');
+  if(flags.some(x=>!['--init','--online'].includes(x)&&x!==selection)||selection&&(Number(selection)<1||Number(selection)>21))throw new Error('Usage: pnpm readiness [01–21] [--init] [--online]');
   const root=fileURLToPath(new URL('../',import.meta.url));let failed=false;
   for(const dir of readdirSync(resolve(root,'apps/agents')).sort()){
     const day=Number(dir.match(/^day-(\d+)-/)?.[1]);if(!required[day]||selection&&day!==Number(selection))continue;
@@ -72,6 +74,7 @@ async function main(){
     // Explicit process environment can supply secrets from a deployment secret manager.
     for(const key of new Set([...Object.keys(env),...required[day]]))if(process.env[key]!==undefined)env[key]=process.env[key];
     const gaps=assess(day,env);
+    if(flags.includes('--online')&&day===21){try{const {keccak256}=await import('viem');for(const source of JSON.parse(env.TRAVEL_SOURCES_JSON??'[]')){const rpc=async(method,params)=>{const res=await fetch(source.rpc,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({jsonrpc:'2.0',id:1,method,params}),signal:AbortSignal.timeout(10000),redirect:'error'});const data=await res.json();if(!res.ok||data.error||data.result===undefined)throw new Error('RPC');return data.result;};if(Number(BigInt(await rpc('eth_chainId',[])))!==source.chainId)gaps.push('TRAVEL_SOURCES_JSON: RPC network mismatch');if(await rpc('eth_getCode',[source.usdc,'latest'])==='0x')gaps.push('TRAVEL_SOURCES_JSON: USDC has no bytecode');if(await rpc('eth_getCode',[source.entryPoint,'latest'])==='0x')gaps.push('TRAVEL_SOURCES_JSON: EntryPoint has no bytecode');if(source.chainId===Number(env.CHAIN_ID)&&env.TRAVEL_PASS){const code=await rpc('eth_getCode',[env.TRAVEL_PASS,'latest']);if(code==='0x'||keccak256(code)!==env.TRAVEL_PASS_CODE_HASH)gaps.push('TRAVEL_PASS_CODE_HASH: deployment mismatch');}}}catch{gaps.push('TRAVEL_SOURCES_JSON: online RPC checks failed; details withheld');}}
     if(flags.includes('--online')&&env.RPC_URL){
       try{
         const rpc=async(method,params)=>{const r=await fetch(env.RPC_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({jsonrpc:'2.0',id:1,method,params}),signal:AbortSignal.timeout(10000)});const data=await r.json();if(!r.ok||data.error||data.result===undefined)throw new Error('RPC rejected request');return data.result;};

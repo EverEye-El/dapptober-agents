@@ -23,7 +23,8 @@
     "./src/familiar": "./src/familiar.tsx",
     "./src/familiar.css": "./src/familiar.css",
     "./src/referee": "./src/referee.tsx",
-    "./src/referee.css": "./src/referee.css"
+    "./src/referee.css": "./src/referee.css",
+    "./src/traveler.css": "./src/traveler.css"
   },
   "dependencies": {
     "@dapptober/compute": "workspace:*",

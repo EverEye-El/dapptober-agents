@@ -1,21 +1,21 @@
 # Project completion tracker
 
-**Updated October 20, 2026. All 20 apps are implemented locally; none is verified as fully live.**
+**Updated October 21, 2026. All 21 apps are implemented locally; none is verified as fully live.**
 
 Checked boxes mean the stated work was completed and verified **in the environment named**. A local test does not complete a live deployment task. Completed and outstanding parts of a task now have separate boxes.
 
-## Completed across Days 01–20
+## Completed across Days 01–21
 
-- [x] Build all 20 independently runnable apps, with shared capabilities and separate configuration.
-- [x] Verify all 20 independent production builds and local HTTP/receipt workflows.
-- [x] Pass lint, type checking, **176 application tests** and **125 contract tests**; **18 opt-in application tests remain skipped** in the ordinary suite.
-- [x] Pass **16 Anvil acceptance cases** using actual local blockchains. External services and protocol fixtures remain distinct from live provider evidence.
+- [x] Build all 21 independently runnable apps, with shared capabilities and separate configuration.
+- [x] Verify all 21 independent production builds and local HTTP/receipt workflows.
+- [x] Pass lint, type checking, **191 application tests** and **130 contract tests**; **19 opt-in application tests remain skipped** in the ordinary suite.
+- [x] Retain **16 earlier Anvil acceptance cases** and pass **one new Day 21 funded acceptance case**, using actual local blockchains. External services and protocol fixtures remain distinct from live provider evidence.
 - [x] Verify the pnpm **10.2.0** frozen installation using the existing dependency store; retain `pnpm-lock.yaml` as the only dependency lockfile.
-- [x] Generate missing unique local operator tokens for all 20 apps and Day 10/19 session secrets. Verify private file permissions and Git exclusion; preserve existing values.
-- [x] Correct readiness checks for Days 05 and 15–20, including invalid addresses, runtime hashes, signer/session-secret formats, token/network mismatches and expired/missing catalog reviews.
+- [x] Generate missing unique local operator tokens for all 21 apps and Day 10/19 session secrets. Verify private file permissions and Git exclusion; preserve existing values.
+- [x] Correct readiness checks for Days 05 and 15–21, including invalid addresses, runtime hashes, signer/session-secret formats, token/network mismatches and expired/missing catalog reviews.
 - [x] Publish the engineering pass in [draft PR #17](https://github.com/EverEye-El/dapptober-agents/pull/17), based on Day 20 PR #16. Implementation: `d8ebffd`; no merge or public deployment was performed.
 
-These results belong to the October 20 engineering pass. They do not establish actual Supabase persistence, paid-model access, public-chain transactions or hosted container execution. Day-specific evidence and exceptions appear below.
+Days 01–20 retain their October 20 engineering-pass evidence; Day 21 adds its separately recorded local checks. They do not establish actual Supabase persistence, paid-model access, public-chain transactions or hosted container execution. Day-specific evidence and exceptions appear below.
 
 ## What needs your involvement
 
@@ -223,6 +223,18 @@ Each day's checked implementation box describes **tested local scope**, not full
 - [ ] Resolve **native EigenLayer security**: actual source-chain AVS registration/allocated stake, transported tables and a separately reviewed slashing/adjudication relay remain absent. Verify the official destination verifier/runtime, AVS/operator set, current certificates, message binding, two-thirds stake and 24-hour freshness; otherwise describe the product as Base vault-share collateral with certificate inspection only.
 
 [Setup](../apps/agents/day-20-restaked-referee/README.md) · [Evidence and limitations](DAY-20-AUDIT.md)
+
+### Day 21 — Layover / Chainless Traveler
+
+- [x] Implement the copper airport lounge, unified USDC view, typed pay/mint/swap itineraries, accessible split-flap departures, Jev-approved candidate/model selection, thirdweb/LI.FI adapters and browser-owned sponsored smart-account signing. Explicit demo outcomes never invent transaction hashes.
+- [x] Test simulated pay/mint/swap and cancellation, route/model guards, unsupported-network rejection, provider partial/refund/pending states and signing-lock recovery. Run funded Anvil USDC pay and pass mint with exact calldata, recipient, receipt and allowance checks; ERC-4337/Jev/LLM infrastructure is explicitly doubled.
+- [ ] Configure the private **Supabase Session pooler URI**, Jev/OpenAI keys/models, **thirdweb client ID/secret**, domain restrictions and funded gas-sponsorship policy. Add reviewed Base Sepolia RPC/bundler/EntryPoint/Circle USDC to `TRAVEL_SOURCES_JSON`; connect and fund the displayed **smart account**, not just its EOA. There is no server agent spending key.
+- [ ] Deploy/pin **LayoverPass** on Base Sepolia with Circle USDC and intended treasury; verify actual sponsored one-USDC mint and direct USDC payment. Verify wallet account changes, paymaster refusal, exact operation lookup, destination receipts, real Supabase durability/restart and restoration.
+- [ ] Review/provider-pin external transaction routers **and allowance spenders**, including proxy/facet upgrade risks; add LI.FI quota credentials as needed. Accept a genuinely executable test quote before enabling any bridge/DEX route. Base Sepolia stays the test network even when external markets are unavailable; do not silently substitute mainnet or Ethereum Sepolia.
+- [ ] Verify actual external bridge/swap delivery, quote expiry, refunds/partial tokens, replacement/drop/ambiguous-wallet recovery and residual exact-allowance revocation. Inspect wallet/bundler history before unlocking an uncertain signing leg. Add production monitoring and export/archive before 200 flights; no unattended bridge retry or refund signer exists.
+- [ ] Complete security review and HTTPS hosting, then use separate Base mainnet configuration/Supabase and an approved small budget. Optionally enable reviewed Ethereum/Arbitrum/Optimism funding smart accounts with their own USDC/RPC/bundler; destination remains Base. Verify each enabled route and paymaster on the actual public chains before release.
+
+[Setup](../apps/agents/day-21-chainless-traveler/README.md) · [Evidence and limitations](DAY-21-AUDIT.md)
 
 ## Shared release blockers and evidence
 

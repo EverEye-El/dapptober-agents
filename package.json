@@ -28,7 +28,8 @@
     "test:coroner-chain": "node scripts/coroner-chain-test.mjs",
     "test:referee-chain": "node scripts/referee-chain-test.mjs",
     "index:referee": "node --env-file=apps/agents/day-20-restaked-referee/.env.local scripts/referee-index.mjs",
-    "worker:referee": "node --env-file=apps/agents/day-20-restaked-referee/.env.local scripts/referee-worker.mjs"
+    "worker:referee": "node --env-file=apps/agents/day-20-restaked-referee/.env.local scripts/referee-worker.mjs",
+    "test:traveler-chain": "node scripts/traveler-chain-test.mjs"
   },
   "dependencies": {
     "@ai-sdk/openai-compatible": "^2.0.0",
@@ -86,7 +87,8 @@
     "viem": "^2.38.0",
     "zod": "^4.0.0",
     "@dapptober/familiar": "workspace:*",
-    "@dapptober/referee": "workspace:*"
+    "@dapptober/referee": "workspace:*",
+    "@dapptober/traveler": "workspace:*"
   },
   "devDependencies": {
     "@cofhe/foundry-plugin": "1.0.0",

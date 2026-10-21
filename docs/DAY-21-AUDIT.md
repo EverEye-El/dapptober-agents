@@ -1,0 +1,31 @@
+# Day 21 final audit — Layover / The Chainless Traveler
+
+October 21, 2026. Compared against the complete canonical Day 21 prompt and live challenge. Base Sepolia remains the test destination; Base remains production. No public deployment or funded provider acceptance is claimed.
+
+| Prompt requirement | Implementation | Verification and limit |
+| --- | --- | --- |
+| Unified multichain balance | Configured source smart accounts, viem USDC reads, unavailable reads excluded and labeled; one combined balance | Simulated multichain balances; actual funded single-network local account reads. Live multichain RPC/smart-account acceptance remains open |
+| Pay, mint, swap without a chain picker | Typed outcome grammar; direct USDC, thirdweb exact-output buy/bridge, LI.FI exact-input swaps; Base destination fixed by environment | Pay/mint/swap simulated end to end; actual funded local pay/mint; invalid destination and excess amounts rejected. External bridge/DEX execution is not verified |
+| Agent-planned itinerary with fees/ETA | Candidate bounds, source funds, runtime pins, Jev candidate-ID/model selection, separate LLM explanation; boarding-pass legs and consent | Grammar/state/provider-negative tests; Jev/LLM are doubles in acceptance. ETA is an estimate and quote availability can fail |
+| Gas sponsorship | Browser-owned thirdweb smart account with sponsorship enabled; no EOA gas fallback; backend verifies successful nonzero-paymaster UserOperation event and exact account execute calldata | Local smart-account/EntryPoint/bundler fixtures verify receipt semantics, tamper rejection and transaction order. Actual thirdweb wallet/bundler/paymaster, billing/policy and injected-wallet behavior remain unverified |
+| In-flight departure board | Accessible split-flap rows, selected itinerary, boarding/transit/connection/arrived/review states; live visible-tab refresh every 15 seconds | Desktop payment arrival and mint connection/consent; phone layout checked at 390px, no body overflow. Board alone scrolls horizontally. Motion honors reduced-motion preferences |
+| Real actions and receipts | Fixed-price `LayoverPass`, exact USDC allowance, three-confirmation receipt checks, hash-chained application records, origin UserOperation lookup and destination token logs | Funded Anvil pay/mint, allowance exhaustion, substituted recipient/calldata rejection, five Foundry tests including 256-run allowance fuzzing. Local fixtures are not real ERC-4337 infrastructure |
+| Safe recovery | Persist signing lock before wallet prompt; save returned hash locally then durably register; recover existing hash without rebroadcast; explicit inspected no-submission acknowledgement for unlocking | Local acceptance verifies repeat prepare/cancel are blocked during signing and an already submitted hash can be registered after quote expiry. User acknowledgement is not a chain proof; dropped/replaced operations and residual allowances need inspection |
+
+## Authority and security review
+
+The server never holds a spending key or autonomous session permission. A human must sign every economic operation. One active flight is serialized, intent input is capped, quotes expire, token approvals are exact, native-value routes are excluded and no chain substitution occurs. Mint payment is enforced onchain. App limits are not an onchain autonomous daily budget; adding delegated spending would require a reviewed onchain/session policy.
+
+Provider quotes remain a trust boundary. Router address/runtime pins do not pin proxy implementations, facets or every economic parameter inside opaque calldata. Live deployment must review those deployments and the quoted recipient/economics before approving funds. Source canonical USDC, EntryPoint, RPC and bundler must be independently reviewed. Destination logs prove delivery in that recorded transaction; rollup economic finality/reorg monitoring requires separate acceptance. Partial and refunded LI.FI transfers are review states, not successful intended outcomes. No bridge retry or refund is automatically signed.
+
+Real mode uses private operator authorization and Supabase state transactions. It is not a public multi-user custody service. Day 21's generated local operator token is private, ignored and mode 0600. Public client ID and funding account addresses are deliberately public. RPC/provider error responses are bounded/redacted rather than returning verbose private URLs.
+
+## Release gaps
+
+Configure Supabase, paid Jev/OpenAI, actual thirdweb project/domain restrictions/sponsored gas, funded source smart accounts, canonical tokens, bundler/EntryPoint and router/spender code pins. Deploy/pin the pass with intended treasury. Verify direct Base Sepolia pay/mint and any genuinely available external test route; unavailable markets stay blocked. Then verify mainnet source routes with a separately approved small budget, provider failures/expiry/partial/refund, operation recovery, proxy upgrades, wallet changes, persistence/backup restoration, HTTPS, alerts and security review. Do not call Anvil or API doubles public-chain/provider acceptance.
+
+The completion tracker is the authoritative current checklist. Build/test counts and hosted CI status are recorded there after final verification.
+
+## Final local checks
+
+All **21 independent production builds** and their **21 production HTTP/page/API/workflow/receipt smoke runs** passed. Lint and TypeScript passed. The ordinary suite passed **191 application tests**, with **19 opt-in tests skipped**; Day 21’s local-chain opt-in was run separately and passed. Foundry passed **130 tests**, including five Layover pass cases and 256-run fuzzing. Frozen pnpm 10.2.0 install passed. Production dependency audit reports zero critical/high/moderate and one inherited low elliptic advisory. Readiness correctly remains blocked for missing live credentials/deployment/provider acceptance. Hosted CI/container evidence is recorded after publishing.

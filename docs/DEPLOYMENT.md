@@ -1,18 +1,18 @@
 # Independent deployment
 
-Use Node 22.12+, pnpm 10.2.0 and Foundry. Run `pnpm install --frozen-lockfile` at the repository root. The twenty apps compile shared packages into their own deployment; they never call another daily server. Choose one app from the root README and copy its `.env.example` to `.env.local` inside that app. Blank optional variables are ignored.
+Use Node 22.12+, pnpm 10.2.0 and Foundry. Run `pnpm install --frozen-lockfile` at the repository root. The twenty-one apps compile shared packages into their own deployment; they never call another daily server. Choose one app from the root README and copy its `.env.example` to `.env.local` inside that app. Blank optional variables are ignored.
 
 Use the version in the root `packageManager` field. Run `corepack enable` and `corepack prepare pnpm@10.2.0 --activate`, or install `pnpm@10.2.0` through npm. All workspace imports are declared explicitly with `workspace:*`. CI and Docker install with `--frozen-lockfile`. Only Tailwind oxide, esbuild and sharp dependency build scripts are permitted; optional bufferutil/keccak/utf-8-validate hooks remain disabled.
 
 ## Local and production
 
-`pnpm run dev 01` starts Day 01; replace the number for another day. `pnpm run build 01` builds that app, and `pnpm --filter @dapptober/day-01 run start` serves it on port 3001. Omit the day to build/start all twenty. Demo mode uses a local `.data` directory and is intended for one persistent process. It is explicitly simulated and requires no credentials.
+`pnpm run dev 01` starts Day 01; replace the number for another day. `pnpm run build 01` builds that app, and `pnpm --filter @dapptober/day-01 run start` serves it on port 3001. Omit the day to build/start all twenty-one. Demo mode uses a local `.data` directory and is intended for one persistent process. It is explicitly simulated and requires no credentials.
 
-For Vercel, create twenty separate projects as needed. Set the daily app directory as Root Directory and enable access to files outside it. Each app contains a `vercel.json` with root install and workspace build commands. Select Node 22 and set that project's environment variables. Real mode requires Supabase PostgreSQL because serverless local files are ephemeral. Do not deploy demo file storage as a durable multi-instance service.
+For Vercel, create twenty-one separate projects as needed. Set the daily app directory as Root Directory and enable access to files outside it. Each app contains a `vercel.json` with root install and workspace build commands. Select Node 22 and set that project's environment variables. Real mode requires Supabase PostgreSQL because serverless local files are ephemeral. Do not deploy demo file storage as a durable multi-instance service.
 
-For a standalone container: `docker build --build-arg APP=day-04-mcp-mercenary -t dapptober-day04 .`, then `docker run --env-file <private-env-file> -p 3004:3000 dapptober-day04`. Set PUBLIC_ORIGIN to the externally reachable origin, not an internal container hostname. Hosted container evidence covers specific earlier commits; later Days 16–20 runs were refused before any job steps because of account billing/spending restrictions. See the completion tracker for exact evidence. Local Docker execution and live hosting remain separate checks.
+For a standalone container: `docker build --build-arg APP=day-04-mcp-mercenary -t dapptober-day04 .`, then `docker run --env-file <private-env-file> -p 3004:3000 dapptober-day04`. Set PUBLIC_ORIGIN to the externally reachable origin, not an internal container hostname. Hosted container evidence covers specific earlier commits; later Days 16–21 runs were refused before any job steps because of account billing/spending restrictions. See the completion tracker for exact evidence. Local Docker execution and live hosting remain separate checks.
 
-Run `pnpm readiness --init` to initialize missing private environments without replacing existing files. `pnpm readiness` checks all twenty apps; `pnpm readiness 05 --online` also checks RPC chain ID and contract bytecode without spending. See [owner setup and live acceptance](LIVE-SETUP-CHECKLIST.md). A configured environment is not live-operation evidence.
+Run `pnpm readiness --init` to initialize missing private environments without replacing existing files. `pnpm readiness` checks all twenty-one-one apps; `pnpm readiness 05 --online` also checks RPC chain ID and contract bytecode without spending. See [owner setup and live acceptance](LIVE-SETUP-CHECKLIST.md). A configured environment is not live-operation evidence.
 
 ## Real mode configuration
 
@@ -122,3 +122,7 @@ Day 20 `pnpm index:referee` runs a separate persistent finalized-event archive u
 
 
 Day 18 browser confirmation now tracks speed-up replacements only when sender, recipient, nonce, value and encrypted calldata match the original instruction exactly. A cancelled or changed instruction clears tracking with an explicit failure and is never recorded as a successful Hush action. The actual mined replacement hash is recorded. Unknown/dropped transactions remain blocked for inspection; no automatic new transaction or private-value upload is introduced. Verify real wallet replacement/cancellation/restart behavior before release.
+
+## Day 21 — Layover
+
+Day 21 uses browser-owned thirdweb sponsored smart accounts, not a server agent key. Its funding RPC/bundler/USDC/EntryPoint configuration is in `TRAVEL_SOURCES_JSON`; it does not use a single `RPC_URL` for every source. The destination is Base Sepolia or Base. Deploy/pin `LayoverPass` for minting; direct payments need no custom payment contract. External bridge/swap quotes require reviewed router/spender pins and actual liquidity. Read the app-specific setup before enabling real mode. No funded public-chain paymaster/bridge evidence is claimed by local fixtures.
