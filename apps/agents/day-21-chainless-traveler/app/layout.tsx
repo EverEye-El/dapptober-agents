@@ -1,0 +1,1 @@
+import '@dapptober/ui/src/traveler.css';export const metadata={title:'Layover · The Chainless Traveler',description:'One balance. Every departure. Let the agent handle the connections.'};export default function Layout({children}:{children:React.ReactNode}){return <html lang="en"><body>{children}</body></html>;}
