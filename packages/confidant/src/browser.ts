@@ -1,6 +1,7 @@
 // Browser capability: private values never cross the app API boundary.
 import {createPublicClient,createWalletClient,http,custom,keccak256,toHex,type Address,type Hex,type EIP1193Provider} from 'viem';
 import {baseSepolia} from 'viem/chains';
+import {sameConfidentialInstruction} from './recovery';
 import {confidantAbi,parseCredits} from './protocol';
 export type PublicOptions={chainId:number;rpc?:string;contract?:string;codeHash?:string};
 export async function connectConfidant(provider:EIP1193Provider,options:PublicOptions){
@@ -27,7 +28,7 @@ export async function connectConfidant(provider:EIP1193Provider,options:PublicOp
    else hash=await wallet.writeContract({account,address,abi:confidantAbi,functionName:kind,args:[id]});
    return hash;
   },
-  async confirm(hash:Hex){await active();const tx=await client.getTransaction({hash});if(tx.to?.toLowerCase()!==address.toLowerCase()||tx.from.toLowerCase()!==account.toLowerCase())throw new Error('Unrelated transaction');const mined=await client.waitForTransactionReceipt({hash,timeout:45000});await active();return mined;},
+  async confirm(hash:Hex,onReplacement?:(hash:Hex)=>void){await active();const tx=await client.getTransaction({hash});if(tx.to?.toLowerCase()!==address.toLowerCase()||tx.from.toLowerCase()!==account.toLowerCase())throw new Error('Unrelated transaction');let changed=false;const mined=await client.waitForTransactionReceipt({hash,timeout:45000,onReplaced:replacement=>{if(!sameConfidentialInstruction(tx,replacement.transaction)){changed=true;return;}onReplacement?.(replacement.transaction.hash);}});await active();const confirmed=await client.getTransaction({hash:mined.transactionHash});changed ||= !sameConfidentialInstruction(tx,confirmed);return {...mined,changed};},
   async reveal(handle:Hex,type:'amount'|'address'='amount'){await active();if(!acpHash){const acp=await fhe.acp.createSelf({issuer:account,name:'Hush / fifteen-minute owner view',contracts:[address],expiration:Math.floor(Date.now()/1000)+900});acpHash=acp.hash;}const result=await fhe.decryptForView(handle,type==='address'?FheTypes.Uint160:FheTypes.Uint64).execute();await active();return result.toString();},
   async lock(){locked=true;if(acpHash)await fhe.acp.removeACP(acpHash,84532,account);fhe.disconnect();},
  };

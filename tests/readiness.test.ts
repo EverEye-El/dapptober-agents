@@ -23,3 +23,13 @@ it('requires the independent forecast deployment and UMA oracle configuration',(
 it('requires production personhood, durable uniqueness, registered identity and funded reward configuration for Day 10',()=>{const gaps=assess(10,{AGENT_MODE:'real',CHECKPOINT_REGISTRY:'bad',CHECKPOINT_SESSION_SECRET:'short'});expect(gaps).toContain('WORLD_SIGNING_KEY: missing');expect(gaps).toContain('CHECKPOINT_REGISTRY: invalid address');expect(gaps).toContain('CHECKPOINT_SESSION_SECRET: requires at least 32 characters');});
 
 it('reports unavailable CoW settlement without treating matching Base Sepolia settings as a chain mismatch',()=>{const gaps=assess(6,{CHAIN_ID:'84532',COW_CHAIN_ID:'84532'});expect(gaps.some(x=>x.startsWith('COW_CHAIN_ID:'))).toBe(false);expect(gaps.some(x=>x.startsWith('CoW settlement:'))).toBe(true);});
+it('does not require another day contract for the coroner and rejects newer malformed runtime pins',()=>{
+ expect(assess(17,{})).not.toContain('CONFIDANT_CONTRACT: missing');
+ expect(assess(19,{FAMILIAR_CONTRACT:'bad',FAMILIAR_CODE_HASH:'bad',FAMILIAR_SESSION_SECRET:'short'})).toEqual(expect.arrayContaining(['FAMILIAR_CONTRACT: invalid address','FAMILIAR_CODE_HASH: independently pin deployed bytecode','FAMILIAR_SESSION_SECRET: requires at least 32 characters']));
+ expect(assess(20,{REFEREE_VAULT:'bad',REFEREE_CONTRACT:'bad',REFEREE_OPERATOR_PRIVATE_KEY:'bad',REFEREE_CODE_HASH:'bad'})).toEqual(expect.arrayContaining(['REFEREE_VAULT: invalid address','REFEREE_CONTRACT: invalid address','REFEREE_OPERATOR_PRIVATE_KEY: invalid key format','REFEREE_CODE_HASH: independently pin deployed bytecode']));
+});
+it('rejects missing catalog review dates and wrong newer-day Circle tokens',()=>{
+ const address='0x'+'11'.repeat(20);
+ expect(assess(15,{CHAIN_ID:'84532',RWA_CATALOG_JSON:JSON.stringify([{chainId:84532,vault:address}])}).some((x:string)=>x.startsWith('RWA_CATALOG_JSON:'))).toBe(true);
+ for(const day of [19,20])expect(assess(day,{CHAIN_ID:'84532',USDC_ADDRESS:address})).toContain('USDC_ADDRESS: wrong Circle USDC for this Base network');
+});

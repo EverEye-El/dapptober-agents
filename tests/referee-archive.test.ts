@@ -1,0 +1,8 @@
+import {expect,it,vi} from 'vitest';
+import {encodeAbiParameters,encodeEventTopics,keccak256,toHex} from 'viem';
+import {config} from '@dapptober/config';
+import {refereeAbi} from '@dapptober/referee/src/protocol';
+const fixture=vi.hoisted(()=>({rows:[] as {body:{blockNumber:string;transactionHash:string;topics:unknown;data:string}}[],queries:[] as {text:string;values:unknown[]}[]}));
+vi.mock('postgres',()=>({default:()=>async(strings:TemplateStringsArray,...values:unknown[])=>{const text=strings.join('?');fixture.queries.push({text,values});if(text.startsWith('SELECT block'))return [{block:'12',hash:'0x'+'11'.repeat(32)}];return fixture.rows;}}));
+import {refereeArchivePage} from '@dapptober/referee/src/archive';
+it('provides namespaced paginated decoded task history from the finalized archive',async()=>{const c=config({SUPABASE_DATABASE_URL:'postgresql://referee-archive.invalid/fixture',REFEREE_CONTRACT:'0x'+'22'.repeat(20),REFEREE_CODE_HASH:'0x'+'33'.repeat(32)}),id=keccak256(toHex('fixture-task')),topics=encodeEventTopics({abi:refereeAbi,eventName:'TaskOpened',args:{id}}),data=encodeAbiParameters([{type:'uint256'},{type:'uint8'},{type:'int64[]'},{type:'int256'}],[1n,0,[1n,2n],3n]);fixture.rows=Array.from({length:100},()=>({body:{blockNumber:'0xa',transactionHash:id,topics,data}}));const page=await refereeArchivePage(c,100,'tasks');expect(page.nextOffset).toBe(200);expect(page.records[0]).toMatchObject({block:'10',eventName:'TaskOpened',args:{id,inputs:[1n,2n],claimed:3n}});expect(fixture.queries.at(-1)?.values).toEqual([`84532:${c.REFEREE_CONTRACT}:${c.REFEREE_CODE_HASH}`,topics[0],100]);fixture.rows=[];expect((await refereeArchivePage(c,200,'tasks')).nextOffset).toBeNull();});

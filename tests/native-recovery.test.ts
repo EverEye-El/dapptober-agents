@@ -1,0 +1,18 @@
+import {afterEach,beforeEach,expect,it,vi} from 'vitest';
+import type {State} from '@dapptober/types';
+import type {Config} from '@dapptober/config';
+import {config} from '@dapptober/config';
+import {initialState} from '@dapptober/agent-core/src/store';
+const fixture=vi.hoisted(()=>({state:{} as State,c:{} as Config}));
+vi.mock('@dapptober/agent-core/src/store',async original=>({...await original<typeof import('@dapptober/agent-core/src/store')>(),withState:async(_day:number,_id:string,_c:unknown,work:(s:State)=>Promise<unknown>)=>({state:fixture.state,result:await work(fixture.state)})}));
+vi.mock('@dapptober/config',async original=>({...await original<typeof import('@dapptober/config')>(),config:()=>fixture.c}));
+vi.mock('@dapptober/familiar/src/planner',()=>({plan:vi.fn(async()=>({kind:'chat',data:{title:'LOCAL MODEL DOUBLE'},route:{intent:'chat',model:'small',confidence:1,source:'fixture'}}))}));
+import {drainNative,nativeAdmin,recoverNativeJob} from '@dapptober/familiar/src/platforms';
+import {plan} from '@dapptober/familiar/src/planner';
+beforeEach(async()=>{const actual=await vi.importActual<typeof import('@dapptober/config')>('@dapptober/config');fixture.c=actual.config({AGENT_MODE:'real',OPERATOR_TOKEN:'o'.repeat(32),TELEGRAM_BOT_TOKEN:'fixture',PUBLIC_ORIGIN:'https://gremlin.invalid'});fixture.state=initialState(19,fixture.c);fixture.state.familiar={rooms:[],nonces:[],jobs:[{id:'telegram:1',platform:'telegram',room:'lounge',channel:'123',actor:'telegram:1',text:'gm',status:'queued'}]};});
+afterEach(()=>{vi.restoreAllMocks();vi.clearAllMocks();});
+it('retries a persisted reply after an uncertain send without repeating model work or action cards',async()=>{const fetcher=vi.spyOn(globalThis,'fetch').mockRejectedValue(new Error('Delivery uncertain'));await drainNative();expect(fixture.state.familiar!.jobs[0]).toMatchObject({status:'review',reply:'gremlin: LOCAL MODEL DOUBLE'});const messages=fixture.state.familiar!.rooms[0].messages.length;recoverNativeJob(fixture.state,{id:'telegram:1',action:'retry',note:'Inspected enrolled chat: delivery absent.'});fetcher.mockResolvedValue(new Response(JSON.stringify({ok:true})));await drainNative();expect(fixture.state.familiar!.jobs[0].status).toBe('sent');expect(plan).toHaveBeenCalledOnce();expect(fixture.state.familiar!.rooms[0].messages).toHaveLength(messages);expect(fetcher).toHaveBeenCalledTimes(2);});
+it('does not send when review supersedes a stalled model worker',async()=>{const fetcher=vi.spyOn(globalThis,'fetch');vi.mocked(plan).mockImplementationOnce(async()=>{const job=fixture.state.familiar!.jobs[0];job.started=Date.now()-181000;recoverNativeJob(fixture.state,{id:job.id,action:'review',note:'Stalled worker reviewed by operator.'});return {kind:'chat',data:{title:'stale'},route:{intent:'chat',model:'small',confidence:1,source:'fixture'}};});await drainNative();expect(fetcher).not.toHaveBeenCalled();expect(fixture.state.familiar!.jobs[0].status).toBe('review');});
+it('rejects queue access without operator authorization',async()=>{const response=await nativeAdmin(new Request('https://gremlin.invalid/api/native-admin'));expect(response.ok).toBe(false);expect(config()).toBe(fixture.c);});
+
+it('ignores a late worker after its reviewed and cancelled job has been archived',async()=>{const fetcher=vi.spyOn(globalThis,'fetch');vi.mocked(plan).mockImplementationOnce(async()=>{fixture.state.familiar!.jobs=[];return {kind:'chat',data:{title:'stale'},route:{intent:'chat',model:'small',confidence:1,source:'fixture'}};});await expect(drainNative()).resolves.toBeUndefined();expect(fetcher).not.toHaveBeenCalled();});
