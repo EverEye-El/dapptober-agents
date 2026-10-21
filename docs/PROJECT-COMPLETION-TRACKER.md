@@ -10,6 +10,38 @@ This living document tracks every built Dapptober agent from local implementatio
 - Remove a remaining task only after completing it; record the result in the tested column and link its audit or evidence.
 - Update the status date and shared release work on every revision. A working UI or successful demo alone does not establish live completion.
 
+## What needs your involvement
+
+The apps are built and tested locally. Getting them live still needs service accounts, test funds and some choices from you. Start with one app; you do not need to set up every service for all twenty at once.
+
+| What you need to do | What I can do afterward |
+| --- | --- |
+| Fix the payment or spending-limit issue in **GitHub → Settings → Billing & plans**. | Run the online build and test checks. GitHub currently refuses to start them. |
+| Create separate **Supabase** projects for testing and production, and make their private database connection details available securely. | Connect the apps, test saved data and check backup/recovery. |
+| Enable billing/access for **TypeSafe Jev** and **OpenAI**, plus any extra service listed for your chosen day below. | Configure the keys privately and test actual responses and failures. |
+| Choose the wallets you control and a small testing budget for gas and USDC. | Prepare deployments and spending limits, then verify transactions. You approve wallet requests when needed. |
+| Provide access to a hosting account and choose the app's final web address. | Deploy it privately, connect the services and test the hosted app. |
+| Approve the chosen app's spending rules and arrange any required outside security/legal review. | Address findings and prepare the app for your release approval. |
+
+I already generated the missing local app passwords and session secrets. They are stored in private, Git-ignored environment files; you do not need to generate them again. Hosting will need its own private configuration. Do not paste secrets into this tracker.
+
+Some days need a specific choice or participation: Day 07 needs confidential-computing hosting; Day 10 needs World ID setup and a real person/passkey test; Day 11 needs a rented GPU; Day 12 needs a decision about Story versus Base; Day 15 needs issuer approval; Day 19 needs your chosen chat apps and permission from the participating rooms; Day 20 needs an approved collateral vault and a decision about whether native EigenLayer support is required. The daily checklists below contain the exact requirements.
+
+## Engineering still unfinished
+
+These tasks remain separate from account setup. They are not marked complete by passing local tests.
+
+- **Day 02:** add a provider-specific signing adapter if the chosen payment facilitator requires automatically refreshed authentication tokens.
+- **Day 12:** implement native Story licensing after the network/bridge design is approved. The existing Base registry does not satisfy that requirement.
+- **Day 18:** test wallet replacements/cancellations live and handle transactions whose outcome remains unknown. Funded token settlement, hidden orders and payroll need separate implementations if included in scope.
+- **Day 19:** finish archiving room proposals before raising the current limit. Completed chat-job archival exists, but still needs testing with the real database and chat platforms.
+- **Day 20:** connect archived history to active task management before exceeding the current 200-task/500-report limits; safely record and reconcile interrupted transaction submissions before unattended operation. The history archive exists, but still needs real database/RPC testing.
+- **Day 20:** implement and independently review source-chain stake registration and slashing before claiming native EigenLayer security. Certificate inspection alone does not provide it.
+- **Shared operations:** finish monitoring, scheduled jobs, retention and backup setup for the chosen hosting environment; verify recovery before enabling unattended operation. Other daily capacity limits also need proper history handling before they are increased.
+- **Dependency review:** resolve or obtain an outside assessment of the remaining low-severity elliptic advisory. The current audit reports no patched release.
+
+The daily checklists remain the detailed record of deployment, funding and live verification. No app is recorded as fully live yet.
+
 ## Current status
 
 Status as of October 20, 2026: twenty daily apps have local implementations. No app is certified here as an end-to-end live production service. Latest release evidence and remaining provider/public-chain requirements are recorded below; simulated financial actions and AI responses remain explicitly labeled.
@@ -634,7 +666,7 @@ Day20 final release evidence: all20 independent production builds and production
 
 ## Engineering completion pass — October 20, 2026
 
-Scope includes Days 01–20. See [the consolidated owner setup list and remaining engineering](OWNER-SETUP-AND-ENGINEERING.md) and [operations instructions](DEPLOYMENT.md#completion-pass-operations). This pass does not certify live operation or independent security review.
+Scope includes Days 01–20. Owner setup and remaining engineering are listed at the top of this tracker. Technical operating instructions are in [deployment instructions](DEPLOYMENT.md#completion-pass-operations). This pass does not certify live operation or independent security review.
 
 Completed repository/local configuration work:
 
