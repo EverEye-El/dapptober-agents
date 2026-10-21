@@ -26,7 +26,6 @@ Twenty-one independently runnable crypto-native agents for Dapptober 2026, built
 | 18 | [Hush — Encrypted Confidant](apps/agents/day-18-encrypted-confidant/README.md) | http://localhost:3018 | Fhenix encrypted allocation auctions, owner ACP view and amount-free Jev routing |
 | 19 | [Gremlin — Group-Chat Familiar](apps/agents/day-19-group-chat-familiar/README.md) | http://localhost:3019 | Base USDC/social contract, Farcaster, Telegram, Discord, Slack |
 | 20 | [Overrule — Restaked Referee](apps/agents/day-20-restaked-referee/README.md) | http://localhost:3020 | Base ERC4626 collateral, EIP712 verdicts, ERC8004, Eigen destination inspection |
-
 | 21 | [Layover — Chainless Traveler](apps/agents/day-21-chainless-traveler/README.md) | http://localhost:3021 | thirdweb Bridge/sponsored smart accounts, LI.FI swap routing, Jev and Base pass mint |
 
 ## Start here

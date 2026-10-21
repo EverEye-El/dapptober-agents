@@ -13,6 +13,7 @@ Checked boxes mean the stated work was completed and verified **in the environme
 - [x] Verify the pnpm **10.2.0** frozen installation using the existing dependency store; retain `pnpm-lock.yaml` as the only dependency lockfile.
 - [x] Generate missing unique local operator tokens for all 21 apps and Day 10/19 session secrets. Verify private file permissions and Git exclusion; preserve existing values.
 - [x] Correct readiness checks for Days 05 and 15–21, including invalid addresses, runtime hashes, signer/session-secret formats, token/network mismatches and expired/missing catalog reviews.
+- [x] Publish Day 21 as [PR #18](https://github.com/EverEye-El/dapptober-agents/pull/18), stacked on PR #17; implementation `7c333f5`. No main push, merge or public deployment was performed.
 - [x] Publish the engineering pass in [draft PR #17](https://github.com/EverEye-El/dapptober-agents/pull/17), based on Day 20 PR #16. Implementation: `d8ebffd`; no merge or public deployment was performed.
 
 Days 01–20 retain their October 20 engineering-pass evidence; Day 21 adds its separately recorded local checks. They do not establish actual Supabase persistence, paid-model access, public-chain transactions or hosted container execution. Day-specific evidence and exceptions appear below.
@@ -238,7 +239,7 @@ Each day's checked implementation box describes **tested local scope**, not full
 
 ## Shared release blockers and evidence
 
-- [ ] **Hosted CI and containers:** [run 39489967016](https://github.com/EverEye-El/dapptober-agents/actions/runs/39489967016), implementation `d8ebffd`, started **zero steps across 23 jobs** because GitHub reported failed payments/spending limits. GitGuardian passed. Docker was unavailable locally; current container execution is not verified. Earlier passing container runs apply only to their recorded earlier commits.
+- [ ] **Hosted CI and containers:** [Day 21 run 39646270549](https://github.com/EverEye-El/dapptober-agents/actions/runs/39646270549), implementation `7c333f5`, started **zero steps across 24 jobs** because GitHub reported failed payments/spending limits. GitGuardian passed. This repeats the same blocker recorded for the October 20 engineering pass. Docker was unavailable locally; current container execution is not verified. Earlier passing container runs apply only to their recorded earlier commits.
 - [ ] **Dependency advisory:** the October 20 production audit found zero critical/high/moderate and one low **elliptic** advisory ([GHSA-848j-6mx2-7j84](https://github.com/advisories/GHSA-848j-6mx2-7j84)), with no patched release reported. Obtain independent assessment or an upstream-vetted fix; signature-verification usage does not clear the advisory.
 - [ ] **Live acceptance:** no public deployment, funded public-chain acceptance, actual Supabase service, paid-model request or real chat delivery was established by the engineering pass. Testnet rehearsals, local fixtures and read-only public-chain evidence remain separate from production acceptance.
 
