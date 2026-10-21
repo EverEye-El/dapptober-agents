@@ -52,3 +52,10 @@ Day 16 uses its own annotated app .env.example/.env.local: BOURSE_ESCROW, BOURSE
 ## Day17 — Toe Tag
 
 Day17 has an annotated per-app .env.example/.env.local. Provider-specific fields include BLOCKSCOUT_API_URL/optional key, CORONER_PROBE/ROUTER/LOCKERS_JSON, Tenderly access/account/project, CORONER_SCHEMA/SCHEMA_REGISTRY, EAS_ADDRESS, Pinata JWT, Supabase pooler, Jev and OpenAI keys. No USDC/thirdweb/server private key needed. Root env remains a pointer.
+
+
+## Day18 — Hush
+
+Day18 .env.local is annotated separately. Supabase/Jev/OpenAI keys remain server-only. CONFIDANT_PUBLIC_RPC_URL is explicitly browser-visible; domain-restrict any key. CONFIDANT_CONTRACT/CODE_HASH enroll reviewed runtime. No server spending key or private amounts are accepted by the API. Demo uses disposable in-memory AES, not FHE. Mainnet8453 remains unsupported by this CoFHE integration.
+
+Day20 Overrule: use its app-local annotated template. Supabase/OPERATOR_TOKEN secure the private booth; REFEREE_OPERATOR_PRIVATE_KEY is a dedicated server verdict signer with funded gas and registered collateral. REFEREE_CONTRACT/CODE_HASH/VAULT/START_BLOCK pin actual Base deployment; optional validation registry and Eigen verifier/AVS/set thresholds require actual protocol configuration. Source-chain restaking/slashing credentials are not accepted. Demo uses ephemeral signatures and fixture collateral; no secrets are needed.

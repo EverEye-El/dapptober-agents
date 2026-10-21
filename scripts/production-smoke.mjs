@@ -18,7 +18,7 @@ try{
     child.on('error',()=>{process.exitCode=1;});
   }
   for(let attempt=0;attempt<60;attempt++){
-    if(children.some(child=>child.exitCode!==null||child.signalCode!==null))throw new Error('A production server exited before the audit; ensure ports 3101–3117 are free');
+    if(children.some(child=>child.exitCode!==null||child.signalCode!==null))throw new Error('A production server exited before the audit; ensure ports 3101–3120 are free');
     const states=await Promise.all(apps.map(async dir=>{try{return (await fetch(`http://127.0.0.1:${base+Number(dir.match(/^day-(\d+)-/)[1])}`,{signal:AbortSignal.timeout(1000)})).status===200;}catch{return false;}}));
     if(ready.size===children.length&&states.every(Boolean))break;
     if(attempt===59)throw new Error('Production servers did not become ready');

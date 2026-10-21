@@ -5,7 +5,10 @@ import {resolve} from 'node:path';
 
 const common=['OWNER_ADDRESS','OPERATOR_TOKEN','SUPABASE_DATABASE_URL','RPC_URL','JEV_API_KEY','OPENAI_API_KEY'];
 const required={
-  17:[...common,'BLOCKSCOUT_API_URL','CORONER_PROBE','CORONER_ROUTER','TENDERLY_ACCESS_KEY','TENDERLY_ACCOUNT_SLUG','TENDERLY_PROJECT_SLUG','PINATA_JWT','EAS_ADDRESS','CORONER_SCHEMA_REGISTRY','CORONER_SCHEMA'],
+  20:['OPERATOR_TOKEN','SUPABASE_DATABASE_URL','RPC_URL','JEV_API_KEY','OPENAI_API_KEY','REFEREE_CONTRACT','REFEREE_CODE_HASH','REFEREE_VAULT','REFEREE_OPERATOR_PRIVATE_KEY'],
+  19:['OPERATOR_TOKEN','SUPABASE_DATABASE_URL','RPC_URL','JEV_API_KEY','OPENAI_API_KEY','FAMILIAR_SESSION_SECRET','FAMILIAR_CONTRACT','FAMILIAR_CODE_HASH'],
+  18:['OPERATOR_TOKEN','SUPABASE_DATABASE_URL','RPC_URL','JEV_API_KEY','OPENAI_API_KEY','CONFIDANT_CONTRACT','CONFIDANT_CODE_HASH','CONFIDANT_PUBLIC_RPC_URL'],
+  17:[...common,'BLOCKSCOUT_API_URL','CONFIDANT_CONTRACT','CORONER_PROBE','CORONER_ROUTER','TENDERLY_ACCESS_KEY','TENDERLY_ACCOUNT_SLUG','TENDERLY_PROJECT_SLUG','PINATA_JWT','EAS_ADDRESS','CORONER_SCHEMA_REGISTRY','CORONER_SCHEMA'],
   16:[...common,'BOURSE_ESCROW','BOURSE_REGISTRY','BOURSE_BUYER_ID','BOURSE_SELLERS_JSON'],
   15:[...common,'RWA_CATALOG_JSON','CHAINLINK_USDC_USD_FEED_ADDRESS'],
   14:[...common,'SENTINEL_VAULT','SENTINEL_GUARDIAN_PRIVATE_KEY','SENTINEL_SIGNERS','TENDERLY_ACCESS_KEY','TENDERLY_ACCOUNT_SLUG','TENDERLY_PROJECT_SLUG'],
@@ -29,16 +32,17 @@ export function assess(day,env){
   for(const key of required[day])if(!env[key]?.trim())gaps.push(`${key}: missing`);
   for(const key of ['OPERATOR_TOKEN','TEE_WORKER_TOKEN','CHECKPOINT_SESSION_SECRET'])if(env[key]&&env[key].length<32)gaps.push(`${key}: requires at least 32 characters`);
   for(const [key,value] of Object.entries(env)){
-    if(value&&(/_ADDRESS$/.test(key)||['SESSION_VAULT','PASSPORT_REGISTRY','QUEST_ESCROW','FLIGHT_TREASURY','COW_USDC','COW_WETH','SENATE_TOKEN','SENATE_GOVERNOR','FORECAST_MARKET','UMA_ORACLE','CHECKPOINT_REWARDS','CHECKPOINT_REGISTRY','INFERENCE_ANCHOR','GPU_MARKET','PROVENANCE_PRESS','LAUNCH_FACTORY','LAUNCH_BUYER_VAULT','SENTINEL_VAULT','BOURSE_ESCROW','BOURSE_REGISTRY','CORONER_PROBE','CORONER_ROUTER','CORONER_SCHEMA_REGISTRY','PAY_TO'].includes(key))&&!/^0x[0-9a-fA-F]{40}$/.test(value))gaps.push(`${key}: invalid address`);
+    if(value&&(/_ADDRESS$/.test(key)||['SESSION_VAULT','PASSPORT_REGISTRY','QUEST_ESCROW','FLIGHT_TREASURY','COW_USDC','COW_WETH','SENATE_TOKEN','SENATE_GOVERNOR','FORECAST_MARKET','UMA_ORACLE','CHECKPOINT_REWARDS','CHECKPOINT_REGISTRY','INFERENCE_ANCHOR','GPU_MARKET','PROVENANCE_PRESS','LAUNCH_FACTORY','LAUNCH_BUYER_VAULT','SENTINEL_VAULT','BOURSE_ESCROW','BOURSE_REGISTRY','CONFIDANT_CONTRACT','CORONER_PROBE','CORONER_ROUTER','CORONER_SCHEMA_REGISTRY','PAY_TO'].includes(key))&&!/^0x[0-9a-fA-F]{40}$/.test(value))gaps.push(`${key}: invalid address`);
   }
   if(env.AGENT_PRIVATE_KEY&&!/^0x[0-9a-fA-F]{64}$/.test(env.AGENT_PRIVATE_KEY))gaps.push('AGENT_PRIVATE_KEY: invalid key format');
-  for(const key of ['PUBLIC_ORIGIN','TEE_WORKER_URL'])if(env[key]){try{if(new URL(env[key]).protocol!=='https:')gaps.push(`${key}: HTTPS required for release`);}catch{gaps.push(`${key}: invalid URL`);}}
+  for(const key of ['PUBLIC_ORIGIN','TEE_WORKER_URL','CONFIDANT_PUBLIC_RPC_URL'])if(env[key]){try{if(new URL(env[key]).protocol!=='https:')gaps.push(`${key}: HTTPS required for release`);}catch{gaps.push(`${key}: invalid URL`);}}
   for(const key of ['RPC_URL','OPENAI_BASE_URL','FACILITATOR_URL'])if(env[key]){try{if(!['http:','https:'].includes(new URL(env[key]).protocol))gaps.push(`${key}: HTTP(S) URL required`);}catch{gaps.push(`${key}: invalid URL`);}}
   if(!env.PUBLIC_ORIGIN)gaps.push('PUBLIC_ORIGIN: missing');
   if(env.SUPABASE_DATABASE_URL&&!/^postgres(ql)?:\/\//.test(env.SUPABASE_DATABASE_URL))gaps.push('SUPABASE_DATABASE_URL: PostgreSQL URL required');
   if(!['8453','84532'].includes(env.CHAIN_ID))gaps.push('CHAIN_ID: use Base Sepolia (84532) for testing or Base (8453) for production');
   const usdc=env.CHAIN_ID==='8453'?'0x833589fcd6edb6e08f4c7c32d4f71b54bda02913':'0x036cbd53842c5426634e7929541ec2318f3dcf7e';
   if([1,2,4,5,9,10,11,12,13,14,15,16].includes(day)&&env.USDC_ADDRESS&&env.USDC_ADDRESS.toLowerCase()!==usdc)gaps.push('USDC_ADDRESS: wrong Circle USDC for this Base network');
+  if(day===18){if(env.CHAIN_ID==='8453')gaps.push('CoFHE Base mainnet: not supported by this SDK release; production stays blocked');if(!/^0x[0-9a-fA-F]{64}$/.test(env.CONFIDANT_CODE_HASH??''))gaps.push('CONFIDANT_CODE_HASH: independently pin deployed bytecode');}
   if(day===6&&env.COW_USDC&&env.COW_USDC.toLowerCase()!==usdc)gaps.push('COW_USDC: wrong Circle USDC for this Base network');
   if(day===6&&(!['8453','84532'].includes(env.COW_CHAIN_ID)||env.CHAIN_ID!==env.COW_CHAIN_ID))gaps.push('COW_CHAIN_ID: must match CHAIN_ID');
   if(day===6&&env.COW_CHAIN_ID==='84532')gaps.push('CoW settlement: no supported Base Sepolia solver endpoint; testing configuration is valid but live settlement is unavailable');
@@ -56,7 +60,7 @@ export function assess(day,env){
 
 async function main(){
   const flags=process.argv.slice(2),selection=flags.find(x=>/^\d{1,2}$/.test(x));
-  if(flags.some(x=>!['--init','--online'].includes(x)&&x!==selection)||selection&&(Number(selection)<1||Number(selection)>17))throw new Error('Usage: pnpm readiness [01–17] [--init] [--online]');
+  if(flags.some(x=>!['--init','--online'].includes(x)&&x!==selection)||selection&&(Number(selection)<1||Number(selection)>20))throw new Error('Usage: pnpm readiness [01–20] [--init] [--online]');
   const root=fileURLToPath(new URL('../',import.meta.url));let failed=false;
   for(const dir of readdirSync(resolve(root,'apps/agents')).sort()){
     const day=Number(dir.match(/^day-(\d+)-/)?.[1]);if(!required[day]||selection&&day!==Number(selection))continue;
@@ -70,7 +74,7 @@ async function main(){
       try{
         const rpc=async(method,params)=>{const r=await fetch(env.RPC_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({jsonrpc:'2.0',id:1,method,params}),signal:AbortSignal.timeout(10000)});const data=await r.json();if(!r.ok||data.error||data.result===undefined)throw new Error('RPC rejected request');return data.result;};
         if(Number(BigInt(await rpc('eth_chainId',[])))!==Number(env.CHAIN_ID))gaps.push('RPC_URL: wrong chain');
-        for(const key of ['SESSION_VAULT','PASSPORT_REGISTRY','QUEST_ESCROW','FLIGHT_TREASURY','SENATE_TOKEN','SENATE_GOVERNOR','FORECAST_MARKET','UMA_ORACLE','CHECKPOINT_REWARDS','CHECKPOINT_REGISTRY','INFERENCE_ANCHOR','GPU_MARKET','PROVENANCE_PRESS','LAUNCH_FACTORY','LAUNCH_BUYER_VAULT','SENTINEL_VAULT','BOURSE_ESCROW','BOURSE_REGISTRY','CORONER_PROBE','CORONER_ROUTER','CORONER_SCHEMA_REGISTRY','USDC_ADDRESS','COW_USDC','COW_WETH'])if(/^0x[0-9a-fA-F]{40}$/.test(env[key]??'')&&await rpc('eth_getCode',[env[key],'latest'])==='0x')gaps.push(`${key}: no deployed bytecode`);
+        for(const key of ['SESSION_VAULT','PASSPORT_REGISTRY','QUEST_ESCROW','FLIGHT_TREASURY','SENATE_TOKEN','SENATE_GOVERNOR','FORECAST_MARKET','UMA_ORACLE','CHECKPOINT_REWARDS','CHECKPOINT_REGISTRY','INFERENCE_ANCHOR','GPU_MARKET','PROVENANCE_PRESS','LAUNCH_FACTORY','LAUNCH_BUYER_VAULT','SENTINEL_VAULT','BOURSE_ESCROW','BOURSE_REGISTRY','CONFIDANT_CONTRACT','CORONER_PROBE','CORONER_ROUTER','CORONER_SCHEMA_REGISTRY','USDC_ADDRESS','COW_USDC','COW_WETH'])if(/^0x[0-9a-fA-F]{40}$/.test(env[key]??'')&&await rpc('eth_getCode',[env[key],'latest'])==='0x')gaps.push(`${key}: no deployed bytecode`);
       }catch{gaps.push('RPC_URL: read-only connectivity check failed (details withheld to protect secrets)');}
     }
     console.log(`Day ${String(day).padStart(2,'0')}: ${gaps.length?'BLOCKED':'CONFIGURED — live acceptance still required'}`);for(const gap of gaps)console.log(`  - ${gap}`);failed ||= gaps.length>0;

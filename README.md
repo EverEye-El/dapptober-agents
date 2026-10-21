@@ -1,6 +1,6 @@
 # Dapptober Agents
 
-Seventeen independently runnable crypto-native agents for Dapptober 2026, built on a shared TypeScript capability layer. The supplied daily prompts are canonical; the master build specification defines the architecture and audit requirements.
+Twenty independently runnable crypto-native agents for Dapptober 2026, built on a shared TypeScript capability layer. The supplied daily prompts are canonical; the master build specification defines the architecture and audit requirements.
 
 [Project completion tracker](docs/PROJECT-COMPLETION-TRACKER.md) records tested functionality and remaining work for every built day and is updated after each daily build.
 
@@ -23,6 +23,9 @@ Seventeen independently runnable crypto-native agents for Dapptober 2026, built 
 | 15 | [Aurel — Real-World Concierge](apps/agents/day-15-real-world-concierge/README.md) | http://localhost:3015 | Centrifuge async USDC subscriptions/redemptions, Chainlink, cited Jev/AI concierge |
 | 16 | [Brass — Bot-to-Bot Bourse](apps/agents/day-16-bot-to-bot-bourse/README.md) | http://localhost:3016 | A2A 1.0 agent cards, Jev negotiations, ERC-8004 and signed USDC escrow |
 | 17 | [Toe Tag — Memecoin Coroner](apps/agents/day-17-memecoin-coroner/README.md) | http://localhost:3017 | Blockscout/RPC forensics, reverting Tenderly sell probe, Jev report and EAS |
+| 18 | [Hush — Encrypted Confidant](apps/agents/day-18-encrypted-confidant/README.md) | http://localhost:3018 | Fhenix encrypted allocation auctions, owner ACP view and amount-free Jev routing |
+| 19 | [Gremlin — Group-Chat Familiar](apps/agents/day-19-group-chat-familiar/README.md) | http://localhost:3019 | Base USDC/social contract, Farcaster, Telegram, Discord, Slack |
+| 20 | [Overrule — Restaked Referee](apps/agents/day-20-restaked-referee/README.md) | http://localhost:3020 | Base ERC4626 collateral, EIP712 verdicts, ERC8004, Eigen destination inspection |
 
 ## Start here
 
@@ -35,7 +38,7 @@ See [pnpm migration and validation](docs/PNPM-MIGRATION.md) for the workspace ch
 ```sh
 pnpm install --frozen-lockfile
 pnpm run dev 01
-# Or run all fifteen independent servers:
+# Or run all eighteen independent servers:
 pnpm run dev
 ```
 
@@ -53,12 +56,12 @@ pnpm run typecheck
 pnpm run lint
 pnpm test
 pnpm run test:contracts            # Solidity unit and fuzz tests, offline
-pnpm run build                    # all fifteen independent builds
+pnpm run build                    # all eighteen independent builds
 pnpm run check                    # full verification
 pnpm run smoke                    # production HTTP workflow audit (servers must run)
 ```
 
-`pnpm --filter @dapptober/day-01 run start` runs a built app. `pnpm run start` starts all fifteen after a full build. No other daily server is needed by any real deployment.
+`pnpm --filter @dapptober/day-01 run start` runs a built app. `pnpm run start` starts all eighteen after a full build. No other daily server is needed by any real deployment.
 
 ## Shared capabilities
 
@@ -83,3 +86,5 @@ All ten apps default to Base Sepolia (84532) for testing and target Base (8453) 
 Configuration names and where to enter each value: [environment setup](docs/ENVIRONMENT-SETUP.md). Each daily `.env.local` includes field explanations; private values belong there, not in `.env.example`.
 
 Day 13 is `gantry.fun`: a copper agent launchpad with thirdweb-based fixed-supply tokens, perpetual curves and holder revenue. See [its audit](docs/DAY-13-AUDIT.md) for evidence and release limits.
+
+Day18 deliberately keeps all private values in the browser/FHE network: its API stores only public routing categories and confirmed transaction metadata. Its confidential credits are allocation units, not funded cash. Base mainnet support is blocked pending CoFHE availability.

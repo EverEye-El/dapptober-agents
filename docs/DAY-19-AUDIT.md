@@ -1,0 +1,17 @@
+# Day19 final audit — Gremlin
+
+Implemented independent Next app3019 and shared familiar capability package. Degen copper group chat, channels, direct messages to Gremlin, reaction stickers, action cards, leveling pet, mobile room/wallet controls and platform setup. Public rooms intentionally expose directed bot excerpts; no private group-chat claim.
+
+Four real contract paths: direct user-funded USDC tips; shared collector bill with exact micro-USDC rounding; ERC721 meme metadata; wallet-based polls/tally. Fixed100USDC/payment and500/day/wallet caps, replay guards, guardian pause, no custody. Jev intent agreement and model routing fail closed; narration does not control economic fields. All broadcasts are wallet signed. Signed five-minute commands bind payload/room/wallet/origin/chain/nonces; EOAs and smart-wallet verification supported. Exact mined sender/to/input/value/time checks precede receipt acceptance.
+
+Telegram secret-token, Slack raw HMAC/timestamp and Discord Ed25519/timestamp authenticate enrolled native commands. Durable dedupe, fast acknowledgment, bounded after() queue and no automatic ambiguous-delivery retries. No live external messages sent during build. Native actor names confer no wallet authority. Group consent, ingress controls, manual queue recovery and retention are release requirements.
+
+Validation: application tests152 passed with17 opt-in skips; thirteen Day19 unit tests. Funded Anvil integration passed for tip, split creation/payment, NFT ownership, poll creation/vote and exact receipt/replay checks. Jev/OpenAI were explicit doubles. Solidity suite116 passed including eight Day19 cases and256-run rounding fuzzing. Lint/typecheck passed. Lockfile install passed against existing store. Independent builds and production HTTP audit recorded after completion below.
+
+No public-chain deployment, real Supabase durability, live bot installation/delivery, real Neynar lookup, actual paid model calls, production wallet integration or Farcaster publication is implied. Manifest is noindex until supplied signed association. Mainnet optional thirdweb BuyWidget is separate from testnet wallets. Production security review and operational recovery remain unchecked in the tracker. Production audit retains one inherited low advisory.
+
+Hosted verification: [PR15](https://github.com/EverEye-El/dapptober-agents/pull/15), implementation `bcc519f`, stacked on open PR14. [Run39300831682](https://github.com/EverEye-El/dapptober-agents/actions/runs/39300831682) has zero job steps; GitHub's annotation says recent account payments failed or spending limit needs increasing. **GitGuardian passed.** Hosted containers/checks remain unverified due to that account restriction.
+
+Browser: desktop chat command → concrete preview → simulated completion/XP and room isolation/platform setup were checked. Mobile navigation/CSS was implemented, but the browser viewport override did not affect this preview tab; phone visual/wallet acceptance remains open.
+
+Final local release verification: **all19 independent production builds passed**, then **all19 production page/API/workflow/receipt HTTP checks passed** on temporary ports3101–3119, including Day19 manifest and simulated tip. Temporary audit servers were stopped; Day19 dev preview remains on3019. Final receipt-recovery UI refinement passed lint/typecheck and was included in the Day19 build. Docker image execution remains unverified locally/hosted for this release; next start HTTP checks are not standalone-container evidence.

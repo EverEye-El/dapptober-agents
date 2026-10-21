@@ -17,7 +17,13 @@
     "./src/bourse": "./src/bourse.tsx",
     "./src/bourse.css": "./src/bourse.css",
     "./src/coroner": "./src/coroner.tsx",
-    "./src/coroner.css": "./src/coroner.css"
+    "./src/coroner.css": "./src/coroner.css",
+    "./src/confidant": "./src/confidant.tsx",
+    "./src/confidant.css": "./src/confidant.css",
+    "./src/familiar": "./src/familiar.tsx",
+    "./src/familiar.css": "./src/familiar.css",
+    "./src/referee": "./src/referee.tsx",
+    "./src/referee.css": "./src/referee.css"
   },
   "dependencies": {
     "@dapptober/compute": "workspace:*",
@@ -36,7 +42,12 @@
     "viem": "^2.38.0",
     "@dapptober/rwa": "workspace:*",
     "@dapptober/bourse": "workspace:*",
-    "@dapptober/coroner": "workspace:*"
+    "@dapptober/coroner": "workspace:*",
+    "@dapptober/confidant": "workspace:*",
+    "@cofhe/sdk": "1.0.0",
+    "@dapptober/familiar": "workspace:*",
+    "@farcaster/miniapp-sdk": "0.3.0",
+    "@dapptober/referee": "workspace:*"
   },
   "devDependencies": {
     "@types/three": "^0.186.0"

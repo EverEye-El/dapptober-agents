@@ -1,0 +1,1 @@
+{"name":"@dapptober/day-20","private":true,"scripts":{"dev":"next dev --port 3020","start":"next start --port 3020","build":"next build --webpack","test":"vitest run --root ../../.. tests/day-20.test.ts"},"dependencies":{"@dapptober/ui":"workspace:*","@dapptober/referee":"workspace:*","next":"^16.0.0","react":"^19.2.0","react-dom":"^19.2.0"}}
