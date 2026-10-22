@@ -1,22 +1,22 @@
 # Project completion tracker
 
-**Updated October 21, 2026. All 21 apps are implemented locally; none is verified as fully live.**
+**Updated October 22, 2026. All 22 apps are implemented locally; none is verified as fully live.**
 
 Checked boxes mean the stated work was completed and verified **in the environment named**. A local test does not complete a live deployment task. Completed and outstanding parts of a task now have separate boxes.
 
-## Completed across Days 01–21
+## Completed across Days 01–22
 
-- [x] Build all 21 independently runnable apps, with shared capabilities and separate configuration.
-- [x] Verify all 21 independent production builds and local HTTP/receipt workflows.
-- [x] Pass lint, type checking, **191 application tests** and **130 contract tests**; **19 opt-in application tests remain skipped** in the ordinary suite.
-- [x] Retain **16 earlier Anvil acceptance cases** and pass **one new Day 21 funded acceptance case**, using actual local blockchains. External services and protocol fixtures remain distinct from live provider evidence.
+- [x] Build all 22 independently runnable apps, with shared capabilities and separate configuration.
+- [x] Verify all 22 independent production builds and local HTTP/receipt workflows.
+- [x] Pass lint, type checking, **209 application tests** and **145 contract tests**; **20 opt-in application tests remain skipped** in the ordinary suite.
+- [x] Retain **16 earlier Anvil acceptance cases** and pass **one Day 21 and one new Day 22 funded acceptance case**, using actual local blockchains. External services and protocol fixtures remain distinct from live provider evidence.
 - [x] Verify the pnpm **10.2.0** frozen installation using the existing dependency store; retain `pnpm-lock.yaml` as the only dependency lockfile.
-- [x] Generate missing unique local operator tokens for all 21 apps and Day 10/19 session secrets. Verify private file permissions and Git exclusion; preserve existing values.
-- [x] Correct readiness checks for Days 05 and 15–21, including invalid addresses, runtime hashes, signer/session-secret formats, token/network mismatches and expired/missing catalog reviews.
+- [x] Generate missing unique local operator tokens for all 22 apps and Day 10/19 session secrets. Verify private file permissions and Git exclusion; preserve existing values.
+- [x] Correct readiness checks for Days 05 and 15–22, including invalid addresses, runtime hashes, signer/session-secret formats, token/network mismatches and expired/missing catalog reviews.
 - [x] Publish Day 21 as [PR #18](https://github.com/EverEye-El/dapptober-agents/pull/18), stacked on PR #17; implementation `7c333f5`. No main push, merge or public deployment was performed.
 - [x] Publish the engineering pass in [draft PR #17](https://github.com/EverEye-El/dapptober-agents/pull/17), based on Day 20 PR #16. Implementation: `d8ebffd`; no merge or public deployment was performed.
 
-Days 01–20 retain their October 20 engineering-pass evidence; Day 21 adds its separately recorded local checks. Hosted CI/container execution is now verified by the October 21 reruns linked below. These results do not establish actual Supabase persistence, paid-model access or public-chain transactions. Day-specific evidence and exceptions appear below.
+Days 01–20 retain their October 20 engineering-pass evidence; Days 21–22 add their separately recorded local checks. Hosted CI/container execution for Days 01–21 is verified by the October 21 reruns linked below; Day 22 evidence is recorded separately. These results do not establish actual Supabase persistence, paid-model access or public-chain transactions. Day-specific evidence and exceptions appear below.
 
 ## What needs your involvement
 
@@ -237,7 +237,21 @@ Each day's checked implementation box describes **tested local scope**, not full
 
 [Setup](../apps/agents/day-21-chainless-traveler/README.md) · [Evidence and limitations](DAY-21-AUDIT.md)
 
+### Day 22 — Pitlane / Agent Arena
+
+- [x] Build the training gym, five starter agents, versioned/frozen weighted strategies, sixty-bout practice benchmark, autonomous commit-reveal pilots, Phaser holographic replay/match tape/archive, seasonal ladder and pooled wager UI. Explicit practice stakes/crowds/randomness never pretend to be live.
+- [x] Enforce USDC stakes and 90/5/5 **losing-pool** profit/trainer/house split onchain, with principal recovery, exact rounding, pull claims, zero-fee refunds and missed-reveal forfeits. Test real funded Anvil wagers, durable signed pilot outbox, VRF/Jev fixtures, scoring agreement and exact receipt/claim rejection.
+- [ ] Configure actual **Supabase Session pooler URI**, Base Sepolia RPC, billed **OpenAI** coaching and **TypeSafe Jev** gates. Verify live wallet authentication/nonces, per-wallet instruction isolation, quotas, database locking/backups and encrypted reveal-preimage restoration. This version authenticates EOAs; EIP-1271 support is absent.
+- [ ] Deploy/pin **AgentArena** with Circle USDC, intended house/guardian and reviewed **Chainlink VRF v2.5 coordinator/lane/subscription**. Fund that subscription with LINK, add its arena consumer, and verify genuine request/fulfillment/callback gas. Guardian-enroll fighters; fund dedicated matching pilot keys with bounded ETH gas and user wallets with intended test USDC/gas.
+- [ ] Register/coach/publish fighters so the worker retains frozen preimages. Run `pnpm worker:arena` with private operator authentication; verify genuine autonomous commit → request → reveal → settlement and trainer/backer/house claims using independent wallets. Test trainer self-backing, pause-safe exits, missing reveals, oracle timeout/late callback, changed strategies and season rollover.
+- [ ] Reconcile dropped/replaced/reverted worker outboxes and uncertain wallet submissions before retry; test real provider refusal, worker downtime, reorgs and restore recovery. Monitor pilot gas, LINK, pending phases and deadlines. Pilot budgets do not secure a stolen private key; commit-reveal/VRF do not prevent collusion or Sybil bets.
+- [ ] Review public wagering eligibility/economics, custody, independent contract/security assessment, ingress limits and retention/privacy. Provide archive/indexer/new-season deployment before the 200-match stop; retain four-active-bout and daily scheduling/VRF bounds unless separately reviewed. Add HTTPS/hosting and hosted acceptance, then approve a separate small Base mainnet acceptance budget and verify live dependencies there.
+
+[Setup](../apps/agents/day-22-agent-arena/README.md) · [Evidence and limitations](DAY-22-AUDIT.md)
+
 ## Shared release blockers and evidence
+
+- [ ] **Day 22 hosted verification:** local checks pass; publish the dedicated branch/PR and verify its shared/local-chain checks, 22 standalone app containers and worker images.
 
 - [x] **Hosted CI and containers:** October 21 full reruns passed for [PR #16 — 23 jobs](https://github.com/EverEye-El/dapptober-agents/actions/runs/39486891036) at `4791f47`, [PR #17 — 23 jobs](https://github.com/EverEye-El/dapptober-agents/actions/runs/39533455898) at `1e51d81`, and [PR #18 — 24 jobs](https://github.com/EverEye-El/dapptober-agents/actions/runs/39646547429) at `5fe7815`. This includes the shared test/local-chain checks, each app's standalone container/workflow checks and both worker images. These successful reruns supersede the earlier zero-step billing failures for those commits. Documentation follow-ups do not change the identified implementation evidence; live deployment and provider acceptance remain separate.
 - [ ] **Dependency advisory:** the October 20 production audit found zero critical/high/moderate and one low **elliptic** advisory ([GHSA-848j-6mx2-7j84](https://github.com/advisories/GHSA-848j-6mx2-7j84)), with no patched release reported. Obtain independent assessment or an upstream-vetted fix; signature-verification usage does not clear the advisory.
