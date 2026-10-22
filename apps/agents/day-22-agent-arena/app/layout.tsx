@@ -1,0 +1,1 @@
+import '@dapptober/ui/src/arena.css';export const metadata={title:'Pitlane · The Agent Arena',description:'Train a menace. Back a champion. Let the agents fight.'};export default function Layout({children}:{children:React.ReactNode}){return <html lang="en"><body>{children}</body></html>;}

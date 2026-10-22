@@ -59,3 +59,15 @@ Day17 has an annotated per-app .env.example/.env.local. Provider-specific fields
 Day18 .env.local is annotated separately. Supabase/Jev/OpenAI keys remain server-only. CONFIDANT_PUBLIC_RPC_URL is explicitly browser-visible; domain-restrict any key. CONFIDANT_CONTRACT/CODE_HASH enroll reviewed runtime. No server spending key or private amounts are accepted by the API. Demo uses disposable in-memory AES, not FHE. Mainnet8453 remains unsupported by this CoFHE integration.
 
 Day20 Overrule: use its app-local annotated template. Supabase/OPERATOR_TOKEN secure the private booth; REFEREE_OPERATOR_PRIVATE_KEY is a dedicated server verdict signer with funded gas and registered collateral. REFEREE_CONTRACT/CODE_HASH/VAULT/START_BLOCK pin actual Base deployment; optional validation registry and Eigen verifier/AVS/set thresholds require actual protocol configuration. Source-chain restaking/slashing credentials are not accepted. Demo uses ephemeral signatures and fixture collateral; no secrets are needed.
+
+## Day 21 — Layover
+
+The app-local template explains `TRAVEL_SOURCES_JSON` (per-chain RPC, canonical USDC, bundler and EntryPoint), `TRAVEL_ROUTERS_JSON` (reviewed router/spender bytecode pins), public `THIRDWEB_CLIENT_ID`, private `THIRDWEB_SECRET_KEY`, optional LI.FI quota key and `TRAVEL_PASS`/runtime hash. Users own their sponsored smart accounts; no server spending key is used. Actual bridge market availability and paymaster policy must be verified on the chosen Base network.
+
+## Day 22 — Pitlane
+
+Use Day 22's annotated `.env.example`/`.env.local`. `SUPABASE_DATABASE_URL` stores private reveal preimages, historical policies, signed outbox and wallet nonces; back them up securely. `OPERATOR_TOKEN` authenticates only private automation/admin. Public trainer/spectator actions use EOA signatures; no operator token is sent to their browser. `RPC_URL`, Circle `USDC_ADDRESS`, `ARENA_CONTRACT` and independently verified `ARENA_CODE_HASH` identify the actual Base deployment.
+
+`ARENA_PILOT_KEYS_JSON` maps registered fighter IDs to their dedicated gas-only signer keys. These wallets cannot stake; never use a spectator wallet key here. `ARENA_MAX_GAS_GWEI` and `ARENA_GAS_DAILY_ETH` bound worker gas. Jev screens commits/reveals; OpenAI coaches training. External coaching runs outside the shared state transaction. Missing/uncertain gates and missing preimages stop that pilot for review while other eligible pilots can continue; an unresolved signed outbox still requires operator reconciliation.
+
+Chainlink needs a **funded VRF v2.5 subscription**, arena consumer enrollment, and the official coordinator/lane hash as deployment constructor arguments. It does not need an API key. House treasury and guardian are also constructor addresses. The guardian enrolls fighters; the worker schedules no new bets, never chooses winners and cannot withdraw spectator funds. Keep all configuration private except deliberately public deployment/account addresses and published strategies.

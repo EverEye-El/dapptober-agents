@@ -1,6 +1,6 @@
 # Dapptober Agents
 
-Twenty-one independently runnable crypto-native agents for Dapptober 2026, built on a shared TypeScript capability layer. The supplied daily prompts are canonical; the master build specification defines the architecture and audit requirements.
+Twenty-two independently runnable crypto-native agents for Dapptober 2026, built on a shared TypeScript capability layer. The supplied daily prompts are canonical; the master build specification defines the architecture and audit requirements.
 
 [Project completion tracker](docs/PROJECT-COMPLETION-TRACKER.md) records tested functionality and remaining work for every built day and is updated after each daily build.
 
@@ -27,6 +27,7 @@ Twenty-one independently runnable crypto-native agents for Dapptober 2026, built
 | 19 | [Gremlin — Group-Chat Familiar](apps/agents/day-19-group-chat-familiar/README.md) | http://localhost:3019 | Base USDC/social contract, Farcaster, Telegram, Discord, Slack |
 | 20 | [Overrule — Restaked Referee](apps/agents/day-20-restaked-referee/README.md) | http://localhost:3020 | Base ERC4626 collateral, EIP712 verdicts, ERC8004, Eigen destination inspection |
 | 21 | [Layover — Chainless Traveler](apps/agents/day-21-chainless-traveler/README.md) | http://localhost:3021 | thirdweb Bridge/sponsored smart accounts, LI.FI swap routing, Jev and Base pass mint |
+| 22 | [Pitlane — Agent Arena](apps/agents/day-22-agent-arena/README.md) | http://localhost:3022 | Autonomous trained pilots, VRF commit-reveal, pooled USDC wagers, Phaser replay and Jev |
 
 ## Start here
 
