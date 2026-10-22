@@ -8,7 +8,7 @@ Checked boxes mean the stated work was completed and verified **in the environme
 
 - [x] Build all 22 independently runnable apps, with shared capabilities and separate configuration.
 - [x] Verify all 22 independent production builds and local HTTP/receipt workflows.
-- [x] Pass lint, type checking, **209 application tests** and **145 contract tests**; **20 opt-in application tests remain skipped** in the ordinary suite.
+- [x] Pass lint, type checking, **210 application tests** and **145 contract tests**; **20 opt-in application tests remain skipped** in the ordinary suite.
 - [x] Retain **16 earlier Anvil acceptance cases** and pass **one Day 21 and one new Day 22 funded acceptance case**, using actual local blockchains. External services and protocol fixtures remain distinct from live provider evidence.
 - [x] Verify the pnpm **10.2.0** frozen installation using the existing dependency store; retain `pnpm-lock.yaml` as the only dependency lockfile.
 - [x] Generate missing unique local operator tokens for all 22 apps and Day 10/19 session secrets. Verify private file permissions and Git exclusion; preserve existing values.
@@ -251,7 +251,7 @@ Each day's checked implementation box describes **tested local scope**, not full
 
 ## Shared release blockers and evidence
 
-- [ ] **Day 22 hosted verification:** local checks pass; publish the dedicated branch/PR and verify its shared/local-chain checks, 22 standalone app containers and worker images.
+- [ ] **Day 22 hosted verification:** Published [PR #19](https://github.com/EverEye-El/dapptober-agents/pull/19) against main; verify its shared/local-chain checks, 22 standalone app containers and worker images. GitGuardian passes.
 
 - [x] **Hosted CI and containers:** October 21 full reruns passed for [PR #16 — 23 jobs](https://github.com/EverEye-El/dapptober-agents/actions/runs/39486891036) at `4791f47`, [PR #17 — 23 jobs](https://github.com/EverEye-El/dapptober-agents/actions/runs/39533455898) at `1e51d81`, and [PR #18 — 24 jobs](https://github.com/EverEye-El/dapptober-agents/actions/runs/39646547429) at `5fe7815`. This includes the shared test/local-chain checks, each app's standalone container/workflow checks and both worker images. These successful reruns supersede the earlier zero-step billing failures for those commits. Documentation follow-ups do not change the identified implementation evidence; live deployment and provider acceptance remain separate.
 - [ ] **Dependency advisory:** the October 20 production audit found zero critical/high/moderate and one low **elliptic** advisory ([GHSA-848j-6mx2-7j84](https://github.com/advisories/GHSA-848j-6mx2-7j84)), with no patched release reported. Obtain independent assessment or an upstream-vetted fix; signature-verification usage does not clear the advisory.
