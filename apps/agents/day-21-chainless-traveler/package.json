@@ -8,9 +8,9 @@
     "test": "vitest run --root ../../.. tests/day-21.test.ts"
   },
   "dependencies": {
-    "@dapptober/ui": "workspace:*",
     "@dapptober/traveler": "workspace:*",
-    "next": "^16.0.0",
+    "@dapptober/ui": "workspace:*",
+    "next": "^16.4.3",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "thirdweb": "^5.0.0",

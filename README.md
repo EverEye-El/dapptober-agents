@@ -28,6 +28,7 @@ Twenty-two independently runnable crypto-native agents for Dapptober 2026, built
 | 20 | [Overrule — Restaked Referee](apps/agents/day-20-restaked-referee/README.md) | http://localhost:3020 | Base ERC4626 collateral, EIP712 verdicts, ERC8004, Eigen destination inspection |
 | 21 | [Layover — Chainless Traveler](apps/agents/day-21-chainless-traveler/README.md) | http://localhost:3021 | thirdweb Bridge/sponsored smart accounts, LI.FI swap routing, Jev and Base pass mint |
 | 22 | [Pitlane — Agent Arena](apps/agents/day-22-agent-arena/README.md) | http://localhost:3022 | Autonomous trained pilots, VRF commit-reveal, pooled USDC wagers, Phaser replay and Jev |
+| 23 | [REDLINE — Perp Pit Wall](apps/agents/day-23-perp-pit-wall/README.md) | http://localhost:3023 | Hyperliquid telemetry, Jev risk engineering, permissioned reduce-only protection and debriefs |
 
 ## Start here
 

@@ -1,0 +1,30 @@
+# Day 23 audit — REDLINE / The Perp Pit Wall
+
+October 23, 2026. Built from the complete canonical prompt and matching live challenge. No funded native venue order, public deployment, paid inference or Supabase production acceptance is claimed.
+
+| Prompt requirement | Implementation | Verification boundary |
+| --- | --- | --- |
+| Live leverage/funding/liquidation/PnL | Canonical HTTP account/context adapter, WebSocket midpoint chart observations with reconnect/ping, 10-second visible-page snapshot polling, unknown liquidation handling | Public testnet metadata read succeeds. Typed provider fixtures cover position parsing; funded account telemetry remains unverified |
+| Plain-language risk alerts | Deterministic long/short bands and hourly funding-cost estimate; numeric priority and team radio | Tests cover critical/unknown/short/funding sign. Cross-margin estimates are not guarantees |
+| Permissioned stop-loss and de-risk | Exact short-lived preview, reduce-only IOC/trigger order, browser wallet signature, order cap, stale-position check, per-workspace pending lock and native status reconciliation | Generated SDK signatures captured without broadcast; simulated reduction/stop crossing tests. Real wallet/venue rejection/fill acceptance remains a release task |
+| Post-trade debrief | Recent venue fills and immutable plan tape supplied to a separately routed debrief request; resting vs filled kept distinct | Demo debrief and actual recorded fixture facts tested. Paid provider output quality/live reconciliation outstanding |
+| Jev proximity bands/priority | Typed band/priority gate can escalate but never lower hard calculated risk; confidence floor 0.8 | Provider-double tests for escalation floor and service failure; no live Jev evidence |
+| Jev model routing | Typed small/large routing into existing AI SDK provider abstraction | Simulation chooses small telemetry / large debrief. No model can sign orders |
+| F1 pit-wall identity | REDLINE carbon-fiber/copper room, circuit illustration, telemetry gauges, risk chart, team radio and race tape; supplied graphic retained | Desktop reduction → confirmation → simulated fill → debrief verified. Expired preview rejected; new preview clears confirmation. At 390px the body is 390px and the 568px tape scrolls inside its 349px frame; chart height is fixed at 275px. Desktop viewport restored and screenshot saved. |
+| Shared extensible capability | `packages/perps` risk, venue, engineer, plan and route exports; isolated Day 23 app/env/build/deployment | No other daily app server required |
+
+## Controls and remaining limits
+
+Private operator deployment with pinned master account; all real reads/writes require its operator token. Same-origin mutations, 5 KB body bound, 30 requests/minute and 30 radio/debrief calls per UTC day before provider work, 100 historical plans, Supabase durability and audit receipts. Unique cloid and signed expiration prevent blind duplicate retries. An unknown submission remains locked until expiry plus two minutes and a fresh venue unknown-ID response. Venue latency/reorg/history interpretation and browser rejection/reload/restart recovery need funded acceptance.
+
+Pausing blocks new preparations/submissions, not existing venue stops. Existing orders must be managed in Hyperliquid and reconciled. App caps are not autonomous onchain spending permissions; every financial action requires the master wallet's signature. No server/private trading key or delegation is created. No new position, leverage increase, deposit, bridge or withdrawal tool exists. A compromised frontend can mislead the signer; independent review and isolated small balances remain necessary.
+
+Hyperliquid native testnet/mainnet is separate from Base Sepolia/Base. Approve the external venue exception or replace the adapter before release. No custom contract deployment is required. EOA master accounts and canonical perp universe only; HIP-3, vault/subaccount/delegated/multisig trading are not supported. Funding extrapolation is not a settled fee; a stop can slip, fail or partially fill. Synthetic practice charts/positions/fills are explicitly labeled.
+
+## Verification
+
+Lint and TypeScript pass. All **231 application tests** pass, with **20 opt-in tests skipped**, and **145 contract tests** pass. The 21 Day 23 tests include an actual generated SDK signature captured without broadcast, provider doubles, numeric/policy failures and pending-expiry recovery. Public testnet metadata returned 212 matching assets/contexts, and a real allMids WebSocket snapshot returned 3,453 symbols. All **23 independent production builds** and all **23 production page/API/workflow/receipt checks pass** after the shared security update. Frozen pnpm 10.2.0 offline installation passes. The final audit added a 30-call daily commentary budget, selected-position/chart alignment after a close and explicit TradingView attribution. Published in [PR #20](https://github.com/EverEye-El/dapptober-agents/pull/20), stacked on open Day 22 PR #19; final hosted verification remains tracked separately. See the completion tracker for ordered configuration, funding, acceptance, hosting and release tasks. Dependency audit findings are recorded in the research document and tracker rather than hidden.
+
+Hosted CI initially caught a pre-existing Day 20 verdict-expiry bug: a wall-clock-derived deadline at the contract's exact 300-second upper bound could exceed the latest block's permitted window. The signing path now uses latest chain timestamp +240 seconds. Re-ran the funded Day 20 Anvil lifecycle with the host clock deliberately one hour ahead; it passes, including verdict, challenge, slashing and release. Day 20 build/lint/type checks were rerun for this follow-up; final hosted verification remains open until the corrected commit passes.
+
+The last Day 23 guard regression verifies that a stop crossed by a small market move inside the general drift allowance requires a fresh preview. The 231-test ordinary suite, type check, lint, Day 23 production build and production workflow all pass after that correction.

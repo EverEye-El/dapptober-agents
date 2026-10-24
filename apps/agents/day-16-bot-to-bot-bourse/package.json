@@ -8,10 +8,10 @@
     "test": "vitest run --root ../../.. tests/day-16.test.ts tests/day-16-a2a.test.ts"
   },
   "dependencies": {
+    "@dapptober/bourse": "workspace:*",
     "@dapptober/ui": "workspace:*",
-    "next": "^16.0.0",
+    "next": "^16.4.3",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0",
-    "@dapptober/bourse": "workspace:*"
+    "react-dom": "^19.2.0"
   }
 }
