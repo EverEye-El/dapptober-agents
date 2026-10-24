@@ -39,7 +39,7 @@ Approved beneficiary credits are excluded from capital NAV. Virtual assets/share
 
 ## Real configuration and signatures
 
-Set `AGENT_MODE=real`, `SUPABASE_DATABASE_URL` (Supabase Connect → Session pooler), `OPERATOR_TOKEN`, Base RPC/chain/Circle USDC, pool/runtime hash, registry addresses and `JEV_API_KEY`. Set the exact hosted origin at deployment. Optional `MUTUAL_SNAPSHOT_SPACE` enables real Hub proposal verification; it needs no Snapshot signing secret.
+Set `AGENT_MODE=real`, `SUPABASE_DATABASE_URL` (Supabase Connect → Session pooler), `OPERATOR_TOKEN`, Base RPC/chain/Circle USDC, pool/runtime hash, registry addresses and `JEV_API_KEY`. Set the exact hosted origin at deployment. Optional `SNAPSHOT_SPACE` enables real Hub proposal verification; it needs no Snapshot signing secret.
 
 This is a **private operator office**, not a public member authentication service. The operator token protects all live reads/writes/evidence. Individual members still sign their own browser wallets. Token is held in UI memory. Shared state has bounded request/model rates; provider review runs outside the final database transaction. Preparation, chain refresh/reconciliation and Snapshot verification can hold that lock during bounded network requests. Add ingress limits and measure production load. Verify actual Supabase persistence and restore before hosting. Onchain policy/evidence hashes and evidence URI are public; private JSON requires office authorization. Redact secrets and personal data before committing or sharing with Jev.
 
