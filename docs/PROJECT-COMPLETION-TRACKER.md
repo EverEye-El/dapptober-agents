@@ -16,7 +16,7 @@ Checked boxes mean the stated work was completed and verified **in the environme
 - [x] Publish Day 21 as [PR #18](https://github.com/EverEye-El/dapptober-agents/pull/18), stacked on PR #17; implementation `7c333f5`. No main push, merge or public deployment was performed.
 - [x] Publish the engineering pass in [draft PR #17](https://github.com/EverEye-El/dapptober-agents/pull/17), based on Day 20 PR #16. Implementation: `d8ebffd`; no merge or public deployment was performed.
 
-Days 01–20 retain their October 20 engineering-pass evidence; Days 21–23 add their separately recorded local checks. Hosted CI/container execution for Days 01–21 is verified by the October 21 reruns linked below; Day 22 evidence is recorded separately. These results do not establish actual Supabase persistence, paid-model access or public-chain transactions. Day-specific evidence and exceptions appear below.
+Days 01–20 retain their October 20 engineering-pass evidence; Days 21–23 add their separately recorded local checks. Hosted CI/container execution for Days 01–21 is verified by the October 21 reruns linked below; Day 22 evidence is recorded separately. These results do not establish actual Supabase persistence, paid-model access or public-chain transactions. Day-specific evidence and exceptions appear below. The October 23 pass also reverified Day 20 funded Anvil acceptance with an intentionally skewed host clock after correcting chain-derived verdict expiry.
 
 ## What needs your involvement
 

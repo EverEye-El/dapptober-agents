@@ -31,3 +31,7 @@ Git history check: PR14 merged Day18 into the Day17 branch and PR15 merged Day19
 Final release evidence: **all20 independent production builds passed**, followed by **all20 production page/API/workflow/receipt HTTP checks passed** on temporary3120-range audit ports. Final Day20 publication-state UI refinement was rebuilt independently and funded integration was rerun successfully. Temporary production audit servers stopped; preview remains on3020. No Docker/hosted container execution is inferred from next-start HTTP checks.
 
 Hosted status: [PR16](https://github.com/EverEye-El/dapptober-agents/pull/16), implementation `0a4f6bf`, targets main and preserves merged Days18–19. [Run39486727225](https://github.com/EverEye-El/dapptober-agents/actions/runs/39486727225) started zero job steps; GitHub reported failed account payments or insufficient spending limit. **GitGuardian passed.** Resolve billing and rerun hosted/container checks before release.
+
+## October 23 signing-clock regression
+
+Day 23 hosted CI exposed that the real verdict signer used the host clock at the contract's exact 300-second maximum. Replaced it with latest chain timestamp +240 seconds, preserving a 60-second margin. The funded Anvil acceptance case now deliberately skews the host clock one hour forward around verification, then confirms the actual mined verdict/challenge/slash/release lifecycle. It passes. This is local-chain evidence, not EigenCloud or public-chain acceptance.
