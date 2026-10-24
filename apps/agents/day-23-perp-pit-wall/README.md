@@ -30,7 +30,7 @@ Open http://localhost:3023. Its own `.env.local` is the configuration boundary. 
 - `pit.lap`: demo-only adverse scenario; can cross a simulated stop and create a clearly labeled simulated fill.
 - `receipt.verify`: verifies the local audit chain. Venue order IDs are not EVM transaction hashes.
 
-Private operator token protects all real-mode reads and writes; account address is pinned server-side. Token is held in UI memory, not localStorage. Same-origin mutations, 5 KB body bound, 30 requests/minute per durable workspace, 100-order history limit. External model/snapshot calls run outside the database transaction; final plan checks run inside it. Reconciliation is bounded by the venue timeout and transaction lock. Every substantive action is receipted.
+Private operator token protects all real-mode reads and writes; account address is pinned server-side. Token is held in UI memory, not localStorage. Same-origin mutations, 5 KB body bound, 30 requests/minute per durable workspace, 30 radio/debrief calls per UTC day, 100-order history limit. External model/snapshot calls run outside the database transaction; final plan checks run inside it. Reconciliation is bounded by the venue timeout and transaction lock. Every substantive action is receipted.
 
 ## Configuration and venue boundaries
 

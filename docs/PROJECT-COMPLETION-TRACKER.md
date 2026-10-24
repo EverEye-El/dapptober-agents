@@ -7,8 +7,8 @@ Checked boxes mean the stated work was completed and verified **in the environme
 ## Completed across Days 01–23
 
 - [x] Build all 23 independently runnable apps, with shared capabilities and separate configuration.
-- [x] Verify all 22 earlier independent production builds and local HTTP/receipt workflows; Day 23 verification is recorded below.
-- [x] Pass lint, type checking, **229 application tests** and **145 contract tests**; **20 opt-in application tests remain skipped** in the ordinary suite.
+- [x] Verify all 23 independent production builds and local production HTTP/page/API/workflow/receipt checks after the Next.js security patch.
+- [x] Pass lint, type checking, **230 application tests** and **145 contract tests**; **20 opt-in application tests remain skipped** in the ordinary suite.
 - [x] Retain **16 earlier Anvil acceptance cases** and pass **one Day 21 and one new Day 22 funded acceptance case**, using actual local blockchains. External services and protocol fixtures remain distinct from live provider evidence.
 - [x] Verify the pnpm **10.2.0** frozen installation using the existing dependency store; retain `pnpm-lock.yaml` as the only dependency lockfile.
 - [x] Generate missing unique local operator tokens for all 23 apps and Day 10/19 session secrets. Verify private file permissions and Git exclusion; preserve existing values.
@@ -266,7 +266,7 @@ Each day's checked implementation box describes **tested local scope**, not full
 ## Shared release blockers and evidence
 
 - [x] **Day 22 hosted verification:** [PR #19](https://github.com/EverEye-El/dapptober-agents/pull/19) final implementation `ee98fde` passed [all 25 CI jobs](https://github.com/EverEye-El/dapptober-agents/actions/runs/39815167719): shared/local-chain checks, 22 standalone app containers and two worker images. GitGuardian passes. No merge or production release is implied.
-- [ ] **Day 23 hosted verification:** publish the dedicated branch/PR, verify shared checks, 23 standalone containers and worker images, and record the final commit/run. Local test/build verification is being finalized.
+- [ ] **Day 23 hosted verification:** Published [PR #20](https://github.com/EverEye-El/dapptober-agents/pull/20), stacked on open PR #19. All local builds/workflows/tests pass. Verify the final commit’s shared/local-chain checks, 23 standalone app containers and two worker images; record the exact run before marking hosted verification complete.
 
 - [x] **Hosted CI and containers:** October 21 full reruns passed for [PR #16 — 23 jobs](https://github.com/EverEye-El/dapptober-agents/actions/runs/39486891036) at `4791f47`, [PR #17 — 23 jobs](https://github.com/EverEye-El/dapptober-agents/actions/runs/39533455898) at `1e51d81`, and [PR #18 — 24 jobs](https://github.com/EverEye-El/dapptober-agents/actions/runs/39646547429) at `5fe7815`. This includes the shared test/local-chain checks, each app's standalone container/workflow checks and both worker images. These successful reruns supersede the earlier zero-step billing failures for those commits. Documentation follow-ups do not change the identified implementation evidence; live deployment and provider acceptance remain separate.
 - [x] **Security patch pass:** update workspace Next.js 16.4.0 to 16.4.3 and compatible vulnerable ranges of Zod 4, undici 6, ip-address 10, body-parser 2 and fast-uri 3; bind the dstack SDK to its declared Noble 1.x compatible peer. Full workspace regression/build evidence is recorded in Day 23's audit.

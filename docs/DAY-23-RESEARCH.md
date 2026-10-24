@@ -12,7 +12,7 @@ Read the complete master specification, repository instructions and complete can
 | [Lightweight Charts 5.2](https://tradingview.github.io/lightweight-charts/docs) | Client-only createChart/addSeries, explicit TradingView creator attribution/link and responsive cleanup |
 | Existing shared AI/config/store/receipt packages | AI SDK compatible provider abstraction, typed Jev source and Supabase transaction boundaries reused; daily server is independent |
 
-A read-only request to the real Hyperliquid testnet `metaAndAssetCtxs` returned HTTP 200 and 212 matching asset/context records, with expected mark/funding fields. This establishes public metadata connectivity only; it is not funded order, wallet, private database or paid inference acceptance.
+A read-only request to the real Hyperliquid testnet `metaAndAssetCtxs` returned HTTP 200 and 212 matching asset/context records, with expected mark/funding fields. A real public testnet WebSocket allMids subscription also returned a snapshot of 3,453 symbols. This establishes public metadata/stream connectivity only; it is not funded order, wallet, private database or paid inference acceptance.
 
 ## Chain boundary
 
@@ -20,4 +20,4 @@ Hyperliquid's API trades on its native venue. Base Sepolia is not its testnet an
 
 ## Security dependency findings
 
-Next.js 16.4.0 blocked the first build with a security advisory. Upgraded all workspace Next.js installations to 16.4.3. Patched vulnerable compatible ranges of Zod 4, undici 6, ip-address 10, body-parser 2 and fast-uri 3. The refreshed graph exposed the existing dstack SDK's declared Noble 1.x peer resolving to 2.x; supplied its compatible 1.8.0 dependency explicitly. Remaining audit findings involving thirdweb's TOML major-version migration, transitive Zod 3 and inherited elliptic require separate reviewed remediation; do not silence scanning or force incompatible major replacements.
+Next.js 16.4.0 blocked the first build with a security advisory. Upgraded all workspace Next.js installations to 16.4.3. Patched vulnerable compatible ranges of Zod 4, undici 6, ip-address 10, body-parser 2 and fast-uri 3. The refreshed graph exposed the existing dstack SDK's declared Noble 1.x peer resolving to 2.x; supplied compatible 1.8.0 as an explicit root peer provider. Remaining audit findings involving thirdweb's TOML major-version migration, transitive Zod 3 and inherited elliptic require separate reviewed remediation; do not silence scanning or force incompatible major replacements.
