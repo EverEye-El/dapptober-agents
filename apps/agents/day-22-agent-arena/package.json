@@ -7,12 +7,12 @@
     "build": "next build --webpack"
   },
   "dependencies": {
-    "@dapptober/ui": "workspace:*",
     "@dapptober/arena": "workspace:*",
-    "next": "^16.0.0",
+    "@dapptober/ui": "workspace:*",
+    "next": "^16.4.3",
+    "phaser": "4.1.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "phaser": "4.1.0",
     "viem": "^2.38.0"
   }
 }

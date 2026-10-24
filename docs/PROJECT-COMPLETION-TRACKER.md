@@ -1,22 +1,22 @@
 # Project completion tracker
 
-**Updated October 22, 2026. All 22 apps are implemented locally; none is verified as fully live.**
+**Updated October 23, 2026. All 23 apps are implemented locally; none is verified as fully live.**
 
 Checked boxes mean the stated work was completed and verified **in the environment named**. A local test does not complete a live deployment task. Completed and outstanding parts of a task now have separate boxes.
 
-## Completed across Days 01–22
+## Completed across Days 01–23
 
-- [x] Build all 22 independently runnable apps, with shared capabilities and separate configuration.
-- [x] Verify all 22 independent production builds and local HTTP/receipt workflows.
-- [x] Pass lint, type checking, **210 application tests** and **145 contract tests**; **20 opt-in application tests remain skipped** in the ordinary suite.
+- [x] Build all 23 independently runnable apps, with shared capabilities and separate configuration.
+- [x] Verify all 22 earlier independent production builds and local HTTP/receipt workflows; Day 23 verification is recorded below.
+- [x] Pass lint, type checking, **229 application tests** and **145 contract tests**; **20 opt-in application tests remain skipped** in the ordinary suite.
 - [x] Retain **16 earlier Anvil acceptance cases** and pass **one Day 21 and one new Day 22 funded acceptance case**, using actual local blockchains. External services and protocol fixtures remain distinct from live provider evidence.
 - [x] Verify the pnpm **10.2.0** frozen installation using the existing dependency store; retain `pnpm-lock.yaml` as the only dependency lockfile.
-- [x] Generate missing unique local operator tokens for all 22 apps and Day 10/19 session secrets. Verify private file permissions and Git exclusion; preserve existing values.
-- [x] Correct readiness checks for Days 05 and 15–22, including invalid addresses, runtime hashes, signer/session-secret formats, token/network mismatches and expired/missing catalog reviews.
+- [x] Generate missing unique local operator tokens for all 23 apps and Day 10/19 session secrets. Verify private file permissions and Git exclusion; preserve existing values.
+- [x] Correct readiness checks for Days 05 and 15–23, including invalid addresses, runtime hashes, signer/session-secret formats, token/network mismatches and expired/missing catalog reviews.
 - [x] Publish Day 21 as [PR #18](https://github.com/EverEye-El/dapptober-agents/pull/18), stacked on PR #17; implementation `7c333f5`. No main push, merge or public deployment was performed.
 - [x] Publish the engineering pass in [draft PR #17](https://github.com/EverEye-El/dapptober-agents/pull/17), based on Day 20 PR #16. Implementation: `d8ebffd`; no merge or public deployment was performed.
 
-Days 01–20 retain their October 20 engineering-pass evidence; Days 21–22 add their separately recorded local checks. Hosted CI/container execution for Days 01–21 is verified by the October 21 reruns linked below; Day 22 evidence is recorded separately. These results do not establish actual Supabase persistence, paid-model access or public-chain transactions. Day-specific evidence and exceptions appear below.
+Days 01–20 retain their October 20 engineering-pass evidence; Days 21–23 add their separately recorded local checks. Hosted CI/container execution for Days 01–21 is verified by the October 21 reruns linked below; Day 22 evidence is recorded separately. These results do not establish actual Supabase persistence, paid-model access or public-chain transactions. Day-specific evidence and exceptions appear below.
 
 ## What needs your involvement
 
@@ -31,7 +31,7 @@ Start with one app. You do not need every day-specific service at once. Supply s
 
 ## Shared steps still required for each live app
 
-Use **Base Sepolia (84532)** for testing and **Base (8453)** for production, with Circle USDC where required. Keep wallets, databases, secrets and contract addresses separate. Local Anvil is only a test environment. Day 06 and Day 18 have explicit network blockers below.
+Use **Base Sepolia (84532)** for testing and **Base (8453)** for production, with Circle USDC where required. Keep wallets, databases, secrets and contract addresses separate. Local Anvil is only a test environment. Day 06 and Day 18 have explicit network blockers below. Day 23 uses a native Hyperliquid venue adapter; its external-network exception remains a release decision, and no Base venue is claimed.
 
 Apply this checklist to each selected day; completing it for one app does not complete it for the others.
 
@@ -249,12 +249,28 @@ Each day's checked implementation box describes **tested local scope**, not full
 
 [Setup](../apps/agents/day-22-agent-arena/README.md) · [Evidence and limitations](DAY-22-AUDIT.md)
 
+### Day 23 — REDLINE / The Perp Pit Wall
+
+- [x] Implement deterministic liquidation/funding risk, typed Jev escalation/routing, AI radio/debrief, native venue account/market adapters and WebSocket chart telemetry. Complete simulated reduction/stop crossing/receipt flow, generated SDK signing tests, authorization/confirmation/pause/expiry/pending recovery tests and read-only public Hyperliquid testnet metadata check. These are not funded venue acceptance.
+- [ ] **Venue decision first:** approve the explicit native Hyperliquid testnet/mainnet exception to the Base Sepolia/Base preference, or build and independently verify a Base-native replacement adapter before enabling financial orders. No custom contract deployment is required for the implemented Hyperliquid version.
+- [ ] Configure the private app with **Supabase Session pooler `SUPABASE_DATABASE_URL`**, generated **`OPERATOR_TOKEN`**, **`JEV_API_KEY`**, **`OPENAI_API_KEY`** and selected model names. Verify actual private persistence, restricted access, backup/restore and typed Jev confidence/routing with paid models; use a separate test project.
+- [ ] Set **`HYPERLIQUID_NETWORK=testnet`**, pin the intended **master EOA** in **`HYPERLIQUID_ACCOUNT_ADDRESS`**, and review **`PIT_MAX_ORDER_USD`** (default $250). Activate/fund only that isolated test account through the venue's supported flow. Browser wallet signs each order; no private trading key, thirdweb key, Base RPC or bridge is needed by this app.
+- [ ] Verify actual positions/mark/funding/liquidation/nullable estimates, native metadata indices, WS disconnect/reconnect/ping and stale HTTP behavior. Use small funded long/short positions to test stop registration/trigger/fill, partial IOC reduction, canceled/rejected orders, fees, funding and independent venue balances/history. Confirm native order IDs, not fabricated EVM hashes.
+- [ ] Test fresh-preview confirmation, wrong wallet, changed position/mark, expired signature, duplicate click, wallet rejection, network failure, reload/restart and Supabase restoration. Uncertain submissions stay locked until native reconciliation; an unknown ID releases only after signed expiry plus a two-minute safety delay. Test pause blocking new actions while existing venue orders remain live; cancel those in the venue and reconcile.
+- [ ] Independently review the signing payload, app caps, private access, exchange controls and risk statements. App preview caps are not autonomous onchain permissions. This version supports master EOA/native canonical perps only; HIP-3, vault/subaccount/delegated/multisig trading remain unsupported. No model may open a position, raise leverage, deposit, bridge or withdraw.
+- [ ] Deploy the private HTTPS app with correct origin/token and ingress limits after the above rehearsal. Verify hosted Supabase/provider/wallet behavior, mobile layout and chart attribution. Export/archive before 100 plans, monitor feed age/pending client IDs/provider failures, and rehearse pause/backup/recovery.
+- [ ] Approve a separately funded **Hyperliquid mainnet** account and separate database/origin only if the venue exception was accepted; repeat bounded live acceptance and review privacy/retention/risk obligations before public or meaningful-fund use. Global Base configuration remains unchanged.
+
+[Setup](../apps/agents/day-23-perp-pit-wall/README.md) · [Evidence and limitations](DAY-23-AUDIT.md)
+
 ## Shared release blockers and evidence
 
-- [ ] **Day 22 hosted verification:** Published [PR #19](https://github.com/EverEye-El/dapptober-agents/pull/19) against main; verify its shared/local-chain checks, 22 standalone app containers and worker images. GitGuardian passes.
+- [x] **Day 22 hosted verification:** [PR #19](https://github.com/EverEye-El/dapptober-agents/pull/19) final implementation `ee98fde` passed [all 25 CI jobs](https://github.com/EverEye-El/dapptober-agents/actions/runs/39815167719): shared/local-chain checks, 22 standalone app containers and two worker images. GitGuardian passes. No merge or production release is implied.
+- [ ] **Day 23 hosted verification:** publish the dedicated branch/PR, verify shared checks, 23 standalone containers and worker images, and record the final commit/run. Local test/build verification is being finalized.
 
 - [x] **Hosted CI and containers:** October 21 full reruns passed for [PR #16 — 23 jobs](https://github.com/EverEye-El/dapptober-agents/actions/runs/39486891036) at `4791f47`, [PR #17 — 23 jobs](https://github.com/EverEye-El/dapptober-agents/actions/runs/39533455898) at `1e51d81`, and [PR #18 — 24 jobs](https://github.com/EverEye-El/dapptober-agents/actions/runs/39646547429) at `5fe7815`. This includes the shared test/local-chain checks, each app's standalone container/workflow checks and both worker images. These successful reruns supersede the earlier zero-step billing failures for those commits. Documentation follow-ups do not change the identified implementation evidence; live deployment and provider acceptance remain separate.
-- [ ] **Dependency advisory:** the October 20 production audit found zero critical/high/moderate and one low **elliptic** advisory ([GHSA-848j-6mx2-7j84](https://github.com/advisories/GHSA-848j-6mx2-7j84)), with no patched release reported. Obtain independent assessment or an upstream-vetted fix; signature-verification usage does not clear the advisory.
+- [x] **Security patch pass:** update workspace Next.js 16.4.0 to 16.4.3 and compatible vulnerable ranges of Zod 4, undici 6, ip-address 10, body-parser 2 and fast-uri 3; bind the dstack SDK to its declared Noble 1.x compatible peer. Full workspace regression/build evidence is recorded in Day 23's audit.
+- [ ] **Remaining dependency advisories:** October 23 production audit still reports **six high and one low** findings involving **TOML 4**, **transitive Zod 3** and inherited **elliptic**; zero critical/moderate. Review upstream-compatible TOML/Zod major migrations and obtain independent assessment or an upstream-vetted elliptic fix before production. Earlier October 20 audit counts are historical, not current clearance. Secret/dependency scanning remains enabled.
 - [ ] **Live acceptance:** no public deployment, funded public-chain acceptance, actual Supabase service, paid-model request or real chat delivery was established by the engineering pass. Testnet rehearsals, local fixtures and read-only public-chain evidence remain separate from production acceptance.
 
 ## Keeping this tracker current

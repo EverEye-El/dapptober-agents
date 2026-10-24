@@ -5,6 +5,7 @@ import {resolve} from 'node:path';
 
 const common=['OWNER_ADDRESS','OPERATOR_TOKEN','SUPABASE_DATABASE_URL','RPC_URL','JEV_API_KEY','OPENAI_API_KEY'];
 export const required={
+  23:['OPERATOR_TOKEN','SUPABASE_DATABASE_URL','HYPERLIQUID_ACCOUNT_ADDRESS','JEV_API_KEY','OPENAI_API_KEY'],
   22:['OPERATOR_TOKEN','SUPABASE_DATABASE_URL','RPC_URL','ARENA_CONTRACT','ARENA_CODE_HASH','ARENA_PILOT_KEYS_JSON','JEV_API_KEY','OPENAI_API_KEY'],
   21:['OPERATOR_TOKEN','SUPABASE_DATABASE_URL','THIRDWEB_CLIENT_ID','THIRDWEB_SECRET_KEY','JEV_API_KEY','OPENAI_API_KEY','TRAVEL_SOURCES_JSON','TRAVEL_PASS','TRAVEL_PASS_CODE_HASH'],
   20:['OPERATOR_TOKEN','SUPABASE_DATABASE_URL','RPC_URL','JEV_API_KEY','OPENAI_API_KEY','REFEREE_CONTRACT','REFEREE_CODE_HASH','REFEREE_VAULT','REFEREE_OPERATOR_PRIVATE_KEY'],
@@ -30,6 +31,7 @@ export const required={
 };
 export function assess(day,env){
   const gaps=[];
+  if(day===23){if(!['testnet','mainnet'].includes(env.HYPERLIQUID_NETWORK))gaps.push('HYPERLIQUID_NETWORK: choose native venue testnet/mainnet; not a Base contract');if(!/^0x[0-9a-fA-F]{40}$/.test(env.HYPERLIQUID_ACCOUNT_ADDRESS??''))gaps.push('HYPERLIQUID_ACCOUNT_ADDRESS: configure the master venue account');if(!(Number(env.PIT_MAX_ORDER_USD)>=10&&Number(env.PIT_MAX_ORDER_USD)<=1000))gaps.push('PIT_MAX_ORDER_USD: require $10–$1000 notional limit');}
   if(day===22){if(!/^0x[0-9a-fA-F]{40}$/.test(env.ARENA_CONTRACT??''))gaps.push('ARENA_CONTRACT: deployed AgentArena address required');if(!/^0x[0-9a-fA-F]{64}$/.test(env.ARENA_CODE_HASH??''))gaps.push('ARENA_CODE_HASH: independently verify runtime');try{const keys=JSON.parse(env.ARENA_PILOT_KEYS_JSON??'{}');if(!Object.keys(keys).length||Object.entries(keys).some(([id,key])=>!/^\d+$/.test(id)||!/^0x[0-9a-fA-F]{64}$/.test(String(key))))gaps.push('ARENA_PILOT_KEYS_JSON: enroll gas-only pilot keys matching registered agent IDs');}catch{gaps.push('ARENA_PILOT_KEYS_JSON: invalid private pilot configuration');}}
   if(day===21){if(!/^0x[0-9a-fA-F]{40}$/.test(env.TRAVEL_PASS??''))gaps.push('TRAVEL_PASS: configure the deployed Base pass address');if(!/^0x[0-9a-fA-F]{64}$/.test(env.TRAVEL_PASS_CODE_HASH??''))gaps.push('TRAVEL_PASS_CODE_HASH: independently pin deployed runtime');try{const sources=JSON.parse(env.TRAVEL_SOURCES_JSON??'[]');if(!Array.isArray(sources)||!sources.length||!sources.some(x=>x.chainId===Number(env.CHAIN_ID)))gaps.push('TRAVEL_SOURCES_JSON: configure the Base destination and funding smart accounts');for(const source of sources){if(Number(env.CHAIN_ID)===84532?source.chainId!==84532:![8453,1,10,42161].includes(source.chainId))gaps.push('TRAVEL_SOURCES_JSON: test and production networks cannot mix');for(const key of ['rpc','bundler'])if(!source[key]||new URL(source[key]).protocol!=='https:')gaps.push('TRAVEL_SOURCES_JSON: HTTPS RPC and bundler required');if(!/^0x[0-9a-fA-F]{40}$/.test(source.usdc)||!/^0x[0-9a-fA-F]{40}$/.test(source.entryPoint))gaps.push('TRAVEL_SOURCES_JSON: reviewed USDC and EntryPoint addresses required');}if(!JSON.parse(env.TRAVEL_ROUTERS_JSON??'[]').length)gaps.push('TRAVEL_ROUTERS_JSON: no external bridge/swap routers approved');}catch{gaps.push('TRAVEL_SOURCES_JSON: invalid source configuration');}}
   if(env.AGENT_MODE!=='real')gaps.push('AGENT_MODE: still simulated');
@@ -66,7 +68,7 @@ export function assess(day,env){
 
 async function main(){
   const flags=process.argv.slice(2),selection=flags.find(x=>/^\d{1,2}$/.test(x));
-  if(flags.some(x=>!['--init','--online'].includes(x)&&x!==selection)||selection&&(Number(selection)<1||Number(selection)>22))throw new Error('Usage: pnpm readiness [01–22] [--init] [--online]');
+  if(flags.some(x=>!['--init','--online'].includes(x)&&x!==selection)||selection&&(Number(selection)<1||Number(selection)>23))throw new Error('Usage: pnpm readiness [01–23] [--init] [--online]');
   const root=fileURLToPath(new URL('../',import.meta.url));let failed=false;
   for(const dir of readdirSync(resolve(root,'apps/agents')).sort()){
     const day=Number(dir.match(/^day-(\d+)-/)?.[1]);if(!required[day]||selection&&day!==Number(selection))continue;

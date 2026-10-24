@@ -1,0 +1,1 @@
+import '@dapptober/ui/src/pitwall.css';export const metadata={title:'REDLINE · The Perp Pit Wall',description:'Your positions. Your race engineer. Stay off the wall.'};export default function Layout({children}:{children:React.ReactNode}){return <html lang="en"><body>{children}</body></html>;}

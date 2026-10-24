@@ -8,10 +8,10 @@
     "test": "vitest run --root ../../.. tests/day-13.test.ts"
   },
   "dependencies": {
+    "@dapptober/launchpad": "workspace:*",
     "@dapptober/ui": "workspace:*",
-    "next": "^16.0.0",
+    "next": "^16.4.3",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0",
-    "@dapptober/launchpad": "workspace:*"
+    "react-dom": "^19.2.0"
   }
 }

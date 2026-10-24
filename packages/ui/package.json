@@ -25,7 +25,8 @@
     "./src/referee": "./src/referee.tsx",
     "./src/referee.css": "./src/referee.css",
     "./src/traveler.css": "./src/traveler.css",
-    "./src/arena.css": "./src/arena.css"
+    "./src/arena.css": "./src/arena.css",
+    "./src/pitwall.css": "./src/pitwall.css"
   },
   "dependencies": {
     "@dapptober/compute": "workspace:*",
