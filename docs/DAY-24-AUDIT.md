@@ -30,3 +30,7 @@ Full-limit reserves and excluded beneficiary credits protect accounting; minimum
 Remaining risks: members/reviewers can collude; fabricated logs or differently labeled duplicate losses require human adjudication. New capital bears old losses without historical voting rights. Global reserve lock lasts until permissionless expiration/settlement. Browser preview expiry cannot cancel a signed wallet transaction; manual discard is an operator assertion, and uncertain submissions must reconcile. There is no public member authentication layer, scalable chain indexer, automatic renewal/migration or settlement keeper. Snapshot is advisory, not binding governance execution. Real Supabase, Jev, hardware wallet, public registry, Snapshot proposal and funded Base Sepolia acceptance are not yet verified. Independent contract/economic/legal/privacy review and a separate Base production deployment remain required.
 
 Ordered remaining tasks: [completion tracker](PROJECT-COMPLETION-TRACKER.md). Never mark local fixtures as live service evidence.
+
+## Publication
+
+Implementation `558dea8` is published in [PR #21](https://github.com/EverEye-El/dapptober-agents/pull/21), stacked on open Day 23 PR #20. Hosted [PR verification](https://github.com/EverEye-El/dapptober-agents/actions/runs/40105483055) is running; this audit does not yet claim hosted success. Local acceptance above was verified before publication.
