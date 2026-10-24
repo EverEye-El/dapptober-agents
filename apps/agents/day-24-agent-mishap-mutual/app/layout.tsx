@@ -1,0 +1,1 @@
+import '@dapptober/ui/src/mutual.css';export const metadata={title:'Umbra Mutual · Agent Mishap Mutual',description:'A little cover for spectacularly expensive mistakes.'};export default function Layout({children}:{children:React.ReactNode}){return <html lang="en"><body>{children}</body></html>;}

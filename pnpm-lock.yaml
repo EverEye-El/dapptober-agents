@@ -100,6 +100,9 @@ importers:
       '@dapptober/mcp':
         specifier: workspace:*
         version: link:packages/mcp
+      '@dapptober/mutual':
+        specifier: workspace:*
+        version: link:packages/mutual
       '@dapptober/payments':
         specifier: workspace:*
         version: link:packages/payments
@@ -738,6 +741,27 @@ importers:
         specifier: ^2.38.0
         version: 2.57.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)(zod@4.6.6)
 
+  apps/agents/day-24-agent-mishap-mutual:
+    dependencies:
+      '@dapptober/mutual':
+        specifier: workspace:*
+        version: link:../../../packages/mutual
+      '@dapptober/ui':
+        specifier: workspace:*
+        version: link:../../../packages/ui
+      next:
+        specifier: ^16.4.3
+        version: 16.4.3(@opentelemetry/api@1.9.1)(@types/node@22.20.5)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      react:
+        specifier: ^19.2.0
+        version: 19.3.0
+      react-dom:
+        specifier: ^19.2.0
+        version: 19.3.0(react@19.3.0)
+      viem:
+        specifier: ^2.38.0
+        version: 2.57.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)(zod@4.6.6)
+
   packages/agent-core:
     dependencies:
       '@ai-sdk/openai-compatible':
@@ -1195,6 +1219,30 @@ importers:
         version: 2.57.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)(zod@4.6.6)
       zod:
         specifier: 4.6.6
+        version: 4.6.6
+
+  packages/mutual:
+    dependencies:
+      '@dapptober/agent-core':
+        specifier: workspace:*
+        version: link:../agent-core
+      '@dapptober/chain':
+        specifier: workspace:*
+        version: link:../chain
+      '@dapptober/config':
+        specifier: workspace:*
+        version: link:../config
+      '@dapptober/receipts':
+        specifier: workspace:*
+        version: link:../receipts
+      '@dapptober/types':
+        specifier: workspace:*
+        version: link:../types
+      viem:
+        specifier: ^2.38.0
+        version: 2.57.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)(zod@4.6.6)
+      zod:
+        specifier: ^4.6.6
         version: 4.6.6
 
   packages/payments:

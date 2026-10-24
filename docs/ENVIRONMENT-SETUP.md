@@ -75,3 +75,7 @@ Chainlink needs a **funded VRF v2.5 subscription**, arena consumer enrollment, a
 ### Day 23 — REDLINE
 
 Use the detailed per-app `.env.example`. `HYPERLIQUID_ACCOUNT_ADDRESS` is the master account address, not an agent key; `HYPERLIQUID_NETWORK=testnet` selects the native external venue. `PIT_MAX_ORDER_USD=250` caps previews. `SUPABASE_DATABASE_URL` is the private Session pooler connection URI; `OPERATOR_TOKEN` protects the deployment's private reads/writes. `JEV_API_KEY` enables typed risk/routing and `OPENAI_API_KEY` enables trader explanations/debriefs. Browser EOA signs each order; never put its private key here. No thirdweb, RPC or custom contract field is needed. Global Base settings remain unchanged; a native Hyperliquid venue exception is explicit, not a claimed Base integration.
+
+### Day 24 — Umbra Mutual
+
+Use the app's commented `.env.example` / private `.env.local`. Configure Supabase Session pooler `SUPABASE_DATABASE_URL`, generated `OPERATOR_TOKEN`, `JEV_API_KEY`, Base chain/RPC/Circle USDC and verified `MUTUAL_POOL`, `MUTUAL_CODE_HASH`, `MUTUAL_IDENTITY_REGISTRY`, `MUTUAL_REPUTATION_REGISTRY`. Optional `SNAPSHOT_SPACE` enables a verified advisory proposal mirror. No OpenAI/thirdweb/server wallet key is used. Constructor guardian/trusted reviewers are deployment choices, not secret API credentials. Keep Base Sepolia and Base pools, epochs and Supabase projects separate.

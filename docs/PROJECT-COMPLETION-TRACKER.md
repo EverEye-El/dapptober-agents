@@ -1,14 +1,14 @@
 # Project completion tracker
 
-**Updated October 23, 2026. All 23 apps are implemented locally; none is verified as fully live.**
+**Updated October 24, 2026. All 24 apps are implemented locally; none is verified as fully live.**
 
 Checked boxes mean the stated work was completed and verified **in the environment named**. A local test does not complete a live deployment task. Completed and outstanding parts of a task now have separate boxes.
 
-## Completed across Days 01–23
+## Completed across Days 01–24
 
-- [x] Build all 23 independently runnable apps, with shared capabilities and separate configuration.
+- [x] Build all 24 independently runnable apps, with shared capabilities and separate configuration.
 - [x] Verify all 23 independent production builds and local production HTTP/page/API/workflow/receipt checks after the Next.js security patch.
-- [x] Pass lint, type checking, **231 application tests** and **145 contract tests**; **20 opt-in application tests remain skipped** in the ordinary suite.
+- [x] Pass lint, type checking, **242 application tests** and **162 contract tests**; **21 opt-in application tests remain skipped** in the ordinary suite.
 - [x] Retain **16 earlier Anvil acceptance cases** and pass **one Day 21 and one new Day 22 funded acceptance case**, using actual local blockchains. External services and protocol fixtures remain distinct from live provider evidence.
 - [x] Verify the pnpm **10.2.0** frozen installation using the existing dependency store; retain `pnpm-lock.yaml` as the only dependency lockfile.
 - [x] Generate missing unique local operator tokens for all 23 apps and Day 10/19 session secrets. Verify private file permissions and Git exclusion; preserve existing values.
@@ -263,10 +263,27 @@ Each day's checked implementation box describes **tested local scope**, not full
 
 [Setup](../apps/agents/day-23-perp-pit-wall/README.md) · [Evidence and limitations](DAY-23-AUDIT.md)
 
+### Day 24 — Umbra Mutual / The Agent Mishap Mutual
+
+- [x] Implement reputation-priced cover, finite-season fully reserved USDC capital, historical member ballots, private evidence commitments, typed Jev recommendations and exact payout accounting. Pass 17 new Solidity cases (including conservation fuzzing), 11 ordinary application cases, actual funded Anvil premium/claim/vote/payout/exit acceptance, independent production build and HTTP lifecycle. Providers/registry/database doubles and simulated causal-loss evidence remain separate from live acceptance.
+- [ ] Review the economic/legal rules first: seven-day season, seven-day cover/one-hour wait, three-day filing grace and ballot, 30% quorum/strict majority, nontransferable shares, claimant exclusion and global capital lock. Approve trusted feedback reviewers, covered mistakes/exclusions, evidence retention and member adjudication responsibilities. New capital bears old claims without old voting rights; premium return is variable and can be negative.
+- [ ] On **Base Sepolia 84532**, verify actual **ERC-8004 Identity/Reputation** deployments, their relationship, agent owners/wallets and trusted `quality` feedback. Day 03's custom registry is not an automatic substitute. Prepare independent member, claimant and guardian wallets with small gas/USDC budgets; register the agent and establish genuine trusted feedback.
+- [ ] Deploy/verify **AgentMishapMutual** using Circle USDC, those registries, guardian and 1–16 reviewed trusted reviewers. Record source/constructor/runtime hash; set **MUTUAL_POOL**, **MUTUAL_CODE_HASH**, **MUTUAL_IDENTITY_REGISTRY**, **MUTUAL_REPUTATION_REGISTRY**, chain/RPC/USDC. Check the seven-day underwriting deadline before accepting deposits; do not fund an expired season.
+- [ ] Configure **Supabase Session pooler SUPABASE_DATABASE_URL**, the generated private **OPERATOR_TOKEN**, and **JEV_API_KEY**. Verify actual save/read/restart/backup restore and private evidence access. Run genuine redacted, consented Jev sufficient/insufficient/deny reviews; test unavailable providers without fabricated recommendations. No OpenAI, thirdweb or server spending key is needed.
+- [ ] With independent browser wallets, rehearse actual deposit/approval/quote/premium, waiting period, genuine causal incident/evidence, historical ballots, approved/denied/no-quorum settlement, duplicate incidents, pull payout and expired-cover release/withdrawal. Check exact balances, runtime pin, wallet/chain changes, allowance, transferred agent identity, pending/reverted receipt recovery and restart. Uncertain submissions must reconcile before another transaction; discard is an operator assertion, not cancellation.
+- [ ] If using Snapshot discussions, configure **SNAPSHOT_SPACE**, create the actual Base Sepolia space/proposal with reviewed weight strategy and the exact printed evidence binding/policy block, then verify Hub imports and real member votes. The deployed contract ballot remains binding; imported Snapshot scores never authorize funds.
+- [ ] Obtain independent contract/economic/security and applicable insurance/legal/privacy review. Resolve inherited dependency advisories. Test collusion/fabricated evidence, differently labeled duplicate losses, capital locks, depleted balances and guardian pause/recovery. Export/index before 200 policies; assign operators for permissionless expiry/settlement and plan a separate next season.
+- [ ] Deploy the private **HTTPS** office with correct origin, secrets, ingress limits and durable Supabase. Verify hosted evidence permissions, wallets/providers, mobile behavior, restore and receipt reconciliation. This is operator-authenticated administration, not a public member login system.
+- [ ] After test acceptance, deploy a separate **Base 8453** season with production Circle USDC/verified registries, separate database/wallets/runtime pin, real funded capital and narrowly bounded cover. Repeat paid-provider/wallet/payout acceptance; approve public release only after review. Monitor reserves, credits, capital, deadlines, outstanding ballots, Jev/database failures and backups; rehearse pause and end-of-season exit.
+
+[Setup](../apps/agents/day-24-agent-mishap-mutual/README.md) · [Evidence and limitations](DAY-24-AUDIT.md)
+
 ## Shared release blockers and evidence
 
+- [x] **Day 24 local regression:** all 24 independent production HTTP/page/API/workflow/receipt checks pass; new funded Anvil mutual acceptance passes. Browser and production evidence are recorded in the Day 24 audit. Published [Day 24 PR #21](https://github.com/EverEye-El/dapptober-agents/pull/21), stacked on open PR #20. Hosted verification is pending on the latest PR commit; superseded runs were canceled to free runners. Do not mark hosted verification complete until the exact final run passes. A unique local Day 24 operator token was generated with private file permissions and Git exclusion; existing values were preserved.
+
 - [x] **Day 22 hosted verification:** [PR #19](https://github.com/EverEye-El/dapptober-agents/pull/19) final implementation `ee98fde` passed [all 25 CI jobs](https://github.com/EverEye-El/dapptober-agents/actions/runs/39815167719): shared/local-chain checks, 22 standalone app containers and two worker images. GitGuardian passes. No merge or production release is implied.
-- [ ] **Day 23 hosted verification:** Published [PR #20](https://github.com/EverEye-El/dapptober-agents/pull/20), stacked on open PR #19. All local builds/workflows/tests pass. Verify the final commit’s shared/local-chain checks, 23 standalone app containers and two worker images; record the exact run before marking hosted verification complete.
+- [x] **Day 23 hosted verification:** [PR #20](https://github.com/EverEye-El/dapptober-agents/pull/20), implementation `431041d`, passed [all 26 CI jobs](https://github.com/EverEye-El/dapptober-agents/actions/runs/40046974363): shared/local-chain checks, 23 standalone app containers and two worker images. No merge or production acceptance is implied.
 
 - [x] **Hosted CI and containers:** October 21 full reruns passed for [PR #16 — 23 jobs](https://github.com/EverEye-El/dapptober-agents/actions/runs/39486891036) at `4791f47`, [PR #17 — 23 jobs](https://github.com/EverEye-El/dapptober-agents/actions/runs/39533455898) at `1e51d81`, and [PR #18 — 24 jobs](https://github.com/EverEye-El/dapptober-agents/actions/runs/39646547429) at `5fe7815`. This includes the shared test/local-chain checks, each app's standalone container/workflow checks and both worker images. These successful reruns supersede the earlier zero-step billing failures for those commits. Documentation follow-ups do not change the identified implementation evidence; live deployment and provider acceptance remain separate.
 - [x] **Security patch pass:** update workspace Next.js 16.4.0 to 16.4.3 and compatible vulnerable ranges of Zod 4, undici 6, ip-address 10, body-parser 2 and fast-uri 3; bind the dstack SDK to its declared Noble 1.x compatible peer. Full workspace regression/build evidence is recorded in Day 23's audit.

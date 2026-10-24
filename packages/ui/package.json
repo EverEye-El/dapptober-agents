@@ -26,7 +26,8 @@
     "./src/referee.css": "./src/referee.css",
     "./src/traveler.css": "./src/traveler.css",
     "./src/arena.css": "./src/arena.css",
-    "./src/pitwall.css": "./src/pitwall.css"
+    "./src/pitwall.css": "./src/pitwall.css",
+    "./src/mutual.css": "./src/mutual.css"
   },
   "dependencies": {
     "@dapptober/compute": "workspace:*",
