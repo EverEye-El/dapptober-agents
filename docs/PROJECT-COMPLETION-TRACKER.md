@@ -8,7 +8,7 @@ Checked boxes mean the stated work was completed and verified **in the environme
 
 - [x] Build all 23 independently runnable apps, with shared capabilities and separate configuration.
 - [x] Verify all 23 independent production builds and local production HTTP/page/API/workflow/receipt checks after the Next.js security patch.
-- [x] Pass lint, type checking, **230 application tests** and **145 contract tests**; **20 opt-in application tests remain skipped** in the ordinary suite.
+- [x] Pass lint, type checking, **231 application tests** and **145 contract tests**; **20 opt-in application tests remain skipped** in the ordinary suite.
 - [x] Retain **16 earlier Anvil acceptance cases** and pass **one Day 21 and one new Day 22 funded acceptance case**, using actual local blockchains. External services and protocol fixtures remain distinct from live provider evidence.
 - [x] Verify the pnpm **10.2.0** frozen installation using the existing dependency store; retain `pnpm-lock.yaml` as the only dependency lockfile.
 - [x] Generate missing unique local operator tokens for all 23 apps and Day 10/19 session secrets. Verify private file permissions and Git exclusion; preserve existing values.
