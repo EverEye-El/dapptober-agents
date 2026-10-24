@@ -95,3 +95,7 @@ Day20 promotes reproducible verification into `@dapptober/referee`: exact task c
 ## Day 23 — composable perp risk engineering
 
 `packages/perps` adds pure long/short risk calculations, bounded exact order plans, a canonical native-venue snapshot adapter and typed Jev band/priority/model routing. These can be composed into later agents without the REDLINE server. `apps/agents/day-23-perp-pit-wall` owns its chart/WebSocket presentation, explicit browser-wallet approval and independent environment/deployment boundary. It does not depend on another daily runtime. Browser signing remains separate from model reasoning and server persistence: no server trading authority is delegated. The native Hyperliquid venue boundary is explicit and does not redefine the project's Base network configuration.
+
+## Day 24 — mutual underwriting capability
+
+`packages/mutual` composes Supabase state, private authorization, hash-linked receipts, typed Jev assessments, canonical evidence and pinned Base contract adapters. `AgentMishapMutual` reserves full policy limits, checkpoints nontransferable capital, excludes claimants from historical ballots and credits approved beneficiaries. The private office prepares exact browser-signed transactions; no model/server key spends capital. A finite season bounds exit locks. Premiums minus claims are member returns; no external yield protocol is claimed. Optional Snapshot Hub discussion mirrors are evidence/block/network-bound and advisory. See the Day 24 README/audit for governance, causal-evidence and operating limits.

@@ -31,7 +31,8 @@
     "worker:referee": "node --env-file=apps/agents/day-20-restaked-referee/.env.local scripts/referee-worker.mjs",
     "test:traveler-chain": "node scripts/traveler-chain-test.mjs",
     "test:arena-chain": "node scripts/arena-chain-test.mjs",
-    "worker:arena": "node --env-file=apps/agents/day-22-agent-arena/.env.local scripts/arena-worker.mjs"
+    "worker:arena": "node --env-file=apps/agents/day-22-agent-arena/.env.local scripts/arena-worker.mjs",
+    "test:mutual-chain": "node scripts/mutual-chain-test.mjs"
   },
   "dependencies": {
     "@ai-sdk/openai-compatible": "^2.0.0",
@@ -95,7 +96,8 @@
     "thirdweb": "^5.0.0",
     "viem": "^2.38.0",
     "zod": "^4.0.0",
-    "@noble/hashes": "1.8.0"
+    "@noble/hashes": "1.8.0",
+    "@dapptober/mutual": "workspace:*"
   },
   "devDependencies": {
     "@cofhe/foundry-plugin": "1.0.0",
