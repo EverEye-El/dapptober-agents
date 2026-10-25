@@ -296,7 +296,7 @@ Each day's checked implementation box describes **tested local scope**, not full
 
 ## Shared release blockers and evidence
 
-- [x] **Day 25 local regression:** independent production build, all 25 production HTTP/workflow/receipt checks, browser encrypted library/search/grant/decrypt/revoke and signed funded Anvil acceptance pass. A unique private local operator token was generated; keys/secrets are excluded from Git. Hosted Day 25 verification will be recorded after publication.
+- [x] **Day 25 local regression:** independent production build, all 25 production HTTP/workflow/receipt checks, browser encrypted library/search/grant/decrypt/revoke and signed funded Anvil acceptance pass. A unique private local operator token was generated; keys/secrets are excluded from Git. Published [PR #22](https://github.com/EverEye-El/dapptober-agents/pull/22), stacked on open PR #21. Hosted verification is pending on the final commit; no hosted success is claimed yet.
 
 - [x] **Day 24 local regression:** all 24 independent production HTTP/page/API/workflow/receipt checks pass; new funded Anvil mutual acceptance passes. Browser and production evidence are recorded in the Day 24 audit. Published [Day 24 PR #21](https://github.com/EverEye-El/dapptober-agents/pull/21), stacked on open PR #20. Day 24 hosted verification is now complete: final `37fd625` passed [all 27 jobs](https://github.com/EverEye-El/dapptober-agents/actions/runs/40105743399), including 24 standalone app containers, two worker images and shared/local-chain checks. A unique local Day 24 operator token was generated with private file permissions and Git exclusion; existing values were preserved.
 
