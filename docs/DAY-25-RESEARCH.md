@@ -10,3 +10,5 @@ Primary references reviewed before implementation choices:
 - Current installed Next.js client-boundary guide and CSS guidance: client-only Web Crypto/keys and scoped application stylesheet imported through the layout, independently built for production.
 
 Lit was suggested, not mandatory. The historical Lit encryption documentation URL returned 404; no unsupported Lit API/deployment is invented. Native browser encryption plus owner-signed Base permission registry was selected to preserve user-held keys and portability. This has explicit revocation limits: already released keys remain usable for old ciphertext, and rotation protects new content only. No LLM, embedding or vector database receives plaintext by default.
+
+Final audit rechecked the existing Jev adapter against the official [TypeSafe quickstart/HTTP example](https://docs.typesafe.ai/introduction/quickstart) and [confidence reference](https://docs.typesafe.ai/confidence): bearer authentication, `jev-latest`, named Choice questions and `answers.<id>.choice/confidence` match. No unofficial Jev proxy is used. The app's 90% threshold still requires genuine calibration/paid-provider acceptance.
