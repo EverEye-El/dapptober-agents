@@ -99,3 +99,7 @@ Day20 promotes reproducible verification into `@dapptober/referee`: exact task c
 ## Day 24 — mutual underwriting capability
 
 `packages/mutual` composes Supabase state, private authorization, hash-linked receipts, typed Jev assessments, canonical evidence and pinned Base contract adapters. `AgentMishapMutual` reserves full policy limits, checkpoints nontransferable capital, excludes claimants from historical ballots and credits approved beneficiaries. The private office prepares exact browser-signed transactions; no model/server key spends capital. A finite season bounds exit locks. Premiums minus claims are member returns; no external yield protocol is claimed. Optional Snapshot Hub discussion mirrors are evidence/block/network-bound and advisory. See the Day 24 README/audit for governance, causal-evidence and operating limits.
+
+## Day 25 — portable encrypted memory
+
+`packages/memory` exposes browser Web Crypto/portable envelopes, Pinata/IPFS, versioned owner-controlled MemoryCathedral pointers and agent-specific RSA capsules. Actual MCP SDK request/read tools bind EIP-712 signer, purpose, public key, nonce, deadline and deployment; durable budgets and Jev metadata gates precede delivery. Agents decrypt locally, without another daily server or server-held private key. Rotation invalidates old-version grants; cached copies remain outside revocation. Supabase/receipts store only ciphertext, capsules, request metadata and authority history. This is a composable memory capability, not a plaintext global agent database.

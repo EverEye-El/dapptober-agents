@@ -1,0 +1,1 @@
+import path from 'node:path';export default {output:'standalone',outputFileTracingRoot:path.resolve('../../..'),transpilePackages:['@dapptober/memory','@dapptober/agent-core','@dapptober/config','@dapptober/chain','@dapptober/receipts','@dapptober/types','@dapptober/ui'],experimental:{cpus:2}};

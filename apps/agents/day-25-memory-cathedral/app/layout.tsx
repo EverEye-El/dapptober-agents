@@ -1,0 +1,1 @@
+import type {Metadata} from 'next';import '@dapptober/ui/memory.css';export const metadata:Metadata={title:'VESPER / The Memory Cathedral',description:'A private library for the mind you lend to your agents.'};export default function Layout({children}:{children:React.ReactNode}){return <html lang="en"><body>{children}</body></html>;}

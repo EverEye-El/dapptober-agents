@@ -79,3 +79,7 @@ Use the detailed per-app `.env.example`. `HYPERLIQUID_ACCOUNT_ADDRESS` is the ma
 ### Day 24 — Umbra Mutual
 
 Use the app's commented `.env.example` / private `.env.local`. Configure Supabase Session pooler `SUPABASE_DATABASE_URL`, generated `OPERATOR_TOKEN`, `JEV_API_KEY`, Base chain/RPC/Circle USDC and verified `MUTUAL_POOL`, `MUTUAL_CODE_HASH`, `MUTUAL_IDENTITY_REGISTRY`, `MUTUAL_REPUTATION_REGISTRY`. Optional `SNAPSHOT_SPACE` enables a verified advisory proposal mirror. No OpenAI/thirdweb/server wallet key is used. Constructor guardian/trusted reviewers are deployment choices, not secret API credentials. Keep Base Sepolia and Base pools, epochs and Supabase projects separate.
+
+### Day 25 — Vesper
+
+The app's detailed `.env.example`/private `.env.local` requires Supabase Session pooler `SUPABASE_DATABASE_URL`, generated private `OPERATOR_TOKEN`, owner EOA `OWNER_ADDRESS`, Base RPC/chain, verified `MEMORY_REGISTRY` / `MEMORY_REGISTRY_CODE_HASH`, scoped public-IPFS `PINATA_JWT` and `JEV_API_KEY`. No OpenAI/Lit/thirdweb/server wallet key is used. Owner RSA private backups belong only in private encrypted user storage; per-agent EOA/RSA keys belong in separate local clients, with `scripts/memory-agent.env.example` documenting their configuration. Never copy these private client keys into deployed app secrets.

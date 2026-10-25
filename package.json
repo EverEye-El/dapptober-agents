@@ -32,7 +32,8 @@
     "test:traveler-chain": "node scripts/traveler-chain-test.mjs",
     "test:arena-chain": "node scripts/arena-chain-test.mjs",
     "worker:arena": "node --env-file=apps/agents/day-22-agent-arena/.env.local scripts/arena-worker.mjs",
-    "test:mutual-chain": "node scripts/mutual-chain-test.mjs"
+    "test:mutual-chain": "node scripts/mutual-chain-test.mjs",
+    "test:memory-chain": "node scripts/memory-chain-test.mjs"
   },
   "dependencies": {
     "@ai-sdk/openai-compatible": "^2.0.0",
@@ -97,7 +98,8 @@
     "viem": "^2.38.0",
     "zod": "^4.0.0",
     "@noble/hashes": "1.8.0",
-    "@dapptober/mutual": "workspace:*"
+    "@dapptober/mutual": "workspace:*",
+    "@dapptober/memory": "workspace:*"
   },
   "devDependencies": {
     "@cofhe/foundry-plugin": "1.0.0",

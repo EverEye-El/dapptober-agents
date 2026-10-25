@@ -33,4 +33,4 @@ Ordered remaining tasks: [completion tracker](PROJECT-COMPLETION-TRACKER.md). Ne
 
 ## Publication
 
-Implementation `558dea8` is published in [PR #21](https://github.com/EverEye-El/dapptober-agents/pull/21), stacked on open Day 23 PR #20. Hosted verification is pending on the PR Checks tab; superseded runs were canceled to free runners for the latest commit. This audit does not yet claim hosted success. Local acceptance above was verified before publication.
+Implementation `558dea8` is published in [PR #21](https://github.com/EverEye-El/dapptober-agents/pull/21), stacked on open Day 23 PR #20. Hosted final implementation `37fd625` passed [all 27 jobs](https://github.com/EverEye-El/dapptober-agents/actions/runs/40105743399): shared/local-chain checks, 24 independent app containers and two worker images. This does not establish live provider or public-chain acceptance. Local acceptance above was verified before publication.

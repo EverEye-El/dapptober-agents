@@ -1,0 +1,1 @@
+{"name": "@dapptober/day-25", "private": true, "scripts": {"dev": "next dev --port 3025", "start": "next start --port 3025", "build": "next build --webpack"}, "dependencies": {"@dapptober/memory": "workspace:*", "@dapptober/ui": "workspace:*", "next": "^16.4.3", "react": "^19.2.0", "react-dom": "^19.2.0", "viem": "^2.38.0"}}
