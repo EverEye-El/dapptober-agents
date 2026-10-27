@@ -5,6 +5,7 @@ import {resolve} from 'node:path';
 
 const common=['OWNER_ADDRESS','OPERATOR_TOKEN','SUPABASE_DATABASE_URL','RPC_URL','JEV_API_KEY','OPENAI_API_KEY'];
 export const required={
+  26:['OWNER_ADDRESS','OPERATOR_TOKEN','SUPABASE_DATABASE_URL','RPC_URL','OPENAI_API_KEY','OPENAI_IMAGE_MODEL','JEV_API_KEY','PINATA_JWT','THIRDWEB_SECRET_KEY','C2PA_SIGNING_CERT_PEM_BASE64','C2PA_SIGNING_KEY_PEM_BASE64','C2PA_TRUST_ANCHORS_PEM_BASE64','STUDIO_DROP_ADDRESS','STUDIO_DROP_CODE_HASH','STUDIO_MINT_SIGNER_PRIVATE_KEY'],
   25:['OWNER_ADDRESS','OPERATOR_TOKEN','SUPABASE_DATABASE_URL','RPC_URL','MEMORY_REGISTRY','MEMORY_REGISTRY_CODE_HASH','PINATA_JWT','JEV_API_KEY'],
   24:['OPERATOR_TOKEN','SUPABASE_DATABASE_URL','RPC_URL','MUTUAL_POOL','MUTUAL_CODE_HASH','MUTUAL_IDENTITY_REGISTRY','MUTUAL_REPUTATION_REGISTRY','JEV_API_KEY'],
   23:['OPERATOR_TOKEN','SUPABASE_DATABASE_URL','HYPERLIQUID_ACCOUNT_ADDRESS','JEV_API_KEY','OPENAI_API_KEY'],
@@ -33,6 +34,7 @@ export const required={
 };
 export function assess(day,env){
   const gaps=[];
+  if(day===26){for(const k of ['STUDIO_DROP_ADDRESS'])if(!/^0x[0-9a-fA-F]{40}$/.test(env[k]??''))gaps.push(k+': actual deployed Base credential drop required');for(const k of ['STUDIO_DROP_CODE_HASH','STUDIO_MINT_SIGNER_PRIVATE_KEY'])if(!/^0x[0-9a-fA-F]{64}$/.test(env[k]??''))gaps.push(k+': expected 32-byte hex value');for(const k of ['C2PA_SIGNING_CERT_PEM_BASE64','C2PA_SIGNING_KEY_PEM_BASE64','C2PA_TRUST_ANCHORS_PEM_BASE64'])if(!/^[A-Za-z0-9+/]+={0,2}$/.test(env[k]??''))gaps.push(k+': one-line base64 PEM material required');}
   if(day===25){if(!/^0x[0-9a-fA-F]{40}$/.test(env.MEMORY_REGISTRY??''))gaps.push('MEMORY_REGISTRY: actual deployed Base pointer registry required');if(!/^0x[0-9a-fA-F]{64}$/.test(env.MEMORY_REGISTRY_CODE_HASH??''))gaps.push('MEMORY_REGISTRY_CODE_HASH: pin verified deployed runtime');}
   if(day===24){for(const k of ['MUTUAL_POOL','MUTUAL_IDENTITY_REGISTRY','MUTUAL_REPUTATION_REGISTRY'])if(!/^0x[0-9a-fA-F]{40}$/.test(env[k]??''))gaps.push(k+': configure the actual deployed Base registry/pool address');if(!/^0x[0-9a-fA-F]{64}$/.test(env.MUTUAL_CODE_HASH??''))gaps.push('MUTUAL_CODE_HASH: independently pin runtime including immutables');}
   if(day===23){if(!['testnet','mainnet'].includes(env.HYPERLIQUID_NETWORK))gaps.push('HYPERLIQUID_NETWORK: choose native venue testnet/mainnet; not a Base contract');if(!/^0x[0-9a-fA-F]{40}$/.test(env.HYPERLIQUID_ACCOUNT_ADDRESS??''))gaps.push('HYPERLIQUID_ACCOUNT_ADDRESS: configure the master venue account');if(!(Number(env.PIT_MAX_ORDER_USD)>=10&&Number(env.PIT_MAX_ORDER_USD)<=1000))gaps.push('PIT_MAX_ORDER_USD: require $10–$1000 notional limit');}
@@ -72,7 +74,7 @@ export function assess(day,env){
 
 async function main(){
   const flags=process.argv.slice(2),selection=flags.find(x=>/^\d{1,2}$/.test(x));
-  if(flags.some(x=>!['--init','--online'].includes(x)&&x!==selection)||selection&&(Number(selection)<1||Number(selection)>25))throw new Error('Usage: pnpm readiness [01–25] [--init] [--online]');
+  if(flags.some(x=>!['--init','--online'].includes(x)&&x!==selection)||selection&&(Number(selection)<1||Number(selection)>26))throw new Error('Usage: pnpm readiness [01–26] [--init] [--online]');
   const root=fileURLToPath(new URL('../',import.meta.url));let failed=false;
   for(const dir of readdirSync(resolve(root,'apps/agents')).sort()){
     const day=Number(dir.match(/^day-(\d+)-/)?.[1]);if(!required[day]||selection&&day!==Number(selection))continue;

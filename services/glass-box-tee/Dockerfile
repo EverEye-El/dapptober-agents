@@ -3,6 +3,7 @@ FROM node:22-bookworm-slim
 WORKDIR /app
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY patches ./patches
+COPY scripts/setup-c2pa.mjs ./scripts/setup-c2pa.mjs
 RUN npm install --global pnpm@10.2.0
 COPY packages ./packages
 COPY apps/agents ./apps/agents

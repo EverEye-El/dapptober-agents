@@ -103,3 +103,7 @@ Day20 promotes reproducible verification into `@dapptober/referee`: exact task c
 ## Day 25 — portable encrypted memory
 
 `packages/memory` exposes browser Web Crypto/portable envelopes, Pinata/IPFS, versioned owner-controlled MemoryCathedral pointers and agent-specific RSA capsules. Actual MCP SDK request/read tools bind EIP-712 signer, purpose, public key, nonce, deadline and deployment; durable budgets and Jev metadata gates precede delivery. Agents decrypt locally, without another daily server or server-held private key. Rotation invalidates old-version grants; cached copies remain outside revocation. Supabase/receipts store only ciphertext, capsules, request metadata and authority history. This is a composable memory capability, not a plaintext global agent database.
+
+## Day 26 — credentialed media
+
+`packages/studio` composes bounded image generation, genuine C2PA sign/read, deterministic signed parent edits, independent Jev metadata gates, explicit public IPFS publication and exact EIP-712 mint permits. Its free ERC-721 credential drop records file/manifest/model/parent commitments and rejects replay or modified recipients. Creator wallet submits each mint; unified thirdweb reads pinned NFT evidence. Public file verification separates integrity, signer trust and onchain match. Private operator Supabase state has durable cost/project bounds; no other daily server is required.
