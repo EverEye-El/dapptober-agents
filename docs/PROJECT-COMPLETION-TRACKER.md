@@ -340,6 +340,8 @@ Each day's checked implementation box describes **tested local scope**, not full
 
 ## Shared release blockers and evidence
 
+- [x] **Day 27 local release regression:** all 27 independent production builds and all 27 production HTTP/page/API/workflow/receipt checks pass; 273 ordinary application tests pass (24 opt-in skipped), 186 contract tests pass, and separate funded Anvil haunted acceptance passes. Day 27 keeper edits persist through reload in development and production; the 69MB standalone copy outside the repository passes independently. Published implementation `292148a` in [PR #24](https://github.com/EverEye-El/dapptober-agents/pull/24), stacked on Day 26 PR #23. GitGuardian and **all 30 hosted jobs** pass, including 27 Linux app containers/workflows, both worker images and shared/local-chain checks in [the implementation run](https://github.com/EverEye-El/dapptober-agents/actions/runs/40582458137). No hosted public deployment, genuine Supabase service, paid-provider call or public-chain transaction is implied.
+
 - [x] Publish Day 26 as [PR #23](https://github.com/EverEye-El/dapptober-agents/pull/23), stacked on open Day 25 PR #22. The requested Day 25 button-spacing fix is also pushed to PR #22. No main push, merge or public deployment.
 - [x] **Day 26 hosted implementation verification:** final implementation `4794acb` passed [all 29 hosted jobs](https://github.com/EverEye-El/dapptober-agents/actions/runs/40549290711): 26 actual standalone Linux containers/workflows, both GPU/TEE images and shared application/contract/Anvil checks. GitGuardian passes. The missing install-helper copies detected in the baseline were fixed and verified. This evidence certifies the named implementation; the following documentation-only commit records it.
 

@@ -1,5 +1,6 @@
-import {readFileSync} from 'node:fs';import {parseEnv} from 'node:util';
-const env={...parseEnv(readFileSync('apps/agents/day-27-haunted-contract/.env.example','utf8')),...process.env},gaps=[];
+import {readFileSync,existsSync} from 'node:fs';import {parseEnv} from 'node:util';
+const file='apps/agents/day-27-haunted-contract/.env.local';
+const env={...parseEnv(readFileSync('apps/agents/day-27-haunted-contract/.env.example','utf8')),...existsSync(file)?parseEnv(readFileSync(file,'utf8')):{},...process.env},gaps=[];
 if(env.AGENT_MODE!=='demo')gaps.push('AGENT_MODE=demo required for the hosted demo target');
 for(const key of ['OPERATOR_TOKEN','HAUNTED_SESSION_SECRET'])if((env[key]??'').length<32)gaps.push(key+': private stable random secret of at least 32 characters');
 if(!env.SUPABASE_DATABASE_URL&&env.HAUNTED_STORAGE!=='local')gaps.push('SUPABASE_DATABASE_URL: private Supabase Session pooler URI required on serverless');

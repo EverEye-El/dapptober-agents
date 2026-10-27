@@ -14,6 +14,7 @@ Audited October 27, 2026 against the complete canonical Day 27 prompt and master
 
 ## Verification and distinction of evidence
 
+- **All 27 independent production builds and all 27 production HTTP/page/API/workflow/receipt checks pass** on the final local source. The standalone copy also passes independently outside the repository.
 - Full ordinary application suite: **273 passed / 24 opt-in skipped**. The new funded Day 27 opt-in case was run separately and passed. Other opt-in tests were not implied to run by this ordinary suite.
 - Full Foundry suite: **186 passed / 0 failed**, including nine new haunted contract cases.
 - Lint and TypeScript pass. Production compilation caught a result type that was corrected before the passing build.
@@ -21,7 +22,7 @@ Audited October 27, 2026 against the complete canonical Day 27 prompt and master
 - Actual browser play and saved reload pass. The browser viewport capability did not change measured width from 971px; **390px browser/mobile-wallet acceptance is not claimed**. Mobile/reduced-motion CSS is implemented but narrow-device acceptance remains an explicit release task.
 - Production dependency audit: **6 high / 1 low**, zero critical/moderate; inherited TOML/Zod/elliptic findings remain. No clean security audit is claimed.
 - Genuine Supabase service, paid Jev/OpenAI, public Base deployment/funding, actual browser wallet signing and public hosting are **not verified**. Database/provider doubles and actual Anvil are separately labeled.
-- Linux hosted CI/containers for this new implementation require the published run. Local Docker is unavailable; copied macOS standalone acceptance does not substitute for Linux container evidence.
+- **Hosted Day 27 Linux container/workflow passes** for implementation `292148a` in [the 30-job run](https://github.com/EverEye-El/dapptober-agents/actions/runs/40582458137). **All 30 jobs passed**, including 27 standalone Linux containers/workflows, both worker images and shared application/contract/Anvil checks. GitGuardian passes. A subsequent local-readiness-helper/documentation follow-up records this exact implementation evidence; it does not claim that evidence applies to an unverified future commit. Local Docker is unavailable; Linux evidence comes from hosted CI, separately from the copied macOS standalone acceptance.
 
 ## Trust and operational limits
 
