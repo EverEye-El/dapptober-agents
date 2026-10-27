@@ -1,6 +1,6 @@
 # Dapptober Agents
 
-Twenty-six independently runnable crypto-native agents for Dapptober 2026, built on a shared TypeScript capability layer. The supplied daily prompts are canonical; the master build specification defines the architecture and audit requirements.
+Twenty-seven independently runnable crypto-native agents for Dapptober 2026, built on a shared TypeScript capability layer. The supplied daily prompts are canonical; the master build specification defines the architecture and audit requirements.
 
 [Project completion tracker](docs/PROJECT-COMPLETION-TRACKER.md) records tested functionality and remaining work for every built day and is updated after each daily build.
 
@@ -32,6 +32,7 @@ Twenty-six independently runnable crypto-native agents for Dapptober 2026, built
 | 24 | [Umbra Mutual — Agent Mishap Mutual](apps/agents/day-24-agent-mishap-mutual/README.md) | http://localhost:3024 | Reputation-priced cover, risk-bearing capital, Jev evidence review and member-approved USDC payouts |
 | 25 | [Vesper — Memory Cathedral](apps/agents/day-25-memory-cathedral/README.md) | http://localhost:3025 | User-held encrypted memory, portable tomes, owner-controlled pointers and signed Jev-gated MCP access |
 | 26 | [Take One — Credentialed Studio](apps/agents/day-26-credentialed-studio/README.md) | http://localhost:3026 | AI image generation, embedded C2PA credentials, signed edit history, public verifier and exact provenance mint permits |
+| 27 | [DEADLOCK — Haunted Contract](apps/agents/day-27-haunted-contract/README.md) | http://localhost:3027 | Playable ghost mansion, editable saved demo rooms, Jev-gated dialogue and contract-enforced commit/reveal keys and USDC treasure |
 
 ## Start here
 
@@ -44,11 +45,11 @@ See [pnpm migration and validation](docs/PNPM-MIGRATION.md) for the workspace ch
 ```sh
 pnpm install --frozen-lockfile
 pnpm run dev 01
-# Or run all eighteen independent servers:
+# Or run all twenty-seven independent servers:
 pnpm run dev
 ```
 
-Local simulation is the default and needs no secrets. Every simulated balance, signature, payment and attestation is labelled. State and receipts persist under each application's ignored `.data/` directory, isolated by HttpOnly session cookie. Local mode supports one process per app; use Supabase PostgreSQL for real/serverless mode. The agents never fabricate real transaction hashes.
+Local simulation is the default and needs no external service keys. Day 27 also supports a hosted editable demo: configure Supabase, stable visitor-cookie signing and keeper access, without funding contracts or enabling paid dialogue. See its README for the separate demo and live release paths. Every simulated balance, signature, payment and attestation is labelled. State and receipts persist under each application's ignored `.data/` directory, isolated by HttpOnly session cookie. Local mode supports one process per app; use Supabase PostgreSQL for real/serverless mode. The agents never fabricate real transaction hashes.
 
 Real mode uses configured RPCs, contracts, Jev, generative AI, thirdweb, x402 or CoW as relevant. Copy an app's `.env.example` to its `.env.local`. [Deployment instructions](docs/DEPLOYMENT.md) explain every required variable, funding and contract step. [Live setup checklist](docs/LIVE-SETUP-CHECKLIST.md) lists the owner inputs and acceptance runs; `pnpm readiness` reports missing live configuration without printing secrets. Days 01–09 use single-operator control rooms; Day 10 has private visitor sessions and separately authenticated operator pause controls. For Days 01–09, real server actions require a deployment-specific bearer token. Human owner/client signatures remain in their browser wallet. Day 11 also uses an authenticated operator control room and bidding API; inference runs in independent GPU workers without an OpenAI key.
 
@@ -62,12 +63,12 @@ pnpm run typecheck
 pnpm run lint
 pnpm test
 pnpm run test:contracts            # Solidity unit and fuzz tests, offline
-pnpm run build                    # all eighteen independent builds
+pnpm run build                    # all twenty-seven independent builds
 pnpm run check                    # full verification
 pnpm run smoke                    # production HTTP workflow audit (servers must run)
 ```
 
-`pnpm --filter @dapptober/day-01 run start` runs a built app. `pnpm run start` starts all eighteen after a full build. No other daily server is needed by any real deployment.
+`pnpm --filter @dapptober/day-01 run start` runs a built app. `pnpm run start` starts all twenty-seven after a full build. No other daily server is needed by any real deployment.
 
 ## Shared capabilities
 

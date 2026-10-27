@@ -1,0 +1,1 @@
+{"name":"@dapptober/haunted","version":"0.1.0","private":true,"type":"module","exports":{".":"./src/index.ts","./src/*":"./src/*.ts"},"dependencies":{"@dapptober/agent-core":"workspace:*","@dapptober/config":"workspace:*","@dapptober/receipts":"workspace:*","@dapptober/types":"workspace:*","postgres":"^3.4.0","zod":"^4.6.6","viem":"^2.38.0","thirdweb":"^5.0.0"}}

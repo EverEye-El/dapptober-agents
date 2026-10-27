@@ -85,6 +85,9 @@ importers:
       '@dapptober/guardrails':
         specifier: workspace:*
         version: link:packages/guardrails
+      '@dapptober/haunted':
+        specifier: workspace:*
+        version: link:packages/haunted
       '@dapptober/identity':
         specifier: workspace:*
         version: link:packages/identity
@@ -816,6 +819,37 @@ importers:
         specifier: ^2.38.0
         version: 2.57.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)(zod@4.6.6)
 
+  apps/agents/day-27-haunted-contract:
+    dependencies:
+      '@dapptober/haunted':
+        specifier: workspace:*
+        version: link:../../../packages/haunted
+      howler:
+        specifier: 2.2.4
+        version: 2.2.4
+      next:
+        specifier: ^16.4.3
+        version: 16.4.3(@opentelemetry/api@1.9.1)(@types/node@22.20.5)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      react:
+        specifier: ^19.2.0
+        version: 19.3.0
+      react-dom:
+        specifier: ^19.2.0
+        version: 19.3.0(react@19.3.0)
+      thirdweb:
+        specifier: ^5.0.0
+        version: 5.121.6(@hey-api/openapi-ts@0.99.0(typescript@5.9.3))(@solana/sysvars@5.5.1(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3))(@tanstack/query-core@5.81.5)(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(@x402/core@2.28.0)(@x402/evm@2.28.0(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6))(@x402/extensions@2.28.0(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6))(@x402/svm@2.28.0(@solana/kit@5.5.1(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(utf-8-validate@6.0.6))(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3))(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(immer@11.1.21)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(typescript@5.9.3)(use-sync-external-store@1.4.0(react@19.3.0))(utf-8-validate@6.0.6)(ws@8.22.0(bufferutil@4.1.0)(utf-8-validate@6.0.6))
+      viem:
+        specifier: ^2.38.0
+        version: 2.57.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)(zod@4.6.6)
+      zod:
+        specifier: ^4.6.6
+        version: 4.6.6
+    devDependencies:
+      '@types/howler':
+        specifier: 2.2.12
+        version: 2.2.12
+
   packages/agent-core:
     dependencies:
       '@ai-sdk/openai-compatible':
@@ -1130,6 +1164,33 @@ importers:
       viem:
         specifier: ^2.38.0
         version: 2.57.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)(zod@4.6.6)
+
+  packages/haunted:
+    dependencies:
+      '@dapptober/agent-core':
+        specifier: workspace:*
+        version: link:../agent-core
+      '@dapptober/config':
+        specifier: workspace:*
+        version: link:../config
+      '@dapptober/receipts':
+        specifier: workspace:*
+        version: link:../receipts
+      '@dapptober/types':
+        specifier: workspace:*
+        version: link:../types
+      postgres:
+        specifier: ^3.4.0
+        version: 3.4.9
+      thirdweb:
+        specifier: ^5.0.0
+        version: 5.121.6(@hey-api/openapi-ts@0.99.0(typescript@5.9.3))(@solana/sysvars@5.5.1(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3))(@tanstack/query-core@5.81.5)(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(@x402/core@2.28.0)(@x402/evm@2.28.0(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6))(@x402/extensions@2.28.0(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6))(@x402/svm@2.28.0(@solana/kit@5.5.1(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3)(utf-8-validate@6.0.6))(fastestsmallesttextencoderdecoder@1.0.22)(typescript@5.9.3))(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(immer@11.1.21)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(typescript@5.9.3)(use-sync-external-store@1.4.0(react@19.3.0))(utf-8-validate@6.0.6)(ws@8.22.0(bufferutil@4.1.0)(utf-8-validate@6.0.6))
+      viem:
+        specifier: ^2.38.0
+        version: 2.57.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)(zod@4.6.6)
+      zod:
+        specifier: ^4.6.6
+        version: 4.6.6
 
   packages/identity:
     dependencies:
@@ -4273,6 +4334,9 @@ packages:
   '@types/estree@1.0.9':
     resolution: {integrity: sha512-GhdPgy1el4/ImP05X05Uw4cw2/M93BCUmnEvWZNStlCzEKME4Fkk+YpoA5OiHNQmoS7Cafb8Xa3Pya8m1Qrzeg==}
 
+  '@types/howler@2.2.12':
+    resolution: {integrity: sha512-hy769UICzOSdK0Kn1FBk4gN+lswcj1EKRkmiDtMkUGvFfYJzgaDXmVXkSShS2m89ERAatGIPnTUlp2HhfkVo5g==}
+
   '@types/json-schema@7.0.15':
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
 
@@ -5817,6 +5881,9 @@ packages:
   hono@4.13.13:
     resolution: {integrity: sha512-CQ46U0ZkAGmbT/4UxdzzGJpacP2IeKgY4a5/tOI9AABbpOMfK739wfDXmv1usCk+3RkKj1hQy4/fjhiwa2xlrA==}
     engines: {node: '>=16.9.0'}
+
+  howler@2.2.4:
+    resolution: {integrity: sha512-iARIBPgcQrwtEr+tALF+rapJ8qSc+Set2GJQl7xT1MQzWaVkFebdJhR3alVlSiUf5U7nAANKuj3aWpwerocD5w==}
 
   http-errors@2.0.1:
     resolution: {integrity: sha512-4FbRdAX+bSdmo4AUFuS0WNiPz8NgFt+r8ThgNWmlrjQjt1Q7ZR9+zTlce2859x4KSXrwIsaeTqDoKQmtP8pLmQ==}
@@ -8287,7 +8354,7 @@ snapshots:
       clsx: 1.2.1
       eventemitter3: 5.0.1
       idb-keyval: 6.2.1
-      ox: 0.6.9(typescript@5.9.3)(zod@3.25.76)
+      ox: 0.6.9(typescript@5.9.3)(zod@4.6.6)
       preact: 10.24.2
       viem: 2.57.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)(zod@4.6.6)
       zustand: 5.0.3(@types/react@19.3.0)(immer@10.1.1)(react@19.3.0)(use-sync-external-store@1.4.0(react@19.3.0))
@@ -8315,7 +8382,7 @@ snapshots:
       clsx: 1.2.1
       eventemitter3: 5.0.1
       idb-keyval: 6.2.1
-      ox: 0.6.9(typescript@5.9.3)(zod@3.25.76)
+      ox: 0.6.9(typescript@5.9.3)(zod@4.6.6)
       preact: 10.24.2
       viem: 2.57.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)(zod@3.25.76)
       zustand: 5.0.3(@types/react@19.3.0)(immer@11.1.21)(react@19.3.0)(use-sync-external-store@1.4.0(react@19.3.0))
@@ -8498,7 +8565,7 @@ snapshots:
       clsx: 1.2.1
       eventemitter3: 5.0.1
       idb-keyval: 6.2.1
-      ox: 0.6.9(typescript@5.9.3)(zod@3.25.76)
+      ox: 0.6.9(typescript@5.9.3)(zod@4.6.6)
       preact: 10.24.2
       viem: 2.57.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)(zod@4.6.6)
       zustand: 5.0.3(@types/react@19.3.0)(immer@10.1.1)(react@19.3.0)(use-sync-external-store@1.4.0(react@19.3.0))
@@ -8518,7 +8585,7 @@ snapshots:
       clsx: 1.2.1
       eventemitter3: 5.0.1
       idb-keyval: 6.2.1
-      ox: 0.6.9(typescript@5.9.3)(zod@3.25.76)
+      ox: 0.6.9(typescript@5.9.3)(zod@4.6.6)
       preact: 10.24.2
       viem: 2.57.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)(zod@3.25.76)
       zustand: 5.0.3(@types/react@19.3.0)(immer@11.1.21)(react@19.3.0)(use-sync-external-store@1.4.0(react@19.3.0))
@@ -11689,6 +11756,8 @@ snapshots:
 
   '@types/estree@1.0.9': {}
 
+  '@types/howler@2.2.12': {}
+
   '@types/json-schema@7.0.15': {}
 
   '@types/lodash@4.17.25': {}
@@ -14192,6 +14261,8 @@ snapshots:
 
   hono@4.13.13: {}
 
+  howler@2.2.4: {}
+
   http-errors@2.0.1:
     dependencies:
       depd: 2.0.0
@@ -15071,7 +15142,7 @@ snapshots:
     transitivePeerDependencies:
       - zod
 
-  ox@0.6.9(typescript@5.9.3)(zod@3.25.76):
+  ox@0.6.9(typescript@5.9.3)(zod@4.6.6):
     dependencies:
       '@adraffy/ens-normalize': 1.11.1
       '@noble/curves': 1.9.7

@@ -40,3 +40,10 @@ it('refuses to relabel testnet receipts and balances as Base production state',a
  await expect(withState(2,'operator',production,async s=>s.balance)).rejects.toThrow('Stored workspace belongs to another chain');
  expect((await withState(2,'operator',test,async s=>s.balance)).result).toBe('12');
 });
+
+// Hosted demo persistence uses the same private SQL transport; it does not require real token mode.
+import {stored} from '../packages/haunted/src/storage';
+it('persists haunted demo edits through Supabase with RLS and row locking',async()=>{
+ vi.stubEnv('AGENT_MODE','demo');vi.stubEnv('SUPABASE_DATABASE_URL','postgresql://haunted.supabase.invalid/postgres');
+ try{await stored('house-a',()=>({rooms:0}),async h=>{h.rooms=4;});expect((await stored('house-a',()=>({rooms:0}),async h=>h.rooms)).result).toBe(4);expect((await stored('house-b',()=>({rooms:0}),async h=>h.rooms)).result).toBe(0);const connection=fixture.connections.find(x=>x.url==='postgresql://haunted.supabase.invalid/postgres')!;expect(connection.queries).toContain('ALTER TABLE dapptober_haunted ENABLE ROW LEVEL SECURITY');expect(connection.queries.some(q=>q.includes('FOR UPDATE'))).toBe(true);expect(connection.options).toEqual({max:5,prepare:false,ssl:'require'});}finally{vi.unstubAllEnvs();}
+});

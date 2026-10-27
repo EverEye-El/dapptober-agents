@@ -1,10 +1,12 @@
 # Project completion tracker
 
-**Updated October 27, 2026. Days 01–26 are implemented locally. Day 27 is listed below, with implementation evidence still pending. No app is verified as fully live.**
+**Updated October 27, 2026: 27 local app implementations exist (Days 01–27); 0 hosted demos or full live deployments are verified released. Day 27 is now built; its separate demo-launch and live-contract checklists appear below.**
+
+“Local implementation” does not mean full prompt/protocol compliance or production readiness. See the [repository status audit](IMPLEMENTATION-STATUS-AUDIT.md) for the inventory, fresh test results and material gaps.
 
 Checked boxes mean the stated work was completed and verified **in the environment named**. A local test does not complete a live deployment task. Completed and outstanding parts of a task now have separate boxes.
 
-## Completed across Days 01–26
+## Earlier completed work across Days 01–26
 
 - [x] Build all 26 independently runnable apps, with shared capabilities and separate configuration.
 - [x] Verify all 26 independent production builds and all 26 local production HTTP/page/API/workflow/receipt checks.
@@ -28,6 +30,10 @@ Start with one app. You do not need every day-specific service at once. Supply s
 - [ ] **Provide wallets and a small test budget:** choose the owner/deployer and any separate agent/guardian wallets; fund only intended test gas/USDC. Approve wallet requests when needed.
 - [ ] **Choose hosting and the final web address:** provide account access and approve the operating budget, including separate confidential/GPU hosting where required.
 - [ ] **Approve the chosen app's rules and release:** spending limits, participants, public-data consent and required outside security/legal review. Specific decisions are listed by day.
+
+## Launch targets
+
+A hosted, editable **demo** is an approved release target. Mock providers and prizes may stay enabled. It still requires genuine persistent storage, protected editing, clear simulation labels and hosted acceptance. Day 27 implements this path explicitly; earlier days have not been automatically migrated to durable hosted-demo storage or verified editing flows. The live integration checklist below applies only when enabling real services/funds.
 
 ## Shared steps still required for each live app
 
@@ -309,14 +315,28 @@ Each day's checked implementation box describes **tested local scope**, not full
 
 [Setup](../apps/agents/day-26-credentialed-studio/README.md) · [Evidence and limitations](DAY-26-AUDIT.md)
 
-### Day 27 — The Haunted Contract
+### Day 27 — DEADLOCK / The Haunted Contract
 
-- [x] Day 27's challenge prompt and supplied graphics are available: [prompt](../prompts/dapp-prompts.ts), [graphic A](../2026SocialPosts/39-day-27-A.png) and [graphic B](../2026SocialPosts/39-day-27.-Bpng.png).
-- [ ] **Confirm the implementation:** no Day 27 app, tests, audit or published branch was found in the repository on October 27. Add its actual build evidence before increasing the verified app/test totals.
-- [ ] Build the independent haunted-mansion game: distinct ghost personas/riddles, talk/trick/bribe moves screened by Jev, ghost dialogue, contract-enforced keys/win conditions/treasure payouts, and spooky visuals/audio. Prompt injection must not bypass the contract's prize rules.
-- [ ] Verify the game locally: ordinary and malicious moves, unauthorized/duplicate keys or payouts, wallet/transaction recovery and funded local-chain acceptance. Check browser/mobile/audio behavior and independent build/HTTP/container workflows; distinguish simulated ghosts/providers from genuine inference.
-- [ ] Configure private provider/database access and owner/player wallets; approve the prize asset, rules and small funding budget. Deploy/review the actual Base Sepolia game contract and verify genuine dialogue, wallet-earned keys and exact treasure payments before a separate Base production deployment.
-- [ ] Complete the shared security, HTTPS hosting, monitoring/recovery and release checklist above; record actual contract/provider/transaction evidence. Live configuration, funding and production verification remain open.
+- [x] Build a playable three-ghost mansion with typed talk/trick/bribe, independent deterministic keys, one-claim practice treasure, receipt ledger, original opt-in Howler audio and copper spectral visuals. Add protected keeper room creation/removal, shared catalog, immutable active-visit snapshots and private visitor progress. Demo storage supports Supabase as well as an explicitly chosen persistent disk.
+- [x] Test ordinary/malicious/wrong-type moves, exact bribe and duplicate charge rejection, one-time prize, pause/restart, keeper authentication, signed visitor cookies, bounded bodies, paid review reservation, session isolation and saved reloads. Supabase adapter tests verify private TLS, RLS and row locking using database doubles; actual Supabase service is not yet verified.
+- [x] Implement and test **HauntedContract** with fixed three-room checks, player/chain/deployment-bound commit/reveal, one-block delay/80-block reveal window, exact token accounting, reserved five-USDC winnings, one-time claims, pause-safe recovery and separate bribe withdrawals. Generated-wallet funded Anvil acceptance earns all three keys and reconciles the exact payout. This is local blockchain evidence, not Base/public funds.
+- [x] Verify desktop browser talk → trick → bribe → three keys → practice claim → saved reload and audio toggle; local keeper add/remove/snapshot/reload HTTP acceptance passes. Verify independent production build and complete Day 27 page/API/workflow/receipt smoke. Additional release verification is recorded in the Day 27 audit.
+
+**First release target — hosted, editable demo (no funded contracts or paid AI required):**
+
+- [ ] Configure private **Supabase Session pooler SUPABASE_DATABASE_URL**, **HAUNTED_STORAGE=supabase**, stable **HAUNTED_WORKSPACE_ID**, and separate random **OPERATOR_TOKEN / HAUNTED_SESSION_SECRET** (>=32 characters each). Keep **AGENT_MODE=demo / HAUNTED_DIALOGUE=simulated**. Verify genuine table migration, save/read/restart, role restrictions and backup restore. A single server can instead use explicitly selected local storage with a mounted persistent `.data` volume; serverless files are not durable storage.
+- [ ] Review demo riddles/personas, public content, privacy/retention, inbound rate limits and existing dependency findings. Keep simulated prizes/dialogue labeled; no real-value or public-chain claims. Protect keeper access, cookies, backups and stored plaintext chat. Visitors are isolated by browser cookie, not portable user accounts.
+- [ ] Deploy the independent app over **HTTPS** with the exact **PUBLIC_ORIGIN** and private secrets. Verify actual keeper add/remove, new-versus-active visitor snapshots, different-browser isolation, progress after redeploy, pause/claim behavior, exports and restoration. Perform a genuine narrow mobile/browser acceptance; the in-app viewport override did not change the measured width in this local run, so 390px verification is not claimed.
+- [ ] Record hosted origin/release commit and actual persistence/editing evidence; verify final hosted CI and monitoring/backup ownership before marking the **hosted demo** ready. This is separate from enabling real treasure.
+
+**Optional upgrades after demo launch:**
+
+- [ ] Enable actual **JEV_API_KEY / OPENAI_API_KEY**, approved models and **HAUNTED_DIALOGUE=live** if genuine dialogue is wanted. Verify real Jev >=90% type gate, denied/uncertain/outage behavior, bounded model costs and global budgets. The ghost LLM has no tools or key/payout authority.
+- [ ] Independently review/deploy **HauntedContract(admin, CircleUSDC, answerHashes, 5000000, 1000000, endTimestamp)** on **Base Sepolia 84532**. Pin actual **HAUNTED_CONTRACT / HAUNTED_CODE_HASH**, domain-restricted **THIRDWEB_CLIENT_ID** and actual **RPC_URL**; verify source, immutable rules/token, owner, funding and time. Browser player wallets sign all actions; no server player key is required.
+- [ ] Fund a deliberately small test chest and separate player gas/optional one-USDC bribe. Verify real thirdweb wallet commit/reveal/claim, exact balances, incorrect answer/duplicate/expired/wrong-wallet rejection, depleted-pool rollback, pending receipt recovery, browser reload and owner pause/recovery. These public puzzles are inspectable and not Sybil-resistant; do not promise guaranteed prizes or secret answers.
+- [ ] After independent contract/economic review, deploy a separate **Base 8453** season/environment/database, fund a bounded budget, repeat genuine acceptance and record release evidence. Monitor contract end time, unreserved pool, reserved unpaid winners, bribes, provider limits and pending receipts. Web keeper pause and onchain owner pause are separate controls; reserved winnings remain claimable after pause/expiry.
+
+[Setup](../apps/agents/day-27-haunted-contract/README.md) · [Evidence and limitations](DAY-27-AUDIT.md)
 
 ## Shared release blockers and evidence
 

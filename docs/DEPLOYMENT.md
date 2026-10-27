@@ -146,3 +146,10 @@ Independent app: `APP=day-25-memory-cathedral` or its Vercel config. Prepare key
 ## Day 26 — Take One
 
 Follow the ordered [studio README](../apps/agents/day-26-credentialed-studio/README.md): test Supabase/creator Base Sepolia RPC, OpenAI Images/Jev, actual C2PA signer+reviewed trust anchors, Pinata/thirdweb, deployed runtime-pinned CredentialedStudio and dedicated gasless verifier, full synthetic live rehearsal, security/content/ingress review, then HTTPS hosting and separate Base mainnet release. Native C2PA and Sharp must match the target OS; the root postinstall provisions the official SDK binary. Docker includes OpenSSL for ephemeral practice certificates; no actual production keys are generated automatically. Full provider/public-chain acceptance remains required.
+
+
+## Day 27 hosted demo is a supported release
+
+Day 27 can launch with `AGENT_MODE=demo`, `HAUNTED_DIALOGUE=simulated`, `HAUNTED_STORAGE=supabase`, a private Supabase Session pooler `SUPABASE_DATABASE_URL`, stable `HAUNTED_WORKSPACE_ID`, random `OPERATOR_TOKEN` and `HAUNTED_SESSION_SECRET`. Configure the final exact `PUBLIC_ORIGIN`. Deploy the independent app using its Vercel config or root Docker `APP=day-27-haunted-contract`. No paid provider keys, wallet, USDC or contract deployment are needed for this mode. Verify keeper room additions, isolated visitor progress and save/read/redeploy/backup restore before calling the hosted demo ready.
+
+For a single server, explicit local mode requires a persistent mounted `.data` volume. Serverless deployments must use Supabase. `pnpm run readiness:haunted-demo` checks hosted demo fields without printing secrets, writing the database or certifying persistence. Supply the host environment to the command; it does not automatically read a developer's private file. Full setup, immutable live contract constructor values and wallet recovery appear in [Day 27 README](../apps/agents/day-27-haunted-contract/README.md). Earlier days are not automatically converted by this addition.

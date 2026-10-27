@@ -1,0 +1,1 @@
+import type {Metadata} from 'next';import './haunted.css';export const metadata:Metadata={title:'DEADLOCK / The Haunted Contract',description:'Three ghosts. Three keys. One very bad idea. A playable Dapptober haunted mansion.'};export default function Layout({children}:{children:React.ReactNode}){return <html lang="en"><body>{children}</body></html>;}
