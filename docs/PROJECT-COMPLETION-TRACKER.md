@@ -312,7 +312,7 @@ Each day's checked implementation box describes **tested local scope**, not full
 ## Shared release blockers and evidence
 
 - [x] Publish Day 26 as [PR #23](https://github.com/EverEye-El/dapptober-agents/pull/23), stacked on open Day 25 PR #22. The requested Day 25 button-spacing fix is also pushed to PR #22. No main push, merge or public deployment.
-- [ ] **Day 26 hosted CI/container verification:** local builds/workflows and copied macOS standalone pass; baseline `24c281d` passed the Day 26 Linux container/workflow and GitGuardian. CI exposed missing install-helper copies in existing GPU/TEE images; both Dockerfiles are fixed. Record all final follow-up container/shared checks after GitHub finishes; baseline success does not certify later changes.
+- [x] **Day 26 hosted implementation verification:** final implementation `4794acb` passed [all 29 hosted jobs](https://github.com/EverEye-El/dapptober-agents/actions/runs/40549290711): 26 actual standalone Linux containers/workflows, both GPU/TEE images and shared application/contract/Anvil checks. GitGuardian passes. The missing install-helper copies detected in the baseline were fixed and verified. This evidence certifies the named implementation; the following documentation-only commit records it.
 
 - [x] **Pinata response compatibility (Days 12, 17, 25, 26):** accept current raw-file `bafk…` CIDs alongside `bafy…` UnixFS CIDs; preserve strict gateway/path validation. Local upload parsing, ciphertext retrieval and new mint acceptance cover raw-CID fixtures; actual public-provider acceptance remains required.
 
