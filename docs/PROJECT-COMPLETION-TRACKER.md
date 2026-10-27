@@ -1,6 +1,6 @@
 # Project completion tracker
 
-**Updated October 27, 2026. All 26 apps are implemented locally; none is verified as fully live.**
+**Updated October 27, 2026. Days 01–26 are implemented locally. Day 27 is listed below, with implementation evidence still pending. No app is verified as fully live.**
 
 Checked boxes mean the stated work was completed and verified **in the environment named**. A local test does not complete a live deployment task. Completed and outstanding parts of a task now have separate boxes.
 
@@ -16,7 +16,7 @@ Checked boxes mean the stated work was completed and verified **in the environme
 - [x] Publish Day 21 as [PR #18](https://github.com/EverEye-El/dapptober-agents/pull/18), stacked on PR #17; implementation `7c333f5`. No main push, merge or public deployment was performed.
 - [x] Publish the engineering pass in [draft PR #17](https://github.com/EverEye-El/dapptober-agents/pull/17), based on Day 20 PR #16. Implementation: `d8ebffd`; no merge or public deployment was performed.
 
-Days 01–20 retain their October 20 engineering-pass evidence; Days 21–23 add their separately recorded local checks. Hosted CI/container execution for Days 01–21 is verified by the October 21 reruns linked below; Day 22 evidence is recorded separately. These results do not establish actual Supabase persistence, paid-model access or public-chain transactions. Day-specific evidence and exceptions appear below. The October 23 pass also reverified Day 20 funded Anvil acceptance with an intentionally skewed host clock after correcting chain-derived verdict expiry.
+Days 01–20 retain their October 20 engineering-pass evidence; Days 21–26 add their separately recorded local checks. Hosted CI/container execution for Days 01–21 is verified by the October 21 reruns linked below; Day 22 evidence is recorded separately. These results do not establish actual Supabase persistence, paid-model access or public-chain transactions. Day-specific evidence and exceptions appear below. The October 23 pass also reverified Day 20 funded Anvil acceptance with an intentionally skewed host clock after correcting chain-derived verdict expiry.
 
 ## What needs your involvement
 
@@ -308,6 +308,15 @@ Each day's checked implementation box describes **tested local scope**, not full
 - [ ] Deploy a separate **Base 8453** drop/database/environment after test acceptance. Repeat bounded real generation/publication/mint/verification, record actual provider/chain evidence, approve public release and monitor provider spend, certificate expiry/revocation, trust bundle updates, IPFS availability, mint permits/receipts, ingress and backups. Rehearse contract pause/verifier rotation and recovery.
 
 [Setup](../apps/agents/day-26-credentialed-studio/README.md) · [Evidence and limitations](DAY-26-AUDIT.md)
+
+### Day 27 — The Haunted Contract
+
+- [x] Day 27's challenge prompt and supplied graphics are available: [prompt](../prompts/dapp-prompts.ts), [graphic A](../2026SocialPosts/39-day-27-A.png) and [graphic B](../2026SocialPosts/39-day-27.-Bpng.png).
+- [ ] **Confirm the implementation:** no Day 27 app, tests, audit or published branch was found in the repository on October 27. Add its actual build evidence before increasing the verified app/test totals.
+- [ ] Build the independent haunted-mansion game: distinct ghost personas/riddles, talk/trick/bribe moves screened by Jev, ghost dialogue, contract-enforced keys/win conditions/treasure payouts, and spooky visuals/audio. Prompt injection must not bypass the contract's prize rules.
+- [ ] Verify the game locally: ordinary and malicious moves, unauthorized/duplicate keys or payouts, wallet/transaction recovery and funded local-chain acceptance. Check browser/mobile/audio behavior and independent build/HTTP/container workflows; distinguish simulated ghosts/providers from genuine inference.
+- [ ] Configure private provider/database access and owner/player wallets; approve the prize asset, rules and small funding budget. Deploy/review the actual Base Sepolia game contract and verify genuine dialogue, wallet-earned keys and exact treasure payments before a separate Base production deployment.
+- [ ] Complete the shared security, HTTPS hosting, monitoring/recovery and release checklist above; record actual contract/provider/transaction evidence. Live configuration, funding and production verification remain open.
 
 ## Shared release blockers and evidence
 
