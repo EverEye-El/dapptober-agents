@@ -1,0 +1,14 @@
+# Day 25 research — October 25, 2026
+
+Read the complete master specification and complete canonical Day 25 entry before implementation. Inspected [the live Day 25 challenge](https://www.dapptober.xyz/dapp/25) in the browser, including its optional Jev layer and explicit permission to substitute suggested stack components. The canonical prompt remains primary, so Jev checks are implemented even though the live page calls them optional. Inspected and preserved `2026SocialPosts/37-day-25.png`: copper gothic library, glowing tome and astronomical tracery.
+
+Primary references reviewed before implementation choices:
+
+- [Pinata uploading files](https://docs.pinata.cloud/files/uploading-files): current multipart POST `https://uploads.pinata.cloud/v3/files`, `network=public`, scoped JWT and `data.cid`. Upload encrypted canonical JSON only; gateway retrieval verifies its onchain keccak commitment. Public storage is not confidential storage or guaranteed permanent availability.
+- [MCP server documentation](https://modelcontextprotocol.io/docs/develop/build-server) and [official TypeScript SDK source](https://github.com/modelcontextprotocol/typescript-sdk): real registered tools and Streamable HTTP. The installed SDK's supported v1 imports/transport declarations were inspected and reused instead of assuming current v2 tutorial imports apply. Actual SDK Client/Server tools/call is tested, not a REST alias called MCP.
+- [Web Crypto wrapKey](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/wrapKey) and [encrypt](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/encrypt): AES-GCM authenticated encryption, RSA-OAEP key wrapping and extractable local keys. Fresh per-version AES-256 keys/96-bit IVs, authenticated tome/version context and separate agent wraps meet direct user key custody without a hosted release key.
+- Current installed Next.js client-boundary guide and CSS guidance: client-only Web Crypto/keys and scoped application stylesheet imported through the layout, independently built for production.
+
+Lit was suggested, not mandatory. The historical Lit encryption documentation URL returned 404; no unsupported Lit API/deployment is invented. Native browser encryption plus owner-signed Base permission registry was selected to preserve user-held keys and portability. This has explicit revocation limits: already released keys remain usable for old ciphertext, and rotation protects new content only. No LLM, embedding or vector database receives plaintext by default.
+
+Final audit rechecked the existing Jev adapter against the official [TypeSafe quickstart/HTTP example](https://docs.typesafe.ai/introduction/quickstart) and [confidence reference](https://docs.typesafe.ai/confidence): bearer authentication, `jev-latest`, named Choice questions and `answers.<id>.choice/confidence` match. No unofficial Jev proxy is used. The app's 90% threshold still requires genuine calibration/paid-provider acceptance.

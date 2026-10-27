@@ -30,6 +30,7 @@ Twenty-two independently runnable crypto-native agents for Dapptober 2026, built
 | 22 | [Pitlane — Agent Arena](apps/agents/day-22-agent-arena/README.md) | http://localhost:3022 | Autonomous trained pilots, VRF commit-reveal, pooled USDC wagers, Phaser replay and Jev |
 | 23 | [REDLINE — Perp Pit Wall](apps/agents/day-23-perp-pit-wall/README.md) | http://localhost:3023 | Hyperliquid telemetry, Jev risk engineering, permissioned reduce-only protection and debriefs |
 | 24 | [Umbra Mutual — Agent Mishap Mutual](apps/agents/day-24-agent-mishap-mutual/README.md) | http://localhost:3024 | Reputation-priced cover, risk-bearing capital, Jev evidence review and member-approved USDC payouts |
+| 25 | [Vesper — Memory Cathedral](apps/agents/day-25-memory-cathedral/README.md) | http://localhost:3025 | User-held encrypted memory, portable tomes, owner-controlled pointers and signed Jev-gated MCP access |
 
 ## Start here
 
