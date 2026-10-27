@@ -1,14 +1,14 @@
 # Project completion tracker
 
-**Updated October 25, 2026. All 25 apps are implemented locally; none is verified as fully live.**
+**Updated October 27, 2026. All 26 apps are implemented locally; none is verified as fully live.**
 
 Checked boxes mean the stated work was completed and verified **in the environment named**. A local test does not complete a live deployment task. Completed and outstanding parts of a task now have separate boxes.
 
-## Completed across Days 01–25
+## Completed across Days 01–26
 
-- [x] Build all 25 independently runnable apps, with shared capabilities and separate configuration.
-- [x] Verify all 25 independent production builds and local production HTTP/page/API/workflow/receipt checks after the Next.js security patch.
-- [x] Pass lint, type checking, **254 application tests** and **170 contract tests**; **22 opt-in application tests remain skipped** in the ordinary suite.
+- [x] Build all 26 independently runnable apps, with shared capabilities and separate configuration.
+- [x] Verify all 26 independent production builds and all 26 local production HTTP/page/API/workflow/receipt checks.
+- [x] Pass lint, type checking, **262 application tests** and **177 contract tests**; **23 opt-in application tests remain skipped** in the ordinary suite.
 - [x] Retain **16 earlier Anvil acceptance cases** and pass **one Day 21 and one new Day 22 funded acceptance case**, using actual local blockchains. External services and protocol fixtures remain distinct from live provider evidence.
 - [x] Verify the pnpm **10.2.0** frozen installation using the existing dependency store; retain `pnpm-lock.yaml` as the only dependency lockfile.
 - [x] Generate missing unique local operator tokens for all 23 apps and Day 10/19 session secrets. Verify private file permissions and Git exclusion; preserve existing values.
@@ -294,7 +294,24 @@ Each day's checked implementation box describes **tested local scope**, not full
 
 [Setup](../apps/agents/day-25-memory-cathedral/README.md) · [Evidence and limitations](DAY-25-AUDIT.md)
 
+### Day 26 — Take One / The Credentialed Studio
+
+- [x] Build an independent film-backlot studio with actual C2PA-signed PNGs, OpenAI image adapter, preserved signed upstream ingredients, B&W/copper/crop edits with parent manifests, public file-drop verifier, Jev gates, explicit IPFS publication and exact EIP-712 credential-drop minting. Verify real generated-wallet/funded Anvil deployment, mint/replay rejection, exact receipts, independently enrolled local-root trust and thirdweb NFT reads. OpenAI/Jev/Pinata in that test are provider doubles, not production evidence.
+- [ ] **Configure the test workspace first:** Supabase Session pooler **SUPABASE_DATABASE_URL**, private generated **OPERATOR_TOKEN**, creator EOA **OWNER_ADDRESS**, **CHAIN_ID=84532**, Base Sepolia **RPC_URL**. Verify actual private database persistence/row locking, backup/restore and private prompt/media retention. The studio is one private creator workspace; the verifier is public.
+- [ ] Enable **OpenAI Images API billing/access**, set **OPENAI_API_KEY/OPENAI_IMAGE_MODEL**, and configure **JEV_API_KEY** for TypeSafe System One. Test one bounded real generation plus Jev allow/deny/uncertain/outage, generation cost limits and durable daily review budgets. No paid provider calls have been made by this build.
+- [ ] Obtain a C2PA-compatible **ES256 leaf+issuer certificate chain** and matching **P-256 PKCS#8 private key**. Set one-line base64 **C2PA_SIGNING_CERT_PEM_BASE64/C2PA_SIGNING_KEY_PEM_BASE64**, independently reviewed **C2PA_TRUST_ANCHORS_PEM_BASE64**, and optional approved **C2PA_TIMESTAMP_URL**. Verify certificate profile, private key custody, expiry, revocation, timestamp policy and independent-reader behavior. Local practice certificates are not trusted public identities; adding a local root does not establish public trust-list enrollment.
+- [ ] Configure scoped public-file **PINATA_JWT** and unified **THIRDWEB_SECRET_KEY**. Verify actual signed PNG and metadata IPFS upload plus independent gateway byte-for-byte read-back before permit issuance, external retrieval/retention and upload-failure recovery. Approve public content/credits and provider billing. No browser thirdweb client key or USDC funding is required.
+- [ ] Deploy and verify **CredentialedStudio(admin, verifier)** on **Base Sepolia**. Pin **STUDIO_DROP_ADDRESS/STUDIO_DROP_CODE_HASH** to the actual verified runtime; set dedicated unfunded **STUDIO_MINT_SIGNER_PRIVATE_KEY** matching `verifier()`. Fund only creator/deployer test ETH. Review admin ownership, pause/verifier rotation, immutable URI and domain/recipient/hash/replay constraints. This is a custom gated ERC-721 using unified thirdweb reads, not an unmodified prebuilt NFT Drop.
+- [ ] With synthetic content, run real image generation → embedded C2PA read-back → signed edit/ingredient timeline → Jev review → explicit public Pinata publication → creator-wallet mint → two-block exact receipt → file download/IPFS retrieval → independent public verifier and another C2PA reader. Test changed recipient/network/calldata, expired permits, duplicate claims, transaction uncertainty/restart and pending recovery. An intact signature is not proof of depicted truth, legal copyright or human identity.
+- [ ] Obtain independent contract/signer/content/privacy review and resolve inherited dependency advisories. Define certificate trust/revocation operations, public IPFS retention, prohibited-content handling and budget/admission policy. Add platform IP/body/time limits before public verifier exposure; cookie-only rate limiting is not sufficient. Export before the 12-take / ~24 MB project bound, or implement reviewed object storage/indexing before scaling.
+- [ ] After provider/testnet rehearsal, host the independent app over **HTTPS** with exact **PUBLIC_ORIGIN**, private secrets, enough request time/memory and correct native C2PA/Sharp binaries. Verify clean frozen installation, target-OS standalone/container operation, platform upload limits, Supabase restore, public/private route boundaries, mobile/browser wallet/file-download behavior and hosted CI. Vercel ingress limits may be below the app's 8 MB cap; Docker includes OpenSSL for practice certificates.
+- [ ] Deploy a separate **Base 8453** drop/database/environment after test acceptance. Repeat bounded real generation/publication/mint/verification, record actual provider/chain evidence, approve public release and monitor provider spend, certificate expiry/revocation, trust bundle updates, IPFS availability, mint permits/receipts, ingress and backups. Rehearse contract pause/verifier rotation and recovery.
+
+[Setup](../apps/agents/day-26-credentialed-studio/README.md) · [Evidence and limitations](DAY-26-AUDIT.md)
+
 ## Shared release blockers and evidence
+
+- [x] **Day 26 local regression:** 26 independent production builds and 26 production HTTP workflows pass. Native C2PA generation/edit/verification, funded Anvil credential-drop mint and exact receipts pass. Desktop and 390px mobile browser checks pass; the copied standalone runtime outside the repository passes its full workflow. Frozen pnpm install passes; ordinary application tests: 262 passed / 23 opt-in skipped; Foundry: 177 passed. Paid providers, actual Supabase, public-chain minting and target-OS containers remain separate release evidence. Patched Sharp 0.35.5 avoids added image-processing advisories; inherited 6 high / 1 low findings remain.
 
 - [x] **Day 25 local regression:** independent production build, all 25 production HTTP/workflow/receipt checks, browser encrypted library/search/grant/decrypt/revoke and signed funded Anvil acceptance pass. A unique private local operator token was generated; keys/secrets are excluded from Git. Published [PR #22](https://github.com/EverEye-El/dapptober-agents/pull/22), stacked on open PR #21. Hosted baseline `c757920` passed [all 28 jobs](https://github.com/EverEye-El/dapptober-agents/actions/runs/40217016241). The subsequent recovery/race fixes have local acceptance and need final hosted verification; baseline evidence does not certify later commits.
 

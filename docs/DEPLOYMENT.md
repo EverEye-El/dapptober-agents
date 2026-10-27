@@ -142,3 +142,7 @@ Deploy the independent app using `APP=day-24-agent-mishap-mutual` or its Vercel 
 ## Day 25 — Vesper
 
 Independent app: `APP=day-25-memory-cathedral` or its Vercel config. Prepare key custody and synthetic data first; verify Supabase/Pinata/Jev and deploy/pin MemoryCathedral on Base Sepolia. Only owner gas is needed, no token treasury. Verify actual public-IPFS ciphertext commitment, independently signed MCP access, expiry/revocation/rotation, local agent decrypt, wallet recovery and backup restore before private HTTPS hosting. Apply admission/ingress limits and independent crypto/contract/privacy review. Deploy separate Base production registry/database only after acceptance; preserve public metadata/retention and already-delivered-copy limitations. The completion tracker lists exact ordered steps.
+
+## Day 26 — Take One
+
+Follow the ordered [studio README](../apps/agents/day-26-credentialed-studio/README.md): test Supabase/creator Base Sepolia RPC, OpenAI Images/Jev, actual C2PA signer+reviewed trust anchors, Pinata/thirdweb, deployed runtime-pinned CredentialedStudio and dedicated gasless verifier, full synthetic live rehearsal, security/content/ingress review, then HTTPS hosting and separate Base mainnet release. Native C2PA and Sharp must match the target OS; the root postinstall provisions the official SDK binary. Docker includes OpenSSL for ephemeral practice certificates; no actual production keys are generated automatically. Full provider/public-chain acceptance remains required.

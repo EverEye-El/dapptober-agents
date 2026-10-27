@@ -1,0 +1,22 @@
+{
+  "name": "@dapptober/studio",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./src/*": "./src/*.ts"
+  },
+  "dependencies": {
+    "@contentauth/c2pa-node": "0.9.10",
+    "sharp": "0.35.5",
+    "@dapptober/agent-core": "workspace:*",
+    "@dapptober/config": "workspace:*",
+    "@dapptober/chain": "workspace:*",
+    "@dapptober/receipts": "workspace:*",
+    "@dapptober/types": "workspace:*",
+    "thirdweb": "^5.0.0",
+    "viem": "^2.38.0",
+    "zod": "^4.6.6"
+  }
+}

@@ -28,7 +28,8 @@
     "./src/arena.css": "./src/arena.css",
     "./src/pitwall.css": "./src/pitwall.css",
     "./src/mutual.css": "./src/mutual.css",
-    "./memory.css": "./src/memory.css"
+    "./memory.css": "./src/memory.css",
+    "./studio.css": "./src/studio.css"
   },
   "dependencies": {
     "@dapptober/compute": "workspace:*",

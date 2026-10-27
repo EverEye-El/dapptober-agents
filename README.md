@@ -1,6 +1,6 @@
 # Dapptober Agents
 
-Twenty-two independently runnable crypto-native agents for Dapptober 2026, built on a shared TypeScript capability layer. The supplied daily prompts are canonical; the master build specification defines the architecture and audit requirements.
+Twenty-six independently runnable crypto-native agents for Dapptober 2026, built on a shared TypeScript capability layer. The supplied daily prompts are canonical; the master build specification defines the architecture and audit requirements.
 
 [Project completion tracker](docs/PROJECT-COMPLETION-TRACKER.md) records tested functionality and remaining work for every built day and is updated after each daily build.
 
@@ -31,6 +31,7 @@ Twenty-two independently runnable crypto-native agents for Dapptober 2026, built
 | 23 | [REDLINE — Perp Pit Wall](apps/agents/day-23-perp-pit-wall/README.md) | http://localhost:3023 | Hyperliquid telemetry, Jev risk engineering, permissioned reduce-only protection and debriefs |
 | 24 | [Umbra Mutual — Agent Mishap Mutual](apps/agents/day-24-agent-mishap-mutual/README.md) | http://localhost:3024 | Reputation-priced cover, risk-bearing capital, Jev evidence review and member-approved USDC payouts |
 | 25 | [Vesper — Memory Cathedral](apps/agents/day-25-memory-cathedral/README.md) | http://localhost:3025 | User-held encrypted memory, portable tomes, owner-controlled pointers and signed Jev-gated MCP access |
+| 26 | [Take One — Credentialed Studio](apps/agents/day-26-credentialed-studio/README.md) | http://localhost:3026 | AI image generation, embedded C2PA credentials, signed edit history, public verifier and exact provenance mint permits |
 
 ## Start here
 

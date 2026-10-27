@@ -1,0 +1,2 @@
+import Verifier from '../verifier';
+export default function Verify(){return <><header><a className="brand" href="/">▰ TAKE<span>ONE</span><small>THE CREDENTIALED STUDIO</small></a><nav><a href="/">← Back to the backlot</a></nav><span className="pill">PUBLIC SCREENING ROOM</span></header><main className="verify-page"><p className="eyebrow">NO WALLET. NO ACCOUNT. JUST THE FILE.</p><h1>Show us<br/>the <em>receipts.</em></h1><p className="lede">A signature can tell you where an image came from.<br/>It cannot tell you that the image tells the truth.</p><Verifier/></main></>;}

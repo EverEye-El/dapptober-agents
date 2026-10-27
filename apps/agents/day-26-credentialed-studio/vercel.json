@@ -1,0 +1,1 @@
+{"buildCommand":"cd ../../.. && pnpm run build 26","installCommand":"cd ../../.. && pnpm install --frozen-lockfile"}
