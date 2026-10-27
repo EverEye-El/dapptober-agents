@@ -30,13 +30,14 @@ jobs:
       - run: pnpm run test:coroner-chain
       - run: pnpm run test:mutual-chain
       - run: pnpm run test:memory-chain
+      - run: pnpm run test:haunted-chain
       - run: pnpm run test:studio-chain
   containers:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        app: [day-01-wallet-genesis, day-02-pay-per-prompt, day-03-agent-passport, day-04-mcp-mercenary, day-05-stablecoin-autopilot, day-06-intent-calligrapher, day-07-glass-box-mind, day-08-swarm-senate, day-09-forecast-colosseum, day-10-human-checkpoint, day-11-gpu-night-market, day-12-provenance-press, day-13-agent-launch-gantry, day-14-guardrail-sentinel, day-15-real-world-concierge, day-16-bot-to-bot-bourse, day-17-memecoin-coroner, day-18-encrypted-confidant, day-19-group-chat-familiar, day-20-restaked-referee, day-21-chainless-traveler, day-22-agent-arena, day-23-perp-pit-wall, day-24-agent-mishap-mutual, day-25-memory-cathedral, day-26-credentialed-studio]
+        app: [day-01-wallet-genesis, day-02-pay-per-prompt, day-03-agent-passport, day-04-mcp-mercenary, day-05-stablecoin-autopilot, day-06-intent-calligrapher, day-07-glass-box-mind, day-08-swarm-senate, day-09-forecast-colosseum, day-10-human-checkpoint, day-11-gpu-night-market, day-12-provenance-press, day-13-agent-launch-gantry, day-14-guardrail-sentinel, day-15-real-world-concierge, day-16-bot-to-bot-bourse, day-17-memecoin-coroner, day-18-encrypted-confidant, day-19-group-chat-familiar, day-20-restaked-referee, day-21-chainless-traveler, day-22-agent-arena, day-23-perp-pit-wall, day-24-agent-mishap-mutual, day-25-memory-cathedral, day-26-credentialed-studio, day-27-haunted-contract]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -47,7 +48,7 @@ jobs:
         env:
           APP: ${{ matrix.app }}
         run: |
-          docker run -d --name agent-check -p 3000:3000 -e AGENT_MODE=demo -e PUBLIC_ORIGIN=http://localhost:3000 dapptober-check
+          docker run -d --name agent-check -p 3000:3000 -e AGENT_MODE=demo -e PUBLIC_ORIGIN=http://localhost:3000 -e HAUNTED_STORAGE=local -e HAUNTED_SESSION_SECRET=ci-local-session-fixture-with-no-external-authority dapptober-check
           trap 'docker logs agent-check; docker rm -f agent-check' EXIT
           curl --retry 20 --retry-all-errors --retry-delay 2 --fail http://localhost:3000/ > /tmp/agent-page.html
           test -s /tmp/agent-page.html

@@ -87,3 +87,10 @@ The app's detailed `.env.example`/private `.env.local` requires Supabase Session
 ### Day 26 — Take One
 
 The per-app example distinguishes OpenAI Images (`OPENAI_API_KEY`, explicit `OPENAI_IMAGE_MODEL`) from TypeSafe System One (`JEV_API_KEY`); private Supabase Session pooler URI and deployment operator token remain separate. C2PA certificate chain, matching P-256 PKCS#8 key and independently reviewed trust anchors are **base64 PEM material**, not EVM keys. The optional timestamp URL must be reviewed HTTPS. `STUDIO_MINT_SIGNER_PRIVATE_KEY` is a separate unfunded EVM permit signer matching the deployed credential drop's `verifier()`, never the creator/admin wallet key. `STUDIO_DROP_ADDRESS/STUDIO_DROP_CODE_HASH` pin the verified testnet or production runtime. `PINATA_JWT` authorizes public signed media/metadata upload; `THIRDWEB_SECRET_KEY` is server-only NFT read access. The creator connects an injected wallet for gas-funded mint submission. No USDC, browser thirdweb client key, generic AI key or root shared environment is needed. Practice creates ephemeral development certificates, real signatures and procedural pixels; production issuer trust and live provider acceptance remain separate.
+
+
+## Day 27: launch the demo first
+
+The hosted demo needs private Supabase **Session pooler** `SUPABASE_DATABASE_URL`, keeper `OPERATOR_TOKEN` and stable visitor-cookie `HAUNTED_SESSION_SECRET`; keep the last two distinct, random and >=32 characters. Use stable `HAUNTED_WORKSPACE_ID`, `HAUNTED_STORAGE=supabase`, `AGENT_MODE=demo`, `HAUNTED_DIALOGUE=simulated` and exact HTTPS `PUBLIC_ORIGIN`. The operator token authorizes catalog edits, not wallet spending. The cookie secret preserves visitor access through redeploys. Neither belongs in browser-public configuration.
+
+Optional live dialogue uses `JEV_API_KEY` and `OPENAI_API_KEY`; optional real treasure additionally uses public domain-restricted `THIRDWEB_CLIENT_ID`, `RPC_URL`, Circle `USDC_ADDRESS`, `HAUNTED_CONTRACT` and `HAUNTED_CODE_HASH`. No server private wallet key or thirdweb secret key is required. The per-app `.env.example` details each field.

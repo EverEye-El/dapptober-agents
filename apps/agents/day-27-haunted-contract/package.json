@@ -1,0 +1,22 @@
+{
+  "name": "@dapptober/day-27",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --port 3027",
+    "start": "next start --port 3027",
+    "build": "next build --webpack"
+  },
+  "dependencies": {
+    "@dapptober/haunted": "workspace:*",
+    "next": "^16.4.3",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "thirdweb": "^5.0.0",
+    "viem": "^2.38.0",
+    "howler": "2.2.4",
+    "zod": "^4.6.6"
+  },
+  "devDependencies": {
+    "@types/howler": "2.2.12"
+  }
+}

@@ -35,7 +35,10 @@
     "test:mutual-chain": "node scripts/mutual-chain-test.mjs",
     "test:memory-chain": "node scripts/memory-chain-test.mjs",
     "postinstall": "node scripts/setup-c2pa.mjs",
-    "test:studio-chain": "node scripts/studio-chain-test.mjs"
+    "test:studio-chain": "node scripts/studio-chain-test.mjs",
+    "test:haunted-chain": "node scripts/haunted-chain-test.mjs",
+    "readiness:haunted-demo": "node scripts/haunted-demo-readiness.mjs",
+    "test:haunted-demo": "node scripts/haunted-demo-test.mjs"
   },
   "dependencies": {
     "@ai-sdk/openai-compatible": "^2.0.0",
@@ -102,7 +105,8 @@
     "@noble/hashes": "1.8.0",
     "@dapptober/mutual": "workspace:*",
     "@dapptober/memory": "workspace:*",
-    "@dapptober/studio": "workspace:*"
+    "@dapptober/studio": "workspace:*",
+    "@dapptober/haunted": "workspace:*"
   },
   "devDependencies": {
     "@cofhe/foundry-plugin": "1.0.0",

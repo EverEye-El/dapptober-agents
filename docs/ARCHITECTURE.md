@@ -107,3 +107,10 @@ Day20 promotes reproducible verification into `@dapptober/referee`: exact task c
 ## Day 26 — credentialed media
 
 `packages/studio` composes bounded image generation, genuine C2PA sign/read, deterministic signed parent edits, independent Jev metadata gates, explicit public IPFS publication and exact EIP-712 mint permits. Its free ERC-721 credential drop records file/manifest/model/parent commitments and rejects replay or modified recipients. Creator wallet submits each mint; unified thirdweb reads pinned NFT evidence. Public file verification separates integrity, signer trust and onchain match. Private operator Supabase state has durable cost/project bounds; no other daily server is required.
+
+
+## Day 27: haunted capability and hosted demos
+
+`packages/haunted` separates move gating, deterministic key rules, ghost dialogue, exact contract instructions, keeper catalog and visitor persistence. `apps/agents/day-27-haunted-contract` independently bundles these capabilities. Browser wallets use unified thirdweb; no daily server calls another day. Howler audio is local and opt-in.
+
+Unlike earlier demo storage, Day 27 deliberately supports private Supabase persistence **in demo mode**. The catalog is shared by a stable workspace ID, while HMAC-authenticated visitor cookies select isolated runs. Each visit snapshots the catalog. Keeper changes affect future demo visits, never deployed contract rules. This does not migrate earlier days to hosted-demo persistence; their adapters and editing flows still require individual acceptance.
