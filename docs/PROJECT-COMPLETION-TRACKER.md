@@ -8,7 +8,7 @@ Checked boxes mean the stated work was completed and verified **in the environme
 
 - [x] Build all 26 independently runnable apps, with shared capabilities and separate configuration.
 - [x] Verify all 26 independent production builds and all 26 local production HTTP/page/API/workflow/receipt checks.
-- [x] Pass lint, type checking, **262 application tests** and **177 contract tests**; **23 opt-in application tests remain skipped** in the ordinary suite.
+- [x] Pass lint, type checking, **263 application tests** and **177 contract tests**; **23 opt-in application tests remain skipped** in the ordinary suite.
 - [x] Retain **16 earlier Anvil acceptance cases** and pass **one Day 21 and one new Day 22 funded acceptance case**, using actual local blockchains. External services and protocol fixtures remain distinct from live provider evidence.
 - [x] Verify the pnpm **10.2.0** frozen installation using the existing dependency store; retain `pnpm-lock.yaml` as the only dependency lockfile.
 - [x] Generate missing unique local operator tokens for all 23 apps and Day 10/19 session secrets. Verify private file permissions and Git exclusion; preserve existing values.
@@ -311,7 +311,12 @@ Each day's checked implementation box describes **tested local scope**, not full
 
 ## Shared release blockers and evidence
 
-- [x] **Day 26 local regression:** 26 independent production builds and 26 production HTTP workflows pass. Native C2PA generation/edit/verification, funded Anvil credential-drop mint and exact receipts pass. Desktop and 390px mobile browser checks pass; the copied standalone runtime outside the repository passes its full workflow. Frozen pnpm install passes; ordinary application tests: 262 passed / 23 opt-in skipped; Foundry: 177 passed. Paid providers, actual Supabase, public-chain minting and target-OS containers remain separate release evidence. Patched Sharp 0.35.5 avoids added image-processing advisories; inherited 6 high / 1 low findings remain.
+- [x] Publish Day 26 as [PR #23](https://github.com/EverEye-El/dapptober-agents/pull/23), stacked on open Day 25 PR #22. The requested Day 25 button-spacing fix is also pushed to PR #22. No main push, merge or public deployment.
+- [ ] **Day 26 hosted CI/container verification:** local builds/workflows and copied macOS standalone pass; baseline `24c281d` passed the Day 26 Linux container/workflow and GitGuardian. CI exposed missing install-helper copies in existing GPU/TEE images; both Dockerfiles are fixed. Record all final follow-up container/shared checks after GitHub finishes; baseline success does not certify later changes.
+
+- [x] **Pinata response compatibility (Days 12, 17, 25, 26):** accept current raw-file `bafk…` CIDs alongside `bafy…` UnixFS CIDs; preserve strict gateway/path validation. Local upload parsing, ciphertext retrieval and new mint acceptance cover raw-CID fixtures; actual public-provider acceptance remains required.
+
+- [x] **Day 26 local regression:** 26 independent production builds and 26 production HTTP workflows pass. Native C2PA generation/edit/verification, funded Anvil credential-drop mint and exact receipts pass. Desktop and 390px mobile browser checks pass; the copied standalone runtime outside the repository passes its full workflow. Frozen pnpm install passes; ordinary application tests: 263 passed / 23 opt-in skipped; Foundry: 177 passed. Paid providers, actual Supabase, public-chain minting and target-OS containers remain separate release evidence. Patched Sharp 0.35.5 avoids added image-processing advisories; inherited 6 high / 1 low findings remain.
 
 - [x] **Day 25 local regression:** independent production build, all 25 production HTTP/workflow/receipt checks, browser encrypted library/search/grant/decrypt/revoke and signed funded Anvil acceptance pass. A unique private local operator token was generated; keys/secrets are excluded from Git. Published [PR #22](https://github.com/EverEye-El/dapptober-agents/pull/22), stacked on open PR #21. Hosted baseline `c757920` passed [all 28 jobs](https://github.com/EverEye-El/dapptober-agents/actions/runs/40217016241). The subsequent recovery/race fixes have local acceptance and need final hosted verification; baseline evidence does not certify later commits.
 
