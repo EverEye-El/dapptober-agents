@@ -1,0 +1,1 @@
+import type {Metadata} from 'next';import './waterfall.css';export const metadata:Metadata={title:'SPILLWAY / The Per-Second Waterfall',description:'Money in motion. Stream by the second to creators, contributors and compute.'};export default function Layout({children}:{children:React.ReactNode}){return <html lang="en"><body>{children}</body></html>;}

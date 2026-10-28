@@ -1,0 +1,1 @@
+{"name":"@dapptober/waterfall","version":"0.1.0","private":true,"type":"module","exports":{".":"./src/index.ts","./src/*":"./src/*.ts"},"dependencies":{"@dapptober/persistence":"workspace:*","@dapptober/agent-core":"workspace:*","@dapptober/config":"workspace:*","@dapptober/types":"workspace:*","@dapptober/receipts":"workspace:*","viem":"^2.38.0","zod":"^4.6.6"}}

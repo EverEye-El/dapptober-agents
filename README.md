@@ -1,6 +1,6 @@
 # Dapptober Agents
 
-Twenty-seven independently runnable crypto-native agents for Dapptober 2026, built on a shared TypeScript capability layer. The supplied daily prompts are canonical; the master build specification defines the architecture and audit requirements.
+Twenty-eight independently runnable crypto-native agents for Dapptober 2026, built on a shared TypeScript capability layer. The supplied daily prompts are canonical; the master build specification defines the architecture and audit requirements.
 
 [Project completion tracker](docs/PROJECT-COMPLETION-TRACKER.md) records tested functionality and remaining work for every built day and is updated after each daily build.
 
@@ -33,6 +33,7 @@ Twenty-seven independently runnable crypto-native agents for Dapptober 2026, bui
 | 25 | [Vesper — Memory Cathedral](apps/agents/day-25-memory-cathedral/README.md) | http://localhost:3025 | User-held encrypted memory, portable tomes, owner-controlled pointers and signed Jev-gated MCP access |
 | 26 | [Take One — Credentialed Studio](apps/agents/day-26-credentialed-studio/README.md) | http://localhost:3026 | AI image generation, embedded C2PA credentials, signed edit history, public verifier and exact provenance mint permits |
 | 27 | [DEADLOCK — Haunted Contract](apps/agents/day-27-haunted-contract/README.md) | http://localhost:3027 | Playable ghost mansion, editable saved demo rooms, Jev-gated dialogue and contract-enforced commit/reveal keys and USDC treasure |
+| 28 | [SPILLWAY — Per-Second Waterfall](apps/agents/day-28-per-second-waterfall/README.md) | http://localhost:3028 | Superfluid USDCx creator/payroll/compute streams, fixed channel policies, Jev and a durable gas-only keeper |
 
 ## Start here
 

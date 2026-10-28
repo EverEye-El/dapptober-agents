@@ -38,7 +38,11 @@
     "test:studio-chain": "node scripts/studio-chain-test.mjs",
     "test:haunted-chain": "node scripts/haunted-chain-test.mjs",
     "readiness:haunted-demo": "node scripts/haunted-demo-readiness.mjs",
-    "test:haunted-demo": "node scripts/haunted-demo-test.mjs"
+    "test:haunted-demo": "node scripts/haunted-demo-test.mjs",
+    "test:waterfall-chain": "node scripts/waterfall-chain-test.mjs",
+    "worker:waterfall": "node --env-file=apps/agents/day-28-per-second-waterfall/.env.local scripts/waterfall-worker.mjs",
+    "deploy:waterfall": "node --env-file=apps/agents/day-28-per-second-waterfall/.env.local scripts/waterfall-deploy.mjs",
+    "readiness:waterfall-demo": "node scripts/waterfall-demo-readiness.mjs"
   },
   "dependencies": {
     "@ai-sdk/openai-compatible": "^2.0.0",
@@ -106,7 +110,9 @@
     "@dapptober/mutual": "workspace:*",
     "@dapptober/memory": "workspace:*",
     "@dapptober/studio": "workspace:*",
-    "@dapptober/haunted": "workspace:*"
+    "@dapptober/haunted": "workspace:*",
+    "@dapptober/waterfall": "workspace:*",
+    "@dapptober/persistence": "workspace:*"
   },
   "devDependencies": {
     "@cofhe/foundry-plugin": "1.0.0",

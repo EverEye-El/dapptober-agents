@@ -94,3 +94,9 @@ The per-app example distinguishes OpenAI Images (`OPENAI_API_KEY`, explicit `OPE
 The hosted demo needs private Supabase **Session pooler** `SUPABASE_DATABASE_URL`, keeper `OPERATOR_TOKEN` and stable visitor-cookie `HAUNTED_SESSION_SECRET`; keep the last two distinct, random and >=32 characters. Use stable `HAUNTED_WORKSPACE_ID`, `HAUNTED_STORAGE=supabase`, `AGENT_MODE=demo`, `HAUNTED_DIALOGUE=simulated` and exact HTTPS `PUBLIC_ORIGIN`. The operator token authorizes catalog edits, not wallet spending. The cookie secret preserves visitor access through redeploys. Neither belongs in browser-public configuration.
 
 Optional live dialogue uses `JEV_API_KEY` and `OPENAI_API_KEY`; optional real treasure additionally uses public domain-restricted `THIRDWEB_CLIENT_ID`, `RPC_URL`, Circle `USDC_ADDRESS`, `HAUNTED_CONTRACT` and `HAUNTED_CODE_HASH`. No server private wallet key or thirdweb secret key is required. The per-app `.env.example` details each field.
+
+## Day 28: SPILLWAY credentials
+
+Use its detailed app `.env.example`. **No OpenAI or thirdweb key is used.** Demo hosting needs the private Supabase **database Session pooler URI**, two different stable random operator/cookie secrets, workspace ID and exact origin. `WATERFALL_STORAGE=local` is only for a single server with persistent disk; use `supabase` on Vercel. Visitors and the authenticated shared keeper have separate saved spaces.
+
+Real streaming additionally needs Base Sepolia then Base owner address/RPC, **TypeSafe Jev** API key, verified Circle-USDC SuperToken, SpillwayFactory and three runtime pins, plus a distinct gas-only agent address/private key enrolled per channel. USDC approvals use six decimals; SuperToken upgrades, balances and channel funding use eighteen. Owner private keys stay in wallets. The per-app README explains the wrapping, deployment helper and worker; changing shared environment names in earlier apps is unnecessary.

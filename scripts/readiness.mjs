@@ -5,6 +5,7 @@ import {resolve} from 'node:path';
 
 const common=['OWNER_ADDRESS','OPERATOR_TOKEN','SUPABASE_DATABASE_URL','RPC_URL','JEV_API_KEY','OPENAI_API_KEY'];
 export const required={
+  28:['OWNER_ADDRESS','OPERATOR_TOKEN','SUPABASE_DATABASE_URL','RPC_URL','JEV_API_KEY','WATERFALL_SESSION_SECRET','WATERFALL_FACTORY','WATERFALL_FACTORY_CODE_HASH','SUPERFLUID_USDCX','SUPERFLUID_USDCX_CODE_HASH','SUPERFLUID_FORWARDER_CODE_HASH','WATERFALL_AGENT_ADDRESS','WATERFALL_AGENT_PRIVATE_KEY'],
   27:['SUPABASE_DATABASE_URL','OPERATOR_TOKEN','HAUNTED_SESSION_SECRET','RPC_URL','HAUNTED_CONTRACT','HAUNTED_CODE_HASH','THIRDWEB_CLIENT_ID'],
   26:['OWNER_ADDRESS','OPERATOR_TOKEN','SUPABASE_DATABASE_URL','RPC_URL','OPENAI_API_KEY','OPENAI_IMAGE_MODEL','JEV_API_KEY','PINATA_JWT','THIRDWEB_SECRET_KEY','C2PA_SIGNING_CERT_PEM_BASE64','C2PA_SIGNING_KEY_PEM_BASE64','C2PA_TRUST_ANCHORS_PEM_BASE64','STUDIO_DROP_ADDRESS','STUDIO_DROP_CODE_HASH','STUDIO_MINT_SIGNER_PRIVATE_KEY'],
   25:['OWNER_ADDRESS','OPERATOR_TOKEN','SUPABASE_DATABASE_URL','RPC_URL','MEMORY_REGISTRY','MEMORY_REGISTRY_CODE_HASH','PINATA_JWT','JEV_API_KEY'],
@@ -35,6 +36,7 @@ export const required={
 };
 export function assess(day,env){
   const gaps=[];
+  if(day===28){if(env.WATERFALL_POLICY!=='live')gaps.push('WATERFALL_POLICY: live Jev required for real starts');if((env.WATERFALL_SESSION_SECRET??'').length<32)gaps.push('WATERFALL_SESSION_SECRET: at least 32 random characters');for(const k of ['WATERFALL_FACTORY','SUPERFLUID_USDCX','WATERFALL_AGENT_ADDRESS'])if(!/^0x[0-9a-fA-F]{40}$/.test(env[k]??''))gaps.push(k+': actual deployed address required');for(const k of ['WATERFALL_FACTORY_CODE_HASH','SUPERFLUID_USDCX_CODE_HASH','SUPERFLUID_FORWARDER_CODE_HASH'])if(!/^0x[0-9a-fA-F]{64}$/.test(env[k]??''))gaps.push(k+': pin verified runtime');}
   if(day===27){if(!/^0x[0-9a-fA-F]{40}$/.test(env.HAUNTED_CONTRACT??''))gaps.push('HAUNTED_CONTRACT: actual deployed Base puzzle contract required');if(!/^0x[0-9a-fA-F]{64}$/.test(env.HAUNTED_CODE_HASH??''))gaps.push('HAUNTED_CODE_HASH: pin verified runtime');if((env.HAUNTED_SESSION_SECRET??'').length<32)gaps.push('HAUNTED_SESSION_SECRET: stable random secret of at least 32 characters required');if(env.HAUNTED_DIALOGUE==='live')for(const key of ['JEV_API_KEY','OPENAI_API_KEY'])if(!env[key])gaps.push(key+': required for live ghost dialogue');}
   if(day===26){for(const k of ['STUDIO_DROP_ADDRESS'])if(!/^0x[0-9a-fA-F]{40}$/.test(env[k]??''))gaps.push(k+': actual deployed Base credential drop required');for(const k of ['STUDIO_DROP_CODE_HASH','STUDIO_MINT_SIGNER_PRIVATE_KEY'])if(!/^0x[0-9a-fA-F]{64}$/.test(env[k]??''))gaps.push(k+': expected 32-byte hex value');for(const k of ['C2PA_SIGNING_CERT_PEM_BASE64','C2PA_SIGNING_KEY_PEM_BASE64','C2PA_TRUST_ANCHORS_PEM_BASE64'])if(!/^[A-Za-z0-9+/]+={0,2}$/.test(env[k]??''))gaps.push(k+': one-line base64 PEM material required');}
   if(day===25){if(!/^0x[0-9a-fA-F]{40}$/.test(env.MEMORY_REGISTRY??''))gaps.push('MEMORY_REGISTRY: actual deployed Base pointer registry required');if(!/^0x[0-9a-fA-F]{64}$/.test(env.MEMORY_REGISTRY_CODE_HASH??''))gaps.push('MEMORY_REGISTRY_CODE_HASH: pin verified deployed runtime');}
@@ -57,7 +59,7 @@ export function assess(day,env){
   if(env.SUPABASE_DATABASE_URL&&!/^postgres(ql)?:\/\//.test(env.SUPABASE_DATABASE_URL))gaps.push('SUPABASE_DATABASE_URL: PostgreSQL URL required');
   if(!['8453','84532'].includes(env.CHAIN_ID))gaps.push('CHAIN_ID: use Base Sepolia (84532) for testing or Base (8453) for production');
   const usdc=env.CHAIN_ID==='8453'?'0x833589fcd6edb6e08f4c7c32d4f71b54bda02913':'0x036cbd53842c5426634e7929541ec2318f3dcf7e';
-  if([1,2,4,5,9,10,11,12,13,14,15,16,19,20,27].includes(day)&&env.USDC_ADDRESS&&env.USDC_ADDRESS.toLowerCase()!==usdc)gaps.push('USDC_ADDRESS: wrong Circle USDC for this Base network');
+  if([1,2,4,5,9,10,11,12,13,14,15,16,19,20,27,28].includes(day)&&env.USDC_ADDRESS&&env.USDC_ADDRESS.toLowerCase()!==usdc)gaps.push('USDC_ADDRESS: wrong Circle USDC for this Base network');
   if(day===18){if(env.CHAIN_ID==='8453')gaps.push('CoFHE Base mainnet: not supported by this SDK release; production stays blocked');if(!/^0x[0-9a-fA-F]{64}$/.test(env.CONFIDANT_CODE_HASH??''))gaps.push('CONFIDANT_CODE_HASH: independently pin deployed bytecode');}
   if(day===6&&env.COW_USDC&&env.COW_USDC.toLowerCase()!==usdc)gaps.push('COW_USDC: wrong Circle USDC for this Base network');
   if(day===6&&(!['8453','84532'].includes(env.COW_CHAIN_ID)||env.CHAIN_ID!==env.COW_CHAIN_ID))gaps.push('COW_CHAIN_ID: must match CHAIN_ID');
@@ -76,7 +78,7 @@ export function assess(day,env){
 
 async function main(){
   const flags=process.argv.slice(2),selection=flags.find(x=>/^\d{1,2}$/.test(x));
-  if(flags.some(x=>!['--init','--online'].includes(x)&&x!==selection)||selection&&(Number(selection)<1||Number(selection)>27))throw new Error('Usage: pnpm readiness [01–27] [--init] [--online]');
+  if(flags.some(x=>!['--init','--online'].includes(x)&&x!==selection)||selection&&(Number(selection)<1||Number(selection)>28))throw new Error('Usage: pnpm readiness [01–28] [--init] [--online]');
   const root=fileURLToPath(new URL('../',import.meta.url));let failed=false;
   for(const dir of readdirSync(resolve(root,'apps/agents')).sort()){
     const day=Number(dir.match(/^day-(\d+)-/)?.[1]);if(!required[day]||selection&&day!==Number(selection))continue;
@@ -92,6 +94,7 @@ async function main(){
         const rpc=async(method,params)=>{const r=await fetch(env.RPC_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({jsonrpc:'2.0',id:1,method,params}),signal:AbortSignal.timeout(10000)});const data=await r.json();if(!r.ok||data.error||data.result===undefined)throw new Error('RPC rejected request');return data.result;};
         if(Number(BigInt(await rpc('eth_chainId',[])))!==Number(env.CHAIN_ID))gaps.push('RPC_URL: wrong chain');
         for(const key of ['SESSION_VAULT','PASSPORT_REGISTRY','QUEST_ESCROW','FLIGHT_TREASURY','SENATE_TOKEN','SENATE_GOVERNOR','FORECAST_MARKET','UMA_ORACLE','CHECKPOINT_REWARDS','CHECKPOINT_REGISTRY','INFERENCE_ANCHOR','GPU_MARKET','PROVENANCE_PRESS','LAUNCH_FACTORY','LAUNCH_BUYER_VAULT','SENTINEL_VAULT','FAMILIAR_CONTRACT','REFEREE_CONTRACT','REFEREE_VAULT','REFEREE_VALIDATION_REGISTRY','EIGEN_CERTIFICATE_VERIFIER','BOURSE_ESCROW','BOURSE_REGISTRY','CONFIDANT_CONTRACT','CORONER_PROBE','CORONER_ROUTER','CORONER_SCHEMA_REGISTRY','USDC_ADDRESS','COW_USDC','COW_WETH','MEMORY_REGISTRY','HAUNTED_CONTRACT'])if(/^0x[0-9a-fA-F]{40}$/.test(env[key]??'')&&await rpc('eth_getCode',[env[key],'latest'])==='0x')gaps.push(`${key}: no deployed bytecode`);
+      if(day===28){const {keccak256}=await import('viem');for(const [key,field]of [['WATERFALL_FACTORY','WATERFALL_FACTORY_CODE_HASH'],['SUPERFLUID_USDCX','SUPERFLUID_USDCX_CODE_HASH']])if(/^0x[0-9a-fA-F]{40}$/.test(env[key]??'')){const code=await rpc('eth_getCode',[env[key],'latest']);if(code==='0x'||keccak256(code).toLowerCase()!==env[field]?.toLowerCase())gaps.push(field+': deployed runtime mismatch');}const code=await rpc('eth_getCode',['0xcfA132E353cB4E398080B9700609bb008eceB125','latest']);if(code==='0x'||keccak256(code).toLowerCase()!==env.SUPERFLUID_FORWARDER_CODE_HASH?.toLowerCase())gaps.push('SUPERFLUID_FORWARDER_CODE_HASH: official forwarder runtime mismatch');}
       if(day===27&&/^0x[0-9a-fA-F]{40}$/.test(env.HAUNTED_CONTRACT??'')){const code=await rpc('eth_getCode',[env.HAUNTED_CONTRACT,'latest']);const {keccak256}=await import('viem');if(code==='0x'||keccak256(code).toLowerCase()!==env.HAUNTED_CODE_HASH?.toLowerCase())gaps.push('HAUNTED_CODE_HASH: deployed runtime mismatch');}
       if(day===25&&/^0x[0-9a-fA-F]{40}$/.test(env.MEMORY_REGISTRY??'')){const code=await rpc('eth_getCode',[env.MEMORY_REGISTRY,'latest']);const {keccak256}=await import('viem');if(code==='0x'||keccak256(code).toLowerCase()!==env.MEMORY_REGISTRY_CODE_HASH?.toLowerCase())gaps.push('MEMORY_REGISTRY_CODE_HASH: deployed runtime mismatch');}
       }catch{gaps.push('RPC_URL: read-only connectivity check failed (details withheld to protect secrets)');}
