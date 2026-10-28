@@ -42,3 +42,7 @@ Per-deployment HMAC HttpOnly cookies isolate visitors and keeper roles. Mode/cha
 ## Remaining release work
 
 No hosted public demo, genuine Supabase project, paid Jev access, public Superfluid/CircleUSDC deployment/funding, production keeper supervision, hardware wallet acceptance, independent contract audit or end-to-end Base mainnet run is established. Follow the ordered demo/live sections in [the tracker](PROJECT-COMPLETION-TRACKER.md). Demo release does not require all live-funds dependencies.
+
+## Publication
+
+Implementation **3164a7c** is published in [PR #25](https://github.com/EverEye-El/dapptober-agents/pull/25), stacked on the still-open Day 27 PR #24. The exact final standalone workflow and final skewed-clock official-protocol fork rehearsal pass. Hosted checks started in [the push run](https://github.com/EverEye-El/dapptober-agents/actions/runs/40756252624) and [the PR run](https://github.com/EverEye-El/dapptober-agents/actions/runs/40756352285); they were still running/queued when recorded, so no hosted CI pass is claimed here. This documentation follow-up does not certify itself through earlier results. No merge, main push or public deployment was performed.
