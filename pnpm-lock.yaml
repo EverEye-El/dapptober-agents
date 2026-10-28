@@ -115,6 +115,9 @@ importers:
       '@dapptober/perps':
         specifier: workspace:*
         version: link:packages/perps
+      '@dapptober/persistence':
+        specifier: workspace:*
+        version: link:packages/persistence
       '@dapptober/provenance':
         specifier: workspace:*
         version: link:packages/provenance
@@ -148,6 +151,9 @@ importers:
       '@dapptober/wallet':
         specifier: workspace:*
         version: link:packages/wallet
+      '@dapptober/waterfall':
+        specifier: workspace:*
+        version: link:packages/waterfall
       '@farcaster/miniapp-sdk':
         specifier: 0.3.0
         version: 0.3.0(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)(zod@4.6.6)
@@ -850,6 +856,30 @@ importers:
         specifier: 2.2.12
         version: 2.2.12
 
+  apps/agents/day-28-per-second-waterfall:
+    dependencies:
+      '@dapptober/waterfall':
+        specifier: workspace:*
+        version: link:../../../packages/waterfall
+      framer-motion:
+        specifier: 14.7.1
+        version: 14.7.1(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      next:
+        specifier: ^16.4.3
+        version: 16.4.3(@opentelemetry/api@1.9.1)(@types/node@22.20.5)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      react:
+        specifier: ^19.2.0
+        version: 19.3.0
+      react-dom:
+        specifier: ^19.2.0
+        version: 19.3.0(react@19.3.0)
+      viem:
+        specifier: ^2.38.0
+        version: 2.57.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)(zod@4.6.6)
+      zod:
+        specifier: ^4.6.6
+        version: 4.6.6
+
   packages/agent-core:
     dependencies:
       '@ai-sdk/openai-compatible':
@@ -1438,6 +1468,15 @@ importers:
         specifier: 4.6.6
         version: 4.6.6
 
+  packages/persistence:
+    dependencies:
+      '@dapptober/config':
+        specifier: workspace:*
+        version: link:../config
+      postgres:
+        specifier: ^3.4.0
+        version: 3.4.9
+
   packages/provenance:
     dependencies:
       '@dapptober/agent-core':
@@ -1740,6 +1779,30 @@ importers:
       viem:
         specifier: ^2.38.0
         version: 2.57.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)(zod@4.6.6)
+
+  packages/waterfall:
+    dependencies:
+      '@dapptober/agent-core':
+        specifier: workspace:*
+        version: link:../agent-core
+      '@dapptober/config':
+        specifier: workspace:*
+        version: link:../config
+      '@dapptober/persistence':
+        specifier: workspace:*
+        version: link:../persistence
+      '@dapptober/receipts':
+        specifier: workspace:*
+        version: link:../receipts
+      '@dapptober/types':
+        specifier: workspace:*
+        version: link:../types
+      viem:
+        specifier: ^2.38.0
+        version: 2.57.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)(zod@4.6.6)
+      zod:
+        specifier: ^4.6.6
+        version: 4.6.6
 
   services/gpu-provider:
     dependencies:
@@ -5714,6 +5777,17 @@ packages:
   fp-ts@1.19.3:
     resolution: {integrity: sha512-H5KQDspykdHuztLTg+ajGN0Z2qUjcEf3Ybxc6hLt0k7/zPkn29XnKnxlBPyW2XIddWrGaJBzBl4VLYOtk39yZg==}
 
+  framer-motion@14.7.1:
+    resolution: {integrity: sha512-mFDYZxyfeZnpvL/zEQEqLZNYVA/ya47c9TBfZb/PEoNBBVSVvCLkMrCv9U38cuw72W161XENZwZB0+4nIBLEJg==}
+    peerDependencies:
+      react: ^18.0.0 || ^19.0.0
+      react-dom: ^18.0.0 || ^19.0.0
+    peerDependenciesMeta:
+      react:
+        optional: true
+      react-dom:
+        optional: true
+
   fresh@2.0.0:
     resolution: {integrity: sha512-Rx/WycZ60HOaqLKAi6cHRKKI7zxWbJ31MhntmtwMoaTeF7XFH9hhBp8vITaMidfljRQ6eYWCKkaTK+ykVJHP2A==}
     engines: {node: '>= 0.8'}
@@ -6592,6 +6666,12 @@ packages:
     resolution: {integrity: sha512-VZlYo/WE8t1tstuRmqgeyBgCbJc/lEdopaa+axcKzTBJ+UIdlAB9XnmvTCAH4pwR4ElNInaedhEBmZD8iCSVEg==}
     engines: {node: '>= 14.0.0'}
     hasBin: true
+
+  motion-dom@14.7.1:
+    resolution: {integrity: sha512-p9q9F7+HoijbQjUG/cSGNmWS2t1OaAKxkd2RG5gQJRoDwoTap/Khb7K1P5rLW90crnSmx0rcRXzh3Jd5UNrpEw==}
+
+  motion-utils@14.7.0:
+    resolution: {integrity: sha512-woO0/Nb7ys75f94fjvQi/6leiHGvZUYkeHUPEZ3vxsV+9OpEVhkxp01x8MlRwX0zt31EqgXsKDAoBoJLC148Tw==}
 
   ms@2.1.2:
     resolution: {integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==}
@@ -8354,7 +8434,7 @@ snapshots:
       clsx: 1.2.1
       eventemitter3: 5.0.1
       idb-keyval: 6.2.1
-      ox: 0.6.9(typescript@5.9.3)(zod@4.6.6)
+      ox: 0.6.9(typescript@5.9.3)(zod@3.25.76)
       preact: 10.24.2
       viem: 2.57.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)(zod@4.6.6)
       zustand: 5.0.3(@types/react@19.3.0)(immer@10.1.1)(react@19.3.0)(use-sync-external-store@1.4.0(react@19.3.0))
@@ -8382,7 +8462,7 @@ snapshots:
       clsx: 1.2.1
       eventemitter3: 5.0.1
       idb-keyval: 6.2.1
-      ox: 0.6.9(typescript@5.9.3)(zod@4.6.6)
+      ox: 0.6.9(typescript@5.9.3)(zod@3.25.76)
       preact: 10.24.2
       viem: 2.57.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)(zod@3.25.76)
       zustand: 5.0.3(@types/react@19.3.0)(immer@11.1.21)(react@19.3.0)(use-sync-external-store@1.4.0(react@19.3.0))
@@ -8565,7 +8645,7 @@ snapshots:
       clsx: 1.2.1
       eventemitter3: 5.0.1
       idb-keyval: 6.2.1
-      ox: 0.6.9(typescript@5.9.3)(zod@4.6.6)
+      ox: 0.6.9(typescript@5.9.3)(zod@3.25.76)
       preact: 10.24.2
       viem: 2.57.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)(zod@4.6.6)
       zustand: 5.0.3(@types/react@19.3.0)(immer@10.1.1)(react@19.3.0)(use-sync-external-store@1.4.0(react@19.3.0))
@@ -8585,7 +8665,7 @@ snapshots:
       clsx: 1.2.1
       eventemitter3: 5.0.1
       idb-keyval: 6.2.1
-      ox: 0.6.9(typescript@5.9.3)(zod@4.6.6)
+      ox: 0.6.9(typescript@5.9.3)(zod@3.25.76)
       preact: 10.24.2
       viem: 2.57.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)(zod@3.25.76)
       zustand: 5.0.3(@types/react@19.3.0)(immer@11.1.21)(react@19.3.0)(use-sync-external-store@1.4.0(react@19.3.0))
@@ -14037,6 +14117,15 @@ snapshots:
 
   fp-ts@1.19.3: {}
 
+  framer-motion@14.7.1(react-dom@19.3.0(react@19.3.0))(react@19.3.0):
+    dependencies:
+      motion-dom: 14.7.1
+      motion-utils: 14.7.0
+      tslib: 2.8.1
+    optionalDependencies:
+      react: 19.3.0
+      react-dom: 19.3.0(react@19.3.0)
+
   fresh@2.0.0: {}
 
   fs-extra@11.4.1:
@@ -14888,6 +14977,12 @@ snapshots:
       yargs-parser: 20.2.9
       yargs-unparser: 2.0.0
 
+  motion-dom@14.7.1:
+    dependencies:
+      motion-utils: 14.7.0
+
+  motion-utils@14.7.0: {}
+
   ms@2.1.2: {}
 
   ms@2.1.3: {}
@@ -15142,7 +15237,7 @@ snapshots:
     transitivePeerDependencies:
       - zod
 
-  ox@0.6.9(typescript@5.9.3)(zod@4.6.6):
+  ox@0.6.9(typescript@5.9.3)(zod@3.25.76):
     dependencies:
       '@adraffy/ens-normalize': 1.11.1
       '@noble/curves': 1.9.7

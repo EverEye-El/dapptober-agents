@@ -1,6 +1,6 @@
 # Project completion tracker
 
-**Updated October 27, 2026: 27 local app implementations exist (Days 01–27); 0 hosted demos or full live deployments are verified released. Day 27 is now built; its separate demo-launch and live-contract checklists appear below.**
+**Updated October 28, 2026: 28 local app implementations exist (Days 01–28); 0 hosted demos or full live deployments are verified released. Day 28 adds SPILLWAY with a saved editable demo and a separately tested real Superfluid adapter.**
 
 “Local implementation” does not mean full prompt/protocol compliance or production readiness. See the [repository status audit](IMPLEMENTATION-STATUS-AUDIT.md) for the inventory, fresh test results and material gaps.
 
@@ -33,7 +33,7 @@ Start with one app. You do not need every day-specific service at once. Supply s
 
 ## Launch targets
 
-A hosted, editable **demo** is an approved release target. Mock providers and prizes may stay enabled. It still requires genuine persistent storage, protected editing, clear simulation labels and hosted acceptance. Day 27 implements this path explicitly; earlier days have not been automatically migrated to durable hosted-demo storage or verified editing flows. The live integration checklist below applies only when enabling real services/funds.
+A hosted, editable **demo** is an approved release target. Mock providers and prizes may stay enabled. It still requires genuine persistent storage, protected editing, clear simulation labels and hosted acceptance. Days 27–28 implement this path explicitly; earlier days have not been automatically migrated to durable hosted-demo storage or verified editing flows. The live integration checklist below applies only when enabling real services/funds.
 
 ## Shared steps still required for each live app
 
@@ -338,7 +338,31 @@ Each day's checked implementation box describes **tested local scope**, not full
 
 [Setup](../apps/agents/day-27-haunted-contract/README.md) · [Evidence and limitations](DAY-27-AUDIT.md)
 
+### Day 28 — SPILLWAY / The Per-Second Waterfall
+
+- [x] Build the independent copper waterfall app: creator watch sessions/optional HTTPS video, contributor payroll, job-bound compute, sender/receiver channel views, ticking balances, create/pause/top-up/withdraw, saved demo channels and receipt export. No OpenAI or thirdweb key is needed.
+- [x] Implement shared durable demo/real workspaces, isolated visitor cookies, authenticated shared keeper desk, Supabase row locking and explicit persistent-local-disk mode. Verify local persistence/isolation and concurrent updates. Actual Supabase service acceptance remains below; earlier days are not migrated.
+- [x] Test immutable receiver/rate/budget channels, real USDC-six/SuperToken-eighteen decimal conversion, actual buffer queries, Jev start gates, bounded signed job starts, replay protection, revocation, stop/withdraw and exact wallet receipt recovery. Pass a protocol-double Anvil test **and a genuine official Superfluid Base Sepolia fork rehearsal** with a disposable local underlying; verify durable keeper start/stop signing and confirmation recovery. No public token transfers or genuine paid Jev call is claimed.
+
+**Approved editable-demo release path — do these in order:**
+
+- [ ] Create a **Supabase test project**, provide its private **Session pooler PostgreSQL URI** as `SUPABASE_DATABASE_URL`, and set `WATERFALL_STORAGE=supabase`, `AGENT_MODE=demo`, `WATERFALL_POLICY=simulated`. Retain unique stable `OPERATOR_TOKEN`, `WATERFALL_SESSION_SECRET` and workspace ID. Verify a real saved write/read, isolated visitors, keeper edits and RLS/public-role denial.
+- [ ] Configure the chosen host with Day 28’s Vercel app directory or Docker APP value, set the final exact HTTPS `PUBLIC_ORIGIN`, and run `pnpm readiness:waterfall-demo`. Verify saved additions after browser reload, worker/app restart and redeployment; test export/backup/restore and ingress limits on the actual host. A single-server local-disk alternative needs a mounted persistent volume and separate disk acceptance.
+- [ ] Run hosted create/fund/start/pause/job/receipt acceptance, verify clear simulation labels and keeper/visitor separation, record the exact release commit/origin and enable monitoring/backups before opening the demo publicly. If the compute worker is desired, run it against the shared keeper workspace; visitor queues remain isolated.
+
+**Optional real-funds path — additional work, in order:**
+
+- [ ] Independently review **SpillwayFactory/SpillwayChannel**, keeper liveness, liquidation risk, immutable receiver/rate/funding cap and provider metadata. Choose owner and separate gas-only agent EOAs. All testing stays on **Base Sepolia 84532**, production on **Base 8453**.
+- [ ] Verify or deploy a **Superfluid USDCx wrapper of the selected chain’s Circle USDC**, using the official SuperToken factory if needed; reject fake-USDC test wrappers. Deploy SpillwayFactory, verify source/constructor/protocol bindings and pin factory/SuperToken/forwarder runtime hashes. The unsigned helper never broadcasts. Configure owner/RPC/agent and all app-specific fields from its detailed example.
+- [ ] Enable billed **TypeSafe Jev** with `WATERFALL_POLICY=live`, retain Supabase/auth settings, run `pnpm readiness 28 --online`, and fund narrow owner USDC/gas and agent gas budgets. Approve exact USDC amounts, wrap, create a channel, approve exact USDCx amounts and fund lease cost + actual protocol buffer + reserve.
+- [ ] Supervise the five-second keeper. Rehearse genuine Base Sepolia creator heartbeat expiry/media pause, payroll expiry, job start/completion/failure, reserve/global stop, owner/receiver pause, revocation, policy deny/outage, stale/reverted transactions, restart/retry, gas loss and database/RPC failure. **A lease deadline is not an automatic stop; charges continue until a deletion transaction lands.** Verify exact receipts and balances rather than animated estimates.
+- [ ] Resolve independent security/economic findings and dependency advisories, deploy a separate HTTPS **Base mainnet** environment/contracts/database with a small approved budget, repeat funded acceptance and record release evidence. Monitor buffer/runway, keeper gas, missed deadlines, pending signed transactions, provider quota and restore drills before unattended use.
+
+[Setup](../apps/agents/day-28-per-second-waterfall/README.md) · [Evidence and limitations](DAY-28-AUDIT.md)
+
 ## Shared release blockers and evidence
+
+- [x] **Day 28 local verification:** pnpm frozen install, lint/typecheck, 290 ordinary application tests (25 opt-in skipped), 199 Solidity tests, all 28 independent production builds/workflows and a 57MB standalone runtime outside the repository pass. Protocol-double Anvil, genuine Superfluid Base Sepolia fork, actual bounded worker and 390px browser checks pass within their stated local scope. Details: [Day 28 audit](DAY-28-AUDIT.md). Supabase/paid Jev/public-chain/hosted release acceptance remains open.
 
 - [x] **Day 27 local release regression:** all 27 independent production builds and all 27 production HTTP/page/API/workflow/receipt checks pass; 273 ordinary application tests pass (24 opt-in skipped), 186 contract tests pass, and separate funded Anvil haunted acceptance passes. Day 27 keeper edits persist through reload in development and production; the 69MB standalone copy outside the repository passes independently. Published implementation `292148a` in [PR #24](https://github.com/EverEye-El/dapptober-agents/pull/24), stacked on Day 26 PR #23. GitGuardian and **all 30 hosted jobs** pass, including 27 Linux app containers/workflows, both worker images and shared/local-chain checks in [the implementation run](https://github.com/EverEye-El/dapptober-agents/actions/runs/40582458137). No hosted public deployment, genuine Supabase service, paid-provider call or public-chain transaction is implied.
 
