@@ -1,0 +1,1 @@
+import {publicAgent} from '@dapptober/architect/src/service';import PublicProfile from './profile';import {notFound} from 'next/navigation';export const dynamic='force-dynamic';export default async function Page({params}:{params:Promise<{id:string}>}){try{return <PublicProfile agent={await publicAgent((await params).id)}/>;}catch{notFound();}}

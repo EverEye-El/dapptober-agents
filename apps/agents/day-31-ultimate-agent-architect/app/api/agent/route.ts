@@ -1,0 +1,1 @@
+import {architectHandler} from '@dapptober/architect';export const runtime='nodejs';export const dynamic='force-dynamic';export const GET=(r:Request)=>architectHandler(r);export const POST=(r:Request)=>architectHandler(r,true);
