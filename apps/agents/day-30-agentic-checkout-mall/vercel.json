@@ -1,0 +1,1 @@
+{"buildCommand": "cd ../../.. && pnpm run build 30", "installCommand": "cd ../../.. && pnpm install --frozen-lockfile", "framework": "nextjs"}

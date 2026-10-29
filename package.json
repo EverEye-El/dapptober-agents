@@ -43,7 +43,9 @@
     "worker:waterfall": "node --env-file=apps/agents/day-28-per-second-waterfall/.env.local scripts/waterfall-worker.mjs",
     "deploy:waterfall": "node --env-file=apps/agents/day-28-per-second-waterfall/.env.local scripts/waterfall-deploy.mjs",
     "readiness:waterfall-demo": "node scripts/waterfall-demo-readiness.mjs",
-    "test:recorder-chain": "node scripts/recorder-chain-test.mjs"
+    "test:recorder-chain": "node scripts/recorder-chain-test.mjs",
+    "test:mall-chain": "node scripts/mall-chain-test.mjs",
+    "deploy:mall": "node --env-file=apps/agents/day-30-agentic-checkout-mall/.env.local scripts/mall-deploy.mjs"
   },
   "dependencies": {
     "@ai-sdk/openai-compatible": "^2.0.0",
@@ -115,7 +117,8 @@
     "@dapptober/waterfall": "workspace:*",
     "@dapptober/persistence": "workspace:*",
     "@dapptober/experience": "workspace:*",
-    "@dapptober/recorder": "workspace:*"
+    "@dapptober/recorder": "workspace:*",
+    "@dapptober/mall": "workspace:*"
   },
   "devDependencies": {
     "@cofhe/foundry-plugin": "1.0.0",

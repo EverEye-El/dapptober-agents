@@ -5,6 +5,7 @@ import {resolve} from 'node:path';
 
 const common=['OWNER_ADDRESS','OPERATOR_TOKEN','SUPABASE_DATABASE_URL','RPC_URL','JEV_API_KEY','OPENAI_API_KEY'];
 export const required={
+  30:['OPERATOR_TOKEN','SUPABASE_DATABASE_URL','EXPERIENCE_SESSION_SECRET','OWNER_ADDRESS','RPC_URL','JEV_API_KEY','OPENAI_API_KEY','MALL_MERCHANT_ADDRESS','MALL_CHECKOUT','MALL_CHECKOUT_CODE_HASH','MALL_QUOTE_SIGNING_PRIVATE_KEY','NEXT_PUBLIC_THIRDWEB_CLIENT_ID'],
   29:['OPERATOR_TOKEN','SUPABASE_DATABASE_URL','EXPERIENCE_SESSION_SECRET','OWNER_ADDRESS','RPC_URL','JEV_API_KEY','RECORDER_SIGNING_PRIVATE_KEY','RECORDER_EAS','RECORDER_EAS_CODE_HASH','RECORDER_SCHEMA'],
   28:['OWNER_ADDRESS','OPERATOR_TOKEN','SUPABASE_DATABASE_URL','RPC_URL','JEV_API_KEY','WATERFALL_SESSION_SECRET','WATERFALL_FACTORY','WATERFALL_FACTORY_CODE_HASH','SUPERFLUID_USDCX','SUPERFLUID_USDCX_CODE_HASH','SUPERFLUID_FORWARDER_CODE_HASH','WATERFALL_AGENT_ADDRESS','WATERFALL_AGENT_PRIVATE_KEY'],
   27:['SUPABASE_DATABASE_URL','OPERATOR_TOKEN','HAUNTED_SESSION_SECRET','RPC_URL','HAUNTED_CONTRACT','HAUNTED_CODE_HASH','THIRDWEB_CLIENT_ID'],
@@ -37,6 +38,7 @@ export const required={
 };
 export function assess(day,env){
   const gaps=[];
+  if(day===30){if(env.MALL_PROVIDER_CONSENT!=='true')gaps.push('MALL_PROVIDER_CONSENT: explicitly approve documented shopping metadata sharing with TypeSafe and OpenAI');for(const k of ['MALL_CHECKOUT_CODE_HASH','MALL_QUOTE_SIGNING_PRIVATE_KEY'])if(!/^0x[0-9a-fA-F]{64}$/.test(env[k]??''))gaps.push(k+': actual 32-byte hex value required');if(!/^0x[0-9a-fA-F]{40}$/.test(env.MALL_CHECKOUT??''))gaps.push('MALL_CHECKOUT: reviewed deployed contract required');}
   if(day===29){if(env.RECORDER_JEV_METADATA_CONSENT!=='true')gaps.push('RECORDER_JEV_METADATA_CONSENT: explicit approval of redacted recorder metadata sharing with TypeSafe/Jev required for live policy assessments');for(const k of ['RECORDER_SCHEMA','RECORDER_EAS_CODE_HASH','RECORDER_SIGNING_PRIVATE_KEY'])if(!/^0x[0-9a-fA-F]{64}$/.test(env[k]??''))gaps.push(k+': expected actual 32-byte hex value');if((env.EXPERIENCE_SESSION_SECRET??'').length<32)gaps.push('EXPERIENCE_SESSION_SECRET: stable 32+ character private value required');}
   if(day===28){if(env.WATERFALL_POLICY!=='live')gaps.push('WATERFALL_POLICY: live Jev required for real starts');if((env.WATERFALL_SESSION_SECRET??'').length<32)gaps.push('WATERFALL_SESSION_SECRET: at least 32 random characters');for(const k of ['WATERFALL_FACTORY','SUPERFLUID_USDCX','WATERFALL_AGENT_ADDRESS'])if(!/^0x[0-9a-fA-F]{40}$/.test(env[k]??''))gaps.push(k+': actual deployed address required');for(const k of ['WATERFALL_FACTORY_CODE_HASH','SUPERFLUID_USDCX_CODE_HASH','SUPERFLUID_FORWARDER_CODE_HASH'])if(!/^0x[0-9a-fA-F]{64}$/.test(env[k]??''))gaps.push(k+': pin verified runtime');}
   if(day===27){if(!/^0x[0-9a-fA-F]{40}$/.test(env.HAUNTED_CONTRACT??''))gaps.push('HAUNTED_CONTRACT: actual deployed Base puzzle contract required');if(!/^0x[0-9a-fA-F]{64}$/.test(env.HAUNTED_CODE_HASH??''))gaps.push('HAUNTED_CODE_HASH: pin verified runtime');if((env.HAUNTED_SESSION_SECRET??'').length<32)gaps.push('HAUNTED_SESSION_SECRET: stable random secret of at least 32 characters required');if(env.HAUNTED_DIALOGUE==='live')for(const key of ['JEV_API_KEY','OPENAI_API_KEY'])if(!env[key])gaps.push(key+': required for live ghost dialogue');}
@@ -80,7 +82,7 @@ export function assess(day,env){
 
 async function main(){
   const flags=process.argv.slice(2),selection=flags.find(x=>/^\d{1,2}$/.test(x));
-  if(flags.some(x=>!['--init','--online'].includes(x)&&x!==selection)||selection&&(Number(selection)<1||Number(selection)>29))throw new Error('Usage: pnpm readiness [01–29] [--init] [--online]');
+  if(flags.some(x=>!['--init','--online'].includes(x)&&x!==selection)||selection&&(Number(selection)<1||Number(selection)>30))throw new Error('Usage: pnpm readiness [01–30] [--init] [--online]');
   const root=fileURLToPath(new URL('../',import.meta.url));let failed=false;
   for(const dir of readdirSync(resolve(root,'apps/agents')).sort()){
     const day=Number(dir.match(/^day-(\d+)-/)?.[1]);if(!required[day]||selection&&day!==Number(selection))continue;
