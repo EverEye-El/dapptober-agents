@@ -1,0 +1,1 @@
+import {publicAgent,card} from '@dapptober/architect/src/service';export const dynamic='force-dynamic';export async function GET(_:Request,{params}:{params:Promise<{id:string}>}){try{return Response.json(card(await publicAgent((await params).id)),{headers:{'Cache-Control':'no-store'}});}catch{return Response.json({error:'Agent not found'},{status:404});}}

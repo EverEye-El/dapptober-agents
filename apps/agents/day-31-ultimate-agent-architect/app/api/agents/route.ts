@@ -1,0 +1,1 @@
+import {directory,card} from '@dapptober/architect/src/service';export const dynamic='force-dynamic';export async function GET(){try{return Response.json({agents:(await directory()).map(card)});}catch{return Response.json({error:'Directory unavailable'},{status:503});}}

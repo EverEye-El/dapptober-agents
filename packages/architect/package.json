@@ -1,0 +1,30 @@
+{
+  "name": "@dapptober/architect",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./src/*": "./src/*.ts"
+  },
+  "dependencies": {
+    "@dapptober/experience": "workspace:*",
+    "@dapptober/config": "workspace:*",
+    "@dapptober/persistence": "workspace:*",
+    "@dapptober/agent-core": "workspace:*",
+    "@dapptober/wallet": "workspace:*",
+    "@dapptober/payments": "workspace:*",
+    "@dapptober/receipts": "workspace:*",
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "@langchain/typesafe": "0.0.1",
+    "@x402/core": "^2.0.0",
+    "@x402/evm": "^2.0.0",
+    "@x402/next": "^2.0.0",
+    "@x402/fetch": "^2.0.0",
+    "thirdweb": "^5.0.0",
+    "next": "^16.4.3",
+    "viem": "^2.38.0",
+    "zod": "^4.6.6",
+    "@dapptober/types": "workspace:*"
+  }
+}

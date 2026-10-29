@@ -1,6 +1,6 @@
 # Dapptober Agents
 
-Thirty independently runnable crypto-native agents for Dapptober 2026, built on a shared TypeScript capability layer. The supplied daily prompts are canonical; the master build specification defines the architecture and audit requirements.
+Thirty-one independently runnable crypto-native agents for Dapptober 2026, built on a shared TypeScript capability layer. The supplied daily prompts are canonical; the master build specification defines the architecture and audit requirements.
 
 [Project completion tracker](docs/PROJECT-COMPLETION-TRACKER.md) records tested functionality and remaining work for every built day and is updated after each daily build.
 
@@ -36,6 +36,7 @@ Thirty independently runnable crypto-native agents for Dapptober 2026, built on 
 | 28 | [SPILLWAY — Per-Second Waterfall](apps/agents/day-28-per-second-waterfall/README.md) | http://localhost:3028 | Superfluid USDCx creator/payroll/compute streams, fixed channel policies, Jev and a durable gas-only keeper |
 | 29 | [MAYDAY — Black Box Recorder](apps/agents/day-29-black-box-recorder/README.md) | http://localhost:3029 | Signed hash-chain flights, Merkle/EAS anchoring, OpenTelemetry intake and Jev review |
 | 30 | [AFTERHOURS — Agentic Checkout Mall](apps/agents/day-30-agentic-checkout-mall/README.md) | http://localhost:3030 | Agent catalog shopping, approved thirdweb/USDC escrow checkout, digital goods and role-bound refunds/disputes |
+| 31 | [FOUNDRY — Ultimate Agent Architect](apps/agents/day-31-ultimate-agent-architect/README.md) | http://localhost:3031 | Saved MCP skill graph, Three.js twin, thirdweb executor, ERC-8004 guarded vault and paid x402 services |
 
 ## Start here
 
@@ -91,7 +92,7 @@ Day 10 adds private World ID uniqueness, returning verified passkeys, an isolate
 
 ### Network and storage policy
 
-All ten apps default to Base Sepolia (84532) for testing and target Base (8453) for production. Local Anvil (31337) is reserved for isolated integrations. Use separate Supabase projects and private database connection URIs for testing/production; no Supabase browser API keys are required. See [the alignment audit](docs/BASE-SUPABASE-ALIGNMENT-AUDIT.md) for per-day contracts, provider dependencies and unavailable live CoW settlement on Base Sepolia.
+All apps default to Base Sepolia (84532) for testing and target Base (8453) for production. Local Anvil (31337) is reserved for isolated integrations. Use separate Supabase projects and private database connection URIs for testing/production; no Supabase browser API keys are required. See [the alignment audit](docs/BASE-SUPABASE-ALIGNMENT-AUDIT.md) for per-day contracts, provider dependencies and unavailable live CoW settlement on Base Sepolia.
 
 Configuration names and where to enter each value: [environment setup](docs/ENVIRONMENT-SETUP.md). Each daily `.env.local` includes field explanations; private values belong there, not in `.env.example`.
 

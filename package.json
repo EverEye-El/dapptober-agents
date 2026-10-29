@@ -45,7 +45,9 @@
     "readiness:waterfall-demo": "node scripts/waterfall-demo-readiness.mjs",
     "test:recorder-chain": "node scripts/recorder-chain-test.mjs",
     "test:mall-chain": "node scripts/mall-chain-test.mjs",
-    "deploy:mall": "node --env-file=apps/agents/day-30-agentic-checkout-mall/.env.local scripts/mall-deploy.mjs"
+    "deploy:mall": "node --env-file=apps/agents/day-30-agentic-checkout-mall/.env.local scripts/mall-deploy.mjs",
+    "test:architect-chain": "node scripts/architect-chain-test.mjs",
+    "deploy:architect": "node --env-file=apps/agents/day-31-ultimate-agent-architect/.env.local scripts/architect-deploy.mjs"
   },
   "dependencies": {
     "@ai-sdk/openai-compatible": "^2.0.0",
@@ -118,7 +120,8 @@
     "@dapptober/persistence": "workspace:*",
     "@dapptober/experience": "workspace:*",
     "@dapptober/recorder": "workspace:*",
-    "@dapptober/mall": "workspace:*"
+    "@dapptober/mall": "workspace:*",
+    "@dapptober/architect": "workspace:*"
   },
   "devDependencies": {
     "@cofhe/foundry-plugin": "1.0.0",

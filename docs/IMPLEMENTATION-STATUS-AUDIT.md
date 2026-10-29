@@ -1,3 +1,5 @@
+> Historical October 27 inventory below. **October 29 update:** Days 01–31 now have built/tested local implementations; all 31 production workflows pass. Current evidence and remaining gaps: [Day 31 audit](DAY-31-AUDIT.md) and [living tracker](PROJECT-COMPLETION-TRACKER.md). Historical “not built” entries below describe that earlier checkout, not the current repository.
+
 # Implementation status audit — October 27, 2026
 
 **Historical inventory taken before the Day 27 build.** Days 01–26 were the correct count at that audit. Day 27 has since been implemented; current evidence and launch targets are in [Day 27 audit](DAY-27-AUDIT.md) and the [completion tracker](PROJECT-COMPLETION-TRACKER.md). The historical findings below are retained rather than silently relabeled as new verification.

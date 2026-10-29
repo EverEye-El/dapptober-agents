@@ -1,0 +1,1 @@
+import {foundryMcp} from '@dapptober/architect/src/http';export const dynamic='force-dynamic';export const runtime='nodejs';export async function POST(r:Request,{params}:{params:Promise<{id:string}>}){return foundryMcp(r,(await params).id);}export const GET=POST;export const DELETE=POST;
