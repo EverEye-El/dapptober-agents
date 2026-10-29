@@ -73,6 +73,9 @@ importers:
       '@dapptober/coroner':
         specifier: workspace:*
         version: link:packages/coroner
+      '@dapptober/experience':
+        specifier: workspace:*
+        version: link:packages/experience
       '@dapptober/familiar':
         specifier: workspace:*
         version: link:packages/familiar
@@ -124,6 +127,9 @@ importers:
       '@dapptober/receipts':
         specifier: workspace:*
         version: link:packages/receipts
+      '@dapptober/recorder':
+        specifier: workspace:*
+        version: link:packages/recorder
       '@dapptober/referee':
         specifier: workspace:*
         version: link:packages/referee
@@ -880,6 +886,33 @@ importers:
         specifier: ^4.6.6
         version: 4.6.6
 
+  apps/agents/day-29-black-box-recorder:
+    dependencies:
+      '@dapptober/experience':
+        specifier: workspace:*
+        version: link:../../../packages/experience
+      '@dapptober/recorder':
+        specifier: workspace:*
+        version: link:../../../packages/recorder
+      framer-motion:
+        specifier: 14.7.1
+        version: 14.7.1(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      next:
+        specifier: ^16.4.3
+        version: 16.4.3(@opentelemetry/api@1.9.1)(@types/node@22.20.5)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      react:
+        specifier: ^19.2.0
+        version: 19.3.0
+      react-dom:
+        specifier: ^19.2.0
+        version: 19.3.0(react@19.3.0)
+      viem:
+        specifier: ^2.38.0
+        version: 2.57.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)(zod@4.6.6)
+      zod:
+        specifier: ^4.6.6
+        version: 4.6.6
+
   packages/agent-core:
     dependencies:
       '@ai-sdk/openai-compatible':
@@ -1109,6 +1142,33 @@ importers:
         version: 2.57.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)(zod@4.6.6)
       zod:
         specifier: 4.6.6
+        version: 4.6.6
+
+  packages/experience:
+    dependencies:
+      '@dapptober/agent-core':
+        specifier: workspace:*
+        version: link:../agent-core
+      '@dapptober/config':
+        specifier: workspace:*
+        version: link:../config
+      '@dapptober/persistence':
+        specifier: workspace:*
+        version: link:../persistence
+      '@dapptober/receipts':
+        specifier: workspace:*
+        version: link:../receipts
+      '@dapptober/types':
+        specifier: workspace:*
+        version: link:../types
+      react:
+        specifier: ^19.2.0
+        version: 19.3.0
+      viem:
+        specifier: ^2.38.0
+        version: 2.57.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)(zod@4.6.6)
+      zod:
+        specifier: ^4.6.6
         version: 4.6.6
 
   packages/familiar:
@@ -1512,6 +1572,30 @@ importers:
       '@dapptober/types':
         specifier: workspace:*
         version: link:../types
+
+  packages/recorder:
+    dependencies:
+      '@dapptober/agent-core':
+        specifier: workspace:*
+        version: link:../agent-core
+      '@dapptober/config':
+        specifier: workspace:*
+        version: link:../config
+      '@dapptober/experience':
+        specifier: workspace:*
+        version: link:../experience
+      '@dapptober/receipts':
+        specifier: workspace:*
+        version: link:../receipts
+      '@opentelemetry/api':
+        specifier: 1.9.1
+        version: 1.9.1
+      viem:
+        specifier: ^2.38.0
+        version: 2.57.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)(zod@4.6.6)
+      zod:
+        specifier: ^4.6.6
+        version: 4.6.6
 
   packages/referee:
     dependencies:
@@ -8434,7 +8518,7 @@ snapshots:
       clsx: 1.2.1
       eventemitter3: 5.0.1
       idb-keyval: 6.2.1
-      ox: 0.6.9(typescript@5.9.3)(zod@3.25.76)
+      ox: 0.6.9(typescript@5.9.3)(zod@4.6.6)
       preact: 10.24.2
       viem: 2.57.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)(zod@4.6.6)
       zustand: 5.0.3(@types/react@19.3.0)(immer@10.1.1)(react@19.3.0)(use-sync-external-store@1.4.0(react@19.3.0))
@@ -8462,7 +8546,7 @@ snapshots:
       clsx: 1.2.1
       eventemitter3: 5.0.1
       idb-keyval: 6.2.1
-      ox: 0.6.9(typescript@5.9.3)(zod@3.25.76)
+      ox: 0.6.9(typescript@5.9.3)(zod@4.6.6)
       preact: 10.24.2
       viem: 2.57.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)(zod@3.25.76)
       zustand: 5.0.3(@types/react@19.3.0)(immer@11.1.21)(react@19.3.0)(use-sync-external-store@1.4.0(react@19.3.0))
@@ -8645,7 +8729,7 @@ snapshots:
       clsx: 1.2.1
       eventemitter3: 5.0.1
       idb-keyval: 6.2.1
-      ox: 0.6.9(typescript@5.9.3)(zod@3.25.76)
+      ox: 0.6.9(typescript@5.9.3)(zod@4.6.6)
       preact: 10.24.2
       viem: 2.57.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)(zod@4.6.6)
       zustand: 5.0.3(@types/react@19.3.0)(immer@10.1.1)(react@19.3.0)(use-sync-external-store@1.4.0(react@19.3.0))
@@ -8665,7 +8749,7 @@ snapshots:
       clsx: 1.2.1
       eventemitter3: 5.0.1
       idb-keyval: 6.2.1
-      ox: 0.6.9(typescript@5.9.3)(zod@3.25.76)
+      ox: 0.6.9(typescript@5.9.3)(zod@4.6.6)
       preact: 10.24.2
       viem: 2.57.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)(zod@3.25.76)
       zustand: 5.0.3(@types/react@19.3.0)(immer@11.1.21)(react@19.3.0)(use-sync-external-store@1.4.0(react@19.3.0))
@@ -15237,7 +15321,7 @@ snapshots:
     transitivePeerDependencies:
       - zod
 
-  ox@0.6.9(typescript@5.9.3)(zod@3.25.76):
+  ox@0.6.9(typescript@5.9.3)(zod@4.6.6):
     dependencies:
       '@adraffy/ens-normalize': 1.11.1
       '@noble/curves': 1.9.7
