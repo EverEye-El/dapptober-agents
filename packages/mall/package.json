@@ -1,0 +1,1 @@
+{"name":"@dapptober/mall","private":true,"version":"0.1.0","type":"module","exports":{".":"./src/index.ts","./src/*":"./src/*.ts"},"dependencies":{"@dapptober/experience":"workspace:*","@dapptober/agent-core":"workspace:*","@dapptober/config":"workspace:*","@dapptober/persistence":"workspace:*","@dapptober/receipts":"workspace:*","viem":"^2.38.0","zod":"^4.6.6"}}

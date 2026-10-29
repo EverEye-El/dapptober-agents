@@ -1,0 +1,1 @@
+import './mall.css';export const metadata={title:'AFTERHOURS / Agentic Checkout Mall',description:'Good taste. Hard limits. Open all night.'};export default function Layout({children}:{children:React.ReactNode}){return <html lang="en"><body>{children}</body></html>;}

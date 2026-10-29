@@ -1,6 +1,6 @@
 # Project completion tracker
 
-**Updated October 29, 2026: 29 local app implementations exist (Days 01–29); no hosted public release is verified. Days 30–31 are requested and are not marked implemented until built and tested.**
+**Updated October 29, 2026: 30 local app implementations exist (Days 01–30); no hosted public release is verified. Day 31 is requested and is not marked implemented until built and tested.**
 
 “Local implementation” does not mean full prompt/protocol compliance or production readiness. See the [repository status audit](IMPLEMENTATION-STATUS-AUDIT.md) for the inventory, fresh test results and material gaps.
 
@@ -370,6 +370,18 @@ Each day's checked implementation box describes **tested local scope**, not full
 - [ ] After independent security/privacy review, configure separate Base mainnet/Supabase/secrets and HTTPS production, repeat bounded funded anchor acceptance and test signer rotation, monitoring and restoration before release. Preserve externally trusted checkpoints; signatures prove assertions, not execution truth.
 
 [Setup](../apps/agents/day-29-black-box-recorder/README.md) · [Audit](DAY-29-AUDIT.md)
+
+### Day 30 — AFTERHOURS / The Agentic Checkout Mall
+
+- [x] Build a saved editable digital-goods mall, public machine catalog, budget/allowlist shopping agent, exact approval/quotes, actual file delivery, escrow and refund/dispute UI. Pass ten commerce tests, eleven new Solidity cases (210 total), lint/typecheck/build, desktop/390px browser lifecycle and actual signed local-USDC checkout/dispute/arbiter refund acceptance. Providers remain doubles in tests.
+- [ ] Configure real **Supabase Session pooler URI**, stable private operator/cookie secrets and workspace ID. Verify row locking/RLS, namespace connection limits, private visitor catalogs, authenticated published catalog, saved orders and backup/restore.
+- [ ] Deploy the standalone Vercel/Docker demo with final HTTPS origin; verify add-product/plan/approve/pay/download/dispute/refund across reload/redeploy before public demo release. No model keys or contract are required for this target.
+- [ ] For real money, approve provider metadata sharing via **MALL_PROVIDER_CONSENT**, configure billed **TypeSafe Jev/OpenAI** and domain-restricted **NEXT_PUBLIC_THIRDWEB_CLIENT_ID**, then choose separate buyer, seller, quote-signing and independent arbiter wallets. Review the 48-hour release/digital-copy refund economics first.
+- [ ] Review/deploy **AfterhoursCheckout(CircleUSDC, quoteSigner, arbiter)** on Base Sepolia, pin runtime/source/immutables and configure owner/RPC/merchant fields. The unsigned deployment helper does not broadcast. Fund only narrow buyer USDC and role-wallet gas budgets.
+- [ ] Run readiness and genuine thirdweb wallet approval/payment/delivery/refund/dispute acceptance on **Base Sepolia 84532**. Test gross daily limits, stale/tampered/replayed quotes, wrong roles/chain, provider failure and restart/receipt recovery. Verify no charge occurs before explicit wallet approval.
+- [ ] Resolve independent contract/economic review, then deploy separate **Base 8453**/Supabase/secrets/HTTPS production and repeat funded acceptance. Monitor escrow reserves, seller release windows, arbiter availability, quote key/ingress quotas and restore drills. A downloaded copy cannot be revoked by refund.
+
+[Setup](../apps/agents/day-30-agentic-checkout-mall/README.md) · [Audit](DAY-30-AUDIT.md)
 
 ## Shared release blockers and evidence
 

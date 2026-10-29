@@ -1,6 +1,6 @@
 # Dapptober Agents
 
-Twenty-nine independently runnable crypto-native agents for Dapptober 2026, built on a shared TypeScript capability layer. The supplied daily prompts are canonical; the master build specification defines the architecture and audit requirements.
+Thirty independently runnable crypto-native agents for Dapptober 2026, built on a shared TypeScript capability layer. The supplied daily prompts are canonical; the master build specification defines the architecture and audit requirements.
 
 [Project completion tracker](docs/PROJECT-COMPLETION-TRACKER.md) records tested functionality and remaining work for every built day and is updated after each daily build.
 
@@ -35,6 +35,7 @@ Twenty-nine independently runnable crypto-native agents for Dapptober 2026, buil
 | 27 | [DEADLOCK — Haunted Contract](apps/agents/day-27-haunted-contract/README.md) | http://localhost:3027 | Playable ghost mansion, editable saved demo rooms, Jev-gated dialogue and contract-enforced commit/reveal keys and USDC treasure |
 | 28 | [SPILLWAY — Per-Second Waterfall](apps/agents/day-28-per-second-waterfall/README.md) | http://localhost:3028 | Superfluid USDCx creator/payroll/compute streams, fixed channel policies, Jev and a durable gas-only keeper |
 | 29 | [MAYDAY — Black Box Recorder](apps/agents/day-29-black-box-recorder/README.md) | http://localhost:3029 | Signed hash-chain flights, Merkle/EAS anchoring, OpenTelemetry intake and Jev review |
+| 30 | [AFTERHOURS — Agentic Checkout Mall](apps/agents/day-30-agentic-checkout-mall/README.md) | http://localhost:3030 | Agent catalog shopping, approved thirdweb/USDC escrow checkout, digital goods and role-bound refunds/disputes |
 
 ## Start here
 

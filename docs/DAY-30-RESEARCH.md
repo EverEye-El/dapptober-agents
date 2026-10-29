@@ -1,0 +1,11 @@
+# Day 30 research — October 29, 2026
+
+Read the full canonical Agentic Checkout Mall prompt, master specification and live [challenge](https://www.dapptober.xyz/dapp/30). Inspected `2026SocialPosts/42-day-30.png`: copper sunset atrium, palms, storefront displays and shopping agent. AFTERHOURS retains the warm copper palette with a vaporwave horizon, original vector product art and a bounded shopping companion rather than a generic dashboard.
+
+Official implementation references: [thirdweb transaction payments](https://portal.thirdweb.com/react/v5/pay/transaction), [TransactionButton](https://portal.thirdweb.com/react/v5/TransactionButton), [Bridge payment preparation](https://portal.thirdweb.com/bridge/send), [x402 introduction](https://docs.x402.org/introduction). Current installed thirdweb v5 types were inspected. Chosen path is current unified SDK wallet/transaction payment UI with exact USDC escrow calls. Automatic bridge/swap top-ups are disabled to stay on Base Sepolia/Base. The prompt’s “x402 or thirdweb Pay” intent is implemented through the current thirdweb transaction path; no custom escrow scheme is misrepresented as x402.
+
+USDC stays in a custom replay-protected EIP-712 checkout escrow until buyer acceptance, undisputed 48-hour release or seller/arbiter refund. A separate arbiter resolves disputes. No delivery/shipping data or card details are collected; original WAV/SVG/JSON goods can actually be downloaded after confirmed payment. Redelivery is blocked after refund, but downloaded copies cannot be revoked.
+
+Jev’s typed gate runs after hard budget/allowlist filtering and routes the configured OpenAI-compatible reasoner. Structured planner output is restricted to known eligible product IDs. Provider metadata sharing needs explicit operator consent; demo sends nothing. Human approval always precedes a signed quote and separate wallet payment. Server quote keys have no spending authority. Budgets count gross settled purchases; refunds do not reset them.
+
+Shared persistence now uses per-namespace connection pools so nested private shopper/public catalog transactions do not exhaust a single five-connection pool. Earlier data formats/table keys are unchanged. Real Supabase role/connection-limit acceptance remains a release task; local atomic-file mode is single-process only.
