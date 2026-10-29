@@ -1,6 +1,6 @@
 # Project completion tracker
 
-**Updated October 28, 2026: 28 local app implementations exist (Days 01–28); 0 hosted demos or full live deployments are verified released. Day 28 adds SPILLWAY with a saved editable demo and a separately tested real Superfluid adapter.**
+**Updated October 29, 2026: 29 local app implementations exist (Days 01–29); no hosted public release is verified. Days 30–31 are requested and are not marked implemented until built and tested.**
 
 “Local implementation” does not mean full prompt/protocol compliance or production readiness. See the [repository status audit](IMPLEMENTATION-STATUS-AUDIT.md) for the inventory, fresh test results and material gaps.
 
@@ -359,6 +359,17 @@ Each day's checked implementation box describes **tested local scope**, not full
 - [ ] Resolve independent security/economic findings and dependency advisories, deploy a separate HTTPS **Base mainnet** environment/contracts/database with a small approved budget, repeat funded acceptance and record release evidence. Monitor buffer/runway, keeper gas, missed deadlines, pending signed transactions, provider quota and restore drills before unattended use.
 
 [Setup](../apps/agents/day-28-per-second-waterfall/README.md) · [Evidence and limitations](DAY-28-AUDIT.md)
+
+### Day 29 — MAYDAY / The Black Box Recorder
+
+- [x] Implement signed salted hash-chain entries, replay/inspection, range tamper checks, Merkle proofs, authenticated JSON OTLP intake and reviewed EAS batching. Pass nine application tests, lint/typecheck, independent build, browser flight/seal/verify and actual official EAS/SchemaRegistry Anvil anchoring/readback. Live providers remain separate.
+- [ ] Configure a real **Supabase Session pooler URI**, unique operator/cookie secrets and workspace ID; verify RLS, isolated visitors, shared operator flight, actual persistence and backup/restore. Demo needs no EAS or paid key.
+- [ ] Deploy the independent app with final HTTPS origin; verify demo capture/replay/seal/export/reload/redeploy, request limits and privacy/retention rules before public access.
+- [ ] For real anchors, back up a stable **RECORDER_SIGNING_PRIVATE_KEY**, choose owner gas wallet, Base Sepolia RPC, billed **TypeSafe Jev**, explicit `RECORDER_JEV_METADATA_CONSENT` approval of the documented provider payload and official EAS runtime pin. Register the exact nonrevocable zero-resolver schema from the README; save its UID.
+- [ ] Run readiness and genuine Base Sepolia capture/sign/anchor/readback with wrong-range/hash/signer/chain tests. Configure trusted producer tokens and real OTLP JSON exporters; configure a host SDK/exporter for internal OpenTelemetry spans if desired. No binary protobuf support is claimed.
+- [ ] After independent security/privacy review, configure separate Base mainnet/Supabase/secrets and HTTPS production, repeat bounded funded anchor acceptance and test signer rotation, monitoring and restoration before release. Preserve externally trusted checkpoints; signatures prove assertions, not execution truth.
+
+[Setup](../apps/agents/day-29-black-box-recorder/README.md) · [Audit](DAY-29-AUDIT.md)
 
 ## Shared release blockers and evidence
 

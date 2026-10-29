@@ -1,0 +1,20 @@
+{
+  "name": "@dapptober/experience",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./client": "./src/client.tsx"
+  },
+  "dependencies": {
+    "@dapptober/config": "workspace:*",
+    "@dapptober/persistence": "workspace:*",
+    "@dapptober/receipts": "workspace:*",
+    "@dapptober/types": "workspace:*",
+    "@dapptober/agent-core": "workspace:*",
+    "viem": "^2.38.0",
+    "zod": "^4.6.6",
+    "react": "^19.2.0"
+  }
+}

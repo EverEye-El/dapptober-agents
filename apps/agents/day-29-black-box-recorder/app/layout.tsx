@@ -1,0 +1,1 @@
+import './recorder.css';export const metadata={title:'MAYDAY / Black Box Recorder',description:'Every agent needs an alibi.'};export default function Layout({children}:{children:React.ReactNode}){return <html lang="en"><body>{children}</body></html>;}

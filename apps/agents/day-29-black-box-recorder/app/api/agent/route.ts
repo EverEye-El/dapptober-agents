@@ -1,0 +1,1 @@
+import {recorderHandler} from '@dapptober/recorder';export const runtime='nodejs';export const maxDuration=60;export const GET=(r:Request)=>recorderHandler(r);export const POST=(r:Request)=>recorderHandler(r,true);

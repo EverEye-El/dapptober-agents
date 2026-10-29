@@ -1,0 +1,19 @@
+{
+  "name": "@dapptober/day-29",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --port 3029",
+    "start": "next start --port 3029",
+    "build": "next build --webpack"
+  },
+  "dependencies": {
+    "next": "^16.4.3",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "framer-motion": "14.7.1",
+    "viem": "^2.38.0",
+    "zod": "^4.6.6",
+    "@dapptober/recorder": "workspace:*",
+    "@dapptober/experience": "workspace:*"
+  }
+}
