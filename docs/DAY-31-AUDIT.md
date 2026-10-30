@@ -1,4 +1,4 @@
-# Day 31 audit — FOUNDRY
+# Day 31 audit — NERVEFORGE
 
 October 29, 2026. Dedicated branch `codex/day-31-ultimate-agent-architect`, stacked on Day 30. Independent application, deployable without another daily server.
 
@@ -33,3 +33,7 @@ Real Supabase persistence/roles/restore, genuine thirdweb sponsorship/user opera
 The October 29 production dependency audit reports **seven high / one low**, zero critical/moderate. Current findings include TOML 4, transitive Zod 3, decode-uri-component 0.5.0 and elliptic. The existing decode patch changes module compatibility, not the newly reported parser DoS. Scanning stays enabled; these are tracked release tasks, not suppressed or described as fixed.
 
 Published implementation `02a1ffd` in [PR #28](https://github.com/EverEye-El/dapptober-agents/pull/28), stacked on Day 30 PR #27. At the recorded snapshot, all 31 Linux app containers on both push/PR events and GitGuardian have passed (67 successful checks); two shared/local-chain jobs remain running. [Run](https://github.com/EverEye-El/dapptober-agents/actions/runs/40947670610). This snapshot does not mark those remaining jobs or a hosted public release complete. A documentation/screenshot follow-up records this evidence without changing the implementation.
+
+## Sentinel visual redesign
+
+Renamed the visible product to NERVEFORGE while retaining storage/cookie/contract identifiers for backward compatibility. The new procedural sentinel uses smooth segmented armor, nine red optical assemblies, ten articulated tendrils with machined cuffs, tapered claws and actual selected-skill indicators. A labeled two-position rotary selector switches Blueprint/Digital Twin, supports direct button selection and keyboard activation, and exposes its pressed state. No financial authority, provider consent, saved blueprint or existing deployment is changed. Local lint, typecheck, independent build and the existing Day 31 API workflow are reverified for the redesign; desktop switch/keyboard/pause checks and screenshots accompany it. The browser viewport override did not change the measured 1351px width during this redesign, so a new 390px acceptance is not claimed. Responsive styles remain in place; the original build’s earlier mobile evidence is historical.

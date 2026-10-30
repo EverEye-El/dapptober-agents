@@ -1,6 +1,6 @@
-# FOUNDRY / Day 31 — The Ultimate Agent Architect
+# NERVEFORGE / Day 31 — The Ultimate Agent Architect
 
-A copper blueprint workshop with a draggable saved MCP graph, native Three.js robot twin, guarded identity vaults, discoverable agent profiles and metered MCP services. Each app is independently deployable; it imports shared capabilities without calling other daily servers.
+A copper blueprint workshop with a draggable saved MCP graph, native Three.js sentinel twin, guarded identity vaults, discoverable agent profiles and metered MCP services. Each app is independently deployable; it imports shared capabilities without calling other daily servers.
 
 ## Run the editable demo
 

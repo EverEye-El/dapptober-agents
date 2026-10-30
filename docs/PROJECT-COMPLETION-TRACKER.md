@@ -383,7 +383,9 @@ Each day's checked implementation box describes **tested local scope**, not full
 
 [Setup](../apps/agents/day-30-agentic-checkout-mall/README.md) · [Audit](DAY-30-AUDIT.md)
 
-### Day 31 — FOUNDRY / The Ultimate Agent Architect
+### Day 31 — NERVEFORGE / The Ultimate Agent Architect
+
+- [x] Rename the Day 31 product to NERVEFORGE; replace the toy robot with a smooth armored sentinel, nine optical assemblies and ten articulated mechanical tendrils. Add a labeled two-position rotary Blueprint / Digital Twin selector. Existing workspace, cookie, API and contract identifiers remain stable to preserve saved agents and deployments.
 
 - [x] Build the saved MCP skill composer, draggable blueprint, copper Three.js robot twin, lifecycle controls, guarded identity vault, public discovery/profile/live usage and metered MCP service. Pass eleven app cases, eight new contract cases, actual factory/vault registration/funding/pause/withdrawal and official x402 SDK EIP-3009 settlement/replay on Anvil. Registry/token doubles are explicitly distinguished from public protocol evidence.
 - [x] Verify desktop composition → save → SDK test → practice lifecycle → publish → public digest/counters, 390px mobile without overflow, independent production build and copied standalone outside the repository. All 31 app builds/workflows, 320 ordinary tests and 218 contract tests pass; 29 opt-in tests remain skipped in the ordinary suite.
