@@ -51,3 +51,9 @@ pnpm run test:production
 ```
 
 Local chain acceptance deploys the real custom factory/vault, uses an explicitly labeled local ERC-8004 registry double and test USDC, registers/funds/pays/pauses/withdraws, and verifies exact owner receipts. A second acceptance test uses the **official x402 client/facilitator SDK** to sign/verify/settle an actual EIP-3009 test-token authorization on Anvil and reject replay. This is not genuine Circle, thirdweb bundler, paid Jev/OpenAI, public registry or public-chain acceptance. See [audit](../../../docs/DAY-31-AUDIT.md) and [completion tracker](../../../docs/PROJECT-COMPLETION-TRACKER.md).
+
+## Playground editing
+
+Use **+ Add** in the toolbox or drop a tool on the Blueprint canvas. Draft tool changes save immediately. Move modules by their grip (or focus one and use arrow keys); layout saves automatically. **Auto arrange** restores a readable grid. Identity/settings edits use **Save blueprint** and also save before testing or switching agents. The bordered **Blueprint / Digital Twin** control switches views. The run console includes tool-specific examples.
+
+Published tools and settings are immutable. **Edit a copy** opens a draft; adding a missing tool to a published agent creates that copy and adds the tool there. Published canvas arrangement remains editable because visual positions are excluded from the registered blueprint hash.

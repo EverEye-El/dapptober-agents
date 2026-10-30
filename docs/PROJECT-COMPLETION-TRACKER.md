@@ -385,6 +385,8 @@ Each day's checked implementation box describes **tested local scope**, not full
 
 ### Day 31 — NERVEFORGE / The Ultimate Agent Architect
 
+- [x] Make the workshop an explicit development playground: bordered Blueprint / Digital Twin selector, toolbox Add / Added controls, editable-copy banner, save bar, auto-arrange and run console. Fix grab-point dragging and persist layouts separately from immutable published skills. Browser verified add/remove, reload persistence, keyboard movement, copy-on-add and preserving unsaved settings. Production build/API checks are recorded in the Day 31 audit.
+
 - [x] Rename the Day 31 product to NERVEFORGE; replace the toy robot with a smooth armored sentinel, nine optical assemblies and ten articulated mechanical tendrils. Add a labeled two-position rotary Blueprint / Digital Twin selector. Existing workspace, cookie, API and contract identifiers remain stable to preserve saved agents and deployments.
 
 - [x] Build the saved MCP skill composer, draggable blueprint, copper Three.js robot twin, lifecycle controls, guarded identity vault, public discovery/profile/live usage and metered MCP service. Pass eleven app cases, eight new contract cases, actual factory/vault registration/funding/pause/withdrawal and official x402 SDK EIP-3009 settlement/replay on Anvil. Registry/token doubles are explicitly distinguished from public protocol evidence.
